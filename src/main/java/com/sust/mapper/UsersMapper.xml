@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.UsersMapper">
+	<resultMap id="BaseResultMap" type="com.sust.entity.Users">
+		<id column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="us_name" jdbcType="VARCHAR" property="usName" />
+		<result column="us_age" jdbcType="VARCHAR" property="usAge" />
+		<result column="us_sex" jdbcType="TINYINT" property="usSex" />
+		<result column="us_birthday" jdbcType="DATE" property="usBirthday" />
+		<result column="us_num" jdbcType="VARCHAR" property="usNum" />
+		<result column="us_duty" jdbcType="VARCHAR" property="usDuty" />
+		<result column="us_major" jdbcType="VARCHAR" property="usMajor" />
+		<result column="us_address" jdbcType="VARCHAR" property="usAddress" />
+		<result column="us_mail" jdbcType="VARCHAR" property="usMail" />
+		<result column="us_phone" jdbcType="VARCHAR" property="usPhone" />
+		<result column="us_academy" jdbcType="VARCHAR" property="usAcademy" />
+		<result column="us_question1" jdbcType="VARCHAR" property="usQuestion1" />
+		<result column="us_key1" jdbcType="VARCHAR" property="usKey1" />
+		<result column="us_question2" jdbcType="VARCHAR" property="usQuestion2" />
+		<result column="us_key2" jdbcType="VARCHAR" property="usKey2" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		us_id, us_name, us_age, us_sex, us_birthday, us_num, us_duty, us_major,
+		us_address,
+		us_mail, us_phone, us_academy, us_question1, us_key1, us_question2, us_key2
+	</sql>
+	
+	<select id="selectByNum" parameterType="String"
+		resultType="java.lang.Integer">
+		select us_id from sr_users where us_num = #{usNum,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_users
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sr_users
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.sust.entity.Users">
+		insert into sr_users (us_id, us_name, us_age,
+		us_sex, us_birthday, us_num,
+		us_duty, us_major, us_address,
+		us_mail, us_phone, us_academy,
+		us_question1, us_key1, us_question2,
+		us_key2)
+		values (#{usId,jdbcType=INTEGER}, #{usName,jdbcType=VARCHAR},
+		#{usAge,jdbcType=VARCHAR},
+		#{usSex,jdbcType=TINYINT}, #{usBirthday,jdbcType=DATE}, #{usNum,jdbcType=VARCHAR},
+		#{usDuty,jdbcType=VARCHAR}, #{usMajor,jdbcType=VARCHAR},
+		#{usAddress,jdbcType=VARCHAR},
+		#{usMail,jdbcType=VARCHAR}, #{usPhone,jdbcType=VARCHAR}, #{usAcademy,jdbcType=VARCHAR},
+		#{usQuestion1,jdbcType=VARCHAR}, #{usKey1,jdbcType=VARCHAR},
+		#{usQuestion2,jdbcType=VARCHAR},
+		#{usKey2,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertUserInfo" parameterType="com.sust.entity.Users" useGeneratedKeys="true" keyProperty="us_id" >
+		insert into sr_users (us_name, us_age,
+		us_sex, us_birthday, us_num,
+		us_duty, us_major, us_address,
+		us_mail, us_phone, us_academy,
+		us_question1, us_key1, us_question2,
+		us_key2)
+		values (#{usName,jdbcType=VARCHAR},
+		#{usAge,jdbcType=VARCHAR},
+		#{usSex,jdbcType=TINYINT}, #{usBirthday,jdbcType=DATE}, #{usNum,jdbcType=VARCHAR},
+		#{usDuty,jdbcType=VARCHAR}, #{usMajor,jdbcType=VARCHAR},
+		#{usAddress,jdbcType=VARCHAR},
+		#{usMail,jdbcType=VARCHAR}, #{usPhone,jdbcType=VARCHAR}, #{usAcademy,jdbcType=VARCHAR},
+		#{usQuestion1,jdbcType=VARCHAR}, #{usKey1,jdbcType=VARCHAR},
+		#{usQuestion2,jdbcType=VARCHAR},
+		#{usKey2,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.Users">
+		insert into sr_users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="usName != null">
+				us_name,
+			</if>
+			<if test="usAge != null">
+				us_age,
+			</if>
+			<if test="usSex != null">
+				us_sex,
+			</if>
+			<if test="usBirthday != null">
+				us_birthday,
+			</if>
+			<if test="usNum != null">
+				us_num,
+			</if>
+			<if test="usDuty != null">
+				us_duty,
+			</if>
+			<if test="usMajor != null">
+				us_major,
+			</if>
+			<if test="usAddress != null">
+				us_address,
+			</if>
+			<if test="usMail != null">
+				us_mail,
+			</if>
+			<if test="usPhone != null">
+				us_phone,
+			</if>
+			<if test="usAcademy != null">
+				us_academy,
+			</if>
+			<if test="usQuestion1 != null">
+				us_question1,
+			</if>
+			<if test="usKey1 != null">
+				us_key1,
+			</if>
+			<if test="usQuestion2 != null">
+				us_question2,
+			</if>
+			<if test="usKey2 != null">
+				us_key2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="usName != null">
+				#{usName,jdbcType=VARCHAR},
+			</if>
+			<if test="usAge != null">
+				#{usAge,jdbcType=VARCHAR},
+			</if>
+			<if test="usSex != null">
+				#{usSex,jdbcType=TINYINT},
+			</if>
+			<if test="usBirthday != null">
+				#{usBirthday,jdbcType=DATE},
+			</if>
+			<if test="usNum != null">
+				#{usNum,jdbcType=VARCHAR},
+			</if>
+			<if test="usDuty != null">
+				#{usDuty,jdbcType=VARCHAR},
+			</if>
+			<if test="usMajor != null">
+				#{usMajor,jdbcType=VARCHAR},
+			</if>
+			<if test="usAddress != null">
+				#{usAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="usMail != null">
+				#{usMail,jdbcType=VARCHAR},
+			</if>
+			<if test="usPhone != null">
+				#{usPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="usAcademy != null">
+				#{usAcademy,jdbcType=VARCHAR},
+			</if>
+			<if test="usQuestion1 != null">
+				#{usQuestion1,jdbcType=VARCHAR},
+			</if>
+			<if test="usKey1 != null">
+				#{usKey1,jdbcType=VARCHAR},
+			</if>
+			<if test="usQuestion2 != null">
+				#{usQuestion2,jdbcType=VARCHAR},
+			</if>
+			<if test="usKey2 != null">
+				#{usKey2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Users">
+		update sr_users
+		<set>
+			<if test="usName != null">
+				us_name = #{usName,jdbcType=VARCHAR},
+			</if>
+			<if test="usAge != null">
+				us_age = #{usAge,jdbcType=VARCHAR},
+			</if>
+			<if test="usSex != null">
+				us_sex = #{usSex,jdbcType=TINYINT},
+			</if>
+			<if test="usBirthday != null">
+				us_birthday = #{usBirthday,jdbcType=DATE},
+			</if>
+			<if test="usNum != null">
+				us_num = #{usNum,jdbcType=VARCHAR},
+			</if>
+			<if test="usDuty != null">
+				us_duty = #{usDuty,jdbcType=VARCHAR},
+			</if>
+			<if test="usMajor != null">
+				us_major = #{usMajor,jdbcType=VARCHAR},
+			</if>
+			<if test="usAddress != null">
+				us_address = #{usAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="usMail != null">
+				us_mail = #{usMail,jdbcType=VARCHAR},
+			</if>
+			<if test="usPhone != null">
+				us_phone = #{usPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="usAcademy != null">
+				us_academy = #{usAcademy,jdbcType=VARCHAR},
+			</if>
+			<if test="usQuestion1 != null">
+				us_question1 = #{usQuestion1,jdbcType=VARCHAR},
+			</if>
+			<if test="usKey1 != null">
+				us_key1 = #{usKey1,jdbcType=VARCHAR},
+			</if>
+			<if test="usQuestion2 != null">
+				us_question2 = #{usQuestion2,jdbcType=VARCHAR},
+			</if>
+			<if test="usKey2 != null">
+				us_key2 = #{usKey2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Users">
+		update sr_users
+		set us_name = #{usName,jdbcType=VARCHAR},
+		us_age = #{usAge,jdbcType=VARCHAR},
+		us_sex = #{usSex,jdbcType=TINYINT},
+		us_birthday = #{usBirthday,jdbcType=DATE},
+		us_num = #{usNum,jdbcType=VARCHAR},
+		us_duty = #{usDuty,jdbcType=VARCHAR},
+		us_major = #{usMajor,jdbcType=VARCHAR},
+		us_address = #{usAddress,jdbcType=VARCHAR},
+		us_mail = #{usMail,jdbcType=VARCHAR},
+		us_phone = #{usPhone,jdbcType=VARCHAR},
+		us_academy = #{usAcademy,jdbcType=VARCHAR},
+		us_question1 = #{usQuestion1,jdbcType=VARCHAR},
+		us_key1 = #{usKey1,jdbcType=VARCHAR},
+		us_question2 = #{usQuestion2,jdbcType=VARCHAR},
+		us_key2 = #{usKey2,jdbcType=VARCHAR}
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+</mapper>

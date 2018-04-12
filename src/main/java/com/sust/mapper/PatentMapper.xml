@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.PatentMapper">
+  <resultMap id="BaseResultMap" type="com.sust.entity.Patent">
+    <id column="pa_id" jdbcType="INTEGER" property="paId" />
+    <result column="us_id" jdbcType="INTEGER" property="usId" />
+    <result column="pa_name" jdbcType="VARCHAR" property="paName" />
+    <result column="pa_category" jdbcType="VARCHAR" property="paCategory" />
+    <result column="pa_author" jdbcType="VARCHAR" property="paAuthor" />
+    <result column="pa_please" jdbcType="DATE" property="paPlease" />
+    <result column="pa_date" jdbcType="DATE" property="paDate" />
+    <result column="pa_number" jdbcType="VARCHAR" property="paNumber" />
+    <result column="pa_about" jdbcType="VARCHAR" property="paAbout" />
+    <result column="pa_uptime" jdbcType="TIMESTAMP" property="paUptime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pa_id, us_id, pa_name, pa_category, pa_author, pa_please, pa_date, pa_number, pa_about, 
+    pa_uptime
+  </sql>
+  
+   <select id="selectgetUserNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select us_name from sr_users where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+  <select id="selectByUsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_patent
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_patent
+    where pa_id = #{paId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sr_patent
+    where pa_id = #{paId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sust.entity.Patent">
+    insert into sr_patent (pa_id, us_id, pa_name, 
+      pa_category, pa_author, pa_please, 
+      pa_date, pa_number, pa_about, 
+      pa_uptime)
+    values (#{paId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{paName,jdbcType=VARCHAR}, 
+      #{paCategory,jdbcType=VARCHAR}, #{paAuthor,jdbcType=VARCHAR}, #{paPlease,jdbcType=DATE}, 
+      #{paDate,jdbcType=DATE}, #{paNumber,jdbcType=VARCHAR}, #{paAbout,jdbcType=VARCHAR}, 
+      #{paUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.Patent">
+    insert into sr_patent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paId != null">
+        pa_id,
+      </if>
+      <if test="usId != null">
+        us_id,
+      </if>
+      <if test="paName != null">
+        pa_name,
+      </if>
+      <if test="paCategory != null">
+        pa_category,
+      </if>
+      <if test="paAuthor != null">
+        pa_author,
+      </if>
+      <if test="paPlease != null">
+        pa_please,
+      </if>
+      <if test="paDate != null">
+        pa_date,
+      </if>
+      <if test="paNumber != null">
+        pa_number,
+      </if>
+      <if test="paAbout != null">
+        pa_about,
+      </if>
+      <if test="paUptime != null">
+        pa_uptime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paId != null">
+        #{paId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="paName != null">
+        #{paName,jdbcType=VARCHAR},
+      </if>
+      <if test="paCategory != null">
+        #{paCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="paAuthor != null">
+        #{paAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="paPlease != null">
+        #{paPlease,jdbcType=DATE},
+      </if>
+      <if test="paDate != null">
+        #{paDate,jdbcType=DATE},
+      </if>
+      <if test="paNumber != null">
+        #{paNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbout != null">
+        #{paAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="paUptime != null">
+        #{paUptime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Patent">
+    update sr_patent
+    <set>
+      <if test="usId != null">
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="paName != null">
+        pa_name = #{paName,jdbcType=VARCHAR},
+      </if>
+      <if test="paCategory != null">
+        pa_category = #{paCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="paAuthor != null">
+        pa_author = #{paAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="paPlease != null">
+        pa_please = #{paPlease,jdbcType=DATE},
+      </if>
+      <if test="paDate != null">
+        pa_date = #{paDate,jdbcType=DATE},
+      </if>
+      <if test="paNumber != null">
+        pa_number = #{paNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="paAbout != null">
+        pa_about = #{paAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="paUptime != null">
+        pa_uptime = #{paUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pa_id = #{paId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.Patent">
+    update sr_patent
+    set us_id = #{usId,jdbcType=INTEGER},
+      pa_name = #{paName,jdbcType=VARCHAR},
+      pa_category = #{paCategory,jdbcType=VARCHAR},
+      pa_author = #{paAuthor,jdbcType=VARCHAR},
+      pa_please = #{paPlease,jdbcType=DATE},
+      pa_date = #{paDate,jdbcType=DATE},
+      pa_number = #{paNumber,jdbcType=VARCHAR},
+      pa_about = #{paAbout,jdbcType=VARCHAR},
+      pa_uptime = #{paUptime,jdbcType=TIMESTAMP}
+    where pa_id = #{paId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.ThesisMapper">
+  <resultMap id="BaseResultMap" type="com.sust.entity.Thesis">
+    <id column="th_id" jdbcType="INTEGER" property="thId" />
+    <result column="us_id" jdbcType="INTEGER" property="usId" />
+    <result column="th_name" jdbcType="VARCHAR" property="thName" />
+    <result column="th_category" jdbcType="VARCHAR" property="thCategory" />
+    <result column="th_author" jdbcType="VARCHAR" property="thAuthor" />
+    <result column="th_date" jdbcType="DATE" property="thDate" />
+    <result column="th_level" jdbcType="VARCHAR" property="thLevel" />
+    <result column="th_factor" jdbcType="VARCHAR" property="thFactor" />
+    <result column="th_included" jdbcType="VARCHAR" property="thIncluded" />
+    <result column="th_number" jdbcType="VARCHAR" property="thNumber" />
+    <result column="th_journal" jdbcType="VARCHAR" property="thJournal" />
+    <result column="th_page" jdbcType="VARCHAR" property="thPage" />
+    <result column="th_about" jdbcType="VARCHAR" property="thAbout" />
+    <result column="th_uptime" jdbcType="TIMESTAMP" property="thUptime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    th_id, us_id, th_name, th_category, th_author, th_date, th_level, th_factor, th_included, 
+    th_number, th_journal, th_page, th_about, th_uptime
+  </sql>
+  <select id="selectUserNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select us_name from sr_users where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+   <select id="selectByUsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_thesis
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_thesis
+    where th_id = #{thId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sr_thesis
+    where th_id = #{thId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sust.entity.Thesis">
+    insert into sr_thesis (th_id, us_id, th_name, 
+      th_category, th_author, th_date, 
+      th_level, th_factor, th_included, 
+      th_number, th_journal, th_page, 
+      th_about, th_uptime)
+    values (#{thId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{thName,jdbcType=VARCHAR}, 
+      #{thCategory,jdbcType=VARCHAR}, #{thAuthor,jdbcType=VARCHAR}, #{thDate,jdbcType=DATE}, 
+      #{thLevel,jdbcType=VARCHAR}, #{thFactor,jdbcType=VARCHAR}, #{thIncluded,jdbcType=VARCHAR}, 
+      #{thNumber,jdbcType=VARCHAR}, #{thJournal,jdbcType=VARCHAR}, #{thPage,jdbcType=VARCHAR}, 
+      #{thAbout,jdbcType=VARCHAR}, #{thUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.Thesis">
+    insert into sr_thesis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="thId != null">
+        th_id,
+      </if>
+      <if test="usId != null">
+        us_id,
+      </if>
+      <if test="thName != null">
+        th_name,
+      </if>
+      <if test="thCategory != null">
+        th_category,
+      </if>
+      <if test="thAuthor != null">
+        th_author,
+      </if>
+      <if test="thDate != null">
+        th_date,
+      </if>
+      <if test="thLevel != null">
+        th_level,
+      </if>
+      <if test="thFactor != null">
+        th_factor,
+      </if>
+      <if test="thIncluded != null">
+        th_included,
+      </if>
+      <if test="thNumber != null">
+        th_number,
+      </if>
+      <if test="thJournal != null">
+        th_journal,
+      </if>
+      <if test="thPage != null">
+        th_page,
+      </if>
+      <if test="thAbout != null">
+        th_about,
+      </if>
+      <if test="thUptime != null">
+        th_uptime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="thId != null">
+        #{thId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="thName != null">
+        #{thName,jdbcType=VARCHAR},
+      </if>
+      <if test="thCategory != null">
+        #{thCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="thAuthor != null">
+        #{thAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="thDate != null">
+        #{thDate,jdbcType=DATE},
+      </if>
+      <if test="thLevel != null">
+        #{thLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="thFactor != null">
+        #{thFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="thIncluded != null">
+        #{thIncluded,jdbcType=VARCHAR},
+      </if>
+      <if test="thNumber != null">
+        #{thNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="thJournal != null">
+        #{thJournal,jdbcType=VARCHAR},
+      </if>
+      <if test="thPage != null">
+        #{thPage,jdbcType=VARCHAR},
+      </if>
+      <if test="thAbout != null">
+        #{thAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="thUptime != null">
+        #{thUptime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Thesis">
+    update sr_thesis
+    <set>
+      <if test="usId != null">
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="thName != null">
+        th_name = #{thName,jdbcType=VARCHAR},
+      </if>
+      <if test="thCategory != null">
+        th_category = #{thCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="thAuthor != null">
+        th_author = #{thAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="thDate != null">
+        th_date = #{thDate,jdbcType=DATE},
+      </if>
+      <if test="thLevel != null">
+        th_level = #{thLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="thFactor != null">
+        th_factor = #{thFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="thIncluded != null">
+        th_included = #{thIncluded,jdbcType=VARCHAR},
+      </if>
+      <if test="thNumber != null">
+        th_number = #{thNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="thJournal != null">
+        th_journal = #{thJournal,jdbcType=VARCHAR},
+      </if>
+      <if test="thPage != null">
+        th_page = #{thPage,jdbcType=VARCHAR},
+      </if>
+      <if test="thAbout != null">
+        th_about = #{thAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="thUptime != null">
+        th_uptime = #{thUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where th_id = #{thId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.Thesis">
+    update sr_thesis
+    set us_id = #{usId,jdbcType=INTEGER},
+      th_name = #{thName,jdbcType=VARCHAR},
+      th_category = #{thCategory,jdbcType=VARCHAR},
+      th_author = #{thAuthor,jdbcType=VARCHAR},
+      th_date = #{thDate,jdbcType=DATE},
+      th_level = #{thLevel,jdbcType=VARCHAR},
+      th_factor = #{thFactor,jdbcType=VARCHAR},
+      th_included = #{thIncluded,jdbcType=VARCHAR},
+      th_number = #{thNumber,jdbcType=VARCHAR},
+      th_journal = #{thJournal,jdbcType=VARCHAR},
+      th_page = #{thPage,jdbcType=VARCHAR},
+      th_about = #{thAbout,jdbcType=VARCHAR},
+      th_uptime = #{thUptime,jdbcType=TIMESTAMP}
+    where th_id = #{thId,jdbcType=INTEGER}
+  </update>
+</mapper>

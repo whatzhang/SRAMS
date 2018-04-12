@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.ProjectMapper">
+	<resultMap id="BaseResultMap" type="com.sust.entity.Project">
+		<id column="pro_id" jdbcType="INTEGER" property="proId" />
+		<result column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="pro_name" jdbcType="VARCHAR" property="proName" />
+		<result column="pro_category" jdbcType="VARCHAR" property="proCategory" />
+		<result column="pro_date" jdbcType="DATE" property="proDate" />
+		<result column="pro_cash" jdbcType="INTEGER" property="proCash" />
+		<result column="pro_leader" jdbcType="VARCHAR" property="proLeader" />
+		<result column="pro_team" jdbcType="VARCHAR" property="proTeam" />
+		<result column="pro_about" jdbcType="VARCHAR" property="proAbout" />
+		<result column="pro_uptime" jdbcType="TIMESTAMP" property="proUptime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pro_id, us_id, pro_name, pro_category, pro_date, pro_cash, pro_leader,
+		pro_team,
+		pro_about, pro_uptime
+	</sql>
+
+	<select id="selectProjectList" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_project
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_project
+		where pro_id = #{proId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sr_project
+		where pro_id = #{proId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.sust.entity.Project">
+		insert into sr_project (pro_id, us_id, pro_name,
+		pro_category, pro_date, pro_cash,
+		pro_leader, pro_team, pro_about,
+		pro_uptime)
+		values (#{proId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
+		#{proName,jdbcType=VARCHAR},
+		#{proCategory,jdbcType=VARCHAR}, #{proDate,jdbcType=DATE}, #{proCash,jdbcType=INTEGER},
+		#{proLeader,jdbcType=VARCHAR}, #{proTeam,jdbcType=VARCHAR},
+		#{proAbout,jdbcType=VARCHAR},
+		#{proUptime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.Project">
+		insert into sr_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="proId != null">
+				pro_id,
+			</if>
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="proName != null">
+				pro_name,
+			</if>
+			<if test="proCategory != null">
+				pro_category,
+			</if>
+			<if test="proDate != null">
+				pro_date,
+			</if>
+			<if test="proCash != null">
+				pro_cash,
+			</if>
+			<if test="proLeader != null">
+				pro_leader,
+			</if>
+			<if test="proTeam != null">
+				pro_team,
+			</if>
+			<if test="proAbout != null">
+				pro_about,
+			</if>
+			<if test="proUptime != null">
+				pro_uptime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="proId != null">
+				#{proId,jdbcType=INTEGER},
+			</if>
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="proName != null">
+				#{proName,jdbcType=VARCHAR},
+			</if>
+			<if test="proCategory != null">
+				#{proCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="proDate != null">
+				#{proDate,jdbcType=DATE},
+			</if>
+			<if test="proCash != null">
+				#{proCash,jdbcType=INTEGER},
+			</if>
+			<if test="proLeader != null">
+				#{proLeader,jdbcType=VARCHAR},
+			</if>
+			<if test="proTeam != null">
+				#{proTeam,jdbcType=VARCHAR},
+			</if>
+			<if test="proAbout != null">
+				#{proAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="proUptime != null">
+				#{proUptime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Project">
+		update sr_project
+		<set>
+			<if test="usId != null">
+				us_id = #{usId,jdbcType=INTEGER},
+			</if>
+			<if test="proName != null">
+				pro_name = #{proName,jdbcType=VARCHAR},
+			</if>
+			<if test="proCategory != null">
+				pro_category = #{proCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="proDate != null">
+				pro_date = #{proDate,jdbcType=DATE},
+			</if>
+			<if test="proCash != null">
+				pro_cash = #{proCash,jdbcType=INTEGER},
+			</if>
+			<if test="proLeader != null">
+				pro_leader = #{proLeader,jdbcType=VARCHAR},
+			</if>
+			<if test="proTeam != null">
+				pro_team = #{proTeam,jdbcType=VARCHAR},
+			</if>
+			<if test="proAbout != null">
+				pro_about = #{proAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="proUptime != null">
+				pro_uptime = #{proUptime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where pro_id = #{proId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Project">
+		update sr_project
+		set us_id = #{usId,jdbcType=INTEGER},
+		pro_name = #{proName,jdbcType=VARCHAR},
+		pro_category = #{proCategory,jdbcType=VARCHAR},
+		pro_date = #{proDate,jdbcType=DATE},
+		pro_cash = #{proCash,jdbcType=INTEGER},
+		pro_leader = #{proLeader,jdbcType=VARCHAR},
+		pro_team = #{proTeam,jdbcType=VARCHAR},
+		pro_about = #{proAbout,jdbcType=VARCHAR},
+		pro_uptime = #{proUptime,jdbcType=TIMESTAMP}
+		where pro_id = #{proId,jdbcType=INTEGER}
+	</update>
+</mapper>

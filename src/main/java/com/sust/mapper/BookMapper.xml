@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.BookMapper">
+	<resultMap id="BaseResultMap" type="com.sust.entity.Book">
+		<id column="bo_id" jdbcType="INTEGER" property="boId" />
+		<result column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="bo_name" jdbcType="VARCHAR" property="boName" />
+		<result column="bo_category" jdbcType="VARCHAR" property="boCategory" />
+		<result column="bo_date" jdbcType="DATE" property="boDate" />
+		<result column="bo_editor" jdbcType="VARCHAR" property="boEditor" />
+		<result column="bo_editor2" jdbcType="VARCHAR" property="boEditor2" />
+		<result column="bo_font" jdbcType="INTEGER" property="boFont" />
+		<result column="bo_publish" jdbcType="VARCHAR" property="boPublish" />
+		<result column="bo_about" jdbcType="VARCHAR" property="boAbout" />
+		<result column="bo_uptime" jdbcType="TIMESTAMP" property="boUptime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		bo_id, us_id, bo_name, bo_category, bo_date, bo_editor,
+		bo_editor2, bo_font,
+		bo_publish,
+		bo_about, bo_uptime
+	</sql>
+
+	<select id="selectUserNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select us_name from sr_users where us_id =
+		#{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectBookList" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_book
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_book
+		where bo_id = #{boId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		sr_book
+		where bo_id = #{boId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.sust.entity.Book">
+		insert into sr_book (bo_id,
+		us_id, bo_name,
+		bo_category, bo_date, bo_editor,
+		bo_editor2, bo_font,
+		bo_publish,
+		bo_about, bo_uptime)
+		values (#{boId,jdbcType=INTEGER},
+		#{usId,jdbcType=INTEGER},
+		#{boName,jdbcType=VARCHAR},
+		#{boCategory,jdbcType=VARCHAR}, #{boDate,jdbcType=DATE},
+		#{boEditor,jdbcType=VARCHAR},
+		#{boEditor2,jdbcType=VARCHAR},
+		#{boFont,jdbcType=INTEGER},
+		#{boPublish,jdbcType=VARCHAR},
+		#{boAbout,jdbcType=VARCHAR}, #{boUptime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.Book">
+		insert into sr_book
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="boId != null">
+				bo_id,
+			</if>
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="boName != null">
+				bo_name,
+			</if>
+			<if test="boCategory != null">
+				bo_category,
+			</if>
+			<if test="boDate != null">
+				bo_date,
+			</if>
+			<if test="boEditor != null">
+				bo_editor,
+			</if>
+			<if test="boEditor2 != null">
+				bo_editor2,
+			</if>
+			<if test="boFont != null">
+				bo_font,
+			</if>
+			<if test="boPublish != null">
+				bo_publish,
+			</if>
+			<if test="boAbout != null">
+				bo_about,
+			</if>
+			<if test="boUptime != null">
+				bo_uptime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="boId != null">
+				#{boId,jdbcType=INTEGER},
+			</if>
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="boName != null">
+				#{boName,jdbcType=VARCHAR},
+			</if>
+			<if test="boCategory != null">
+				#{boCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="boDate != null">
+				#{boDate,jdbcType=DATE},
+			</if>
+			<if test="boEditor != null">
+				#{boEditor,jdbcType=VARCHAR},
+			</if>
+			<if test="boEditor2 != null">
+				#{boEditor2,jdbcType=VARCHAR},
+			</if>
+			<if test="boFont != null">
+				#{boFont,jdbcType=INTEGER},
+			</if>
+			<if test="boPublish != null">
+				#{boPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="boAbout != null">
+				#{boAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="boUptime != null">
+				#{boUptime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Book">
+		update sr_book
+		<set>
+			<if test="usId != null">
+				us_id = #{usId,jdbcType=INTEGER},
+			</if>
+			<if test="boName != null">
+				bo_name = #{boName,jdbcType=VARCHAR},
+			</if>
+			<if test="boCategory != null">
+				bo_category = #{boCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="boDate != null">
+				bo_date = #{boDate,jdbcType=DATE},
+			</if>
+			<if test="boEditor != null">
+				bo_editor = #{boEditor,jdbcType=VARCHAR},
+			</if>
+			<if test="boEditor2 != null">
+				bo_editor2 = #{boEditor2,jdbcType=VARCHAR},
+			</if>
+			<if test="boFont != null">
+				bo_font = #{boFont,jdbcType=INTEGER},
+			</if>
+			<if test="boPublish != null">
+				bo_publish = #{boPublish,jdbcType=VARCHAR},
+			</if>
+			<if test="boAbout != null">
+				bo_about = #{boAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="boUptime != null">
+				bo_uptime = #{boUptime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where bo_id = #{boId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Book">
+		update sr_book
+		set
+		us_id = #{usId,jdbcType=INTEGER},
+		bo_name = #{boName,jdbcType=VARCHAR},
+		bo_category = #{boCategory,jdbcType=VARCHAR},
+		bo_date =
+		#{boDate,jdbcType=DATE},
+		bo_editor = #{boEditor,jdbcType=VARCHAR},
+		bo_editor2 = #{boEditor2,jdbcType=VARCHAR},
+		bo_font =
+		#{boFont,jdbcType=INTEGER},
+		bo_publish = #{boPublish,jdbcType=VARCHAR},
+		bo_about = #{boAbout,jdbcType=VARCHAR},
+		bo_uptime =
+		#{boUptime,jdbcType=TIMESTAMP}
+		where bo_id = #{boId,jdbcType=INTEGER}
+	</update>
+</mapper>

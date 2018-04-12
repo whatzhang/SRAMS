@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.sust.entity.Message">
+    <id column="me_id" jdbcType="INTEGER" property="meId" />
+    <result column="me_title" jdbcType="VARCHAR" property="meTitle" />
+    <result column="me_send" jdbcType="INTEGER" property="meSend" />
+    <result column="me_receive" jdbcType="VARCHAR" property="meReceive" />
+    <result column="me_date" jdbcType="TIMESTAMP" property="meDate" />
+    <result column="me_about" jdbcType="VARCHAR" property="meAbout" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    me_id, me_title, me_send, me_receive, me_date, me_about
+  </sql>
+  <select id="selectUserNameById" parameterType="java.lang.Integer" resultType="String">
+    select lo_login from sr_login where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <select id="selectMeDelByUsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from sr_message where me_id in(select me_id from sr_me_status where st_isread = 2 and us_id = #{usId,jdbcType=INTEGER})
+  </select>
+  <select id="selectMeNoReadByUsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from sr_message where me_id in(select me_id from sr_me_status where st_isread = 0 and us_id = #{usId,jdbcType=INTEGER})
+  </select>
+  <select id="selectMeReadByUsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from sr_message where me_id in(select me_id from sr_me_status where st_isread = 1 and us_id = #{usId,jdbcType=INTEGER})
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_message
+    where me_id = #{meId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteReadNews" parameterType="java.lang.Integer" >
+    delete from sr_message where me_id in(select me_id from sr_me_status where st_isread = 2 and us_id = #{usId,jdbcType=INTEGER})
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sr_message
+    where me_id = #{meId,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.sust.entity.Message">
+    insert into sr_message (me_id, me_title, me_send, 
+      me_receive, me_date, me_about
+      )
+    values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{meSend,jdbcType=INTEGER}, 
+      #{meReceive,jdbcType=VARCHAR}, #{meDate,jdbcType=TIMESTAMP}, #{meAbout,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.Message">
+    insert into sr_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meId != null">
+        me_id,
+      </if>
+      <if test="meTitle != null">
+        me_title,
+      </if>
+      <if test="meSend != null">
+        me_send,
+      </if>
+      <if test="meReceive != null">
+        me_receive,
+      </if>
+      <if test="meDate != null">
+        me_date,
+      </if>
+      <if test="meAbout != null">
+        me_about,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meId != null">
+        #{meId,jdbcType=INTEGER},
+      </if>
+      <if test="meTitle != null">
+        #{meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="meSend != null">
+        #{meSend,jdbcType=INTEGER},
+      </if>
+      <if test="meReceive != null">
+        #{meReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="meDate != null">
+        #{meDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meAbout != null">
+        #{meAbout,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Message">
+    update sr_message
+    <set>
+      <if test="meTitle != null">
+        me_title = #{meTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="meSend != null">
+        me_send = #{meSend,jdbcType=INTEGER},
+      </if>
+      <if test="meReceive != null">
+        me_receive = #{meReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="meDate != null">
+        me_date = #{meDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meAbout != null">
+        me_about = #{meAbout,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.Message">
+    update sr_message
+    set me_title = #{meTitle,jdbcType=VARCHAR},
+      me_send = #{meSend,jdbcType=INTEGER},
+      me_receive = #{meReceive,jdbcType=VARCHAR},
+      me_date = #{meDate,jdbcType=TIMESTAMP},
+      me_about = #{meAbout,jdbcType=VARCHAR}
+    where me_id = #{meId,jdbcType=INTEGER}
+  </update>
+</mapper>

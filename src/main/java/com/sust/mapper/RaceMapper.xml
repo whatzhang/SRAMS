@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.RaceMapper">
+  <resultMap id="BaseResultMap" type="com.sust.entity.Race">
+    <id column="ra_id" jdbcType="INTEGER" property="raId" />
+    <result column="us_id" jdbcType="INTEGER" property="usId" />
+    <result column="ra_name" jdbcType="VARCHAR" property="raName" />
+    <result column="ra_category" jdbcType="VARCHAR" property="raCategory" />
+    <result column="ra_type" jdbcType="VARCHAR" property="raType" />
+    <result column="ra_author" jdbcType="VARCHAR" property="raAuthor" />
+    <result column="ra_level" jdbcType="VARCHAR" property="raLevel" />
+    <result column="ra_teacher" jdbcType="VARCHAR" property="raTeacher" />
+    <result column="ra_date" jdbcType="DATE" property="raDate" />
+    <result column="ra_about" jdbcType="VARCHAR" property="raAbout" />
+    <result column="ra_uptime" jdbcType="TIMESTAMP" property="raUptime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ra_id, us_id, ra_name, ra_category, ra_type, ra_author, ra_level, ra_teacher, ra_date, 
+    ra_about, ra_uptime
+  </sql>
+   <select id="selectUserNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select us_name from sr_users where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+  <select id="selectUserRaceList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_race
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sr_race
+    where ra_id = #{raId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sr_race
+    where ra_id = #{raId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sust.entity.Race">
+    insert into sr_race (ra_id, us_id, ra_name, 
+      ra_category, ra_type, ra_author, 
+      ra_level, ra_teacher, ra_date, 
+      ra_about, ra_uptime)
+    values (#{raId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{raName,jdbcType=VARCHAR}, 
+      #{raCategory,jdbcType=VARCHAR}, #{raType,jdbcType=VARCHAR}, #{raAuthor,jdbcType=VARCHAR}, 
+      #{raLevel,jdbcType=VARCHAR}, #{raTeacher,jdbcType=VARCHAR}, #{raDate,jdbcType=DATE}, 
+      #{raAbout,jdbcType=VARCHAR}, #{raUptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sust.entity.Race">
+    insert into sr_race
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="raId != null">
+        ra_id,
+      </if>
+      <if test="usId != null">
+        us_id,
+      </if>
+      <if test="raName != null">
+        ra_name,
+      </if>
+      <if test="raCategory != null">
+        ra_category,
+      </if>
+      <if test="raType != null">
+        ra_type,
+      </if>
+      <if test="raAuthor != null">
+        ra_author,
+      </if>
+      <if test="raLevel != null">
+        ra_level,
+      </if>
+      <if test="raTeacher != null">
+        ra_teacher,
+      </if>
+      <if test="raDate != null">
+        ra_date,
+      </if>
+      <if test="raAbout != null">
+        ra_about,
+      </if>
+      <if test="raUptime != null">
+        ra_uptime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="raId != null">
+        #{raId,jdbcType=INTEGER},
+      </if>
+      <if test="usId != null">
+        #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="raName != null">
+        #{raName,jdbcType=VARCHAR},
+      </if>
+      <if test="raCategory != null">
+        #{raCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="raType != null">
+        #{raType,jdbcType=VARCHAR},
+      </if>
+      <if test="raAuthor != null">
+        #{raAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="raLevel != null">
+        #{raLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="raTeacher != null">
+        #{raTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="raDate != null">
+        #{raDate,jdbcType=DATE},
+      </if>
+      <if test="raAbout != null">
+        #{raAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="raUptime != null">
+        #{raUptime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Race">
+    update sr_race
+    <set>
+      <if test="usId != null">
+        us_id = #{usId,jdbcType=INTEGER},
+      </if>
+      <if test="raName != null">
+        ra_name = #{raName,jdbcType=VARCHAR},
+      </if>
+      <if test="raCategory != null">
+        ra_category = #{raCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="raType != null">
+        ra_type = #{raType,jdbcType=VARCHAR},
+      </if>
+      <if test="raAuthor != null">
+        ra_author = #{raAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="raLevel != null">
+        ra_level = #{raLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="raTeacher != null">
+        ra_teacher = #{raTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="raDate != null">
+        ra_date = #{raDate,jdbcType=DATE},
+      </if>
+      <if test="raAbout != null">
+        ra_about = #{raAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="raUptime != null">
+        ra_uptime = #{raUptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ra_id = #{raId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sust.entity.Race">
+    update sr_race
+    set us_id = #{usId,jdbcType=INTEGER},
+      ra_name = #{raName,jdbcType=VARCHAR},
+      ra_category = #{raCategory,jdbcType=VARCHAR},
+      ra_type = #{raType,jdbcType=VARCHAR},
+      ra_author = #{raAuthor,jdbcType=VARCHAR},
+      ra_level = #{raLevel,jdbcType=VARCHAR},
+      ra_teacher = #{raTeacher,jdbcType=VARCHAR},
+      ra_date = #{raDate,jdbcType=DATE},
+      ra_about = #{raAbout,jdbcType=VARCHAR},
+      ra_uptime = #{raUptime,jdbcType=TIMESTAMP}
+    where ra_id = #{raId,jdbcType=INTEGER}
+  </update>
+</mapper>

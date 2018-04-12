@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.dao.LoginMapper">
+	<resultMap id="BaseResultMap" type="com.sust.entity.Login">
+		<id column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="lo_login" jdbcType="VARCHAR" property="loLogin" />
+		<result column="lo_pass" jdbcType="VARCHAR" property="loPass" />
+		<result column="lo_type" jdbcType="VARCHAR" property="loType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		us_id, lo_login, lo_pass, lo_type
+	</sql>
+	<select id="selectThNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_thesis where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectPaNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_patent where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectPrNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_praise where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectProNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_project where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectBoNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_book where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectRaNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_race where us_id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectMeNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_message,sr_me_status 
+		where sr_me_status.me_id = sr_message.me_id 
+		and sr_me_status.st_isread = 0 
+		and sr_me_status.us_id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	
+	
+	
+	<select id="selectByAccount" parameterType="String"
+		resultType="java.lang.Integer">
+		select us_id from sr_login where lo_login = #{loLogin,jdbcType=VARCHAR}
+	</select>
+	<select id="selectLoginByAccount" parameterType="String"
+		resultType="java.lang.Integer">
+		select count(*) from sr_login where lo_login = #{loLogin,jdbcType=VARCHAR}
+	</select>
+	<select id="selectLoginByPass" parameterType="String"
+		resultType="java.lang.Integer">
+		select count(*) from sr_login where lo_pass = #{loPass,jdbcType=VARCHAR}
+	</select>
+	<select id="selectLoginByAll" resultType="java.lang.Integer">
+		select count(*) from sr_login where  
+		lo_login = #{loLogin,jdbcType=VARCHAR}
+		and lo_pass = #{loPass,jdbcType=VARCHAR}
+		and lo_type = #{loType,jdbcType=VARCHAR}
+	</select>
+	<select id="selectLoginInfo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_login
+		where lo_login = #{loLogin,jdbcType=VARCHAR}
+		and lo_pass = #{loPass,jdbcType=VARCHAR}
+		and lo_type = #{loType,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_login
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sr_login
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
+
+
+	<insert id="insert" parameterType="com.sust.entity.Login">
+		insert into sr_login (us_id, lo_login, lo_pass,
+		lo_type)
+		values (#{usId,jdbcType=INTEGER}, #{loLogin,jdbcType=VARCHAR},
+		#{loPass,jdbcType=VARCHAR},
+		#{loType,jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="insertSelective" parameterType="com.sust.entity.Login">
+		insert into sr_login
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="loLogin != null">
+				lo_login,
+			</if>
+			<if test="loPass != null">
+				lo_pass,
+			</if>
+			<if test="loType != null">
+				lo_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="loLogin != null">
+				#{loLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="loPass != null">
+				#{loPass,jdbcType=VARCHAR},
+			</if>
+			<if test="loType != null">
+				#{loType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+    <update id="updatePassword" >
+		update sr_login set lo_pass = #{loPass,jdbcType=VARCHAR}
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Login">
+		update sr_login
+		<set>
+			<if test="loLogin != null">
+				lo_login = #{loLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="loPass != null">
+				lo_pass = #{loPass,jdbcType=VARCHAR},
+			</if>
+			<if test="loType != null">
+				lo_type = #{loType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Login">
+		update sr_login
+		set lo_login = #{loLogin,jdbcType=VARCHAR},
+		lo_pass = #{loPass,jdbcType=VARCHAR},
+		lo_type = #{loType,jdbcType=VARCHAR}
+		where us_id = #{usId,jdbcType=INTEGER}
+	</update>
+</mapper>
