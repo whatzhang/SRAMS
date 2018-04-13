@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.sust.entity.Message;
 
-
 public interface NewsService {
 
 	public List<Message> getUserMeRead(int usId);

@@ -26,67 +26,64 @@ import com.sust.service.PatentService;
 public class PatentController {
 
 	private static final Log logger = LogFactory.getLog(PatentController.class);
-	
+
 	@Resource
 	private PatentService patentService;
-	
+
 	@RequestMapping("/getUserPaInfo")
-	private String getUserPaInfo(Model model, HttpServletRequest request){
-		
-		Integer usId = ((Login)request.getSession().getAttribute("login")).getUsId();
-		logger.info("getUserPaInfo++"+usId);
-		model.addAttribute("PatentList", patentService.getUserPatent(usId)); 
-		return  "users/patent";
+	private String getUserPaInfo(Model model, HttpServletRequest request) {
+
+		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+		logger.info("getUserPaInfo++" + usId);
+		model.addAttribute("PatentList", patentService.getUserPatent(usId));
+		return "users/patent";
 	}
 
-	@RequestMapping(value="/getPaInfo")
+	@RequestMapping(value = "/getPaInfo")
 	@ResponseBody
-	public Patent getPaInfo(@RequestParam("Id") int paId){
-		
-		logger.info("getPaInfo++"+paId);
-		return  this.patentService.getPaInfoByraId(paId);
+	public Patent getPaInfo(@RequestParam("Id") int paId) {
+
+		logger.info("getPaInfo++" + paId);
+		return this.patentService.getPaInfoByraId(paId);
 	}
-	
-	@RequestMapping(value="/DeletePaInfo" , method = RequestMethod.POST)
+
+	@RequestMapping(value = "/DeletePaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeletePaInfo(@RequestParam("Id") int paId){
-		
-		logger.info("DeletePaInfo++"+paId);
-		return  new AllInfo(String.valueOf(this.patentService.DeletePaInfoById(paId)));
+	public AllInfo DeletePaInfo(@RequestParam("Id") int paId) {
+
+		logger.info("DeletePaInfo++" + paId);
+		return new AllInfo(String.valueOf(this.patentService.DeletePaInfoById(paId)));
 	}
-	
-	@RequestMapping(value="/addPaInfo" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/addPaInfo", method = RequestMethod.GET)
 	@ResponseBody
-	public AllInfo addPaInfo(@RequestParam("usId") Integer usId,
-					         @RequestParam("paName") String paName,
-					         @RequestParam("paCategory") String paCategory,
-					         @RequestParam("paNumber") String paNumber,
-					       	 @RequestParam("paPlease") String paPlease,
-					       	 @RequestParam("paDate") String paDate,
-					       	 @RequestParam("paAbout") String paAbout) throws ParseException{
-		
-		logger.info("addPaInfo++"+usId+"++"+paName+"++"+paCategory+"++"+paNumber+"++"+paPlease+"++"+paDate+"++"+paAbout);
-		int re = this.patentService.addPaInfo(new Patent(usId, paName, paCategory,
-				patentService.getUserNameById(usId), (Date)(new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)), (Date)(new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber,
-				paAbout, new Date(System.currentTimeMillis())));
-		return  new AllInfo(String.valueOf(re));
+	public AllInfo addPaInfo(@RequestParam("usId") Integer usId, @RequestParam("paName") String paName,
+			@RequestParam("paCategory") String paCategory, @RequestParam("paNumber") String paNumber,
+			@RequestParam("paPlease") String paPlease, @RequestParam("paDate") String paDate,
+			@RequestParam("paAbout") String paAbout) throws ParseException {
+
+		logger.info("addPaInfo++" + usId + "++" + paName + "++" + paCategory + "++" + paNumber + "++" + paPlease + "++"
+				+ paDate + "++" + paAbout);
+		int re = this.patentService.addPaInfo(new Patent(usId, paName, paCategory, patentService.getUserNameById(usId),
+				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)),
+				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber, paAbout,
+				new Date(System.currentTimeMillis())));
+		return new AllInfo(String.valueOf(re));
 	}
-	
-	@RequestMapping(value="/upPaInfo" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/upPaInfo", method = RequestMethod.GET)
 	@ResponseBody
-	public AllInfo upPaInfo(@RequestParam("usId") Integer usId,
-							@RequestParam("Id") Integer paId,
-				            @RequestParam("paName") String paName,
-				           	@RequestParam("paCategory") String paCategory,
-				           	@RequestParam("paNumber") String paNumber,
-				           	@RequestParam("paPlease") String paPlease,
-				           	@RequestParam("paDate") String paDate,
-				           	@RequestParam("paAbout") String paAbout) throws ParseException{
-		
-		logger.info("upPaInfo++"+usId+"++"+paId+"++"+paName+"++"+paCategory+"++"+paNumber+"++"+paPlease+"++"+paDate+"++"+paAbout);
+	public AllInfo upPaInfo(@RequestParam("usId") Integer usId, @RequestParam("Id") Integer paId,
+			@RequestParam("paName") String paName, @RequestParam("paCategory") String paCategory,
+			@RequestParam("paNumber") String paNumber, @RequestParam("paPlease") String paPlease,
+			@RequestParam("paDate") String paDate, @RequestParam("paAbout") String paAbout) throws ParseException {
+
+		logger.info("upPaInfo++" + usId + "++" + paId + "++" + paName + "++" + paCategory + "++" + paNumber + "++"
+				+ paPlease + "++" + paDate + "++" + paAbout);
 		int re = this.patentService.upPaInfo(new Patent(paId, usId, paName, paCategory,
-				patentService.getUserNameById(usId), (Date)(new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)), (Date)(new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber,
-				paAbout, new Date(System.currentTimeMillis())));
-		return  new AllInfo(String.valueOf(re));
+				patentService.getUserNameById(usId), (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)),
+				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber, paAbout,
+				new Date(System.currentTimeMillis())));
+		return new AllInfo(String.valueOf(re));
 	}
 }

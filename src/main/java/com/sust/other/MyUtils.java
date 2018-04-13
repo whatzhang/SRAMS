@@ -13,12 +13,10 @@ import org.apache.commons.logging.LogFactory;
 public final class MyUtils {
 
 	private static final Log logger = LogFactory.getLog(MyUtils.class);
-	private final static int[] li_SecPosValue = { 1601, 1637, 1833, 2078, 2274,
-			2302, 2433, 2594, 2787, 3106, 3212, 3472, 3635, 3722, 3730, 3858,
-			4027, 4086, 4390, 4558, 4684, 4925, 5249, 5590 };
-	private final static String[] lc_FirstLetter = { "a", "b", "c", "d", "e",
-			"f", "g", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-			"t", "w", "x", "y", "z" };
+	private final static int[] li_SecPosValue = { 1601, 1637, 1833, 2078, 2274, 2302, 2433, 2594, 2787, 3106, 3212,
+			3472, 3635, 3722, 3730, 3858, 4027, 4086, 4390, 4558, 4684, 4925, 5249, 5590 };
+	private final static String[] lc_FirstLetter = { "a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m", "n",
+			"o", "p", "q", "r", "s", "t", "w", "x", "y", "z" };
 
 	/**
 	 * 获取文件列表
@@ -85,8 +83,7 @@ public final class MyUtils {
 			int li_SecPosCode = li_SectorCode * 100 + li_PositionCode; // 汉字区位码
 			if (li_SecPosCode > 1600 && li_SecPosCode < 5590) {
 				for (int i = 0; i < 23; i++) {
-					if (li_SecPosCode >= li_SecPosValue[i]
-							&& li_SecPosCode < li_SecPosValue[i + 1]) {
+					if (li_SecPosCode >= li_SecPosValue[i] && li_SecPosCode < li_SecPosValue[i + 1]) {
 						chinese = lc_FirstLetter[i];
 						break;
 					}
@@ -111,8 +108,7 @@ public final class MyUtils {
 	 *            转换后的编码
 	 * @return 经过编码转换后的字符串
 	 */
-	private static String conversionStr(String str, String charsetName,
-			String toCharsetName) {
+	private static String conversionStr(String str, String charsetName, String toCharsetName) {
 		try {
 			str = new String(str.getBytes(charsetName), toCharsetName);
 		} catch (UnsupportedEncodingException ex) {
@@ -158,17 +154,16 @@ public final class MyUtils {
 	public static String isExists(String dir, String fileName) {
 
 		String reString = "";
-		logger.info(dir+"++"+fileName);
+		logger.info(dir + "++" + fileName);
 		File file = new File(dir);
 		CreatDir(file);
 		String[] fileList = file.list();
-		if(fileList != null && fileList.length != 0){
+		if (fileList != null && fileList.length != 0) {
 			for (int i = 0; i < fileList.length; i++) {
 				// logger.info("isExists++"+ fileList[i]+ "++"+ fileName+ "++"+
 				// fileList[i].substring(0, fileList[i].lastIndexOf('.'))+ "++"
 				// + (dir + fileList[i]));
-				if ((fileList[i].substring(0, fileList[i].lastIndexOf('.')))
-						.equals(fileName)) {
+				if ((fileList[i].substring(0, fileList[i].lastIndexOf('.'))).equals(fileName)) {
 					new File(dir + File.separatorChar + fileList[i]).delete();
 					reString = fileList[i];
 				}

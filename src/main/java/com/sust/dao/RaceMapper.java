@@ -10,23 +10,23 @@ import com.sust.entity.Race;
 
 @Repository
 public interface RaceMapper {
-    int deleteByPrimaryKey(Integer raId);
+	int deleteByPrimaryKey(Integer raId);
 
-    int insert(Race record);
+	int insert(Race record);
 
-    int insertSelective(Race record);
+	int insertSelective(Race record);
 
-    Race selectByPrimaryKey(Integer raId);
+	Race selectByPrimaryKey(Integer raId);
 
-    int updateByPrimaryKeySelective(Race record);
+	int updateByPrimaryKeySelective(Race record);
 
-    int updateByPrimaryKey(Race record);
+	int updateByPrimaryKey(Race record);
 
 	List<Race> selectUserRaceList(Integer usId);
 
 	String selectUserNameById(Integer usId);
 
-	void updateUpTime(@Param("raUptime")Date raUptime, @Param("raId")Integer raId);
+	void updateUpTime(@Param("raUptime") Date raUptime, @Param("raId") Integer raId);
 
 	Date selectUpTimeByKey(Integer raId);
 

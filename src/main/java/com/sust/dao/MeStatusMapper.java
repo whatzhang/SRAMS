@@ -6,21 +6,21 @@ import com.sust.entity.MeStatus;
 
 @Repository
 public interface MeStatusMapper {
-    int deleteByPrimaryKey(Integer stId);
+	int deleteByPrimaryKey(Integer stId);
 
-    int insert(MeStatus record);
+	int insert(MeStatus record);
 
-    int insertSelective(MeStatus record);
+	int insertSelective(MeStatus record);
 
-    MeStatus selectByPrimaryKey(Integer stId);
+	MeStatus selectByPrimaryKey(Integer stId);
 
-    int updateByPrimaryKeySelective(MeStatus record);
+	int updateByPrimaryKeySelective(MeStatus record);
 
-    int updateByPrimaryKey(MeStatus record);
+	int updateByPrimaryKey(MeStatus record);
 
-    int updateSetReadStatus(@Param("meId")Integer meId, @Param("usId")Integer usId);
+	int updateSetReadStatus(@Param("meId") Integer meId, @Param("usId") Integer usId);
 
-    int updateSetNoReadStatus(@Param("meId")Integer meId, @Param("usId")Integer usId);
+	int updateSetNoReadStatus(@Param("meId") Integer meId, @Param("usId") Integer usId);
 
-    int updateSetDelStatus(@Param("meId")Integer meId, @Param("usId")Integer usId);
+	int updateSetDelStatus(@Param("meId") Integer meId, @Param("usId") Integer usId);
 }

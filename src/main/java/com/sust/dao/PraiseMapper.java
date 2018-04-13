@@ -10,23 +10,23 @@ import com.sust.entity.Praise;
 
 @Repository
 public interface PraiseMapper {
-    int deleteByPrimaryKey(Integer prId);
+	int deleteByPrimaryKey(Integer prId);
 
-    int insert(Praise record);
+	int insert(Praise record);
 
-    int insertSelective(Praise record);
+	int insertSelective(Praise record);
 
-    Praise selectByPrimaryKey(Integer prId);
+	Praise selectByPrimaryKey(Integer prId);
 
-    int updateByPrimaryKeySelective(Praise record);
+	int updateByPrimaryKeySelective(Praise record);
 
-    int updateByPrimaryKey(Praise record);
+	int updateByPrimaryKey(Praise record);
 
 	List<Praise> selectUserPraiseInfo(Integer usId);
-	
+
 	String selectUserNameById(Integer usId);
 
-	void updateUpTime(@Param("prUptime")Date prUptime, @Param("prId")Integer prId);
+	void updateUpTime(@Param("prUptime") Date prUptime, @Param("prId") Integer prId);
 
 	Date selectUpTimeByKey(Integer prId);
 

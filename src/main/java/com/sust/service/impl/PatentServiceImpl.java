@@ -45,6 +45,5 @@ public class PatentServiceImpl implements PatentService {
 	public int upPaInfo(Patent patent) {
 		return this.petentMapper.updateByPrimaryKey(patent);
 	}
-	
-	
+
 }

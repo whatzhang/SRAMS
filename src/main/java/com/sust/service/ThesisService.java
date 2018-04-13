@@ -12,8 +12,8 @@ public interface ThesisService {
 
 	public int deleteThesisById(int deId);
 
-	public int addThesis(Thesis thesis); 
-	
+	public int addThesis(Thesis thesis);
+
 	String getUserNameById(int usId);
 
 	public int upThesisInfo(Thesis thesis);

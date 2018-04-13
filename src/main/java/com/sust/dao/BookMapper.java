@@ -10,23 +10,23 @@ import com.sust.entity.Book;
 
 @Repository
 public interface BookMapper {
-    int deleteByPrimaryKey(Integer boId);
+	int deleteByPrimaryKey(Integer boId);
 
-    int insert(Book record);
+	int insert(Book record);
 
-    int insertSelective(Book record);
+	int insertSelective(Book record);
 
-    Book selectByPrimaryKey(Integer boId);
+	Book selectByPrimaryKey(Integer boId);
 
-    int updateByPrimaryKeySelective(Book record);
+	int updateByPrimaryKeySelective(Book record);
 
-    int updateByPrimaryKey(Book record);
+	int updateByPrimaryKey(Book record);
 
 	String selectUserNameById(Integer usId);
 
 	List<Book> selectBookList(Integer usId);
 
-	void updateUpTime(@Param("boUptime")Date boUptime, @Param("boId")Integer boId);
+	void updateUpTime(@Param("boUptime") Date boUptime, @Param("boId") Integer boId);
 
 	Date selectUpTimeByKey(Integer boId);
 

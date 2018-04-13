@@ -7,5 +7,5 @@ public interface MeStatusService {
 	public String setNoReadStatus(int meId, Integer usId);
 
 	public String setDelStatus(int meId, Integer usId);
-	
+
 }

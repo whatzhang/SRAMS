@@ -10,23 +10,23 @@ import com.sust.entity.Thesis;
 
 @Repository
 public interface ThesisMapper {
-    int deleteByPrimaryKey(Integer thId);
+	int deleteByPrimaryKey(Integer thId);
 
-    int insert(Thesis record);
+	int insert(Thesis record);
 
-    int insertSelective(Thesis record);
+	int insertSelective(Thesis record);
 
-    Thesis selectByPrimaryKey(Integer thId);
+	Thesis selectByPrimaryKey(Integer thId);
 
-    int updateByPrimaryKeySelective(Thesis record);
+	int updateByPrimaryKeySelective(Thesis record);
 
-    int updateByPrimaryKey(Thesis record);
+	int updateByPrimaryKey(Thesis record);
 
 	List<Thesis> selectByUsId(Integer usId);
 
 	String selectUserNameById(int usId);
 
-	void updateUpTime(@Param("thUptime")Date thUptime, @Param("thId")Integer thId);
+	void updateUpTime(@Param("thUptime") Date thUptime, @Param("thId") Integer thId);
 
 	Date selectUpTimeByKey(Integer thId);
 

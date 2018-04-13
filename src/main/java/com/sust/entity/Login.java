@@ -1,13 +1,13 @@
 package com.sust.entity;
 
 public class Login {
-    private Integer usId;
+	private Integer usId;
 
-    private String loLogin;
+	private String loLogin;
 
-    private String loPass;
+	private String loPass;
 
-    private String loType;
+	private String loType;
 
 	public Login(Integer usId, String loLogin, String loPass, String loType) {
 		this.usId = usId;
@@ -23,40 +23,40 @@ public class Login {
 	}
 
 	public Integer getUsId() {
-        return usId;
-    }
+		return usId;
+	}
 
-    public void setUsId(Integer usId) {
-        this.usId = usId;
-    }
+	public void setUsId(Integer usId) {
+		this.usId = usId;
+	}
 
-    public String getLoLogin() {
-        return loLogin;
-    }
+	public String getLoLogin() {
+		return loLogin;
+	}
 
-    public void setLoLogin(String loLogin) {
-        this.loLogin = loLogin == null ? null : loLogin.trim();
-    }
+	public void setLoLogin(String loLogin) {
+		this.loLogin = loLogin == null ? null : loLogin.trim();
+	}
 
-    public String getLoPass() {
-        return loPass;
-    }
+	public String getLoPass() {
+		return loPass;
+	}
 
-    public void setLoPass(String loPass) {
-        this.loPass = loPass == null ? null : loPass.trim();
-    }
+	public void setLoPass(String loPass) {
+		this.loPass = loPass == null ? null : loPass.trim();
+	}
 
-    public String getLoType() {
-        return loType;
-    }
+	public String getLoType() {
+		return loType;
+	}
 
-    public void setLoType(String loType) {
-        this.loType = loType == null ? null : loType.trim();
-    }
+	public void setLoType(String loType) {
+		this.loType = loType == null ? null : loType.trim();
+	}
 
 	@Override
 	public String toString() {
 		return "Login [usId=" + usId + ", loLogin=" + loLogin + ", loPass=" + loPass + ", loType=" + loType + "]";
 	}
-    
+
 }

@@ -27,7 +27,7 @@ import com.sust.service.LoginService;
 public class LoginController {
 
 	private static final Log logger = LogFactory.getLog(LoginController.class);
-	
+
 	@Resource
 	private LoginService loginService;
 
@@ -72,9 +72,9 @@ public class LoginController {
 			@RequestParam("us_academy") String academy, @RequestParam("us_qu1") String qu1,
 			@RequestParam("us_key1") String key1, @RequestParam("us_qu2") String qu2,
 			@RequestParam("us_key2") String key2, Model model) {
-		logger.info("LoginController++" + account + "+" + pass + "+" + name + "+" + age + "+" + sex + "+" + brith
-				+ "+" + num + "+" + duty + "+" + major + "+" + address + "+" + phone + "+" + mail + "+" + academy + "+"
-				+ qu1 + "+" + key1 + "+" + qu2 + "+" + key2);
+		logger.info("LoginController++" + account + "+" + pass + "+" + name + "+" + age + "+" + sex + "+" + brith + "+"
+				+ num + "+" + duty + "+" + major + "+" + address + "+" + phone + "+" + mail + "+" + academy + "+" + qu1
+				+ "+" + key1 + "+" + qu2 + "+" + key2);
 		if (loginService.saveNewInfo(account, pass, "user", name, age, sex, brith, num, duty, major, address, phone,
 				mail, academy, qu1, key1, qu2, key2).equals("success")) {
 			return "login";
@@ -115,7 +115,8 @@ public class LoginController {
 		String qu2 = request.getParameter("qu2").trim();
 		String id = request.getParameter("id").trim();
 
-		logger.info("forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
+		logger.info(
+				"forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
 
 		if (key1.equals(quk1) && key2.equals(quk2)) {
 			String pa = loginService.getPass(id);
@@ -135,13 +136,13 @@ public class LoginController {
 		request.getSession().invalidate();
 		return "login";
 	}
-	
-	@RequestMapping(value="/upPass", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/upPass", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo upPass(@RequestParam("Pass") String pass, HttpSession session){
-		
-		Integer usId = ((Login)session.getAttribute("login")).getUsId();
-		return new AllInfo(String.valueOf(this.loginService.upDataPass(usId,pass)));
+	public AllInfo upPass(@RequestParam("Pass") String pass, HttpSession session) {
+
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		return new AllInfo(String.valueOf(this.loginService.upDataPass(usId, pass)));
 	}
 
 }

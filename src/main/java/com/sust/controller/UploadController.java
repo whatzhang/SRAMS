@@ -21,22 +21,29 @@ import com.sust.service.UploadService;
 @RequestMapping("/upload")
 public class UploadController {
 
-	//private static final Log logger = LogFactory.getLog(UploadController.class);
+	// private static final Log logger =
+	// LogFactory.getLog(UploadController.class);
 	@Resource
 	private UploadService uploadService;
 	@Autowired
 	private MyConfig config;
-	
-	/*@RequestMapping("uploadFile")
-    public void  UploadUserTypeFile(@RequestParam("ID") String id, @RequestParam("type") String type, @RequestParam("upfile") CommonsMultipartFile file, HttpSession session) {
-		this.uploadService.UploadUserTypeFile(Integer.valueOf(id), file, type, session.getServletContext().getRealPath(config.UPLOADE_URL));
-    }*/
-	
-	@RequestMapping("/uploadFileAjax")  
-    @ResponseBody
-    public AllInfo uploadFileAjax(@RequestParam("ID") Integer id, @RequestParam("upfile") CommonsMultipartFile file, @RequestParam("type") String type, HttpSession session) { 
-       
+
+	/*
+	 * @RequestMapping("uploadFile") public void
+	 * UploadUserTypeFile(@RequestParam("ID") String id, @RequestParam("type")
+	 * String type, @RequestParam("upfile") CommonsMultipartFile file,
+	 * HttpSession session) {
+	 * this.uploadService.UploadUserTypeFile(Integer.valueOf(id), file, type,
+	 * session.getServletContext().getRealPath(config.UPLOADE_URL)); }
+	 */
+
+	@RequestMapping("/uploadFileAjax")
+	@ResponseBody
+	public AllInfo uploadFileAjax(@RequestParam("ID") Integer id, @RequestParam("upfile") CommonsMultipartFile file,
+			@RequestParam("type") String type, HttpSession session) {
+
 		MyUtils.CreatDir(new File(session.getServletContext().getRealPath(config.UPLOADE_URL)));
-		return new AllInfo(this.uploadService.UploadUserTypeFile(id, file, type, session.getServletContext().getRealPath(config.UPLOADE_URL)));  
-    } 
+		return new AllInfo(this.uploadService.UploadUserTypeFile(id, file, type,
+				session.getServletContext().getRealPath(config.UPLOADE_URL)));
+	}
 }

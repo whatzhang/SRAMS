@@ -10,7 +10,7 @@ import com.sust.controller.ThesisController;
 public class FileUtil {
 
 	private static final Logger logger = Logger.getLogger(ThesisController.class);
-	
+
 	public List<String> getDowenIfo(String path) {
 		List<String> filelist = new ArrayList<String>();
 		try {
@@ -29,7 +29,5 @@ public class FileUtil {
 		}
 		return filelist;
 	}
-	
-	
-	
+
 }

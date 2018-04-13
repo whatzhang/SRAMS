@@ -42,24 +42,24 @@ public class DownloadServiceImpl implements DownloadService {
 	private RaceMapper raceMapper;
 	@Resource
 	private ThesisMapper thesisMapper;
-	
+
 	@Override
 	public List<String> getDownloadFile(HttpSession session, String type, String id) {
 
 		List<String> reList = new ArrayList<String>();
 		String name = getFileName(type, Integer.valueOf(id));
 		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL);
-		if(MyUtils.CreatDir(new File(dir))){
-		reList.add(name);
-		//String finName = MyUtils.isExists(dir, name);
-		reList.add(dir+File.separatorChar + type + File.separatorChar + name+".rar");
-		logger.info(reList.get(0)+"++"+reList.get(1));
-		return reList;
-		}else{
+		if (MyUtils.CreatDir(new File(dir))) {
+			reList.add(name);
+			// String finName = MyUtils.isExists(dir, name);
+			reList.add(dir + File.separatorChar + type + File.separatorChar + name + ".rar");
+			logger.info(reList.get(0) + "++" + reList.get(1));
+			return reList;
+		} else {
 			return null;
 		}
 	}
-	
+
 	private String getFileName(String type, Integer id) {
 		Date da = new Date();
 		String name = "";
@@ -91,7 +91,7 @@ public class DownloadServiceImpl implements DownloadService {
 		default:
 			break;
 		}
-		//name + 
+		// name +
 		return new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
 	}
 

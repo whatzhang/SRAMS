@@ -15,16 +15,16 @@ public class NewsServiceImpl implements NewsService {
 
 	@Resource
 	private MessageMapper messageMapper;
-	
+
 	@Override
 	public List<Message> getUserMeDel(int usId) {
-		
+
 		return this.messageMapper.selectMeDelByUsId(usId);
 	}
 
 	@Override
 	public List<Message> getUserMeRead(int usId) {
-		
+
 		return this.messageMapper.selectMeReadByUsId(usId);
 	}
 
@@ -36,19 +36,19 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public Message getNewsById(int id) {
-		
+
 		return this.messageMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public String getUserNameById(int id) {
-		
+
 		return this.messageMapper.selectUserNameById(id);
 	}
 
 	@Override
 	public String deleteReadNews(Integer usId) {
-	
+
 		return String.valueOf(this.messageMapper.deleteReadNews(usId));
 	}
 

@@ -24,8 +24,7 @@ import com.sust.service.UploadService;
 @Service
 public class UploadServiceImpl implements UploadService {
 
-	private static final Log logger = LogFactory
-			.getLog(UploadServiceImpl.class);
+	private static final Log logger = LogFactory.getLog(UploadServiceImpl.class);
 	@Resource
 	private BookMapper bookMapper;
 	@Resource
@@ -40,15 +39,16 @@ public class UploadServiceImpl implements UploadService {
 	private ThesisMapper thesisMapper;
 
 	@Override
-	public String UploadUserTypeFile(Integer id, CommonsMultipartFile file,String type, String realPath) {
+	public String UploadUserTypeFile(Integer id, CommonsMultipartFile file, String type, String realPath) {
 		if (id == null) {
 			return "fail";
 		} else {
 			String dir = realPath + File.separatorChar + type + File.separatorChar;
 			String oldName = file.getOriginalFilename();
-			//删除旧文件
+			// 删除旧文件
 			MyUtils.isExists(dir, getOldFileName(type, id));
-			String path = dir + getFileName(type, id , new Date(System.currentTimeMillis()))+oldName.substring(oldName.lastIndexOf('.'));
+			String path = dir + getFileName(type, id, new Date(System.currentTimeMillis()))
+					+ oldName.substring(oldName.lastIndexOf('.'));
 			logger.info("UploadUserTypeFile++" + id + "++" + type + "++" + file.getOriginalFilename() + "++" + path);
 			File newFile = new File(path);
 			try {
@@ -88,8 +88,8 @@ public class UploadServiceImpl implements UploadService {
 		return new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
 	}
 
-	private String getFileName(String type,Integer id, Date date) {
-		logger.info(type+"++"+id+"++"+new SimpleDateFormat("yyyyMMddhhmmssSSS").format(date));
+	private String getFileName(String type, Integer id, Date date) {
+		logger.info(type + "++" + id + "++" + new SimpleDateFormat("yyyyMMddhhmmssSSS").format(date));
 		switch (type) {
 		case "patent":
 			this.patentMapper.updateUpTime(date, id);

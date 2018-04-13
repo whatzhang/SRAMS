@@ -6,17 +6,17 @@ import com.sust.entity.Users;
 
 @Repository
 public interface UsersMapper {
-    int deleteByPrimaryKey(Integer usId);
+	int deleteByPrimaryKey(Integer usId);
 
-    int insert(Users record);
+	int insert(Users record);
 
-    int insertSelective(Users record);
+	int insertSelective(Users record);
 
-    Users selectByPrimaryKey(Integer usId);
+	Users selectByPrimaryKey(Integer usId);
 
-    int updateByPrimaryKeySelective(Users record);
+	int updateByPrimaryKeySelective(Users record);
 
-    int updateByPrimaryKey(Users record);
+	int updateByPrimaryKey(Users record);
 
 	int insertUserInfo(Users users);
 

@@ -26,67 +26,63 @@ import com.sust.service.ProjectService;
 public class ProjectController {
 
 	private static final Log logger = LogFactory.getLog(ProjectController.class);
-	
+
 	@Resource
 	private ProjectService projectService;
-	
+
 	@RequestMapping("/getUserProList")
-	private String getUserProList(Model model, HttpSession session){
-		
-		Integer usId = ((Login)session.getAttribute("login")).getUsId();
-		logger.info("getUserProList++"+usId);
-		model.addAttribute("ProjectList", projectService.getUserProList(usId)); 
-		return  "users/project";
+	private String getUserProList(Model model, HttpSession session) {
+
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		logger.info("getUserProList++" + usId);
+		model.addAttribute("ProjectList", projectService.getUserProList(usId));
+		return "users/project";
 	}
-	
-	@RequestMapping(value="/getProInfo")
+
+	@RequestMapping(value = "/getProInfo")
 	@ResponseBody
-	public Project getProInfo(@RequestParam("ProId") int ProId){
-		
-		logger.info("getProInfo++"+ProId);
-		return  this.projectService.getProInfoByProId(ProId);
+	public Project getProInfo(@RequestParam("ProId") int ProId) {
+
+		logger.info("getProInfo++" + ProId);
+		return this.projectService.getProInfoByProId(ProId);
 	}
-	
-	@RequestMapping(value="/DeleteProInfo" , method = RequestMethod.POST)
+
+	@RequestMapping(value = "/DeleteProInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeleteProInfo(@RequestParam("ProId") int ProId){
-		
-		logger.info("DeleteProInfo++"+ProId);
-		return  new AllInfo(String.valueOf(this.projectService.DeleteProInfoById(ProId)));
+	public AllInfo DeleteProInfo(@RequestParam("ProId") int ProId) {
+
+		logger.info("DeleteProInfo++" + ProId);
+		return new AllInfo(String.valueOf(this.projectService.DeleteProInfoById(ProId)));
 	}
-	
-	@RequestMapping(value="/addProInfo" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/addProInfo", method = RequestMethod.GET)
 	@ResponseBody
-	public AllInfo addProInfo( @RequestParam("usId") Integer usId, 
-            				   @RequestParam("ProName") String ProName, 
-            				   @RequestParam("ProCategory") String ProCategory,
-            				   @RequestParam("ProDate") String ProDate, 
-            				   @RequestParam("proCash") Integer proCash, 
-            				   @RequestParam("proLeader") String proLeader, 
-            				   @RequestParam("proTeam") String proTeam,
-            				   @RequestParam("ProAbout") String ProAbout) throws ParseException{
-		
-		logger.info("addProInfo++"+usId+"++"+ProName+"++"+ProCategory+"++"+ProDate+"++"+proCash+"++"+proLeader+"++"+proTeam+"++"+ProAbout);
-		int re = this.projectService.addProInfo(new Project(usId, ProName, ProCategory,(Date)(new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)), proCash, proLeader, proTeam,
-				 ProAbout, new Date(System.currentTimeMillis())));
-		return  new AllInfo(String.valueOf(re));
+	public AllInfo addProInfo(@RequestParam("usId") Integer usId, @RequestParam("ProName") String ProName,
+			@RequestParam("ProCategory") String ProCategory, @RequestParam("ProDate") String ProDate,
+			@RequestParam("proCash") Integer proCash, @RequestParam("proLeader") String proLeader,
+			@RequestParam("proTeam") String proTeam, @RequestParam("ProAbout") String ProAbout) throws ParseException {
+
+		logger.info("addProInfo++" + usId + "++" + ProName + "++" + ProCategory + "++" + ProDate + "++" + proCash + "++"
+				+ proLeader + "++" + proTeam + "++" + ProAbout);
+		int re = this.projectService.addProInfo(
+				new Project(usId, ProName, ProCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)),
+						proCash, proLeader, proTeam, ProAbout, new Date(System.currentTimeMillis())));
+		return new AllInfo(String.valueOf(re));
 	}
-	
-	@RequestMapping(value="/upProInfo" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/upProInfo", method = RequestMethod.GET)
 	@ResponseBody
-	public AllInfo upProInfo(@RequestParam("ProId") Integer ProId, 
-			                 @RequestParam("usId") Integer usId, 
-			                 @RequestParam("ProName") String ProName, 
-          				     @RequestParam("ProCategory") String ProCategory,
-          				     @RequestParam("ProDate") String ProDate, 
-          				     @RequestParam("proCash") Integer proCash, 
-          				     @RequestParam("proLeader") String proLeader, 
-          				     @RequestParam("proTeam") String proTeam,
-          				     @RequestParam("ProAbout") String ProAbout) throws ParseException{
-		
-		logger.info("addProInfo++"+ProId+"++"+usId+"++"+ProName+"++"+ProCategory+"++"+ProDate+"++"+proCash+"++"+proLeader+"++"+proTeam+"++"+ProAbout);
-		int re = this.projectService.upProInfo(new Project(ProId, usId, ProName, ProCategory,(Date)(new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)), proCash, proLeader, proTeam,
-				ProAbout, new Date(System.currentTimeMillis())));
-		return  new AllInfo(String.valueOf(re));
+	public AllInfo upProInfo(@RequestParam("ProId") Integer ProId, @RequestParam("usId") Integer usId,
+			@RequestParam("ProName") String ProName, @RequestParam("ProCategory") String ProCategory,
+			@RequestParam("ProDate") String ProDate, @RequestParam("proCash") Integer proCash,
+			@RequestParam("proLeader") String proLeader, @RequestParam("proTeam") String proTeam,
+			@RequestParam("ProAbout") String ProAbout) throws ParseException {
+
+		logger.info("addProInfo++" + ProId + "++" + usId + "++" + ProName + "++" + ProCategory + "++" + ProDate + "++"
+				+ proCash + "++" + proLeader + "++" + proTeam + "++" + ProAbout);
+		int re = this.projectService.upProInfo(new Project(ProId, usId, ProName, ProCategory,
+				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)), proCash, proLeader, proTeam, ProAbout,
+				new Date(System.currentTimeMillis())));
+		return new AllInfo(String.valueOf(re));
 	}
 }

@@ -15,22 +15,22 @@ public class RaceServiceImpl implements RaceService {
 
 	@Resource
 	private RaceMapper raceMapper;
-	
+
 	@Override
 	public List<Race> getUserRace(Integer usId) {
-		
+
 		return this.raceMapper.selectUserRaceList(usId);
 	}
 
 	@Override
 	public Race getRaInfoByraId(int raId) {
-		
+
 		return this.raceMapper.selectByPrimaryKey(raId);
 	}
 
 	@Override
 	public int DeleteRaInfoByThid(int raId) {
-		
+
 		return this.raceMapper.deleteByPrimaryKey(raId);
 	}
 
@@ -42,13 +42,13 @@ public class RaceServiceImpl implements RaceService {
 
 	@Override
 	public int addRaInfo(Race race) {
-		
+
 		return this.raceMapper.insertSelective(race);
 	}
 
 	@Override
 	public int upRaInfo(Race race) {
-		
+
 		return this.raceMapper.updateByPrimaryKey(race);
 	}
 

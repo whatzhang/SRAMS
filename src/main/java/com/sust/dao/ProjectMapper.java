@@ -10,21 +10,21 @@ import com.sust.entity.Project;
 
 @Repository
 public interface ProjectMapper {
-    int deleteByPrimaryKey(Integer proId);
+	int deleteByPrimaryKey(Integer proId);
 
-    int insert(Project record);
+	int insert(Project record);
 
-    int insertSelective(Project record);
+	int insertSelective(Project record);
 
-    Project selectByPrimaryKey(Integer proId);
+	Project selectByPrimaryKey(Integer proId);
 
-    int updateByPrimaryKeySelective(Project record);
+	int updateByPrimaryKeySelective(Project record);
 
-    int updateByPrimaryKey(Project record);
+	int updateByPrimaryKey(Project record);
 
 	List<Project> selectProjectList(Integer usId);
 
-	void updateUpTime(@Param("proUptime")Date proUptime, @Param("proId")Integer proId);
+	void updateUpTime(@Param("proUptime") Date proUptime, @Param("proId") Integer proId);
 
 	Date selectUpTimeByKey(Integer proId);
 

@@ -7,26 +7,28 @@ import com.sust.entity.Login;
 
 @Repository
 public interface LoginMapper {
-	
-    int deleteByPrimaryKey(Integer usId);
 
-    int insert(Login record);
+	int deleteByPrimaryKey(Integer usId);
 
-    int insertSelective(Login record);
+	int insert(Login record);
 
-    Login selectByPrimaryKey(Integer usId);
-          
-    int updateByPrimaryKeySelective(Login record);
+	int insertSelective(Login record);
 
-    int updateByPrimaryKey(Login record);
+	Login selectByPrimaryKey(Integer usId);
 
-	Login selectLoginInfo(@Param("loLogin")String account, @Param("loPass")String userPassword, @Param("loType")String type);
+	int updateByPrimaryKeySelective(Login record);
+
+	int updateByPrimaryKey(Login record);
+
+	Login selectLoginInfo(@Param("loLogin") String account, @Param("loPass") String userPassword,
+			@Param("loType") String type);
 
 	int selectLoginByAccount(String account);
 
 	int selectLoginByPass(String password);
 
-	int selectLoginByAll(@Param("loLogin")String account, @Param("loPass")String userPassword, @Param("loType")String type);
+	int selectLoginByAll(@Param("loLogin") String account, @Param("loPass") String userPassword,
+			@Param("loType") String type);
 
 	int selectByNum(String num);
 

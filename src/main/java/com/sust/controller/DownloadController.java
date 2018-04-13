@@ -25,14 +25,13 @@ import com.sust.service.DownloadService;
 @RequestMapping("/download")
 public class DownloadController {
 
-	private static final Log logger = LogFactory
-			.getLog(DownloadController.class);
+	private static final Log logger = LogFactory.getLog(DownloadController.class);
 	@Resource
 	private DownloadService downloadService;
 
 	@RequestMapping(value = "/downloadTypeFile")
-	public ResponseEntity<byte[]> downloadTypeFile(HttpSession session,
-			@RequestParam("type") String type, @RequestParam("id") String id) {
+	public ResponseEntity<byte[]> downloadTypeFile(HttpSession session, @RequestParam("type") String type,
+			@RequestParam("id") String id) {
 
 		List<String> list = this.downloadService.getDownloadFile(session, type, id);
 		if (list != null) {
@@ -41,7 +40,7 @@ public class DownloadController {
 			HttpHeaders headers = new HttpHeaders();
 			String FielName = "";
 			try {
-				FielName = new String(list.get(0).getBytes("UTF-8"),"iso-8859-1");
+				FielName = new String(list.get(0).getBytes("UTF-8"), "iso-8859-1");
 			} catch (UnsupportedEncodingException e) {
 				logger.error("downloadTypeFile_error");
 			}
@@ -49,8 +48,7 @@ public class DownloadController {
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			ResponseEntity<byte[]> entity = null;
 			try {
-				entity = new ResponseEntity<byte[]>(
-						FileUtils.readFileToByteArray(dowenloadFile), headers,
+				entity = new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(dowenloadFile), headers,
 						HttpStatus.CREATED);
 			} catch (IOException e) {
 				logger.error("downloadTypeFile_ResponseEntity_error");

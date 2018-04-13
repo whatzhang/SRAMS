@@ -14,7 +14,9 @@ public class FontUtil {
 
 	/**
 	 * 取得给定汉字串的首字母串,即声母串
-	 * @param str 给定汉字串
+	 * 
+	 * @param str
+	 *            给定汉字串
 	 * @return 声母串
 	 */
 	public String getAllFirstLetter(String str) {
@@ -31,7 +33,9 @@ public class FontUtil {
 
 	/**
 	 * 取得给定汉字的首字母,即声母
-	 * @param chinese 给定的汉字
+	 * 
+	 * @param chinese
+	 *            给定的汉字
 	 * @return 给定汉字的声母
 	 */
 	public String getFirstLetter(String chinese) {
@@ -66,9 +70,13 @@ public class FontUtil {
 
 	/**
 	 * 字符串编码转换
-	 * @param str 要转换编码的字符串
-	 * @param charsetName 原来的编码
-	 * @param toCharsetName 转换后的编码
+	 * 
+	 * @param str
+	 *            要转换编码的字符串
+	 * @param charsetName
+	 *            原来的编码
+	 * @param toCharsetName
+	 *            转换后的编码
 	 * @return 经过编码转换后的字符串
 	 */
 	private String conversionStr(String str, String charsetName, String toCharsetName) {

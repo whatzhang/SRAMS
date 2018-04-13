@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UsersMapper userMapper;
-	
+
 	@Override
 	public Users getUserInfo(Integer usId) {
 
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int upUserInfo(Users users) {
-		
+
 		return this.userMapper.updateByPrimaryKey(users);
 	}
 

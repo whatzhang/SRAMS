@@ -4,35 +4,34 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Race {
-    private Integer raId;
+	private Integer raId;
 
-    private Integer usId;
+	private Integer usId;
 
-    private String raName;
+	private String raName;
 
-    private String raCategory;
+	private String raCategory;
 
-    private String raType;
+	private String raType;
 
-    private String raAuthor;
+	private String raAuthor;
 
-    private String raLevel;
+	private String raLevel;
 
-    private String raTeacher;
+	private String raTeacher;
 
-    private Date raDate;
+	private Date raDate;
 
-    private String raAbout;
+	private String raAbout;
 
-    private Date raUptime;
+	private Date raUptime;
 
-    public Race(){
-    	
-    }
-    
-    public Race(Integer raId, Integer usId, String raName, String raCategory,
-			String raType, String raAuthor, String raLevel, String raTeacher,
-			Date raDate, String raAbout, Date raUptime) {
+	public Race() {
+
+	}
+
+	public Race(Integer raId, Integer usId, String raName, String raCategory, String raType, String raAuthor,
+			String raLevel, String raTeacher, Date raDate, String raAbout, Date raUptime) {
 		super();
 		this.raId = raId;
 		this.usId = usId;
@@ -46,10 +45,9 @@ public class Race {
 		this.raAbout = raAbout;
 		this.raUptime = raUptime;
 	}
-    
-    public Race(Integer usId, String raName, String raCategory,
-			String raType, String raAuthor, String raLevel, String raTeacher,
-			Date raDate, String raAbout, Date raUptime) {
+
+	public Race(Integer usId, String raName, String raCategory, String raType, String raAuthor, String raLevel,
+			String raTeacher, Date raDate, String raAbout, Date raUptime) {
 		super();
 		this.usId = usId;
 		this.raName = raName;
@@ -64,90 +62,90 @@ public class Race {
 	}
 
 	public Integer getRaId() {
-        return raId;
-    }
+		return raId;
+	}
 
-    public void setRaId(Integer raId) {
-        this.raId = raId;
-    }
+	public void setRaId(Integer raId) {
+		this.raId = raId;
+	}
 
-    public Integer getUsId() {
-        return usId;
-    }
+	public Integer getUsId() {
+		return usId;
+	}
 
-    public void setUsId(Integer usId) {
-        this.usId = usId;
-    }
+	public void setUsId(Integer usId) {
+		this.usId = usId;
+	}
 
-    public String getRaName() {
-        return raName;
-    }
+	public String getRaName() {
+		return raName;
+	}
 
-    public void setRaName(String raName) {
-        this.raName = raName == null ? null : raName.trim();
-    }
+	public void setRaName(String raName) {
+		this.raName = raName == null ? null : raName.trim();
+	}
 
-    public String getRaCategory() {
-        return raCategory;
-    }
+	public String getRaCategory() {
+		return raCategory;
+	}
 
-    public void setRaCategory(String raCategory) {
-        this.raCategory = raCategory == null ? null : raCategory.trim();
-    }
+	public void setRaCategory(String raCategory) {
+		this.raCategory = raCategory == null ? null : raCategory.trim();
+	}
 
-    public String getRaType() {
-        return raType;
-    }
+	public String getRaType() {
+		return raType;
+	}
 
-    public void setRaType(String raType) {
-        this.raType = raType == null ? null : raType.trim();
-    }
+	public void setRaType(String raType) {
+		this.raType = raType == null ? null : raType.trim();
+	}
 
-    public String getRaAuthor() {
-        return raAuthor;
-    }
+	public String getRaAuthor() {
+		return raAuthor;
+	}
 
-    public void setRaAuthor(String raAuthor) {
-        this.raAuthor = raAuthor == null ? null : raAuthor.trim();
-    }
+	public void setRaAuthor(String raAuthor) {
+		this.raAuthor = raAuthor == null ? null : raAuthor.trim();
+	}
 
-    public String getRaLevel() {
-        return raLevel;
-    }
+	public String getRaLevel() {
+		return raLevel;
+	}
 
-    public void setRaLevel(String raLevel) {
-        this.raLevel = raLevel == null ? null : raLevel.trim();
-    }
+	public void setRaLevel(String raLevel) {
+		this.raLevel = raLevel == null ? null : raLevel.trim();
+	}
 
-    public String getRaTeacher() {
-        return raTeacher;
-    }
+	public String getRaTeacher() {
+		return raTeacher;
+	}
 
-    public void setRaTeacher(String raTeacher) {
-        this.raTeacher = raTeacher == null ? null : raTeacher.trim();
-    }
+	public void setRaTeacher(String raTeacher) {
+		this.raTeacher = raTeacher == null ? null : raTeacher.trim();
+	}
 
-    public String getRaDate() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(raDate);
-    }
+	public String getRaDate() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(raDate);
+	}
 
-    public void setRaDate(Date raDate) {
-        this.raDate = raDate;
-    }
+	public void setRaDate(Date raDate) {
+		this.raDate = raDate;
+	}
 
-    public String getRaAbout() {
-        return raAbout;
-    }
+	public String getRaAbout() {
+		return raAbout;
+	}
 
-    public void setRaAbout(String raAbout) {
-        this.raAbout = raAbout == null ? null : raAbout.trim();
-    }
+	public void setRaAbout(String raAbout) {
+		this.raAbout = raAbout == null ? null : raAbout.trim();
+	}
 
-    public Date getRaUptime() {
-        return raUptime;
-    }
+	public Date getRaUptime() {
+		return raUptime;
+	}
 
-    public void setRaUptime(Date raUptime) {
-        this.raUptime = raUptime;
-    }
+	public void setRaUptime(Date raUptime) {
+		this.raUptime = raUptime;
+	}
 }

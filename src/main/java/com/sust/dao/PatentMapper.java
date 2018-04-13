@@ -10,23 +10,23 @@ import com.sust.entity.Patent;
 
 @Repository
 public interface PatentMapper {
-    int deleteByPrimaryKey(Integer paId);
+	int deleteByPrimaryKey(Integer paId);
 
-    int insert(Patent record);
+	int insert(Patent record);
 
-    int insertSelective(Patent record);
+	int insertSelective(Patent record);
 
-    Patent selectByPrimaryKey(Integer paId);
+	Patent selectByPrimaryKey(Integer paId);
 
-    int updateByPrimaryKeySelective(Patent record);
+	int updateByPrimaryKeySelective(Patent record);
 
-    int updateByPrimaryKey(Patent record);
+	int updateByPrimaryKey(Patent record);
 
 	List<Patent> selectByUsId(Integer paId);
 
 	String selectgetUserNameById(Integer usId);
 
-	void updateUpTime(@Param("paUptime")Date paUptime, @Param("paId")Integer paId);
+	void updateUpTime(@Param("paUptime") Date paUptime, @Param("paId") Integer paId);
 
 	Date selectUpTimeByKey(Integer paId);
 

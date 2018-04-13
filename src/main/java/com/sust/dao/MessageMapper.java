@@ -8,17 +8,17 @@ import com.sust.entity.Message;
 
 @Repository
 public interface MessageMapper {
-    int deleteByPrimaryKey(Integer meId);
+	int deleteByPrimaryKey(Integer meId);
 
-    int insert(Message record);
+	int insert(Message record);
 
-    int insertSelective(Message record);
+	int insertSelective(Message record);
 
-    Message selectByPrimaryKey(Integer meId);
+	Message selectByPrimaryKey(Integer meId);
 
-    int updateByPrimaryKeySelective(Message record);
+	int updateByPrimaryKeySelective(Message record);
 
-    int updateByPrimaryKey(Message record);
+	int updateByPrimaryKey(Message record);
 
 	List<Message> selectMeDelByUsId(Integer usId);
 

@@ -8,7 +8,7 @@ public class UtilTest {
 
 	@Test
 	public void fileIsExist() {
-	
+
 		MyUtils.isExists("C:\\Users\\zys0916\\Desktop\\bean\\CC", "20180413115806470");
 	}
 }
