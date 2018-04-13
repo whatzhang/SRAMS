@@ -14,17 +14,28 @@
 		<result column="pro_uptime" jdbcType="TIMESTAMP" property="proUptime" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		pro_id, us_id, pro_name, pro_category, pro_date, pro_cash, pro_leader,
+		pro_id, us_id, pro_name, pro_category, pro_date, pro_cash,
+		pro_leader,
 		pro_team,
 		pro_about, pro_uptime
 	</sql>
 
+	<select id="selectNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select pro_name from sr_project where pro_id =
+		#{proId,jdbcType=INTEGER}
+	</select>
 	<select id="selectProjectList" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_project
 		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectUpTimeByKey" parameterType="java.lang.Integer"
+		resultType="java.util.Date">
+		select pro_uptime from sr_project where pro_id =
+		#{proId,jdbcType=INTEGER}
 	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
@@ -34,18 +45,24 @@
 		where pro_id = #{proId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sr_project
+		delete from
+		sr_project
 		where pro_id = #{proId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.sust.entity.Project">
-		insert into sr_project (pro_id, us_id, pro_name,
+		insert into sr_project
+		(pro_id, us_id, pro_name,
 		pro_category, pro_date, pro_cash,
-		pro_leader, pro_team, pro_about,
+		pro_leader,
+		pro_team, pro_about,
 		pro_uptime)
-		values (#{proId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
+		values (#{proId,jdbcType=INTEGER},
+		#{usId,jdbcType=INTEGER},
 		#{proName,jdbcType=VARCHAR},
-		#{proCategory,jdbcType=VARCHAR}, #{proDate,jdbcType=DATE}, #{proCash,jdbcType=INTEGER},
-		#{proLeader,jdbcType=VARCHAR}, #{proTeam,jdbcType=VARCHAR},
+		#{proCategory,jdbcType=VARCHAR}, #{proDate,jdbcType=DATE},
+		#{proCash,jdbcType=INTEGER},
+		#{proLeader,jdbcType=VARCHAR},
+		#{proTeam,jdbcType=VARCHAR},
 		#{proAbout,jdbcType=VARCHAR},
 		#{proUptime,jdbcType=TIMESTAMP})
 	</insert>
@@ -116,6 +133,14 @@
 			</if>
 		</trim>
 	</insert>
+
+
+	<update id="updateUpTime">
+		update sr_project set pro_uptime =
+		#{proUptime,jdbcType=TIMESTAMP}
+		where pro_id =
+		#{proId,jdbcType=INTEGER}
+	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Project">
 		update sr_project
 		<set>
@@ -152,14 +177,19 @@
 	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Project">
 		update sr_project
 		set us_id = #{usId,jdbcType=INTEGER},
-		pro_name = #{proName,jdbcType=VARCHAR},
-		pro_category = #{proCategory,jdbcType=VARCHAR},
+		pro_name =
+		#{proName,jdbcType=VARCHAR},
+		pro_category =
+		#{proCategory,jdbcType=VARCHAR},
 		pro_date = #{proDate,jdbcType=DATE},
 		pro_cash = #{proCash,jdbcType=INTEGER},
-		pro_leader = #{proLeader,jdbcType=VARCHAR},
+		pro_leader =
+		#{proLeader,jdbcType=VARCHAR},
 		pro_team = #{proTeam,jdbcType=VARCHAR},
 		pro_about = #{proAbout,jdbcType=VARCHAR},
-		pro_uptime = #{proUptime,jdbcType=TIMESTAMP}
-		where pro_id = #{proId,jdbcType=INTEGER}
+		pro_uptime =
+		#{proUptime,jdbcType=TIMESTAMP}
+		where pro_id =
+		#{proId,jdbcType=INTEGER}
 	</update>
 </mapper>

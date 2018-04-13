@@ -1,7 +1,9 @@
 package com.sust.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Patent;
@@ -20,7 +22,13 @@ public interface PatentMapper {
 
     int updateByPrimaryKey(Patent record);
 
-	List<Patent> selectByUsId(Integer usId);
+	List<Patent> selectByUsId(Integer paId);
 
 	String selectgetUserNameById(Integer usId);
+
+	void updateUpTime(@Param("paUptime")Date paUptime, @Param("paId")Integer paId);
+
+	Date selectUpTimeByKey(Integer paId);
+
+	String selectNameById(Integer paId);
 }

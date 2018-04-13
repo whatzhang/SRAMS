@@ -78,17 +78,17 @@
         <mime-type>application/mspowerpoint</mime-type>         MIME格式  
     </mime-mapping>  -->
 	
-	<session-config><!--如果某个会话在一定时间未被访问，则服务器可以扔掉以节约内存-->  
+	<!-- <session-config>如果某个会话在一定时间未被访问，则服务器可以扔掉以节约内存  
         <session-timeout>120</session-timeout>  
     </session-config>
     
-    <error-page>  <!--将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径.-->  
-        <error-code>404</error-code>        <!--HTTP Error code,例如: 404、403-->  
-        <location>/error.jsp</location>         <!--用来设置发生错误或异常时要显示的页面-->  
+    <error-page>  将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径.  
+        <error-code>404</error-code>        HTTP Error code,例如: 404、403  
+        <location>/error.jsp</location>         用来设置发生错误或异常时要显示的页面  
     </error-page>  
     <error-page>  
-        <exception-type>java.lang.Exception</exception-type><!--设置可能会发生的java异常类型,例如:java.lang.Exception-->  
-        <location>/error.jsp</location>            <!--用来设置发生错误或异常时要显示的页面-->  
-    </error-page>  
+        <exception-type>java.lang.Exception</exception-type>设置可能会发生的java异常类型,例如:java.lang.Exception  
+        <location>/error.jsp</location>            用来设置发生错误或异常时要显示的页面  
+    </error-page>   -->
   
 </web-app>

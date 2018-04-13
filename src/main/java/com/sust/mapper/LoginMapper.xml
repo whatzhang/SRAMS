@@ -41,10 +41,7 @@
 		and sr_me_status.st_isread = 0 
 		and sr_me_status.us_id = #{id,jdbcType=INTEGER}
 	</select>
-	
-	
-	
-	
+
 	<select id="selectByAccount" parameterType="String"
 		resultType="java.lang.Integer">
 		select us_id from sr_login where lo_login = #{loLogin,jdbcType=VARCHAR}

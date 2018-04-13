@@ -21,6 +21,16 @@
 		bo_about, bo_uptime
 	</sql>
 
+     <select id="selectNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select bo_name from sr_book where bo_id =
+		#{boId,jdbcType=INTEGER}
+	</select>
+    <select id="selectUpTimeByKey" parameterType="java.lang.Integer"
+		resultType="java.util.Date">
+		select bo_uptime from sr_book where bo_id =
+		#{boId,jdbcType=INTEGER}
+	</select>
 	<select id="selectUserNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select us_name from sr_users where us_id =
@@ -135,6 +145,12 @@
 			</if>
 		</trim>
 	</insert>
+	
+	
+	<update id="updateUpTime">
+		update sr_book set bo_uptime = #{boUptime,jdbcType=TIMESTAMP}
+		where bo_id = #{boId,jdbcType=INTEGER}
+	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Book">
 		update sr_book
 		<set>

@@ -1,7 +1,9 @@
 package com.sust.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Praise;
@@ -23,4 +25,11 @@ public interface PraiseMapper {
 	List<Praise> selectUserPraiseInfo(Integer usId);
 	
 	String selectUserNameById(Integer usId);
+
+	void updateUpTime(@Param("prUptime")Date prUptime, @Param("prId")Integer prId);
+
+	Date selectUpTimeByKey(Integer prId);
+
+	String selectNameById(Integer prId);
+
 }

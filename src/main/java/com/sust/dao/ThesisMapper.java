@@ -1,7 +1,9 @@
 package com.sust.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Thesis;
@@ -23,4 +25,10 @@ public interface ThesisMapper {
 	List<Thesis> selectByUsId(Integer usId);
 
 	String selectUserNameById(int usId);
+
+	void updateUpTime(@Param("thUptime")Date thUptime, @Param("thId")Integer thId);
+
+	Date selectUpTimeByKey(Integer thId);
+
+	String selectNameByid(Integer id);
 }

@@ -8,9 +8,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
-	if (login == null) {
-		response.sendRedirect(basePath + "index.jsp");
-	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -41,6 +38,7 @@
 	src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/art-content.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <style type="text/css">
 td {
 	white-space: nowrap;
@@ -156,8 +154,7 @@ li {
 												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-											href="${pageContext.request.contextPath}/thesis/DowenPrInfo"
-											title="下载文件"> <i class="fa fa-download mail-icon"
+                                                href="${pageContext.request.contextPath}/download/downloadTypeFile?type=project&id=${RaceList.proId}"											title="下载文件"> <i class="fa fa-download mail-icon"
 												style="width: 1em; padding-left: 0.2em;"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
@@ -246,21 +243,19 @@ li {
 							class="btn btn-success" onclick="return isOp();">确认提交</button>
 					</div>
 				</form>
-				<form class="form-horizontal" id="upThFile" name="upThFile"
-					action="${pageContext.request.contextPath}/thesis/upProFile"
-					method="get">
+				<form class="form-horizontal" id="upFile" name="upFile"
+					enctype="multipart/form-data" >
 					<div class="form-group mb-n "
 						style="text-align: left; margin-left: 0.08em;">
 						<div style="float: left;">
 							<div class="btn btn-default btn-file" title="上传电子文件">
-								<input type="file" name="upRaFile" id="upRaFile"
-									multiple="multiple" value="upThFile">
+								<input type="file" name="upfile" id="upfile" size="1">
 							</div>
-							<p class="help-block">(格式为：zip/rar)Max.20MB</p>
+							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
 						</div>
 						<div style="text-align: left; margin-left: 0.08em;">
-							<button style="margin-left: 2em;" type="submit"
-								class="btn btn-success" onclick="return checkFile();">上&nbsp;传</button>
+							<button style="margin-left: 2em;" type="button"
+								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
 						</div>
 					</div>
 				</form>
@@ -332,7 +327,7 @@ li {
 </body>
 <script type="text/javascript">
     var flog = 1;
-    var idd ;
+    var idd = null;
     var ms = "确认修改此信息？";
 	function add() {
 		$("#Change").removeClass("btn btn-danger");
@@ -371,6 +366,7 @@ li {
 		showInfo(data);
 	}
     function setInfo(Id) {
+    	idd = Id;
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/project/getProInfo",
@@ -495,7 +491,33 @@ li {
 		}
 	}
     function checkFile(){
-		
+        var allowtype =  ["doc","docx","pdf","rar","zip"];
+		var filename = $("#upfile").val();  
+		if(idd != null){
+			if ($.inArray(filename.substring(filename.lastIndexOf(".")+1,filename.length).toLowerCase(),allowtype) == -1){
+			    alert("请输入正确的格式(doc,docx,pdf,rar,zip)");
+			}else{
+				upFile();
+			}
+		}else{
+			alert("选择要上传文件的信息！");
+		}
 	}
+    function upFile(){
+    	$("#upFile").ajaxSubmit({
+            type : 'POST',
+            url : "${pageContext.request.contextPath}/upload/uploadFileAjax?type=project",
+            contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            data : {
+            	ID : idd
+            },
+            success: function(data) {
+	            alert(data.string1);
+            },
+            error: function (data){
+                alert("出错");
+            }  
+         });
+    }
 </script>
 </html>

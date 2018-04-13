@@ -1,153 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sust.dao.PraiseMapper">
-  <resultMap id="BaseResultMap" type="com.sust.entity.Praise">
-    <id column="pr_id" jdbcType="INTEGER" property="prId" />
-    <result column="us_id" jdbcType="INTEGER" property="usId" />
-    <result column="pr_name" jdbcType="VARCHAR" property="prName" />
-    <result column="pr_category" jdbcType="VARCHAR" property="prCategory" />
-    <result column="pr_date" jdbcType="DATE" property="prDate" />
-    <result column="pr_unit" jdbcType="VARCHAR" property="prUnit" />
-    <result column="pr_author" jdbcType="VARCHAR" property="prAuthor" />
-    <result column="pr_about" jdbcType="VARCHAR" property="prAbout" />
-    <result column="pr_uptime" jdbcType="TIMESTAMP" property="prUptime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    pr_id, us_id, pr_name, pr_category, pr_date, pr_unit, pr_author, pr_about, pr_uptime
-  </sql>
-  
-  
-  <select id="selectUserNameById" parameterType="java.lang.Integer"
+	<resultMap id="BaseResultMap" type="com.sust.entity.Praise">
+		<id column="pr_id" jdbcType="INTEGER" property="prId" />
+		<result column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="pr_name" jdbcType="VARCHAR" property="prName" />
+		<result column="pr_category" jdbcType="VARCHAR" property="prCategory" />
+		<result column="pr_date" jdbcType="DATE" property="prDate" />
+		<result column="pr_unit" jdbcType="VARCHAR" property="prUnit" />
+		<result column="pr_author" jdbcType="VARCHAR" property="prAuthor" />
+		<result column="pr_about" jdbcType="VARCHAR" property="prAbout" />
+		<result column="pr_uptime" jdbcType="TIMESTAMP" property="prUptime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pr_id, us_id, pr_name, pr_category, pr_date, pr_unit, pr_author, pr_about,
+		pr_uptime
+	</sql>
+
+	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
-		select us_name from sr_users where us_id = #{usId,jdbcType=INTEGER}
+		select pr_name from sr_praise where pr_id =
+		#{prId,jdbcType=INTEGER}
 	</select>
-  <select id="selectUserPraiseInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sr_praise
-    where us_id = #{usId,jdbcType=INTEGER}
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sr_praise
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sr_praise
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.sust.entity.Praise">
-    insert into sr_praise (pr_id, us_id, pr_name, 
-      pr_category, pr_date, pr_unit, 
-      pr_author, pr_about, pr_uptime
-      )
-    values (#{prId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, #{prName,jdbcType=VARCHAR}, 
-      #{prCategory,jdbcType=VARCHAR}, #{prDate,jdbcType=DATE}, #{prUnit,jdbcType=VARCHAR}, 
-      #{prAuthor,jdbcType=VARCHAR}, #{prAbout,jdbcType=VARCHAR}, #{prUptime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.sust.entity.Praise">
-    insert into sr_praise
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="prId != null">
-        pr_id,
-      </if>
-      <if test="usId != null">
-        us_id,
-      </if>
-      <if test="prName != null">
-        pr_name,
-      </if>
-      <if test="prCategory != null">
-        pr_category,
-      </if>
-      <if test="prDate != null">
-        pr_date,
-      </if>
-      <if test="prUnit != null">
-        pr_unit,
-      </if>
-      <if test="prAuthor != null">
-        pr_author,
-      </if>
-      <if test="prAbout != null">
-        pr_about,
-      </if>
-      <if test="prUptime != null">
-        pr_uptime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="prId != null">
-        #{prId,jdbcType=INTEGER},
-      </if>
-      <if test="usId != null">
-        #{usId,jdbcType=INTEGER},
-      </if>
-      <if test="prName != null">
-        #{prName,jdbcType=VARCHAR},
-      </if>
-      <if test="prCategory != null">
-        #{prCategory,jdbcType=VARCHAR},
-      </if>
-      <if test="prDate != null">
-        #{prDate,jdbcType=DATE},
-      </if>
-      <if test="prUnit != null">
-        #{prUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="prAuthor != null">
-        #{prAuthor,jdbcType=VARCHAR},
-      </if>
-      <if test="prAbout != null">
-        #{prAbout,jdbcType=VARCHAR},
-      </if>
-      <if test="prUptime != null">
-        #{prUptime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Praise">
-    update sr_praise
-    <set>
-      <if test="usId != null">
-        us_id = #{usId,jdbcType=INTEGER},
-      </if>
-      <if test="prName != null">
-        pr_name = #{prName,jdbcType=VARCHAR},
-      </if>
-      <if test="prCategory != null">
-        pr_category = #{prCategory,jdbcType=VARCHAR},
-      </if>
-      <if test="prDate != null">
-        pr_date = #{prDate,jdbcType=DATE},
-      </if>
-      <if test="prUnit != null">
-        pr_unit = #{prUnit,jdbcType=VARCHAR},
-      </if>
-      <if test="prAuthor != null">
-        pr_author = #{prAuthor,jdbcType=VARCHAR},
-      </if>
-      <if test="prAbout != null">
-        pr_about = #{prAbout,jdbcType=VARCHAR},
-      </if>
-      <if test="prUptime != null">
-        pr_uptime = #{prUptime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sust.entity.Praise">
-    update sr_praise
-    set us_id = #{usId,jdbcType=INTEGER},
-      pr_name = #{prName,jdbcType=VARCHAR},
-      pr_category = #{prCategory,jdbcType=VARCHAR},
-      pr_date = #{prDate,jdbcType=DATE},
-      pr_unit = #{prUnit,jdbcType=VARCHAR},
-      pr_author = #{prAuthor,jdbcType=VARCHAR},
-      pr_about = #{prAbout,jdbcType=VARCHAR},
-      pr_uptime = #{prUptime,jdbcType=TIMESTAMP}
-    where pr_id = #{prId,jdbcType=INTEGER}
-  </update>
+	<select id="selectUserNameById" parameterType="java.lang.Integer"
+		resultType="String">
+		select us_name from sr_users where us_id =
+		#{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectUpTimeByKey" parameterType="java.lang.Integer"
+		resultType="java.util.Date">
+		select pr_uptime from sr_praise where pr_id =
+		#{prId,jdbcType=INTEGER}
+	</select>
+	<select id="selectUserPraiseInfo" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_praise
+		where us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_praise
+		where pr_id = #{prId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sr_praise
+		where pr_id = #{prId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.sust.entity.Praise">
+		insert into sr_praise (pr_id, us_id, pr_name,
+		pr_category, pr_date, pr_unit,
+		pr_author, pr_about, pr_uptime
+		)
+		values (#{prId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
+		#{prName,jdbcType=VARCHAR},
+		#{prCategory,jdbcType=VARCHAR}, #{prDate,jdbcType=DATE}, #{prUnit,jdbcType=VARCHAR},
+		#{prAuthor,jdbcType=VARCHAR}, #{prAbout,jdbcType=VARCHAR},
+		#{prUptime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.Praise">
+		insert into sr_praise
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="prId != null">
+				pr_id,
+			</if>
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="prName != null">
+				pr_name,
+			</if>
+			<if test="prCategory != null">
+				pr_category,
+			</if>
+			<if test="prDate != null">
+				pr_date,
+			</if>
+			<if test="prUnit != null">
+				pr_unit,
+			</if>
+			<if test="prAuthor != null">
+				pr_author,
+			</if>
+			<if test="prAbout != null">
+				pr_about,
+			</if>
+			<if test="prUptime != null">
+				pr_uptime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="prId != null">
+				#{prId,jdbcType=INTEGER},
+			</if>
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="prName != null">
+				#{prName,jdbcType=VARCHAR},
+			</if>
+			<if test="prCategory != null">
+				#{prCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="prDate != null">
+				#{prDate,jdbcType=DATE},
+			</if>
+			<if test="prUnit != null">
+				#{prUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="prAuthor != null">
+				#{prAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="prAbout != null">
+				#{prAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="prUptime != null">
+				#{prUptime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateUpTime">
+		update sr_praise set pr_uptime =
+		#{prUptime,jdbcType=TIMESTAMP}
+		where pr_id = #{prId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Praise">
+		update sr_praise
+		<set>
+			<if test="usId != null">
+				us_id = #{usId,jdbcType=INTEGER},
+			</if>
+			<if test="prName != null">
+				pr_name = #{prName,jdbcType=VARCHAR},
+			</if>
+			<if test="prCategory != null">
+				pr_category = #{prCategory,jdbcType=VARCHAR},
+			</if>
+			<if test="prDate != null">
+				pr_date = #{prDate,jdbcType=DATE},
+			</if>
+			<if test="prUnit != null">
+				pr_unit = #{prUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="prAuthor != null">
+				pr_author = #{prAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="prAbout != null">
+				pr_about = #{prAbout,jdbcType=VARCHAR},
+			</if>
+			<if test="prUptime != null">
+				pr_uptime = #{prUptime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where pr_id = #{prId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Praise">
+		update sr_praise
+		set us_id = #{usId,jdbcType=INTEGER},
+		pr_name = #{prName,jdbcType=VARCHAR},
+		pr_category = #{prCategory,jdbcType=VARCHAR},
+		pr_date = #{prDate,jdbcType=DATE},
+		pr_unit = #{prUnit,jdbcType=VARCHAR},
+		pr_author = #{prAuthor,jdbcType=VARCHAR},
+		pr_about = #{prAbout,jdbcType=VARCHAR},
+		pr_uptime = #{prUptime,jdbcType=TIMESTAMP}
+		where pr_id = #{prId,jdbcType=INTEGER}
+	</update>
 </mapper>
