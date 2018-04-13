@@ -48,16 +48,21 @@ public class DownloadServiceImpl implements DownloadService {
 
 		List<String> reList = new ArrayList<String>();
 		String name = getFileName(type, Integer.valueOf(id));
-		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL);
+		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL)+ File.separatorChar + type + File.separatorChar;
 		if (MyUtils.CreatDir(new File(dir))) {
-			reList.add(name);
-			// String finName = MyUtils.isExists(dir, name);
-			reList.add(dir + File.separatorChar + type + File.separatorChar + name + ".rar");
-			logger.info(reList.get(0) + "++" + reList.get(1));
-			return reList;
+			String finName = MyUtils.findName(dir, name);
+			if(!finName.equals("NO_SUCH_FILE")){
+				
+				reList.add(finName);
+				reList.add(dir + finName);
+				logger.info(reList.get(0) + "++" + reList.get(1));
+			}else{
+				reList.add("NO_SUCH_FILE");
+			}
 		} else {
-			return null;
+			reList.add("NO_SUCH_FILE");
 		}
+		return reList;
 	}
 
 	private String getFileName(String type, Integer id) {
@@ -91,8 +96,7 @@ public class DownloadServiceImpl implements DownloadService {
 		default:
 			break;
 		}
-		// name +
-		return new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
+		return name + new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
 	}
 
 }

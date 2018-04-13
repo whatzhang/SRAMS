@@ -34,9 +34,8 @@ public class DownloadController {
 			@RequestParam("id") String id) {
 
 		List<String> list = this.downloadService.getDownloadFile(session, type, id);
-		if (list != null) {
+		if (list != null && !"NO_SUCH_FILE".equals(list.get(1))) {
 			File dowenloadFile = new File(list.get(1));
-
 			HttpHeaders headers = new HttpHeaders();
 			String FielName = "";
 			try {

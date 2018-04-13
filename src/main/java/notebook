@@ -87,7 +87,14 @@ XMLHttpRequest.readyState: 状态码的意思
     statementType="PREPARED"   
     timeout="20000">     
         
-        
+/*
+	 * @RequestMapping("uploadFile") public void
+	 * UploadUserTypeFile(@RequestParam("ID") String id, @RequestParam("type")
+	 * String type, @RequestParam("upfile") CommonsMultipartFile file,
+	 * HttpSession session) {
+	 * this.uploadService.UploadUserTypeFile(Integer.valueOf(id), file, type,
+	 * session.getServletContext().getRealPath(config.UPLOADE_URL)); }
+	 */        
         
         
         

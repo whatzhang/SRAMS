@@ -151,21 +151,40 @@ public final class MyUtils {
 	 * @param fileName
 	 * @return
 	 */
-	public static String isExists(String dir, String fileName) {
+	public static void isExists(String dir, String fileName) {
 
-		String reString = "";
 		logger.info(dir + "++" + fileName);
 		File file = new File(dir);
 		CreatDir(file);
 		String[] fileList = file.list();
 		if (fileList != null && fileList.length != 0) {
 			for (int i = 0; i < fileList.length; i++) {
-				// logger.info("isExists++"+ fileList[i]+ "++"+ fileName+ "++"+
-				// fileList[i].substring(0, fileList[i].lastIndexOf('.'))+ "++"
-				// + (dir + fileList[i]));
-				if ((fileList[i].substring(0, fileList[i].lastIndexOf('.'))).equals(fileName)) {
+				logger.info("isExists++" + fileList[i] + "++" + fileName + "++"
+						+ fileList[i].substring(0, fileList[i].lastIndexOf('.')) + "++" + (dir + fileList[i]));
+				if ((fileList[i].substring(0,fileList[i].lastIndexOf('.'))).equals(fileName)) {
 					new File(dir + File.separatorChar + fileList[i]).delete();
+					break;
+				}
+			}
+		}
+	}
+
+	public static String findName(String dir, String name) {
+
+		String reString = "";
+		File file = new File(dir);
+		String[] fileList = file.list();
+		logger.info(dir+"++"+name);
+		if (fileList != null && fileList.length != 0) {
+			for (int i = 0; i < fileList.length; i++) {
+
+				reString = fileList[i].substring(0,fileList[i].lastIndexOf('.'));
+				logger.info(reString+"++"+dir+"++"+name);
+				if(reString.equals(name)){
 					reString = fileList[i];
+					break;
+				}else{
+					reString = "NO_SUCH_FILE";
 				}
 			}
 		}

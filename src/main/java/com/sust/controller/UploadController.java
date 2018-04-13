@@ -28,14 +28,6 @@ public class UploadController {
 	@Autowired
 	private MyConfig config;
 
-	/*
-	 * @RequestMapping("uploadFile") public void
-	 * UploadUserTypeFile(@RequestParam("ID") String id, @RequestParam("type")
-	 * String type, @RequestParam("upfile") CommonsMultipartFile file,
-	 * HttpSession session) {
-	 * this.uploadService.UploadUserTypeFile(Integer.valueOf(id), file, type,
-	 * session.getServletContext().getRealPath(config.UPLOADE_URL)); }
-	 */
 
 	@RequestMapping("/uploadFileAjax")
 	@ResponseBody
