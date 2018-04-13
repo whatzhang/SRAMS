@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
 %>
@@ -38,7 +37,8 @@
 	src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/art-content.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <style type="text/css">
 td {
 	white-space: nowrap;
@@ -154,10 +154,9 @@ li {
 												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-                                            href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaceList.raId}"											title="下载文件"> <i class="fa fa-download mail-icon"
+											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaceList.raId}"
 											title="下载文件"> <i class="fa fa-download mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
+													style="width: 1em; padding-left: 0.2em;"></i></a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
 											href="javascript:void(0);"
 											onclick="delInfo(${RaceList.raId});" title="删除信息"> <i
@@ -250,7 +249,7 @@ li {
 					</div>
 				</form>
 				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data" >
+					enctype="multipart/form-data">
 					<div class="form-group mb-n "
 						style="text-align: left; margin-left: 0.08em;">
 						<div style="float: left;">

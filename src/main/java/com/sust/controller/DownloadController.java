@@ -2,10 +2,13 @@ package com.sust.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -17,8 +20,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sust.entity.AllInfo;
 import com.sust.service.DownloadService;
 
 @Controller
@@ -31,10 +37,10 @@ public class DownloadController {
 
 	@RequestMapping(value = "/downloadTypeFile")
 	public ResponseEntity<byte[]> downloadTypeFile(HttpSession session, @RequestParam("type") String type,
-			@RequestParam("id") String id) {
+			@RequestParam("id") String id, HttpServletResponse response, HttpServletRequest request) {
 
 		List<String> list = this.downloadService.getDownloadFile(session, type, id);
-		if (list != null && !"NO_SUCH_FILE".equals(list.get(1))) {
+		if (list != null && !"NO_SUCH_FILE".equals(list.get(0))) {
 			File dowenloadFile = new File(list.get(1));
 			HttpHeaders headers = new HttpHeaders();
 			String FielName = "";
@@ -54,18 +60,50 @@ public class DownloadController {
 			}
 			return entity;
 		} else {
+			String urlString = "";
+			switch (type) {
+			case "patent":
+				urlString = "/patent/getUserPaInfo";
+				break;
+			case "book":
+				urlString = "/book/getUserBoList";
+				break;
+			case "praise":
+				urlString = "/praise/getUserPraiseInfo";
+				break;
+			case "project":
+				urlString = "/project/getUserProList";
+				break;
+			case "race":
+				urlString = "/race/getUserRaceInfo";
+				break;
+			case "thesis":
+				urlString = "/thesis/getUserThInfo";
+				break;
+			default:
+				break;
+			}
+			try {
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("window.location='" + request.getContextPath() + urlString + "'");
+				out.println("alert('没有此信息的电子文件，请及时上传！');");
+				out.println("</script>");
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				logger.warn("没有此信息的电子文件！");
+			}
 			return null;
 		}
 	}
-	/*
-	 * @RequestMapping("/testHttpMessageDown") public ResponseEntity<byte[]>
-	 * download(HttpServletRequest request) throws IOException { File file = new
-	 * File("E://123.jpg"); byte[] body = null; InputStream is = new
-	 * FileInputStream(file); body = new byte[is.available()]; is.read(body);
-	 * HttpHeaders headers = new HttpHeaders();
-	 * headers.add("Content-Disposition", "attchement;filename=" +
-	 * file.getName()); HttpStatus statusCode = HttpStatus.OK;
-	 * ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers,
-	 * statusCode); return entity; }
-	 */
+
+	@RequestMapping(value = "/DeleteAllFile", method = RequestMethod.GET)
+	@ResponseBody
+	public AllInfo DeleteFile(@RequestParam("Id") int id, @RequestParam("type") String type, HttpSession session) {
+
+		logger.info("DeleteFile++" + id + "++" + type);
+		return new AllInfo(this.downloadService.DeleteFile(session, id, type));
+	}
+
 }

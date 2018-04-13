@@ -50,7 +50,7 @@
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
 					<li><a
-						href="${pageContext.request.contextPath}/thesis/getThInfo"
+						href="${pageContext.request.contextPath}/thesis/getUserThInfo"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge">${index.thNum}</span>
 							<span class="fa arrow"></span></a></li>
@@ -332,7 +332,7 @@
 				<iframe id="iFrame" name="iFrame" width="100%"
 					onload="this.height=iFrame.document.body.scrollHeight"
 					frameborder="0" scrolling="no"
-					src="${pageContext.request.contextPath}/thesis/getThInfo"></iframe>
+					src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
 			</div>
 		</div>
 

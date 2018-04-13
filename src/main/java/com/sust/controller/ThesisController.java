@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Thesis;
 import com.sust.service.ThesisService;
@@ -31,7 +33,7 @@ public class ThesisController {
 	@Resource
 	private ThesisService thesisService;
 
-	@RequestMapping(value = "/getThInfo")
+	@RequestMapping(value = "/getUserThInfo")
 	private String getThesisInfo(Model model, HttpServletRequest request) {
 
 		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
@@ -51,15 +53,10 @@ public class ThesisController {
 
 	@RequestMapping(value = "/DeleteThInfo", method = RequestMethod.POST)
 	@ResponseBody
-	private Map<String, String> DeleteThInfo(@RequestParam("deId") int deId) {
+	private AllInfo DeleteThInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
 		logger.info("DeleteThInfo++" + deId);
-		int sta = this.thesisService.deleteThesisById(deId);
-		Map<String, String> result = new HashMap<String, String>();
-		result.put("status", String.valueOf(sta));
-		result.put("info", "删除论文信息成功！");
-		result.put("urlNext", "/thesis/getThInfo");
-		return result;
+		return new AllInfo(this.thesisService.deleteThesisById(deId, fg, "thesis", session));
 	}
 
 	@RequestMapping(value = "/getThInfoUp", method = RequestMethod.POST)
@@ -88,7 +85,7 @@ public class ThesisController {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("status", String.valueOf(sta));
 		result.put("info", "添加论文信息成功！");
-		result.put("urlNext", "/thesis/getThInfo");
+		result.put("urlNext", "/thesis/getUserThInfo");
 		return result;
 	}
 
@@ -110,7 +107,7 @@ public class ThesisController {
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("status", String.valueOf(sta));
 		result.put("info", "修改论文信息成功！");
-		result.put("urlNext", "/thesis/getThInfo");
+		result.put("urlNext", "/thesis/getUserThInfo");
 		return result;
 	}
 

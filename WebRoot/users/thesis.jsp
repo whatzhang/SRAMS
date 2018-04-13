@@ -38,13 +38,15 @@
 	src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/art-content.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <style type="text/css">
 td {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 li {
 	list-style: none;
 }
@@ -300,21 +302,21 @@ li {
 						</div>
 					</form> --%>
 					<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data" >
-					<div class="form-group mb-n "
-						style="text-align: left; margin-left: 0.08em;">
-						<div style="float: left;">
-							<div class="btn btn-default btn-file" title="上传电子文件">
-								<input type="file" name="upfile" id="upfile" size="1">
+						enctype="multipart/form-data">
+						<div class="form-group mb-n "
+							style="text-align: left; margin-left: 0.08em;">
+							<div style="float: left;">
+								<div class="btn btn-default btn-file" title="上传电子文件">
+									<input type="file" name="upfile" id="upfile" size="1">
+								</div>
+								<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
 							</div>
-							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
+							<div style="text-align: left; margin-left: 0.08em;">
+								<button style="margin-left: 2em;" type="button"
+									class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+							</div>
 						</div>
-						<div style="text-align: left; margin-left: 0.08em;">
-							<button style="margin-left: 2em;" type="button"
-								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
-						</div>
-					</div>
-				</form>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -473,23 +475,20 @@ li {
 					}
 				});
 			}
-			function delThesis(deId) {
+			function delThesis(deId,fg) {
+			var too ={"deId" : deId,
+			          "fg" : fg 
+		     }
 				$.ajax({
 					type : "POST",
 					url : "${pageContext.request.contextPath}/thesis/DeleteThInfo",
-					data : {
-						deId : deId
-					},
+					data : too,
 					dataType : 'json',
 					cache : false,
 					async : true,
 					success : function(data){
-					   if(data.status == "1"){
-						     alert(data.info);
-						     window.location.href = "${pageContext.request.contextPath}"+data.urlNext;
-						}else{
-						     alert("删除信息失败！");
-						}
+					     alert(data.string1);
+					     window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo";
 					},
 					error : function(data) {
 						alert("删除信息出错!");
@@ -497,9 +496,15 @@ li {
 				});
 			}
 			function delThInfo(deId){
+			    var fg ;
 			    if (confirm("确定要删除吗？") == true) {
-					delThesis(deId);
-				} else {
+				      if(confirm("是否删除电子文件？")){
+				         fg = "yes";
+				      }else{
+				         fg = 'no'
+				      }
+					  delThesis(deId,fg);
+			    } else {
 					return false;
 				}
 			}

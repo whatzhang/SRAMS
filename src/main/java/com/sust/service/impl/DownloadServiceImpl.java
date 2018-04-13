@@ -47,16 +47,17 @@ public class DownloadServiceImpl implements DownloadService {
 	public List<String> getDownloadFile(HttpSession session, String type, String id) {
 
 		List<String> reList = new ArrayList<String>();
-		String name = getFileName(type, Integer.valueOf(id));
-		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL)+ File.separatorChar + type + File.separatorChar;
+		String name = getFileUpTime(type, Integer.valueOf(id));
+		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
+				+ File.separatorChar;
 		if (MyUtils.CreatDir(new File(dir))) {
 			String finName = MyUtils.findName(dir, name);
-			if(!finName.equals("NO_SUCH_FILE")){
-				
-				reList.add(finName);
-				reList.add(dir + finName);
+			if (!finName.equals("NO_SUCH_FILE")) {
+
+				reList.add(0, finName);
+				reList.add(1, dir + finName);
 				logger.info(reList.get(0) + "++" + reList.get(1));
-			}else{
+			} else {
 				reList.add("NO_SUCH_FILE");
 			}
 		} else {
@@ -65,38 +66,76 @@ public class DownloadServiceImpl implements DownloadService {
 		return reList;
 	}
 
-	private String getFileName(String type, Integer id) {
+	private String getFileUpTime(String type, Integer id) {
 		Date da = new Date();
-		String name = "";
 		switch (type) {
 		case "patent":
 			da = this.patentMapper.selectUpTimeByKey(id);
-			name = this.patentMapper.selectNameById(id);
 			break;
 		case "book":
 			da = this.bookMapper.selectUpTimeByKey(id);
-			name = this.bookMapper.selectNameById(id);
 			break;
 		case "praise":
 			da = this.praiseMapper.selectUpTimeByKey(id);
-			name = this.praiseMapper.selectNameById(id);
 			break;
 		case "project":
 			da = this.projectMapper.selectUpTimeByKey(id);
-			name = this.projectMapper.selectNameById(id);
 			break;
 		case "race":
 			da = this.raceMapper.selectUpTimeByKey(id);
-			name = this.raceMapper.selectNameById(id);
 			break;
 		case "thesis":
 			da = this.thesisMapper.selectUpTimeByKey(id);
+			break;
+		default:
+			break;
+		}
+		return new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
+	}
+
+	@SuppressWarnings("unused")
+	private String getTypeName(String type, Integer id) {
+		String name = "";
+		switch (type) {
+		case "patent":
+			name = this.patentMapper.selectNameById(id);
+			break;
+		case "book":
+			name = this.bookMapper.selectNameById(id);
+			break;
+		case "praise":
+			name = this.praiseMapper.selectNameById(id);
+			break;
+		case "project":
+			name = this.projectMapper.selectNameById(id);
+			break;
+		case "race":
+			name = this.raceMapper.selectNameById(id);
+			break;
+		case "thesis":
 			name = this.thesisMapper.selectNameByid(id);
 			break;
 		default:
 			break;
 		}
-		return name + new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
+		return name;
+	}
+
+	@Override
+	public String DeleteFile(HttpSession session, int id, String type) {
+
+		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
+				+ File.separatorChar;
+		if (MyUtils.CreatDir(new File(dir))) {
+			String re = MyUtils.deleteFile(dir, getFileUpTime(type, id));
+			if (!re.equals("NO_SUCH_FILE")) {
+				return "删除文件成功！";
+			} else {
+				return "没有此文件文件，请及时上传！";
+			}
+		} else {
+			return "没有此文件文件，请及时上传！";
+		}
 	}
 
 }

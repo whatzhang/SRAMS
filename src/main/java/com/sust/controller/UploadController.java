@@ -28,7 +28,6 @@ public class UploadController {
 	@Autowired
 	private MyConfig config;
 
-
 	@RequestMapping("/uploadFileAjax")
 	@ResponseBody
 	public AllInfo uploadFileAjax(@RequestParam("ID") Integer id, @RequestParam("upfile") CommonsMultipartFile file,
