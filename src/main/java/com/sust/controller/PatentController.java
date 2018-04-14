@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,10 +50,10 @@ public class PatentController {
 
 	@RequestMapping(value = "/DeletePaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeletePaInfo(@RequestParam("Id") int paId) {
+	public AllInfo DeletePaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeletePaInfo++" + paId);
-		return new AllInfo(String.valueOf(this.patentService.DeletePaInfoById(paId)));
+		logger.info("DeletePaInfo++" + deId+"++"+fg);
+		return new AllInfo(this.patentService.DeletePaInfoById(deId, fg, "patent", session));
 	}
 
 	@RequestMapping(value = "/addPaInfo", method = RequestMethod.GET)

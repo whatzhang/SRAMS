@@ -390,25 +390,32 @@ li {
 			}
 		});
 	}
-    function delInfo(raId){
+    function delInfo(deId){
+	    var fg ;
 	    if (confirm("确定要删除吗？") == true) {
-	    	delInfoOk(raId);
-		} else {
+		      if(confirm("是否删除电子文件？")){
+		         fg = "yes";
+		      }else{
+		         fg = 'no';
+		      }
+			  delInfoOk(deId,fg);
+	    } else {
 			return false;
 		}
 	}
-    function delInfoOk(raId) {
+    function delInfoOk(deId,fg) {
+    var too ={"deId" : deId,
+			  "fg" : fg 
+		     }
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/race/DeleteRaInfo",
-			data : {
-				raId : raId
-			},
+			data : too,
 			dataType : 'json',
 			cache : false,
 			async : true,
 			success : function(data){
-				alert("删除信息成功！");
+				alert(data.string1);
 				window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
 			},
 			error : function(data) {

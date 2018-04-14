@@ -49,10 +49,10 @@ public class PraiseController {
 
 	@RequestMapping(value = "/DeletePrInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeletePrInfo(@RequestParam("prId") int prId) {
+	public AllInfo DeletePrInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeletePrInfo++" + prId);
-		return new AllInfo(String.valueOf(this.praiseService.DeletePrInfo(prId)));
+		logger.info("DeletePrInfo++" + deId+"++"+fg);
+		return new AllInfo(this.praiseService.DeletePrInfo(deId, fg, "praise", session));
 	}
 
 	@RequestMapping(value = "/addPrInfo", method = RequestMethod.GET)

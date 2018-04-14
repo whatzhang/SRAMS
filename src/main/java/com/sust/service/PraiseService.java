@@ -2,6 +2,8 @@ package com.sust.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.sust.entity.Praise;
 
 public interface PraiseService {
@@ -10,7 +12,7 @@ public interface PraiseService {
 
 	Praise getRaInfoByraId(int prId);
 
-	int DeletePrInfo(int prId);
+	String DeletePrInfo(int deId, String fg, String type, HttpSession session);
 
 	int addPrInfo(Praise praise);
 

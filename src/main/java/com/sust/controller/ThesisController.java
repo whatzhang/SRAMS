@@ -55,7 +55,7 @@ public class ThesisController {
 	@ResponseBody
 	private AllInfo DeleteThInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteThInfo++" + deId);
+		logger.info("DeleteThInfo++" + deId+"++"+fg);
 		return new AllInfo(this.thesisService.deleteThesisById(deId, fg, "thesis", session));
 	}
 

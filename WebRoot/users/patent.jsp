@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
 %>
@@ -38,13 +37,15 @@
 	src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/art-content.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <style type="text/css">
 td {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 li {
 	list-style: none;
 }
@@ -231,7 +232,7 @@ li {
 					</div>
 				</form>
 				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data" >
+					enctype="multipart/form-data">
 					<div class="form-group mb-n "
 						style="text-align: left; margin-left: 0.08em;">
 						<div style="float: left;">
@@ -364,25 +365,32 @@ li {
 			}
 		});
 	}
-    function delInfo(Id){
+    function delInfo(deId){
+	    var fg ;
 	    if (confirm("确定要删除吗？") == true) {
-	    	delInfoOk(Id);
-		} else {
+		      if(confirm("是否删除电子文件？")){
+		         fg = "yes";
+		      }else{
+		         fg = 'no';
+		      }
+			  delInfoOk(deId,fg);
+	    } else {
 			return false;
 		}
 	}
-    function delInfoOk(Id) {
+    function delInfoOk(deId,fg) {
+    var too ={"deId" : deId,
+			  "fg" : fg 
+		     }
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/patent/DeletePaInfo",
-			data : {
-				Id : Id
-			},
+			data : too,
 			dataType : 'json',
 			cache : false,
 			async : true,
 			success : function(data){
-				alert("删除信息成功！");
+				alert(data.string1);
 				window.location.href = "${pageContext.request.contextPath}/patent/getUserPaInfo";
 			},
 			error : function(data) {

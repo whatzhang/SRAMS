@@ -122,7 +122,7 @@ public class DownloadServiceImpl implements DownloadService {
 	}
 
 	@Override
-	public String DeleteFile(HttpSession session, int id, String type) {
+	public String DeleteUnusedFile(HttpSession session, int id, String type) {
 
 		String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 				+ File.separatorChar;

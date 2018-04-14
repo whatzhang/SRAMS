@@ -1,19 +1,27 @@
 package com.sust.service.impl;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sust.dao.BookMapper;
 import com.sust.entity.Book;
+import com.sust.entity.MyConfig;
+import com.sust.other.MyUtils;
 
 @Service
 public class BookServiceImpl implements com.sust.service.BookService {
 
 	@Resource
 	private BookMapper bookMapper;
+	@Autowired
+	private MyConfig config;
 
 	@Override
 	public List<Book> getUserBoList(Integer usId) {
@@ -28,9 +36,28 @@ public class BookServiceImpl implements com.sust.service.BookService {
 	}
 
 	@Override
-	public int DeleteBoInfoById(int boId) {
+	public String DeleteBoInfoById(int deId, String fg, String type, HttpSession session) {
 
-		return this.bookMapper.deleteByPrimaryKey(boId);
+		String result = "";
+		if ("yes".equals(fg)) {
+			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
+					+ File.separatorChar;
+			if (MyUtils.CreatDir(new File(dir))) {
+				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.bookMapper.selectUpTimeByKey(deId)));
+				this.bookMapper.deleteByPrimaryKey(deId);
+				if (!re.equals("NO_SUCH_FILE")) {
+					result = "删除文件和信息成功！";
+				} else {
+					result = "没有此文件文件，请及时上传！";
+				}
+			} else {
+				result = "没有此文件文件，请及时上传！";
+			}
+		} else {
+			this.bookMapper.deleteByPrimaryKey(deId);
+			result = "删除信息成功！";
+		}
+		return result;
 	}
 
 	@Override

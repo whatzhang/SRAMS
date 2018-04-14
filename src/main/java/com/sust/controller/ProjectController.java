@@ -49,10 +49,10 @@ public class ProjectController {
 
 	@RequestMapping(value = "/DeleteProInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeleteProInfo(@RequestParam("ProId") int ProId) {
+	public AllInfo DeleteProInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteProInfo++" + ProId);
-		return new AllInfo(String.valueOf(this.projectService.DeleteProInfoById(ProId)));
+		logger.info("DeleteProInfo++" + deId+"++"+fg);
+		return new AllInfo(this.projectService.DeleteProInfoById(deId, fg, "project", session));
 	}
 
 	@RequestMapping(value = "/addProInfo", method = RequestMethod.GET)

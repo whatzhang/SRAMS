@@ -103,7 +103,7 @@ public class DownloadController {
 	public AllInfo DeleteFile(@RequestParam("Id") int id, @RequestParam("type") String type, HttpSession session) {
 
 		logger.info("DeleteFile++" + id + "++" + type);
-		return new AllInfo(this.downloadService.DeleteFile(session, id, type));
+		return new AllInfo(this.downloadService.DeleteUnusedFile(session, id, type));
 	}
 
 }

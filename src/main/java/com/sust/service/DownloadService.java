@@ -8,5 +8,5 @@ public interface DownloadService {
 
 	List<String> getDownloadFile(HttpSession session, String type, String id);
 
-	String DeleteFile(HttpSession session, int id, String type);
+	String DeleteUnusedFile(HttpSession session, int id, String type);
 }

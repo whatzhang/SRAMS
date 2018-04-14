@@ -348,25 +348,32 @@ li {
 			}
 		});
 	}
-    function delInfo(Id){
+    function delInfo(deId){
+	    var fg ;
 	    if (confirm("确定要删除吗？") == true) {
-	    	delInfoOk(Id);
-		} else {
+		      if(confirm("是否删除电子文件？")){
+		         fg = "yes";
+		      }else{
+		         fg = 'no';
+		      }
+			  delInfoOk(deId,fg);
+	    } else {
 			return false;
 		}
 	}
-    function delInfoOk(Id) {
+    function delInfoOk(deId,fg) {
+    var too ={"deId" : deId,
+			   "fg" : fg 
+		     }
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/praise/DeletePrInfo",
-			data : {
-				prId : Id
-			},
+			data : too,
 			dataType : 'json',
 			cache : false,
 			async : true,
 			success : function(data){
-				alert("删除信息成功！");
+				 alert(data.string1);
 				window.location.href = "${pageContext.request.contextPath}/praise/getUserPraiseInfo";
 			},
 			error : function(data) {

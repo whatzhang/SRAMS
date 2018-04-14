@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,10 +50,10 @@ public class RaceController {
 
 	@RequestMapping(value = "/DeleteRaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeleteRaInfo(@RequestParam("raId") int raId) {
+	public AllInfo DeleteRaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteRaInfo++" + raId);
-		return new AllInfo(String.valueOf(this.raceservice.DeleteRaInfoByThid(raId)));
+		logger.info("DeleteThInfo++" + deId+"++"+fg);
+		return new AllInfo(this.raceservice.DeleteRaInfoByThid(deId, fg, "race", session));
 	}
 
 	@RequestMapping(value = "/addRaInfo", method = RequestMethod.GET)

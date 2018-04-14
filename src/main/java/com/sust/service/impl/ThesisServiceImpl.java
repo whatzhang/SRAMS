@@ -45,6 +45,7 @@ public class ThesisServiceImpl implements ThesisService {
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
 				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.thesisMapper.selectUpTimeByKey(deId)));
+				this.thesisMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件成功！";
 				} else {

@@ -2,6 +2,8 @@ package com.sust.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.sust.entity.Race;
 
 public interface RaceService {
@@ -10,7 +12,7 @@ public interface RaceService {
 
 	Race getRaInfoByraId(int id);
 
-	int DeleteRaInfoByThid(int raId);
+	String DeleteRaInfoByThid(int deId, String fg, String type, HttpSession session);
 
 	String getUserNameById(Integer usId);
 

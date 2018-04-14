@@ -2,6 +2,8 @@ package com.sust.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.sust.entity.Book;
 
 public interface BookService {
@@ -10,7 +12,7 @@ public interface BookService {
 
 	Book getBoInfoByboId(int boId);
 
-	int DeleteBoInfoById(int boId);
+	String DeleteBoInfoById(int boId, String fg, String type, HttpSession session);
 
 	int addBoInfo(Book book);
 

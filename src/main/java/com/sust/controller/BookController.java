@@ -48,10 +48,10 @@ public class BookController {
 
 	@RequestMapping(value = "/DeletePaInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo DeletePaInfo(@RequestParam("boId") int boId) {
+	public AllInfo DeletePaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteBoInfo++" + boId);
-		return new AllInfo(String.valueOf(this.bookService.DeleteBoInfoById(boId)));
+		logger.info("DeleteBoInfo++" + deId+"++"+fg);
+		return new AllInfo(this.bookService.DeleteBoInfoById(deId, fg, "book", session));
 	}
 
 	@RequestMapping(value = "/addBoInfo", method = RequestMethod.GET)

@@ -106,8 +106,7 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">起止页码</th>
-							<th
-								style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
+							<th style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
 							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
 						</tr>
 					</thead>
@@ -501,7 +500,7 @@ li {
 				      if(confirm("是否删除电子文件？")){
 				         fg = "yes";
 				      }else{
-				         fg = 'no'
+				         fg = 'no';
 				      }
 					  delThesis(deId,fg);
 			    } else {

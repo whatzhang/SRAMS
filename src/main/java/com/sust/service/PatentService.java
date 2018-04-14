@@ -2,6 +2,8 @@ package com.sust.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.sust.entity.Patent;
 
 public interface PatentService {
@@ -10,7 +12,7 @@ public interface PatentService {
 
 	Patent getPaInfoByraId(int paId);
 
-	int DeletePaInfoById(int paId);
+	String DeletePaInfoById(int deId, String fg, String type, HttpSession session);
 
 	int addPaInfo(Patent patent);
 
