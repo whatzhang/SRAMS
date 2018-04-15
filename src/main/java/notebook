@@ -97,15 +97,115 @@ XMLHttpRequest.readyState: 状态码的意思
 	 */        
         
         
+  <mapper namespace="userInfoDO">
+    <resultMap id="BaseResultMap" type="UserInfoDO">
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="identity_num" property="identityNum" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getUserInfo" resultMap="BaseResultMap" parameterType="UserInfoDO">
+        select phone_num,user_name,identity_num from tb_user 
+        <where>
+            <if test="phoneNum!=null and phoneNum!=''">
+                phone_num like '%${phoneNum}%'
+            </if>
+            <if test="userName != '' and userName != null" >
+                and user_name like '%${userName}%'
+            </if>
+            <if test="identityNum != '' and identityNum != null" >
+                and identity_num like '%${identityNum}%'
+            </if>
+         </where>
+         limit #{startNum},5 //每页五条数据
+    </select>
+    
+    <select id="getTotalNum" resultType="int" parameterType="UserInfoDO">
+        select count(*) from tb_user 
+        <where>
+            <if test="phoneNum!=null and phoneNum!=''">
+                phone_num like '%${phoneNum}%'
+            </if>
+            <if test="userName != '' and userName != null" >
+                and user_name like '%${userName}%'
+            </if>
+            <if test="identityNum != '' and identityNum != null" >
+                and identity_num like '%${identityNum}%'
+            </if>
+         </where>
+    </select>  
+</mapper>      
         
         
         
+<plugins>
+    <!-- com.github.pagehelper.PageHelper为PageHelper类所在包名 -->
+    <plugin interceptor="com.github.pagehelper.PageHelper">
+        <!-- 4.0.0以后版本可以不设置该参数 -->
+        <!--<property name="dialect" value="mysql"/>-->
+        <!-- 该参数默认为false -->
+        <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+        <!-- 和startPage中的pageNum效果一样-->
+        <property name="offsetAsPageNum" value="true"/>
+        <!-- 该参数默认为false -->
+        <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+        <property name="rowBoundsWithCount" value="true"/>
+        <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+        <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+        <property name="pageSizeZero" value="true"/>
+        <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+        <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+        <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+        <property name="reasonable" value="true"/>
+        <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+        <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+        <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,orderBy,不配置映射的用默认值 -->
+        <!-- 不理解该含义的前提下，不要随便复制该配置 -->
+        <!--<property name="params" value="pageNum=start;pageSize=limit;"/>-->
+        <!-- 支持通过Mapper接口参数来传递分页参数 -->
+        <!--<property name="supportMethodsArguments" value="true"/>-->
+        <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
+        <!--<property name="returnPageInfo" value="check"/>-->
+    </plugin>
+</plugins>        
         
+    
+/* function checkFile(){
+		        var allowtype =  ["doc","docx","pdf","rar","zip"];
+				var filename = $("#upfile").val();  
+				if(upThId != null){
+					if ($.inArray(filename.substring(filename.lastIndexOf(".")+1,filename.length).toLowerCase(),allowtype) == -1)
+					{
+					    alert("请输入正确的格式(doc,docx,pdf,rar,zip)");
+					    return false;
+					}else{
+						$("#ID").val(upThId);
+					    return true;
+					}
+				}else{
+					alert("选择要上传文件的信息！");
+					return false;
+				}
+			} */    
         
-        
-        
-        
-        
+ <%-- <form class="form-horizontal" id="upFile" name="upFile" enctype="multipart/form-data" 
+						action="${pageContext.request.contextPath}/upload/uploadFile?type=thesis"
+						method="post">
+						<input type="hidden" name="ID" id="ID" value=""/>
+						<div class="form-group mb-n "
+							style="text-align: left; margin-left: 0.08em; ">
+							<div style="float: left;">
+								<div class="btn btn-default btn-file" title="上传电子文件">
+									<input type="file" name="upfile" id="upfile" size="1">
+								</div>
+								<p class="help-block">(格式为：zip/rar)Max.20MB</p>
+							</div>
+							<div style="text-align: left; margin-left: 0.08em; ">
+								<button style="margin-left: 2em;" type="submit"
+									class="btn btn-success" onclick="return checkFile();">上&nbsp;传</button>
+							</div>
+						</div>
+					</form> --%>       
         
         
         

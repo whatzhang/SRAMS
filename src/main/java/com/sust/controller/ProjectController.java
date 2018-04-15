@@ -3,6 +3,7 @@ package com.sust.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Project;
@@ -31,11 +34,16 @@ public class ProjectController {
 	private ProjectService projectService;
 
 	@RequestMapping("/getUserProList")
-	private String getUserProList(Model model, HttpSession session) {
-
+	private String getUserProList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
+			HttpSession session){
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserProList++" + usId);
-		model.addAttribute("ProjectList", projectService.getUserProList(usId));
+		PageHelper.startPage(pa, pageSize);
+		List<Project> list = projectService.getUserProList(usId);
+		PageInfo<Project> page = new PageInfo<Project>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("ProjectList", list);
 		return "users/project";
 	}
 

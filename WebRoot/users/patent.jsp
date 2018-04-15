@@ -177,140 +177,166 @@ li {
 						</script>
 					</tbody>
 				</table>
+				<p>
+				<div style="float: left;">
+					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+						onchange="rePages()" size="1">
+						<option value="${page.pageSize}">${page.pageSize}</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>条记录
+				</div>
+				<div style="float:right;">
+					<a
+						href="${pageContext.request.contextPath}/patent/getUserPaInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getUserPaInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getUserPaInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getUserPaInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+				</div>
+				</p>
 			</div>
-		</div>
-		<div class="media">
-			<div class="panel-info" style="padding: 0em 2em 1em 2em;"
-				id="UpAndDe">
-				<form class="form-horizontal" id="upAndaddRa" name="upAndaddRa">
-					<div class="form-group mb-n">
-						<div class="btn-group" style="margin-left: 1em;">
-							<button type="button" class="btn btn-danger" id="Change"
-								onclick="change();">修改信息</button>
-							<button type="button" class="btn btn-default" id="Add"
-								onclick="add();">添加信息</button>
-						</div>
-					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" name="raName"
-								title="专利名称" id="raName" placeholder="专利名称" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg"
-								name="raCategory" title="专利类别" id="raCategory"
-								placeholder="专利类别" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="raLevel"
-								title="专利号" name="raLevel" placeholder="专利号" required="required">
-						</div>
-					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" name="Cdate" readonly="readonly" title="申请时间"
-								class="form-control1 input-lg" id="Cdate" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" name="Cdate1" readonly="readonly" title="授权时间"
-								class="form-control1 input-lg" id="Cdate1" required="required">
-						</div>
-					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-12">
-							<textarea rows="2" class="form-control1 control2 " name="raAbout"
-								id="raAbout" style="font-size: 1em;"
-								placeholder="请简要描述专利信息，不超过200字" required="required"></textarea>
-						</div>
-					</div>
-					<div class="form-group mb-n col-sm-6"
-						style="padding-right: 2em; float: right;">
-						<button style="float: right;" type="reset" class="btn btn-info"
-							onclick="reSet();">重新填写</button>
-						<button style="float: right; margin-right: 1em;" type="submit"
-							class="btn btn-success" onclick="return isOp();">确认提交</button>
-					</div>
-				</form>
-				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data">
-					<div class="form-group mb-n "
-						style="text-align: left; margin-left: 0.08em;">
-						<div style="float: left;">
-							<div class="btn btn-default btn-file" title="上传电子文件">
-								<input type="file" name="upfile" id="upfile" size="1">
+			</div>
+			<div class="media">
+				<div class="panel-info" style="padding: 0em 2em 1em 2em;"
+					id="UpAndDe">
+					<form class="form-horizontal" id="upAndaddRa" name="upAndaddRa">
+						<div class="form-group mb-n">
+							<div class="btn-group" style="margin-left: 1em;">
+								<button type="button" class="btn btn-danger" id="Change"
+									onclick="change();">修改信息</button>
+								<button type="button" class="btn btn-default" id="Add"
+									onclick="add();">添加信息</button>
 							</div>
-							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
 						</div>
-						<div style="text-align: left; margin-left: 0.08em;">
-							<button style="margin-left: 2em;" type="button"
-								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+						<div class="form-group mb-n">
+							<div class="col-sm-4">
+								<input type="text" class="form-control1 input-lg" name="raName"
+									title="专利名称" id="raName" placeholder="专利名称" required="required">
+							</div>
+							<div class="col-sm-4">
+								<input type="text" class="form-control1 input-lg"
+									name="raCategory" title="专利类别" id="raCategory"
+									placeholder="专利类别" required="required">
+							</div>
+							<div class="col-sm-4">
+								<input type="text" class="form-control1 input-lg" id="raLevel"
+									title="专利号" name="raLevel" placeholder="专利号"
+									required="required">
+							</div>
 						</div>
+						<div class="form-group mb-n">
+							<div class="col-sm-4">
+								<input type="text" name="Cdate" readonly="readonly" title="申请时间"
+									class="form-control1 input-lg" id="Cdate" required="required">
+							</div>
+							<div class="col-sm-4">
+								<input type="text" name="Cdate1" readonly="readonly"
+									title="授权时间" class="form-control1 input-lg" id="Cdate1"
+									required="required">
+							</div>
+						</div>
+						<div class="form-group mb-n">
+							<div class="col-sm-12">
+								<textarea rows="2" class="form-control1 control2 "
+									name="raAbout" id="raAbout" style="font-size: 1em;"
+									placeholder="请简要描述专利信息，不超过200字" required="required"></textarea>
+							</div>
+						</div>
+						<div class="form-group mb-n col-sm-6"
+							style="padding-right: 2em; float: right;">
+							<button style="float: right;" type="reset" class="btn btn-info"
+								onclick="reSet();">重新填写</button>
+							<button style="float: right; margin-right: 1em;" type="submit"
+								class="btn btn-success" onclick="return isOp();">确认提交</button>
+						</div>
+					</form>
+					<form class="form-horizontal" id="upFile" name="upFile"
+						enctype="multipart/form-data">
+						<div class="form-group mb-n "
+							style="text-align: left; margin-left: 0.08em;">
+							<div style="float: left;">
+								<div class="btn btn-default btn-file" title="上传电子文件">
+									<input type="file" name="upfile" id="upfile" size="1">
+								</div>
+								<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
+							</div>
+							<div style="text-align: left; margin-left: 0.08em;">
+								<button style="margin-left: 2em;" type="button"
+									class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">详细信息</h4>
 					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">详细信息</h4>
-				</div>
-				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
-					<table class="table" style="text-align: left;">
-						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
-								<td><label for="largeinput"
-									class="control-label label-input-lg">专利名称</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="ra_na" id="ra_na" readonly="true"></td>
-								<td><label for="largeinput"
-									class="control-label label-input-lg">专利类别</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="ra_ca" id="ra_ca" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">申请时间</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="ra_ty" id="ra_ty" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">授权时间</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="ra_da" id="ra_da" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">专利号</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="ra_le" id="ra_le" readonly="true"></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td colspan="4" style="text-align: left;"><label
-									for="largeinput" class=" control-label label-input-lg">专利简介</label></td>
-							</tr>
-							<tr>
-								<td colspan="4"><textarea class="form-control1 control2"
-										name="ra_ab" id="ra_ab" style="font-size: 1em; height: 10em;"
-										readonly="true"></textarea></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary"
-						style="margin-right: 1em;" data-dismiss="modal">确 &nbsp;定</button>
+					<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
+						<table class="table" style="text-align: left;">
+							<tbody style="font-size: 1em;">
+								<tr style="text-align: center; vertical-align: middle;">
+									<td><label for="largeinput"
+										class="control-label label-input-lg">专利名称</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="ra_na" id="ra_na" readonly="true"></td>
+									<td><label for="largeinput"
+										class="control-label label-input-lg">专利类别</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="ra_ca" id="ra_ca" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">申请时间</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="ra_ty" id="ra_ty" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">授权时间</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="ra_da" id="ra_da" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">专利号</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="ra_le" id="ra_le" readonly="true"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="4" style="text-align: left;"><label
+										for="largeinput" class=" control-label label-input-lg">专利简介</label></td>
+								</tr>
+								<tr>
+									<td colspan="4"><textarea class="form-control1 control2"
+											name="ra_ab" id="ra_ab" style="font-size: 1em; height: 10em;"
+											readonly="true"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							style="margin-right: 1em;" data-dismiss="modal">确
+							&nbsp;定</button>
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
-	<script type="text/javascript">
+		</div>
+		<script type="text/javascript">
     var flog = 1;
     var idd =null;
     var ms = "确认修改此信息？";
@@ -508,6 +534,10 @@ li {
             }  
          });
     }
+   function rePages(){
+   var page = $("#pageSize").val();
+   window.location.href = "${pageContext.request.contextPath}/patent/getUserPaInfo?pageSize="+page;
+   }
 </script>
 </body>
 </html>

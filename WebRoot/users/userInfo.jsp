@@ -162,7 +162,7 @@
 						<br>
 						<hr>
 						<div class="form-group mb-n">
-							<a href="${pageContext.request.contextPath}/thesis/getThInfo">
+							<a href="${pageContext.request.contextPath}/thesis/getUserThInfo">
 								<button type="button" style="float: right; margin-right: 3em;"
 									class="btn btn-info">返回</button>
 							</a>
@@ -206,7 +206,7 @@
 					<br><br>
 					<hr>
 					<div class="form-group mb-n">
-						<a href="${pageContext.request.contextPath}/thesis/getThInfo">
+						<a href="${pageContext.request.contextPath}/thesis/getUserThInfo">
 							<button type="button" style="float: right; margin-right: 4em;"
 								class="btn btn-info">返回</button>
 						</a>
@@ -273,7 +273,7 @@
 				async : false,
 				success : function(data) {
 					 alert("修改成功！");
-					 window.location.href = "${pageContext.request.contextPath}/thesis/getThInfo";
+					 window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo";
 				}, 
 				error : function(data) {
 					alert("update error!");
@@ -306,7 +306,7 @@
 				async : false,
 				success : function(data) {
 					alert("修改密码成功！");
-					 window.location.href = "${pageContext.request.contextPath}/thesis/getThInfo";
+					 window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo";
 				}, 
 				error : function(data) {
 					alert("update error!");

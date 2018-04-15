@@ -105,5 +105,14 @@ public class DownloadController {
 		logger.info("DeleteFile++" + id + "++" + type);
 		return new AllInfo(this.downloadService.DeleteUnusedFile(session, id, type));
 	}
+	
+	@RequestMapping(value = "/downloadTypeExcl", method = RequestMethod.GET)
+	@ResponseBody
+	public AllInfo downloadTypeExcl(@RequestParam("usId") int usId, @RequestParam("type") String type){
+		
+		
+		return new AllInfo("downloadTypeExcl_OK");
+	}
+	
 
 }

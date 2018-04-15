@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Thesis;
@@ -34,11 +35,15 @@ public class ThesisController {
 	private ThesisService thesisService;
 
 	@RequestMapping(value = "/getUserThInfo")
-	private String getThesisInfo(Model model, HttpServletRequest request) {
-
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+	private String getThesisInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
+			HttpSession session){
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getThesisInfo++" + usId);
+		PageHelper.startPage(pa, pageSize);
 		List<Thesis> thList = this.thesisService.getThesisInfo(usId);
+		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
 		model.addAttribute("list", thList);
 		return "users/thesis";
 	}

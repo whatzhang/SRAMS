@@ -3,6 +3,7 @@ package com.sust.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Praise;
@@ -31,11 +34,16 @@ public class PraiseController {
 	private PraiseService praiseService;
 
 	@RequestMapping("/getUserPraiseInfo")
-	public String getUserPraiseInfo(HttpSession session, Model model) {
-
+	public String getUserPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
+			HttpSession session){
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserInfo++" + usId);
-		model.addAttribute("Pa", this.praiseService.getUserPraiseInfo(usId));
+		PageHelper.startPage(pa, pageSize);
+		List<Praise> list = this.praiseService.getUserPraiseInfo(usId);
+		PageInfo<Praise> page = new PageInfo<Praise>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("Pa", list);
 		return "users/praise";
 	}
 

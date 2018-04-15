@@ -3,6 +3,7 @@ package com.sust.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Book;
 import com.sust.entity.Login;
@@ -30,11 +33,17 @@ public class BookController {
 	private BookService bookService;
 
 	@RequestMapping("/getUserBoList")
-	private String getUserBoList(Model model, HttpSession session) {
+	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
+			HttpSession session) {
 
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserBoList++" + usId);
-		model.addAttribute("BookList", bookService.getUserBoList(usId));
+		PageHelper.startPage(pa, pageSize);
+		List<Book> list = bookService.getUserBoList(usId);
+		PageInfo<Book> page = new PageInfo<Book>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("BookList", list);
 		return "users/book";
 	}
 
@@ -50,7 +59,7 @@ public class BookController {
 	@ResponseBody
 	public AllInfo DeletePaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteBoInfo++" + deId+"++"+fg);
+		logger.info("DeleteBoInfo++" + deId + "++" + fg);
 		return new AllInfo(this.bookService.DeleteBoInfoById(deId, fg, "book", session));
 	}
 

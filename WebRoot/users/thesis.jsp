@@ -65,8 +65,8 @@ li {
 							<label for="largeinput" class=" control-label label-input-lg"
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-2" style="margin-left: 1em">
+						<div class="form-group mb-n">
+							<div class="col-sm-1" style="margin-left: 1em">
 								<select class="form-control1">
 									<option>论文名称</option>
 									<option>发表时间</option>
@@ -75,21 +75,20 @@ li {
 								</select>
 							</div>
 							<label for="largeinput"
-								class="col-sm-2 control-label label-input-lg"
+								class="col-sm-1 control-label label-input-lg"
 								style="color: #e94e02;">关键信息：</label>
 							<div class="col-sm-4">
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
-							<label class="col-sm-2 " align="center"><button
-									type="submit" class="btn btn-success">查找</button></label>
+							<button type="submit" class="btn btn-success col-sm-1">查找</button>
+							<button type="button" class="btn btn-success col-sm-1"
+								style="float: right;margin-right: 2em;" onclick="dowenExcl();">导出Excl信息表</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<br> <br>
-			<!-- </div>
-		<div class="media"> -->
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
 				<table class="table table-bordered"
 					style="table-layout: fixed; width: 100%;">
@@ -106,7 +105,8 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">起止页码</th>
-							<th style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
+							<th
+								style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
 							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
 						</tr>
 					</thead>
@@ -193,218 +193,220 @@ li {
 						</script>
 					</tbody>
 				</table>
-				<br>
-				<hr>
+				<p>
+				<div style="float: left;">
+					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+						onchange="rePages()" size="1">
+						<option value="${page.pageSize}">${page.pageSize}</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>条记录
+				</div>
+				<div style="float:right;">
+					<a
+						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+				</div>
+				</p>
 			</div>
-			<div class="media">
-				<div class="panel-info" style="padding: 0em 1em 1em 1em;"
-					id="UpAndDe">
-					<form class="form-horizontal" id="upAndadd" name="upAndadd">
-						<div class="form-group mb-n">
-							<div class="btn-group" style="margin-left: 1em;">
-								<button type="button" class="btn btn-danger" id="Change"
-									onclick="change();">修改信息</button>
-								<button type="button" class="btn btn-default" id="Add"
-									onclick="add();">添加信息</button>
-							</div>
+		</div>
+		<div class="media">
+			<div class="panel-info" style="padding: 0em 2em 1em 2em;"
+				id="UpAndDe">
+				<form class="form-horizontal" id="upAndadd" name="upAndadd">
+					<div class="form-group mb-n">
+						<div class="btn-group" style="margin-left: 1em;">
+							<button type="button" class="btn btn-danger" id="Change"
+								onclick="change();">修改信息</button>
+							<button type="button" class="btn btn-default" id="Add"
+								onclick="add();">添加信息</button>
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg" name="thName"
-									title="论文名称" id="thName" placeholder="论文名称" required="required">
-							</div>
-							<div class="col-sm-4">
-								<select class="form-control1" required="required" name="thCate"
-									id="thCate" title="论文类别">
-									<option value="">论文类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
-									<option value="类别3">类别3</option>
-									<option value="其它">其他</option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<input type="text" name="Cdate" readonly="readonly" title="发表时间"
-									class="form-control1 input-lg" id="Cdate" required="required">
-							</div>
+					</div>
+					<div class="form-group mb-n">
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" name="thName"
+								title="论文名称" id="thName" placeholder="论文名称" required="required">
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg" id="thLevel"
-									title="论文级别" name="thLevel" placeholder="论文级别"
-									required="required">
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg" id="thfactor"
-									title="影响因子" name="thfactor" placeholder="影响因子"
-									required="required">
-							</div>
-							<div class="col-sm-4">
-								<select class="form-control1" required="required" title="是否收录"
-									name="thIscloud" id="thIscloud">
-									<option value="">是否收录</option>
-									<option value="1">是</option>
-									<option value="0">否</option>
-									<option value="2">其它</option>
-								</select>
-							</div>
+						<div class="col-sm-4">
+							<select class="form-control1" required="required" name="thCate"
+								id="thCate" title="论文类别">
+								<option value="">论文类别</option>
+								<option value="类别1">类别1</option>
+								<option value="类别2">类别2</option>
+								<option value="类别3">类别3</option>
+								<option value="其它">其他</option>
+							</select>
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-4">
+						<div class="col-sm-4">
+							<input type="text" name="Cdate" readonly="readonly" title="发表时间"
+								class="form-control1 input-lg" id="Cdate" required="required">
+						</div>
+					</div>
+					<div class="form-group mb-n">
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="thLevel"
+								title="论文级别" name="thLevel" placeholder="论文级别"
+								required="required">
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="thfactor"
+								title="影响因子" name="thfactor" placeholder="影响因子"
+								required="required">
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control1" required="required" title="是否收录"
+								name="thIscloud" id="thIscloud">
+								<option value="">是否收录</option>
+								<option value="1">是</option>
+								<option value="0">否</option>
+								<option value="2">其它</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group mb-n">
+						<div class="col-sm-4">
 
-								<input type="text" class="form-control1 input-lg" id="thNum"
-									title="收录编码" name="thNum" placeholder="收录号码"
-									required="required">
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg" id="thJour"
-									title="发表期刊" name="thJour" placeholder="发表期刊"
-									required="required">
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg" id="thPage"
-									title="起止页码" name="thPage" placeholder="起止页码（例：12-15）"
-									required="required">
-							</div>
+							<input type="text" class="form-control1 input-lg" id="thNum"
+								title="收录编码" name="thNum" placeholder="收录号码" required="required">
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-12">
-								<textarea rows="2" class="form-control1 control2 "
-									name="thAbout" id="thAbout" style="font-size: 1em;"
-									placeholder="请简要描述论文信息，不超过200字" required="required"></textarea>
-							</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="thJour"
+								title="发表期刊" name="thJour" placeholder="发表期刊"
+								required="required">
 						</div>
-						<div class="form-group mb-n col-sm-6"
-							style="padding-right: 2em;float: right;">
-							<button style="float: right;" type="reset" class="btn btn-info"
-								onclick="reSet();">重新填写</button>
-							<button style="float: right; margin-right: 1em;" type="submit"
-								class="btn btn-success" onclick="return isOp();">确认提交</button>
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="thPage"
+								title="起止页码" name="thPage" placeholder="起止页码（例：12-15）"
+								required="required">
 						</div>
-					</form>
-					<%-- <form class="form-horizontal" id="upFile" name="upFile" enctype="multipart/form-data" 
-						action="${pageContext.request.contextPath}/upload/uploadFile?type=thesis"
-						method="post">
-						<input type="hidden" name="ID" id="ID" value=""/>
-						<div class="form-group mb-n "
-							style="text-align: left; margin-left: 0.08em; ">
-							<div style="float: left;">
-								<div class="btn btn-default btn-file" title="上传电子文件">
-									<input type="file" name="upfile" id="upfile" size="1">
-								</div>
-								<p class="help-block">(格式为：zip/rar)Max.20MB</p>
-							</div>
-							<div style="text-align: left; margin-left: 0.08em; ">
-								<button style="margin-left: 2em;" type="submit"
-									class="btn btn-success" onclick="return checkFile();">上&nbsp;传</button>
-							</div>
+					</div>
+					<div class="form-group mb-n">
+						<div class="col-sm-12">
+							<textarea rows="2" class="form-control1 control2 " name="thAbout"
+								id="thAbout" style="font-size: 1em;"
+								placeholder="请简要描述论文信息，不超过200字" required="required"></textarea>
 						</div>
-					</form> --%>
-					<form class="form-horizontal" id="upFile" name="upFile"
-						enctype="multipart/form-data">
-						<div class="form-group mb-n "
-							style="text-align: left; margin-left: 0.08em;">
-							<div style="float: left;">
-								<div class="btn btn-default btn-file" title="上传电子文件">
-									<input type="file" name="upfile" id="upfile" size="1">
-								</div>
-								<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
+					</div>
+					<div class="form-group mb-n col-sm-6"
+						style="padding-right: 2em;float: right;">
+						<button style="float: right;" type="reset" class="btn btn-info"
+							onclick="reSet();">重新填写</button>
+						<button style="float: right; margin-right: 1em;" type="submit"
+							class="btn btn-success" onclick="return isOp();">确认提交</button>
+					</div>
+				</form>
+				<form class="form-horizontal" id="upFile" name="upFile"
+					enctype="multipart/form-data">
+					<div class="form-group mb-n "
+						style="text-align: left; margin-left: 0.08em;">
+						<div style="float: left;">
+							<div class="btn btn-default btn-file" title="上传电子文件">
+								<input type="file" name="upfile" id="upfile" size="1">
 							</div>
-							<div style="text-align: left; margin-left: 0.08em;">
-								<button style="margin-left: 2em;" type="button"
-									class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
-							</div>
+							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
 						</div>
-					</form>
+						<div style="text-align: left; margin-left: 0.08em;">
+							<button style="margin-left: 2em;" type="button"
+								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">详细信息</h4>
+				</div>
+				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
+					<table class="table" style="text-align: left;">
+						<tbody style="font-size: 1em;">
+							<tr style="text-align: center;vertical-align: middle; ">
+								<td><label for="largeinput"
+									class="control-label label-input-lg">论文名称</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_na" id="th_na" readonly="true"></td>
+								<td><label for="largeinput"
+									class="control-label label-input-lg">论文类别</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_ca" id="th_ca" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">论文作者</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_au" id="th_au" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">发表时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_da" id="th_da" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">论文级别</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_le" id="th_le" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">影响因子</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_fa" id="th_fa" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">是否收录</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_is" id="th_is" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">收录编号</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_nu" id="th_nu" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">发表期刊</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_ja" id="th_ja" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">起止页码</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_pa" id="th_pa" readonly="true"></td>
+							</tr>
+							<tr>
+								<td colspan="4" style="text-align: left;"><label
+									for="largeinput" class=" control-label label-input-lg">论文简介</label></td>
+							</tr>
+							<tr>
+								<td colspan="4"><textarea class="form-control1 control2"
+										name="th_ab" id="th_ab" style="font-size: 1em;height: 10em;"
+										readonly="true"></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						style="margin-right: 1em;" data-dismiss="modal">确 &nbsp;定</button>
 				</div>
 			</div>
 		</div>
 
-
-		<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">详细信息</h4>
-					</div>
-					<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
-						<table class="table" style="text-align: left;">
-							<tbody style="font-size: 1em;">
-								<tr style="text-align: center;vertical-align: middle; ">
-									<td><label for="largeinput"
-										class="control-label label-input-lg">论文名称</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_na" id="th_na" readonly="true"></td>
-									<td><label for="largeinput"
-										class="control-label label-input-lg">论文类别</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_ca" id="th_ca" readonly="true"></td>
-								</tr>
-								<tr>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">论文作者</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_au" id="th_au" readonly="true"></td>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">发表时间</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_da" id="th_da" readonly="true"></td>
-								</tr>
-								<tr>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">论文级别</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_le" id="th_le" readonly="true"></td>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">影响因子</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_fa" id="th_fa" readonly="true"></td>
-								</tr>
-								<tr>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">是否收录</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_is" id="th_is" readonly="true"></td>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">收录编号</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_nu" id="th_nu" readonly="true"></td>
-								</tr>
-								<tr>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">发表期刊</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_ja" id="th_ja" readonly="true"></td>
-									<td><label for="largeinput"
-										class=" control-label label-input-lg">起止页码</label></td>
-									<td><input type="text" class="form-control1 input-lg"
-										name="th_pa" id="th_pa" readonly="true"></td>
-								</tr>
-								<tr>
-									<td colspan="4" style="text-align: left;"><label
-										for="largeinput" class=" control-label label-input-lg">论文简介</label></td>
-								</tr>
-								<tr>
-									<td colspan="4"><textarea class="form-control1 control2"
-											name="th_ab" id="th_ab" style="font-size: 1em;height: 10em;"
-											readonly="true"></textarea></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary"
-							style="margin-right: 1em;" data-dismiss="modal">确
-							&nbsp;定</button>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<script type="text/javascript">
+	</div>
+	<script type="text/javascript">
 			var num = 0;
 			var idd = 0;
 			var flog = 1;
@@ -635,23 +637,6 @@ li {
 					return false;
 				}
 			}
-			/* function checkFile(){
-		        var allowtype =  ["doc","docx","pdf","rar","zip"];
-				var filename = $("#upfile").val();  
-				if(upThId != null){
-					if ($.inArray(filename.substring(filename.lastIndexOf(".")+1,filename.length).toLowerCase(),allowtype) == -1)
-					{
-					    alert("请输入正确的格式(doc,docx,pdf,rar,zip)");
-					    return false;
-					}else{
-						$("#ID").val(upThId);
-					    return true;
-					}
-				}else{
-					alert("选择要上传文件的信息！");
-					return false;
-				}
-			} */
 			function checkFile(){
 		        var allowtype =  ["doc","docx","pdf","rar","zip"];
 				var filename = $("#upfile").val();  
@@ -681,6 +666,29 @@ li {
 		            }  
 		         });
 		    }
+		    function rePages(){
+				   var page = $("#pageSize").val();
+				   window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo?pageSize="+page;
+            }
+            function dowenExcl(){
+				$.ajax({
+					type : "POST",
+					url : "",
+					data : {
+					   type : "thesis",
+					   usId : <%=login.getUsId()%>
+					},
+					dataType : 'json',
+					cache : false,
+					async : true,
+					success : function(data){
+					     console.info(data.string1);
+					},
+					error : function(data) {
+						alert("下载信息出错!");
+					}
+				});
+            }
 		</script>
 </body>
 </html>

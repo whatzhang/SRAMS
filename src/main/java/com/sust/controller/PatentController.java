@@ -3,9 +3,9 @@ package com.sust.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Patent;
@@ -32,11 +34,16 @@ public class PatentController {
 	private PatentService patentService;
 
 	@RequestMapping("/getUserPaInfo")
-	private String getUserPaInfo(Model model, HttpServletRequest request) {
-
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+	private String getUserPaInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
+			HttpSession session){
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserPaInfo++" + usId);
-		model.addAttribute("PatentList", patentService.getUserPatent(usId));
+		PageHelper.startPage(pa, pageSize);
+		List<Patent> list = patentService.getUserPatent(usId);
+		PageInfo<Patent> page = new PageInfo<Patent>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("PatentList", list);
 		return "users/patent";
 	}
 

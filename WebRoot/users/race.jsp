@@ -183,6 +183,29 @@ li {
 						</script>
 					</tbody>
 				</table>
+				<p>
+				<div style="float: left;">
+					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+						onchange="rePages()" size="1">
+						<option value="${page.pageSize}">${page.pageSize}</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>条记录
+				</div>
+				<div style="float:right;">
+					<a
+						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+					<a
+						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+					<a
+						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+					<a
+						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+				</div>
+				</p>
 			</div>
 		</div>
 		<div class="media">
@@ -460,7 +483,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/race/getRaInfo";
+			    window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
 			}, 
 			error : function(data) {
 				alert("updateRace error!");
@@ -486,7 +509,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("添加成功！");
-			    window.location.href = "${pageContext.request.contextPath}/race/getRaInfo";
+			    window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
 			}, 
 			error : function(data) {
 				alert("updateRace error!");
@@ -534,6 +557,10 @@ li {
             }  
          });
     }
+     function rePages(){
+   var page = $("#pageSize").val();
+   window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo?pageSize="+page;
+   }
 </script>
 </body>
 </html>
