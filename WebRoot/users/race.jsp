@@ -78,8 +78,11 @@ li {
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
-							<label class="col-sm-2 " align="center"><button
-									type="submit" class="btn btn-success">查找</button></label>
+							<button type="submit" class="btn btn-success col-sm-1">查找</button>
+							<a
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=race"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
 					</form>
 				</div>
@@ -156,7 +159,7 @@ li {
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
 											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaceList.raId}"
 											title="下载文件"> <i class="fa fa-download mail-icon"
-													style="width: 1em; padding-left: 0.2em;"></i></a></li>
+												style="width: 1em; padding-left: 0.2em;"></i></a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
 											href="javascript:void(0);"
 											onclick="delInfo(${RaceList.raId});" title="删除信息"> <i

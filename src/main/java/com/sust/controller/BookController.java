@@ -33,8 +33,8 @@ public class BookController {
 	private BookService bookService;
 
 	@RequestMapping("/getUserBoList")
-	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session) {
+	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserBoList++" + usId);

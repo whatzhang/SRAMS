@@ -187,8 +187,8 @@ public class Thesis {
 		this.thAbout = thAbout == null ? null : thAbout.trim();
 	}
 
-	public Date getThUptime() {
-		return thUptime;
+	public String getThUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(thUptime);
 	}
 
 	public void setThUptime(Date thUptime) {

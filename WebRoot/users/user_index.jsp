@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
 	if (login == null) {
@@ -357,16 +356,18 @@
 
 	<script src="js/classie.js"></script>
 	<script>
-		var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
-				.getElementById('showLeftPush'), body = document.body;
-
+		var menuLeft = document.getElementById('cbp-spmenu-s1'),
+			showLeftPush = document
+				.getElementById('showLeftPush'),
+			body = document.body;
+	
 		showLeftPush.onclick = function() {
 			classie.toggle(this, 'active');
 			classie.toggle(body, 'cbp-spmenu-push-toright');
 			classie.toggle(menuLeft, 'cbp-spmenu-open');
 			disableOther('showLeftPush');
 		};
-
+	
 		function disableOther(button) {
 			if (button !== 'showLeftPush') {
 				classie.toggle(showLeftPush, 'disabled');

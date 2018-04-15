@@ -35,8 +35,8 @@ public class ThesisController {
 	private ThesisService thesisService;
 
 	@RequestMapping(value = "/getUserThInfo")
-	private String getThesisInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session){
+	private String getThesisInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getThesisInfo++" + usId);
 		PageHelper.startPage(pa, pageSize);
@@ -60,7 +60,7 @@ public class ThesisController {
 	@ResponseBody
 	private AllInfo DeleteThInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteThInfo++" + deId+"++"+fg);
+		logger.info("DeleteThInfo++" + deId + "++" + fg);
 		return new AllInfo(this.thesisService.deleteThesisById(deId, fg, "thesis", session));
 	}
 

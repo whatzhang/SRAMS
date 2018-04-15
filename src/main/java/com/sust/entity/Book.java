@@ -140,8 +140,8 @@ public class Book {
 		this.boAbout = boAbout == null ? null : boAbout.trim();
 	}
 
-	public Date getBoUptime() {
-		return boUptime;
+	public String getBoUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(boUptime);
 	}
 
 	public void setBoUptime(Date boUptime) {

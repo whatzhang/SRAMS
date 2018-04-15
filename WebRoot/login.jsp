@@ -131,7 +131,7 @@
 	<%
 		}
 	%>
-    <div id="world"></div>
+	<div id="world"></div>
 	<script src="js/three.min.js"></script>
 	<script>
 		var Colors = {

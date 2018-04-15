@@ -203,7 +203,8 @@
 							</div>
 						</div>
 					</div>
-					<br><br>
+					<br>
+					<br>
 					<hr>
 					<div class="form-group mb-n">
 						<a href="${pageContext.request.contextPath}/thesis/getUserThInfo">
@@ -214,9 +215,7 @@
 							class="btn btn-danger" onclick="return checkPass();">确认修改</button>
 					</div>
 				</form>
-			</div>
-			<%
-				}
+			</div>}	}
 			%>
 		</div>
 	</div>

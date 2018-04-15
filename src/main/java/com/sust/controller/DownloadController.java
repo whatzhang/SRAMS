@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sust.entity.AllInfo;
+import com.sust.entity.Login;
 import com.sust.service.DownloadService;
 
 @Controller
@@ -105,14 +106,30 @@ public class DownloadController {
 		logger.info("DeleteFile++" + id + "++" + type);
 		return new AllInfo(this.downloadService.DeleteUnusedFile(session, id, type));
 	}
-	
-	@RequestMapping(value = "/downloadTypeExcl", method = RequestMethod.GET)
-	@ResponseBody
-	public AllInfo downloadTypeExcl(@RequestParam("usId") int usId, @RequestParam("type") String type){
-		
-		
-		return new AllInfo("downloadTypeExcl_OK");
+
+	@RequestMapping("/downloadTypeExcl")
+	public ResponseEntity<byte[]> downloadTypeExcl(@RequestParam("type") String type, HttpSession session) {
+
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		logger.info("downloadTypeExcl+" + usId + "++" + type);
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = type + "Excl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadTypeExcl_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getWorkBookStream(usId, type, session)), headers,
+					HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadTypeExcl_ResponseEntity_error");
+		}
+		return entity;
 	}
-	
 
 }

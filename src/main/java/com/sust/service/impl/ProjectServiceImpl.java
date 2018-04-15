@@ -23,6 +23,7 @@ public class ProjectServiceImpl implements ProjectService {
 	private ProjectMapper projectMapper;
 	@Autowired
 	private MyConfig config;
+
 	@Override
 	public int upProInfo(Project project) {
 
@@ -43,7 +44,8 @@ public class ProjectServiceImpl implements ProjectService {
 			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
-				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.projectMapper.selectUpTimeByKey(deId)));
+				String re = MyUtils.deleteFile(dir,
+						new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.projectMapper.selectUpTimeByKey(deId)));
 				this.projectMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件成功！";

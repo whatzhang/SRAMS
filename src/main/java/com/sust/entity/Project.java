@@ -129,8 +129,8 @@ public class Project {
 		this.proAbout = proAbout == null ? null : proAbout.trim();
 	}
 
-	public Date getProUptime() {
-		return proUptime;
+	public String getProUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(proUptime);
 	}
 
 	public void setProUptime(Date proUptime) {

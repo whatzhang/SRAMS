@@ -65,8 +65,8 @@ li {
 							<label for="largeinput" class=" control-label label-input-lg"
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-1" style="margin-left: 1em">
+						<div class="form-group">
+							<div class="col-sm-2" style="margin-left: 1em">
 								<select class="form-control1">
 									<option>论文名称</option>
 									<option>发表时间</option>
@@ -75,15 +75,17 @@ li {
 								</select>
 							</div>
 							<label for="largeinput"
-								class="col-sm-1 control-label label-input-lg"
+								class="col-sm-2 control-label label-input-lg"
 								style="color: #e94e02;">关键信息：</label>
 							<div class="col-sm-4">
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
 							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<button type="button" class="btn btn-success col-sm-1"
-								style="float: right;margin-right: 2em;" onclick="dowenExcl();">导出Excl信息表</button>
+							<a
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=thesis"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
 					</form>
 				</div>
@@ -669,25 +671,6 @@ li {
 		    function rePages(){
 				   var page = $("#pageSize").val();
 				   window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo?pageSize="+page;
-            }
-            function dowenExcl(){
-				$.ajax({
-					type : "POST",
-					url : "",
-					data : {
-					   type : "thesis",
-					   usId : <%=login.getUsId()%>
-					},
-					dataType : 'json',
-					cache : false,
-					async : true,
-					success : function(data){
-					     console.info(data.string1);
-					},
-					error : function(data) {
-						alert("下载信息出错!");
-					}
-				});
             }
 		</script>
 </body>

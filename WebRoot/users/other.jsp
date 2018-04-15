@@ -31,8 +31,8 @@
 </head>
 
 <body>
-	<div class="main-page" >
-		<div class="panel-info "style="text-align: center; margin-top: 10em;">
+	<div class="main-page">
+		<div class="panel-info " style="text-align: center; margin-top: 10em;">
 			<h2 style="color: red; ">敬请期待</h2>
 		</div>
 	</div>

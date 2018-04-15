@@ -43,7 +43,8 @@ public class BookServiceImpl implements com.sust.service.BookService {
 			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
-				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.bookMapper.selectUpTimeByKey(deId)));
+				String re = MyUtils.deleteFile(dir,
+						new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.bookMapper.selectUpTimeByKey(deId)));
 				this.bookMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件和信息成功！";

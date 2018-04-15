@@ -117,8 +117,8 @@ public class Praise {
 		this.prAbout = prAbout == null ? null : prAbout.trim();
 	}
 
-	public Date getPrUptime() {
-		return prUptime;
+	public String getPrUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(prUptime);
 	}
 
 	public void setPrUptime(Date prUptime) {

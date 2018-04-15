@@ -141,8 +141,8 @@ public class Race {
 		this.raAbout = raAbout == null ? null : raAbout.trim();
 	}
 
-	public Date getRaUptime() {
-		return raUptime;
+	public String getRaUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(raUptime);
 	}
 
 	public void setRaUptime(Date raUptime) {
