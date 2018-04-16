@@ -43,16 +43,17 @@ public class UserController {
 
 	@RequestMapping(value = "/upUserInfo", method = RequestMethod.GET)
 	@ResponseBody
-	public AllInfo upUserInfo(@RequestParam("usId") Integer usId, @RequestParam("usName") String usName,
+	public AllInfo upUserInfo(@RequestParam("usName") String usName,
 			@RequestParam("usAge") String usAge, @RequestParam("usSex") String usSex,
 			@RequestParam("usBirthday") String usBirthday, @RequestParam("usNum") String usNum,
 			@RequestParam("usDuty") String usDuty, @RequestParam("usMajor") String usMajor,
 			@RequestParam("usAddress") String usAddress, @RequestParam("usMail") String usMail,
 			@RequestParam("usPhone") String usPhone, @RequestParam("usAcademy") String usAcademy,
 			@RequestParam("usQuestion1") String usQuestion1, @RequestParam("usKey1") String usKey1,
-			@RequestParam("usQuestion1") String usQuestion2, @RequestParam("usKey1") String usKey2)
+			@RequestParam("usQuestion1") String usQuestion2, @RequestParam("usKey1") String usKey2,HttpSession session)
 					throws ParseException {
 
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("upUserInfo++" + usId + "++" + usName + "++" + usAge + "++" + usSex + "++" + usBirthday + "++"
 				+ usNum + "++" + usDuty + "++" + usMajor + "++" + usAddress + "++" + usMail + "++" + usPhone + "++"
 				+ usAcademy + "++" + usQuestion1 + "++" + usKey1 + "++" + usQuestion2 + "++" + usKey2);

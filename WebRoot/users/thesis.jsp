@@ -53,7 +53,7 @@ li {
 </style>
 
 </head>
-<body style="overflow-y: auto;">
+<body>
 	<%!int i = 0;%>
 	<input type="hidden" name="numJ" id="numJ" />
 	<div class="main-page">

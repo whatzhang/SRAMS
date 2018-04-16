@@ -325,25 +325,14 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<!-- main content start-->
-		<div class="main-content">
+		<!-- <div class="main-content"> -->
 			<div id="page-wrapper">
 				<iframe id="iFrame" name="iFrame" width="100%"
 					onload="this.height=iFrame.document.body.scrollHeight"
 					frameborder="0" scrolling="no"
 					src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
 			</div>
-		</div>
-
-		<%-- <jsp:include page="users/userInfo.jsp"></jsp:include>
-		<jsp:include page="users/upPass.jsp"></jsp:include>
-		<jsp:include page="users/patent.jsp"></jsp:include>
-		<jsp:include page="users/praise.jsp"></jsp:include>
-		<jsp:include page="users/project.jsp"></jsp:include>
-		<jsp:include page="users/book.jsp"></jsp:include>
-		<jsp:include page="users/race.jsp"></jsp:include>
-		<jsp:include page="users/other.jsp"></jsp:include>
-		<jsp:include page="users/thesis.jsp"></jsp:include> --%>
+		<!-- </div> -->
 
 		<!-- Classie -->
 		<div class="footer">
