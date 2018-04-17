@@ -109,8 +109,11 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Map<String, String> getInitInfo(String account, String type) {
-		Integer id = this.loginMapper.selectByAccount(account);
+	public Map<String, String> getInitInfo(String account, String type, Integer id, boolean flg) {
+		
+		if(flg){
+	    	id = this.loginMapper.selectByAccount(account);
+		}
 		Map<String, String> init = new HashMap<String, String>();
 		init.put("name", account);
 		init.put("type", type);
@@ -134,6 +137,31 @@ public class LoginServiceImpl implements LoginService {
 	public int upDataPass(Integer usId, String pass) {
 
 		return this.loginMapper.updatePassword(usId, pass);
+	}
+
+	@Override
+	public Map<String, String> getAdminInitInfo() {
+		Map<String, String> init = new HashMap<String, String>();
+		int thNum = this.loginMapper.selectAllThNum();
+		int paNum = this.loginMapper.selectAllPaNum();
+	    int prNum = this.loginMapper.selectAllPrNum();
+	    int proNum = this.loginMapper.selectAllProNum();
+	    int boNum = this.loginMapper.selectAllBoNum();
+	    int raNum = this.loginMapper.selectAllRaNum();
+	    int meNum = this.loginMapper.selectAllMeNum();
+	    int userNum = this.loginMapper.selectAllUser();
+	    int allData = thNum + paNum + prNum + proNum + boNum + raNum;
+		
+		init.put("thNum", String.valueOf(thNum));
+		init.put("paNum", String.valueOf(paNum));
+		init.put("prNum", String.valueOf(prNum));
+		init.put("proNum", String.valueOf(proNum));
+		init.put("boNum", String.valueOf(boNum));
+		init.put("raNum", String.valueOf(raNum));
+		init.put("meNum", String.valueOf(meNum));
+		init.put("userNum", String.valueOf(userNum));
+		init.put("allData", String.valueOf(allData));
+		return init;
 	}
 
 }

@@ -12,27 +12,33 @@
 	</sql>
 	<select id="selectThNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_thesis where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_thesis where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectPaNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_patent where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_patent where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectPrNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_praise where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_praise where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectProNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_project where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_project where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectBoNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_book where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_book where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectRaNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_race where us_id = #{id,jdbcType=INTEGER}
+		select count(*) from sr_race where us_id =
+		#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selectMeNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
@@ -42,20 +48,57 @@
 		and sr_me_status.us_id = #{id,jdbcType=INTEGER}
 	</select>
 
-	<select id="selectByAccount" parameterType="String"
-		resultType="java.lang.Integer">
-		select us_id from sr_login where lo_login = #{loLogin,jdbcType=VARCHAR}
+
+	<select id="selectAllThNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_thesis
+	</select>
+	<select id="selectAllPaNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_patent
+	</select>
+	<select id="selectAllPrNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_praise
+	</select>
+	<select id="selectAllProNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_project
+	</select>
+	<select id="selectAllBoNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_book
+	</select>
+	<select id="selectAllRaNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_race
+	</select>
+	<select id="selectAllMeNum" resultType="java.lang.Integer">
+		select count(*) from
+		sr_message
+	</select>
+	<select id="selectAllUser" resultType="java.lang.Integer">
+		select count(*) from
+		sr_race sr_login
+	</select>
+
+	<select id="selectByAccount" parameterType="String" resultType="java.lang.Integer">
+		select us_id from sr_login where lo_login =
+		#{loLogin,jdbcType=VARCHAR}
 	</select>
 	<select id="selectLoginByAccount" parameterType="String"
 		resultType="java.lang.Integer">
-		select count(*) from sr_login where lo_login = #{loLogin,jdbcType=VARCHAR}
+		select count(*) from sr_login where lo_login =
+		#{loLogin,jdbcType=VARCHAR}
 	</select>
 	<select id="selectLoginByPass" parameterType="String"
 		resultType="java.lang.Integer">
-		select count(*) from sr_login where lo_pass = #{loPass,jdbcType=VARCHAR}
+		select count(*) from sr_login where lo_pass =
+		#{loPass,jdbcType=VARCHAR}
 	</select>
 	<select id="selectLoginByAll" resultType="java.lang.Integer">
-		select count(*) from sr_login where  
+		select count(*) from
+		sr_login where
 		lo_login = #{loLogin,jdbcType=VARCHAR}
 		and lo_pass = #{loPass,jdbcType=VARCHAR}
 		and lo_type = #{loType,jdbcType=VARCHAR}
@@ -65,7 +108,8 @@
 		<include refid="Base_Column_List" />
 		from sr_login
 		where lo_login = #{loLogin,jdbcType=VARCHAR}
-		and lo_pass = #{loPass,jdbcType=VARCHAR}
+		and lo_pass =
+		#{loPass,jdbcType=VARCHAR}
 		and lo_type = #{loType,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
@@ -78,19 +122,22 @@
 
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sr_login
+		delete from
+		sr_login
 		where us_id = #{usId,jdbcType=INTEGER}
 	</delete>
 
 
 	<insert id="insert" parameterType="com.sust.entity.Login">
-		insert into sr_login (us_id, lo_login, lo_pass,
+		insert into sr_login (us_id,
+		lo_login, lo_pass,
 		lo_type)
-		values (#{usId,jdbcType=INTEGER}, #{loLogin,jdbcType=VARCHAR},
+		values (#{usId,jdbcType=INTEGER},
+		#{loLogin,jdbcType=VARCHAR},
 		#{loPass,jdbcType=VARCHAR},
 		#{loType,jdbcType=VARCHAR})
 	</insert>
-	
+
 	<insert id="insertSelective" parameterType="com.sust.entity.Login">
 		insert into sr_login
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -123,8 +170,9 @@
 		</trim>
 	</insert>
 
-    <update id="updatePassword" >
-		update sr_login set lo_pass = #{loPass,jdbcType=VARCHAR}
+	<update id="updatePassword">
+		update sr_login set lo_pass =
+		#{loPass,jdbcType=VARCHAR}
 		where us_id = #{usId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Login">
@@ -145,8 +193,10 @@
 	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Login">
 		update sr_login
 		set lo_login = #{loLogin,jdbcType=VARCHAR},
-		lo_pass = #{loPass,jdbcType=VARCHAR},
+		lo_pass =
+		#{loPass,jdbcType=VARCHAR},
 		lo_type = #{loType,jdbcType=VARCHAR}
-		where us_id = #{usId,jdbcType=INTEGER}
+		where
+		us_id = #{usId,jdbcType=INTEGER}
 	</update>
 </mapper>

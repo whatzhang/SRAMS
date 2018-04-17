@@ -30,12 +30,12 @@
 
 </head>
 
-<body style="height: 70em;">
+<body>
 
-	<div class="media" style="">
+	<div class="media">
 
 
-		<div class="bs-example5 widget-shadow">
+		<div class="bs-example5">
 			<form class="form-horizontal" name="find_user">
 				<div class="form-group mb-n">
 					<label for="largeinput" class=" control-label label-input-lg"

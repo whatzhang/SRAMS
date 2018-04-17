@@ -317,6 +317,15 @@
 								<li><a
 									href="${pageContext.request.contextPath}/login/Layout"><i
 										class="fa fa-sign-out"></i>退出登录</a></li>
+								<%
+									if ("admin".equals(login.getLoType())) {
+								%>
+								<li><a
+									href="${pageContext.request.contextPath}/admin/admin_index.jsp"><i
+										class="fa fa-sign-out"></i>管理员界面</a></li>
+								<%
+									}
+								%>
 							</ul></li>
 					</ul>
 				</div>
@@ -326,12 +335,12 @@
 		</div>
 
 		<!-- <div class="main-content"> -->
-			<div id="page-wrapper">
-				<iframe id="iFrame" name="iFrame" width="100%"
-					onload="this.height=iFrame.document.body.scrollHeight"
-					frameborder="0" scrolling="no"
-					src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
-			</div>
+		<div id="page-wrapper">
+			<iframe id="iFrame" name="iFrame" width="100%"
+				onload="this.height=iFrame.document.body.scrollHeight"
+				frameborder="0" scrolling="no"
+				src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
+		</div>
 		<!-- </div> -->
 
 		<!-- Classie -->

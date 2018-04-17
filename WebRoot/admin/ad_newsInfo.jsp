@@ -30,11 +30,11 @@
 
 </head>
 
-<body style="height: auto;">
+<body>
 
-	<div class="panel-info widget-shadow">
+	<div class="panel-info" style="margin:  2em 3em 1em 1em; ">
 		<button type="button" class="btn btn-info"
-			style=" width: 100%;margin: 0em 1em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;">接收/刷新信息</button>
+			style=" width: 100%;margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;">接收/刷新信息</button>
 	</div>
 
 	<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">

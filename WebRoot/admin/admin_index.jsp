@@ -1,9 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.sust.entity.*"
+	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	Login login = (Login) session.getAttribute("login");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -18,15 +19,6 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 
-<script type="application/x-javascript">
-	addEventListener("load", function() {
-		setTimeout(hideURLbar, 0);
-	}, false);
-	function hideURLbar() {
-		window.scrollTo(0, 0);
-	}
-
-</script>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
@@ -57,9 +49,45 @@
 
 <script src="js/myjs.js"></script>
 
-
+<script type="application/x-javascript">
+	addEventListener("load", function() {
+		setTimeout(hideURLbar, 0);
+	}, false);
+	function hideURLbar() {
+		window.scrollTo(0, 0);
+	}
+</script>
+<!-- <script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({
+			type : "POST",
+			url : "${pageContext.request.contextPath}/login/toAdmin",
+			data : {
+			},
+			dataType : 'json',
+			cache : false,
+			async : true,
+			success : function(data) {
+				alert(data.string1);
+				$("th").value(data.string1);
+				$("pa").text(data.string2);
+				$("pr").html(data.string3);
+				$("pro").text(data.string4);
+				$("bo").text(data.string5);
+				$("ra").text(data.string6);
+				$("me").text(data.string7);
+				$("us").text(data.string8);
+				$("al").text(data.string9);
+			},
+			error : function(data) {
+				alert("getAdminData error!");
+			}
+		});
+	});
+</script> -->
+</script>
 </head>
-<body class="cbp-spmenu-push" onload="scroll(0, 0)">
+<body class="cbp-spmenu-push">
 
 	<div class="main-content">
 		<!--left-fixed -navigation-->
@@ -68,67 +96,31 @@
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_thesis.jsp#th_show" target="iFrame">论文信息列表<span
-									class="nav-badge-btm">08</span></a></li>
-							<li><a href="admin/ad_thesis.jsp" onclick="aa();"
-								target="iFrame">论文信息查询</a></li>
-							<li><a href="admin/ad_thesis.jsp#th_add" target="iFrame">论文添加修改</a></li>
-						</ul></li>
+					<li><a href="admin/ad_thesis.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge"
+							id="th">${da.string1}</span> <span class="fa arrow"></span></a></li>
 
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>专利信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_patent.jsp#pa_show" target="iFrame">专利信息列表<span
-									class="nav-badge-btm">08</span></a></li>
-							<li><a href="admin/ad_patent.jsp" onclick="aa();"
-								target="iFrame">专利信息查询</a></li>
-							<li><a href="admin/ad_patent.jsp#pa_add" target="iFrame">专利添加修改</a></li>
-						</ul></li>
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>获奖信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_praise.jsp#pr_show" target="iFrame">获奖信息列表<span
-									class="nav-badge-btm">08</span></a></li>
-							<li><a href="admin/ad_praise.jsp" onclick="aa();"
-								target="iFrame">获奖信息查询</a></li>
-							<li><a href="admin/ad_praise.jsp#pr_add" target="iFrame">获奖添加修改</a></li>
-						</ul></li>
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>项目信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_project.jsp#pro_show" target="iFrame">项目信息列表<span
-									class="nav-badge-btm">08</span></a></li>
-							<li><a href="admin/ad_project.jsp" onclick="aa();"
-								target="iFrame">项目信息查询</a></li>
-							<li><a href="admin/ad_project.jsp#pro_add" target="iFrame">项目添加修改</a></li>
-						</ul></li>
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>教材信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_book.jsp#bo_show" target="iFrame">教材信息列表<span
-									class="nav-badge-btm">05</span></a></li>
-							<li><a href="admin/ad_book.jsp" onclick="aa();"
-								target="iFrame">教材信息查询</a></li>
-							<li><a href="admin/ad_book.jsp#bo_add" target="iFrame">教材添加修改</a></li>
-						</ul></li>
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>竞赛信息<span class="nav-badge">3</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/ad_race.jsp#ra_show" target="iFrame">竞赛信息列表<span
-									class="nav-badge-btm">05</span></a></li>
-							<li><a href="admin/ad_race.jsp" onclick="aa();"
-								target="iFrame">竞赛信息查询</a></li>
-							<li><a href="admin/ad_race.jsp#ra_add" target="iFrame">竞赛添加修改</a></li>
-						</ul></li>
+					<li><a href="admin/ad_patent.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>专利信息<span class="nav-badge"
+							id="pa">${da.string2}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_praise.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>获奖信息<span class="nav-badge"
+							id="pr">${da.string3}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_project.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>项目信息<span class="nav-badge"
+							id="pro">${da.string4}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_book.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>教材信息<span class="nav-badge"
+							id="bo">${da.string5}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_race.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>竞赛信息<span class="nav-badge"
+							id="ra">${da.string6}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/st_gui.jsp" onclick="aa();" target="iFrame"
 						class="chart-nav"><i class="fa fa-book nav_icon"></i>信息归纳<span
 							class="nav-badge">1</span> <span class="fa arrow"></span></a></li>
@@ -146,16 +138,16 @@
 						</ul></li>
 					<li><a href="admin/ad_newsInfo.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>信息公告<span class="nav-badge">1</span>
-							<span class="fa arrow"></span></a></li>
+							class="fa fa-book nav_icon"></i>信息公告<span class="nav-badge"
+							id="me">${da.string7}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_userInfo.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge">1</span>
-							<span class="fa arrow"></span></a></li>
+							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
+							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_data.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>数据处理<span class="nav-badge">1</span>
-							<span class="fa arrow"></span></a></li>
+							class="fa fa-book nav_icon"></i>数据备份<span class="nav-badge"
+							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_other.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>其他<span
@@ -374,8 +366,8 @@
 									<span class="prfil-img"><img src="img/a.png" alt="">
 									</span>
 									<div class="user-name">
-										<p>MUREN</p>
-										<span>Administrator</span>
+										<p><%=login.getLoLogin()%></p>
+										<span><%=login.getLoType()%></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i> <i
 										class="fa fa-angle-up lnr"></i>
@@ -383,11 +375,18 @@
 								</div>
 						</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li><a href="#" data-toggle="modal" data-target="#myModal"><i
-										class="fa fa-user"></i>用户信息</a></li>
-								<li><a href="users/upPass.jsp" onclick="aa();"
+								<li><a
+									href="${pageContext.request.contextPath}/users/UserInfo?type=info"
+									target="iFrame"><i class="fa fa-user"></i>用户信息</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
-								<li><a href="login.jsp"><i class="fa fa-sign-out"></i>退出登录</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/login/Layout"><i
+										class="fa fa-sign-out"></i>退出登录</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/login/toUser"><i
+										class="fa fa-sign-out"></i>用户界面</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -396,19 +395,10 @@
 			<div class="clearfix"></div>
 		</div>
 
-
-
-
-
 		<div id="page-wrapper">
 			<iframe id="iFrame" name="iFrame" width="100%" frameborder="0"
 				scrolling="no" src="admin/ad_thesis.jsp"></iframe>
 		</div>
-
-
-
-
-
 
 		<div class="footer">
 			<p style="position: absolute; right: 25em;">
@@ -416,8 +406,6 @@
 					href="#" target="_blank">wahtzhangy</a>
 			</p>
 		</div>
-
-
 
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -514,32 +502,57 @@
 
 	<!-- Classie -->
 	<script src="js/classie.js"></script>
+	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
 		var mainIframe = document.getElementById('iFrame'); //右下角的iframe的id改成你自己命名的
 		mainIframe.onload = function() {
 			this.height = iFrame.document.body.scrollHeight;
 			this.contentDocument.documentElement.scrollTop = 0;
 		}
-		var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
-				.getElementById('showLeftPush'), body = document.body;
-
+		var menuLeft = document.getElementById('cbp-spmenu-s1'),
+			showLeftPush = document
+				.getElementById('showLeftPush'),
+			body = document.body;
+	
 		showLeftPush.onclick = function() {
 			classie.toggle(this, 'active');
 			classie.toggle(body, 'cbp-spmenu-push-toright');
 			classie.toggle(menuLeft, 'cbp-spmenu-open');
 			disableOther('showLeftPush');
 		};
-
+	
 		function disableOther(button) {
 			if (button !== 'showLeftPush') {
 				classie.toggle(showLeftPush, 'disabled');
 			}
-		};
-		function aa() {
-			this.scroll(0, 0);
 		}
+		function getNumInfo() {
+		$.ajax({
+			type : "POST",
+			url : "${pageContext.request.contextPath}/login/toAdmin",
+			data : {
+			},
+			dataType : 'json',
+			cache : false,
+			async : true,
+			success : showData,
+			error : function(data) {
+				alert("getAdminData error!");
+			}
+		});
+	}
+	function showData(data) {
+		alert(data.string1);
+		$("th").value(data.string1);
+		$("pa").text(data.string2);
+		$("pr").html(data.string3);
+		$("pro").text(data.string4);
+		$("bo").text(data.string5);
+		$("ra").text(data.string6);
+		$("me").text(data.string7);
+		$("us").text(data.string8);
+		$("al").text(data.string9);
+	} 
 	</script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.js"></script>
 </body>
 </html>

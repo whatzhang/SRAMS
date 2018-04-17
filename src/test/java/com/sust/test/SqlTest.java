@@ -84,7 +84,7 @@ public class SqlTest {
 
 	@Test
 	public void countInit() {
-		Map<String, String> map = loginService.getInitInfo("ADMIN1", "admin");
+		Map<String, String> map = loginService.getInitInfo("ADMIN1", "admin",0,true);
 		for (Iterator<String> i = map.keySet().iterator(); i.hasNext();) {
 			Object obj = i.next();
 			System.out.println(obj);// 循环输出key

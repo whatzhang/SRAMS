@@ -50,4 +50,20 @@ public interface LoginMapper {
 
 	int updatePassword(@Param("usId") Integer usId, @Param("loPass") String pass);
 
+	int selectAllThNum();
+
+	int selectAllPaNum();
+
+	int selectAllPrNum();
+
+	int selectAllBoNum();
+
+	int selectAllProNum();
+
+	int selectAllRaNum();
+
+	int selectAllMeNum();
+
+	int selectAllUser();
+
 }
