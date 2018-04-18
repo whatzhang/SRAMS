@@ -74,4 +74,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return this.projectMapper.selectProjectList(usId);
 	}
 
+	@Override
+	public List<Project> getAllProList() {
+		
+		return this.projectMapper.selectAllProjectList();
+	}
+
 }

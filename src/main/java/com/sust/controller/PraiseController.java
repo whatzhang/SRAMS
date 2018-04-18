@@ -91,4 +91,20 @@ public class PraiseController {
 						prUnit, praiseService.getUserNameById(usId), prAbout, new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
 	}
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllPraiseInfo")
+	public String getAllPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+		
+		logger.info("getAllPraiseInfo++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Praise> list = this.praiseService.getAllPraiseInfo();
+		PageInfo<Praise> page = new PageInfo<Praise>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("Pa", list);
+		return "admin/ad_praise";
+	}
 }

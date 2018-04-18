@@ -1,6 +1,7 @@
-<%@page import="javax.servlet.jsp.tagext.PageData"%>
 <%@ page language="java" import="java.util.*,com.sust.entity.*"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -199,7 +200,7 @@ li {
 				<div style="float: left;">
 					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
 					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-						onchange="rePages()" size="1">
+						onchange="relodePage()" size="1">
 						<option value="${page.pageSize}">${page.pageSize}</option>
 						<option value="10">10</option>
 						<option value="25">25</option>
@@ -209,13 +210,13 @@ li {
 				</div>
 				<div style="float:right;">
 					<a
-						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
 					<a
-						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
 					<a
-						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
 					<a
-						href="${pageContext.request.contextPath}/thesis/getUserThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
 				</div>
 				</p>
 			</div>
@@ -491,7 +492,7 @@ li {
 					async : true,
 					success : function(data){
 					     alert(data.string1);
-					     window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo";
+					     window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo";
 					},
 					error : function(data) {
 						alert("删除信息出错!");
@@ -668,9 +669,10 @@ li {
 		            }  
 		         });
 		    }
-		    function rePages(){
+		    function relodePage(){
 				   var page = $("#pageSize").val();
-				   window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo?pageSize="+page;
+				   window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo?pageSize="+page;
+				   window.parent.scrollTo(0, 0);
             }
 		</script>
 </body>

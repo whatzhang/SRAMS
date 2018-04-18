@@ -80,4 +80,10 @@ public class PraiseServiceImpl implements PraiseService {
 		return this.praiseMapper.updateByPrimaryKey(praise);
 	}
 
+	@Override
+	public List<Praise> getAllPraiseInfo() {
+		
+		return this.praiseMapper.selectAllPraiseInfo();
+	}
+
 }

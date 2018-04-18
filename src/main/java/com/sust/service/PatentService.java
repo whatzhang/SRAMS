@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.sust.entity.Patent;
+import com.sust.entity.Thesis;
 
 public interface PatentService {
 
@@ -19,5 +20,7 @@ public interface PatentService {
 	String getUserNameById(Integer usId);
 
 	int upPaInfo(Patent patent);
+
+	List<Thesis> getAllPaInfo();
 
 }

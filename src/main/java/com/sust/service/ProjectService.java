@@ -18,4 +18,6 @@ public interface ProjectService {
 
 	List<Project> getUserProList(Integer usId);
 
+	List<Project> getAllProList();
+
 }

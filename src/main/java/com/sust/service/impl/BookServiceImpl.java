@@ -79,4 +79,10 @@ public class BookServiceImpl implements com.sust.service.BookService {
 		return this.bookMapper.updateByPrimaryKey(book);
 	}
 
+	@Override
+	public List<Book> getAllBoList() {
+		
+		return this.bookMapper.selectAllBoList();
+	}
+
 }

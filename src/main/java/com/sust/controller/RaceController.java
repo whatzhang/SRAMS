@@ -96,4 +96,20 @@ public class RaceController {
 						new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
 	}
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllRaceInfo")
+	private String getAllRaceInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllRaceInfo++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Race> list = raceservice.getAllRaceInfo();
+		PageInfo<Race> page = new PageInfo<Race>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("RaceList", list);
+		return "admin/ad_race";
+	}
 }

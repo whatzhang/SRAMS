@@ -20,4 +20,6 @@ public interface PraiseService {
 
 	int upPrInfo(Praise praise);
 
+	List<Praise> getAllPraiseInfo();
+
 }

@@ -5,9 +5,6 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
-	if (login == null) {
-		response.sendRedirect(basePath + "index.jsp");
-	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -41,8 +38,7 @@
 </head>
 <body class="cbp-spmenu-push">
 
-	<div class="main-content">
-		<!--left-fixed -navigation-->
+	<div class="main-content" style="overflow-y: hidden;">
 		<div class=" sidebar" role="navigation">
 			<div class="navbar-collapse">
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
@@ -88,26 +84,19 @@
 						class="chart-nav"><i class="fa fa-book nav_icon"></i>其他<span
 							class="nav-badge-btm pull-right">other</span></a></li>
 				</ul>
-				<!-- //sidebar-collapse --> </nav>
+				</nav>
 			</div>
 		</div>
-		<!--left-fixed -navigation-->
-		<!-- header-starts -->
 		<div class="sticky-header header-section ">
 			<div class="header-left">
-				<!--toggle button start-->
 				<button id="showLeftPush">
 					<i class="fa fa-bars"></i>
 				</button>
-				<!--toggle button end-->
-				<!--logo -->
 				<div class="logo">
-					<a href="users/user_index.jsp">
+					<a href="${pageContext.request.contextPath}/login/toUser">
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
-				<!--//logo-->
-				<!--search-box-->
 				<div class="search-box">
 					<form class="input">
 						<input class="sb-search-input input__field--madoka"
@@ -119,12 +108,10 @@
 						</label>
 					</form>
 				</div>
-				<!--//end-search-box-->
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
 				<div class="profile_details_left">
-					<!--notifications of menu start -->
 					<ul class="nofitications-dropdown">
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
@@ -289,7 +276,6 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<!--notification menu end -->
 				<div class="profile_details">
 					<ul>
 						<li class="dropdown profile_details_drop"><a href="#"
@@ -314,18 +300,18 @@
 								<li><a
 									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
-								<li><a
-									href="${pageContext.request.contextPath}/login/Layout"><i
-										class="fa fa-sign-out"></i>退出登录</a></li>
 								<%
 									if ("admin".equals(login.getLoType())) {
 								%>
 								<li><a
-									href="${pageContext.request.contextPath}/admin/admin_index.jsp"><i
+									href="${pageContext.request.contextPath}/login/toAdmin"><i
 										class="fa fa-sign-out"></i>管理员界面</a></li>
 								<%
 									}
 								%>
+								<li><a
+									href="${pageContext.request.contextPath}/login/Layout"><i
+										class="fa fa-sign-out"></i>退出登录</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -334,16 +320,13 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<!-- <div class="main-content"> -->
 		<div id="page-wrapper">
 			<iframe id="iFrame" name="iFrame" width="100%"
 				onload="this.height=iFrame.document.body.scrollHeight"
 				frameborder="0" scrolling="no"
 				src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
 		</div>
-		<!-- </div> -->
 
-		<!-- Classie -->
 		<div class="footer">
 			<p>
 				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a

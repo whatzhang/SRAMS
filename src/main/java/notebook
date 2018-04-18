@@ -1,3 +1,34 @@
+<error-page>
+		<!-- 将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径. -->
+		<error-code>404</error-code>
+		<!-- HTTP Error code,例如: 404、403 -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<exception-type>NullPointerException</exception-type>
+		<exception-type>java.text.ParseException</exception-type>
+		<exception-type>FileNotFoundException</exception-type>
+		<!-- 设置可能会发生的java异常类型,例如:java.lang.Exception -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ajax请求其实就是三种HTTP错误
 404 路径不正确,或者网络问题
 500 服务器内部错误,一般为程序代码错误

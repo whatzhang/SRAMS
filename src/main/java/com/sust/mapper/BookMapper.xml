@@ -21,6 +21,12 @@
 		bo_about, bo_uptime
 	</sql>
 
+ 	<select id="selectAllBoList"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_book
+	</select>
      <select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select bo_name from sr_book where bo_id =

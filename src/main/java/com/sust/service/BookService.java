@@ -20,4 +20,6 @@ public interface BookService {
 
 	int upBoInfo(Book book);
 
+	List<Book> getAllBoList();
+
 }

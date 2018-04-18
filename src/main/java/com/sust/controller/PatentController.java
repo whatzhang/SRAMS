@@ -22,6 +22,7 @@ import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Patent;
+import com.sust.entity.Thesis;
 import com.sust.service.PatentService;
 
 @Controller
@@ -93,5 +94,22 @@ public class PatentController {
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber, paAbout,
 				new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
+	}
+	
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping(value = "/getAllPaInfo")
+	private String getAllPaInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+		
+		logger.info("getAllPaInfo++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Thesis> thList = this.patentService.getAllPaInfo();
+		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("PatentList", thList);
+		return "admin/ad_patent";
 	}
 }

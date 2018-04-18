@@ -31,4 +31,6 @@ public interface ThesisMapper {
 	Date selectUpTimeByKey(Integer thId);
 
 	String selectNameByid(Integer id);
+
+	List<Thesis> selectAllThesis();
 }

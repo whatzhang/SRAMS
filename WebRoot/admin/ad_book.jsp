@@ -207,13 +207,13 @@ li {
 				</div>
 				<div style="float:right;">
 					<a
-						href="${pageContext.request.contextPath}/book/getUserBoList?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						href="${pageContext.request.contextPath}/book/getAllBoList?page=${page.firstPage}&pageSize=${ps}">第一页</a>
 					<a
-						href="${pageContext.request.contextPath}/book/getUserBoList?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						href="${pageContext.request.contextPath}/book/getAllBoList?page=${page.nextPage}&pageSize=${ps}">下一页</a>
 					<a
-						href="${pageContext.request.contextPath}/book/getUserBoList?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						href="${pageContext.request.contextPath}/book/getAllBoList?page=${page.prePage}&pageSize=${ps}">上一页</a>
 					<a
-						href="${pageContext.request.contextPath}/book/getUserBoList?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+						href="${pageContext.request.contextPath}/book/getAllBoList?page=${page.lastPage}&pageSize=${ps}">最后页</a>
 				</div>
 				</p>
 			</div>
@@ -458,7 +458,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/book/getUserBoList";
+				window.location.href = "${pageContext.request.contextPath}/book/getAllBoList";
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -503,7 +503,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/book/getUserBoList";
+			    window.location.href = "${pageContext.request.contextPath}/book/getAllBoList";
 			}, 
 			error : function(data) {
 				alert("update error!");
@@ -530,7 +530,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("添加信息成功，请上传文件！");
-			    window.location.href = "${pageContext.request.contextPath}/book/getUserBoList";
+			    window.location.href = "${pageContext.request.contextPath}/book/getAllBoList";
 			}, 
 			error : function(data) {
 				alert("add error!");
@@ -572,7 +572,7 @@ li {
             },
             success: function(data) {
 	            alert(data.string1);
-	            window.location.href = "${pageContext.request.contextPath}/book/getUserBoList";
+	            window.location.href = "${pageContext.request.contextPath}/book/getAllBoList";
             },
             error: function (data){
                 alert("出错");
@@ -581,7 +581,8 @@ li {
     }
     function rePages(){
    var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/book/getUserBoList?pageSize="+page;
+   window.location.href = "${pageContext.request.contextPath}/book/getAllBoList?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

@@ -200,13 +200,13 @@ li {
 				</div>
 				<div style="float:right;">
 					<a
-						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
 					<a
-						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
 					<a
-						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
 					<a
-						href="${pageContext.request.contextPath}/race/getUserRaceInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
 				</div>
 				</p>
 			</div>
@@ -442,7 +442,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
+				window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo";
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -486,7 +486,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
+			    window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo";
 			}, 
 			error : function(data) {
 				alert("updateRace error!");
@@ -512,7 +512,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("添加成功！");
-			    window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo";
+			    window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo";
 			}, 
 			error : function(data) {
 				alert("updateRace error!");
@@ -562,7 +562,8 @@ li {
     }
      function rePages(){
    var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo?pageSize="+page;
+   window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </body>

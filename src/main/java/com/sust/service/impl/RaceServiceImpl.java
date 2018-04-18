@@ -80,4 +80,10 @@ public class RaceServiceImpl implements RaceService {
 		return this.raceMapper.updateByPrimaryKey(race);
 	}
 
+	@Override
+	public List<Race> getAllRaceInfo() {
+		
+		return this.raceMapper.selectAllRaceInfo();
+	}
+
 }

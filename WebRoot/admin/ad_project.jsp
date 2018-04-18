@@ -201,13 +201,13 @@ li {
 				</div>
 				<div style="float:right;">
 					<a
-						href="${pageContext.request.contextPath}/project/getUserProList?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						href="${pageContext.request.contextPath}/project/getAllProList?page=${page.firstPage}&pageSize=${ps}">第一页</a>
 					<a
-						href="${pageContext.request.contextPath}/project/getUserProList?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						href="${pageContext.request.contextPath}/project/getAllProList?page=${page.nextPage}&pageSize=${ps}">下一页</a>
 					<a
-						href="${pageContext.request.contextPath}/project/getUserProList?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						href="${pageContext.request.contextPath}/project/getAllProList?page=${page.prePage}&pageSize=${ps}">上一页</a>
 					<a
-						href="${pageContext.request.contextPath}/project/getUserProList?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+						href="${pageContext.request.contextPath}/project/getAllProList?page=${page.lastPage}&pageSize=${ps}">最后页</a>
 				</div>
 				</p>
 			</div>
@@ -435,7 +435,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/project/getUserProList";
+				window.location.href = "${pageContext.request.contextPath}/project/getAllProList";
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -479,7 +479,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/project/getUserProList";
+			    window.location.href = "${pageContext.request.contextPath}/project/getAllProList";
 			}, 
 			error : function(data) {
 				alert("update error!");
@@ -505,7 +505,7 @@ li {
 			async : false,
 			success : function(data) {
 				alert("添加成功！");
-			    window.location.href = "${pageContext.request.contextPath}/project/getUserProList";
+			    window.location.href = "${pageContext.request.contextPath}/project/getAllProList";
 			}, 
 			error : function(data) {
 				alert("add error!");
@@ -555,7 +555,8 @@ li {
     }
     function rePages(){
    var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/project/getUserProList?pageSize="+page;
+   window.location.href = "${pageContext.request.contextPath}/project/getAllProList?pageSize="+page;
+    window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

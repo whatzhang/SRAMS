@@ -95,4 +95,21 @@ public class BookController {
 						boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
 	}
+	
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllBoList")
+	private String getAllBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllBoList++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Book> list = bookService.getAllBoList();
+		PageInfo<Book> page = new PageInfo<Book>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("BookList", list);
+		return "admin/ad_book";
+	}
 }

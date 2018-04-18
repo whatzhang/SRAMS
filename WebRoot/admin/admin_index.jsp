@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*,com.sust.entity.*"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -48,77 +50,44 @@
 <link href="css/custom.css" rel="stylesheet">
 
 <script src="js/myjs.js"></script>
-
-<script type="application/x-javascript">
-	addEventListener("load", function() {
-		setTimeout(hideURLbar, 0);
-	}, false);
-	function hideURLbar() {
-		window.scrollTo(0, 0);
-	}
-</script>
-<!-- <script type="text/javascript">
-	$(document).ready(function() {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/login/toAdmin",
-			data : {
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				alert(data.string1);
-				$("th").value(data.string1);
-				$("pa").text(data.string2);
-				$("pr").html(data.string3);
-				$("pro").text(data.string4);
-				$("bo").text(data.string5);
-				$("ra").text(data.string6);
-				$("me").text(data.string7);
-				$("us").text(data.string8);
-				$("al").text(data.string9);
-			},
-			error : function(data) {
-				alert("getAdminData error!");
-			}
-		});
-	});
-</script> -->
-</script>
 </head>
 <body class="cbp-spmenu-push">
 
-	<div class="main-content">
-		<!--left-fixed -navigation-->
+	<div class="main-content" style="overflow-y: hidden;">
 		<div class=" sidebar" role="navigation">
 			<div class="navbar-collapse">
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
-					<li><a href="admin/ad_thesis.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
+						" onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge"
 							id="th">${da.string1}</span> <span class="fa arrow"></span></a></li>
 
-					<li><a href="admin/ad_patent.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/patent/getAllPaInfo"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>专利信息<span class="nav-badge"
 							id="pa">${da.string2}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_praise.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/praise/getAllPraiseInfo"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>获奖信息<span class="nav-badge"
 							id="pr">${da.string3}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_project.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/project/getAllProList"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>项目信息<span class="nav-badge"
 							id="pro">${da.string4}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_book.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/book/getAllBoList"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>教材信息<span class="nav-badge"
 							id="bo">${da.string5}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_race.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/race/getAllRaceInfo"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>竞赛信息<span class="nav-badge"
 							id="ra">${da.string6}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/st_gui.jsp" onclick="aa();" target="iFrame"
@@ -158,8 +127,6 @@
 			</div>
 		</div>
 
-
-		<!-- header-starts -->
 		<div class="sticky-header header-section ">
 			<div class="header-left">
 				<!--toggle button start-->
@@ -169,7 +136,7 @@
 				<!--toggle button end-->
 				<!--logo -->
 				<div class="logo">
-					<a href="admin/admin_index.jsp">
+					<a href="${pageContext.request.contextPath}/login/toAdmin">
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
@@ -382,11 +349,11 @@
 									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
 								<li><a
-									href="${pageContext.request.contextPath}/login/Layout"><i
-										class="fa fa-sign-out"></i>退出登录</a></li>
-								<li><a
 									href="${pageContext.request.contextPath}/login/toUser"><i
 										class="fa fa-sign-out"></i>用户界面</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/login/Layout"><i
+										class="fa fa-sign-out"></i>退出登录</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -396,119 +363,24 @@
 		</div>
 
 		<div id="page-wrapper">
-			<iframe id="iFrame" name="iFrame" width="100%" frameborder="0"
-				scrolling="no" src="admin/ad_thesis.jsp"></iframe>
+			<iframe id="iFrame" name="iFrame" width="100%"
+				onload="this.height=iFrame.document.body.scrollHeight"
+				frameborder="0" scrolling="no"
+				src="${pageContext.request.contextPath}/thesis/getAllThInfo"></iframe>
 		</div>
 
 		<div class="footer">
-			<p style="position: absolute; right: 25em;">
+			<p>
 				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a
-					href="#" target="_blank">wahtzhangy</a>
+					href="#" target="_blank">whatzhangy</a>
 			</p>
 		</div>
 
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" style="width: 25em;">
-				<div class="modal-content" style="padding: 0em 0em 0em 2em;">
-					<br> <br>
-					<table class="table" style="text-align: left;">
-						<tbody>
-							<tr>
-								<td><label for="largeinput"
-									class="control-label label-input-lg">用户名</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">用户名</td>
-
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class="control-label label-input-lg">姓名</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">姓名</td>
-
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">用户年龄</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">用户年龄</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">用户性别</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">用户性别</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">用户身份</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">用户身份</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">学号/工号</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">学号/工号</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">联系地址</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">联系地址</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">联系电话</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">联系电话</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">E-mail</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">E-mail</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">所属学院</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">所属学院</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">密保问题一</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">密保问题一</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">预留答案一</label></td>
-								<td style="text-align: left; font-size: 0.8em;">预留答案一</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">密保问题二</label></td>
-								<td style="text-align: left; font-size: 0.8em;"">密保问题二</td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">预留答案二</label></td>
-								<td style="text-align: left; font-size: 0.8em;">预留答案二</td>
-							</tr>
-
-						</tbody>
-					</table>
-
-					<div class="modal-footer" style="text-align: center;">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
-
-	<!-- Classie -->
 	<script src="js/classie.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
-		var mainIframe = document.getElementById('iFrame'); //右下角的iframe的id改成你自己命名的
-		mainIframe.onload = function() {
-			this.height = iFrame.document.body.scrollHeight;
-			this.contentDocument.documentElement.scrollTop = 0;
-		}
 		var menuLeft = document.getElementById('cbp-spmenu-s1'),
 			showLeftPush = document
 				.getElementById('showLeftPush'),
@@ -526,33 +398,37 @@
 				classie.toggle(showLeftPush, 'disabled');
 			}
 		}
+		function aa() {
+			window.parent.scrollTo(0, 0);
+			return true;
+		}
 		function getNumInfo() {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/login/toAdmin",
-			data : {
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : showData,
-			error : function(data) {
-				alert("getAdminData error!");
-			}
-		});
-	}
-	function showData(data) {
-		alert(data.string1);
-		$("th").value(data.string1);
-		$("pa").text(data.string2);
-		$("pr").html(data.string3);
-		$("pro").text(data.string4);
-		$("bo").text(data.string5);
-		$("ra").text(data.string6);
-		$("me").text(data.string7);
-		$("us").text(data.string8);
-		$("al").text(data.string9);
-	} 
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/login/toAdmin",
+				data : {
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : showData,
+				error : function(data) {
+					alert("getAdminData error!");
+				}
+			});
+		}
+		function showData(data) {
+			alert(data.string1);
+			$("th").value(data.string1);
+			$("pa").text(data.string2);
+			$("pr").html(data.string3);
+			$("pro").text(data.string4);
+			$("bo").text(data.string5);
+			$("ra").text(data.string6);
+			$("me").text(data.string7);
+			$("us").text(data.string8);
+			$("al").text(data.string9);
+		}
 	</script>
 </body>
 </html>

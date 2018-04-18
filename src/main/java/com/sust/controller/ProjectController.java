@@ -93,4 +93,20 @@ public class ProjectController {
 				new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
 	}
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllProList")
+	private String getAllProList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllProList++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Project> list = projectService.getAllProList();
+		PageInfo<Project> page = new PageInfo<Project>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("ProjectList", list);
+		return "admin/ad_project";
+	}
 }

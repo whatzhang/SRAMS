@@ -76,13 +76,13 @@ public class LoginController {
 		return "users/user_index";
 	}
 
-	@RequestMapping(value = "/toAdmin", method = RequestMethod.POST)
-	@ResponseBody
-	private AllInfo toAdmin(HttpSession session, Model model) {
+	@RequestMapping("/toAdmin")
+	private String toAdmin(HttpSession session, Model model) {
 
 		Map<String, String> ifn = this.loginService.getAdminInitInfo();
-		return new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"), ifn.get("boNum"),
-				ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"), ifn.get("allData"));
+		model.addAttribute("da", new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
+				ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"), ifn.get("allData")));
+		return "admin/admin_index";
 	}
 
 	@RequestMapping("/register")

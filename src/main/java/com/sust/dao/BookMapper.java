@@ -32,4 +32,6 @@ public interface BookMapper {
 
 	String selectNameById(Integer boId);
 
+	List<Book> selectAllBoList();
+
 }

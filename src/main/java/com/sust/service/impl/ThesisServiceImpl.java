@@ -81,4 +81,10 @@ public class ThesisServiceImpl implements ThesisService {
 
 		return this.thesisMapper.updateByPrimaryKey(thesis);
 	}
+
+	@Override
+	public List<Thesis> getAllThInfo() {
+		
+		return this.thesisMapper.selectAllThesis();
+	}
 }
