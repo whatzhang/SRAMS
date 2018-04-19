@@ -105,7 +105,7 @@
 							<li><a href="admin/st_info.jsp#book" target="iFrame">教材信息统计</a></li>
 							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li>
 						</ul></li>
-					<li><a href="admin/ad_newsInfo.jsp" onclick="aa();"
+					<li><a href="${pageContext.request.contextPath}/news/getAdminNews" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>信息公告<span class="nav-badge"
 							id="me">${da.string7}</span> <span class="fa arrow"></span></a></li>
@@ -153,12 +153,10 @@
 						</label>
 					</form>
 				</div>
-				<!--//end-search-box-->
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
 				<div class="profile_details_left">
-					<!--notifications of menu start -->
 					<ul class="nofitications-dropdown">
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"

@@ -19,7 +19,7 @@ public class SessionFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		// 不过滤的uri
-		String[] notFilter = new String[] { "/login","/users/register.jsp","login.jsp","/index.jsp","error.jsp","/css","/js","/img","/fonts"};
+		String[] notFilter = new String[] { "/login","/users/register.jsp","/login.jsp","/index.jsp","/error.jsp","/css","/js","/img","/fonts"};
 
 		// 请求的uri
 		String uri = request.getRequestURI();
@@ -42,10 +42,11 @@ public class SessionFilter extends OncePerRequestFilter {
 				if (isAjaxRequest) {
 					response.setCharacterEncoding("UTF-8");
 					response.sendError(HttpStatus.UNAUTHORIZED.value(), "您已经太长时间没有操作,请重新登录");
-					response.sendRedirect("/index.jsp");
+					System.out.println(request.getContextPath());
+					response.sendRedirect(request.getContextPath()+"/index.jsp");
 					return;
 				}
-				response.sendRedirect("/index.jsp");
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			} else {
 				// 如果session中存在登录者实体，则继续

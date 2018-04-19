@@ -517,6 +517,7 @@ li {
     function rePages(){
    var page = $("#pageSize").val();
    window.location.href = "${pageContext.request.contextPath}/praise/getUserPraiseInfo?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

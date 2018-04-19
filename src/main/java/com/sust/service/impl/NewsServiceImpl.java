@@ -52,4 +52,34 @@ public class NewsServiceImpl implements NewsService {
 		return String.valueOf(this.messageMapper.deleteReadNews(usId));
 	}
 
+	@Override
+	public List<Message> getAllMessages() {
+		
+		return this.messageMapper.selectAllMessages();
+	}
+
+	@Override
+	public List<Message> getNowMessages() {
+		
+		return this.messageMapper.selectNowMessages();
+	}
+
+	@Override
+	public String getNoReadNum(Integer meId) {
+		
+		return String.valueOf(this.messageMapper.selectNoReadNum(meId));
+	}
+
+	@Override
+	public String getReadedNum(Integer meId) {
+		
+		return String.valueOf(this.messageMapper.selectReadedNum(meId));
+	}
+
+	@Override
+	public String getDelNum(Integer meId) {
+		
+		return String.valueOf(this.messageMapper.selectDelNum(meId));
+	}
+
 }

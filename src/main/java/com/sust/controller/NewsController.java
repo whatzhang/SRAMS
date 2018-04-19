@@ -1,5 +1,7 @@
 package com.sust.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Message;
@@ -91,4 +95,29 @@ public class NewsController {
 		logger.info("deleteReadNews++" + usId);
 		return new AllInfo(this.newsservice.deleteReadNews(usId));
 	}
+	/**
+	 * admin消息处理 
+	 */
+	@RequestMapping("/getAdminNews")
+	private String getAdminNews(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+		logger.info("getAdminNews++"+pageSize+"++"+pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Message> list = this.newsservice.getAllMessages();
+		PageInfo<Message> page = new PageInfo<Message>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("MeList", list);
+		model.addAttribute("nowNews", this.newsservice.getNowMessages());
+		return "admin/ad_newsInfo";
+	}
+	
+	@RequestMapping(value = "/getReadNum", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo getReadNum(@RequestParam("meId") int meId) {
+
+		logger.info("getReadNum++" + meId);
+		return new AllInfo(this.newsservice.getNoReadNum(meId),this.newsservice.getReadedNum(meId),this.newsservice.getDelNum(meId));
+	}
+	
 }

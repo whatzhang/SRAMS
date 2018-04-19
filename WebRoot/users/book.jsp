@@ -582,6 +582,7 @@ li {
     function rePages(){
    var page = $("#pageSize").val();
    window.location.href = "${pageContext.request.contextPath}/book/getUserBoList?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

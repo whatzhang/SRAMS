@@ -563,6 +563,7 @@ li {
      function rePages(){
    var page = $("#pageSize").val();
    window.location.href = "${pageContext.request.contextPath}/race/getUserRaceInfo?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </body>
