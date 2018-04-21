@@ -38,7 +38,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sr_message
-		order by me_date desc limit 15
+		order by me_date desc limit 30
 	</select>
 	<select id="selectAllMessages" resultMap="BaseResultMap">
 		select

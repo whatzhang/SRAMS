@@ -1,5 +1,7 @@
 package com.sust.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -80,6 +82,27 @@ public class NewsServiceImpl implements NewsService {
 	public String getDelNum(Integer meId) {
 		
 		return String.valueOf(this.messageMapper.selectDelNum(meId));
+	}
+
+	@Override
+	public String updataMessage(Integer meId, String meTitle, String meSend, String meReceive, String meDate,
+			String meAbout) {
+		try {
+			this.messageMapper.updateByPrimaryKey(new Message(meId, meTitle, Integer.valueOf(meSend), meReceive, (Date)(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(meDate)), meAbout));
+		} catch (Exception e) {
+			return "更新信息失败！";
+		}
+		return "更新信息成功！";
+	}
+
+	@Override
+	public String deleteMessage(Integer meId) {
+		try {
+			this.messageMapper.deleteByPrimaryKey(meId);
+		} catch (Exception e) {
+			return "更新信息失败！";
+		}
+		return "更新信息成功！";
 	}
 
 }

@@ -28,4 +28,9 @@ public interface NewsService {
 
 	public String getDelNum(Integer meId);
 
+	public String updataMessage(Integer meId, String meTitle, String meSend, String meReceive, String meDate,
+			String meAbout);
+
+	public String deleteMessage(Integer meId);
+
 }

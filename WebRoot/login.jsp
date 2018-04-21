@@ -68,7 +68,7 @@
 						<p style="font-size: 1.7em; text-align: center;">欢迎登录科研成果归档系统
 						</p>
 					</div>
-					<div class="login-body">
+					<div class="login-body" style="margin-bottom: 1em;">
 						<form action="${pageContext.request.contextPath}/login/index"
 							name="login" method="post">
 							<div class="form-group mb-n" style="margin-top: 0.5em;">
@@ -90,21 +90,15 @@
 									<input name="radio" type="radio" value="super"><span>超级管理员</span>
 								</label>
 							</div>
-							<div class="form-group mb-n" style="margin-top: 2.2em;">
-								<input class="form-control btn btn-danger" type="submit"
-									value="登录系统" /> <br> <input
-									class="form-control btn btn-success" type="button"
-									onclick="javascrtpt:window.location.href='users/user_index.jsp'"
-									value="user" /> <br> <input
-									class="form-control btn btn-info" type="button"
-									onclick="javascrtpt:window.location.href='admin/admin_index.jsp'"
-									value="admin" />
+							<div class="form-group mb-n" style="margin-top: 2em;margin-bottom: 1em;">
+								<input class="form-control btn btn-danger" type="submit" style="height: 2。5em;"
+									value="登录系统" /> 
 							</div>
 						</form>
 
 						<form action="${pageContext.request.contextPath}/login/findPass"
 							name="findPass" id="findPass" method="post">
-							<div class="form-group mb-n " style="margin-bottom: 2em;">
+							<div class="form-group mb-n ">
 								<input type="hidden" name="acc" id="acc"> <a
 									href="javascript:document.findPass.submit();"
 									onclick="return checkAccount()" id="aa"> <span
@@ -131,7 +125,7 @@
 	<%
 		}
 	%>
-	<div id="world"></div>
+	<div id="world"></div> 
 	<script src="js/three.min.js"></script>
 	<script>
 		var Colors = {
