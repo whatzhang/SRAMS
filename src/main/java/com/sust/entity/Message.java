@@ -15,10 +15,22 @@ public class Message {
 	private Date meDate;
 
 	private String meAbout;
+	public Message(){
+		
+	}
 	
 	public Message(Integer meId, String meTitle, Integer meSend, String meReceive, Date meDate, String meAbout) {
 		super();
 		this.meId = meId;
+		this.meTitle = meTitle;
+		this.meSend = meSend;
+		this.meReceive = meReceive;
+		this.meDate = meDate;
+		this.meAbout = meAbout;
+	}
+
+	public Message(String meTitle, Integer meSend, String meReceive, Date meDate, String meAbout) {
+		super();
 		this.meTitle = meTitle;
 		this.meSend = meSend;
 		this.meReceive = meReceive;

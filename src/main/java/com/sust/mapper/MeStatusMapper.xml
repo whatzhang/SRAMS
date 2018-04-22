@@ -1,95 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sust.dao.MeStatusMapper">
-  <resultMap id="BaseResultMap" type="com.sust.entity.MeStatus">
-    <id column="st_id" jdbcType="INTEGER" property="stId" />
-    <result column="me_id" jdbcType="INTEGER" property="meId" />
-    <result column="us_id" jdbcType="INTEGER" property="usId" />
-    <result column="st_isread" jdbcType="TINYINT" property="stIsread" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    st_id, me_id, us_id, st_isread
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sr_me_status
-    where st_id = #{stId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sr_me_status
-    where st_id = #{stId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.sust.entity.MeStatus">
-    insert into sr_me_status (st_id, me_id, us_id, 
-      st_isread)
-    values (#{stId,jdbcType=INTEGER}, #{meId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER}, 
-      #{stIsread,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.sust.entity.MeStatus">
-    insert into sr_me_status
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="stId != null">
-        st_id,
-      </if>
-      <if test="meId != null">
-        me_id,
-      </if>
-      <if test="usId != null">
-        us_id,
-      </if>
-      <if test="stIsread != null">
-        st_isread,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="stId != null">
-        #{stId,jdbcType=INTEGER},
-      </if>
-      <if test="meId != null">
-        #{meId,jdbcType=INTEGER},
-      </if>
-      <if test="usId != null">
-        #{usId,jdbcType=INTEGER},
-      </if>
-      <if test="stIsread != null">
-        #{stIsread,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
+	<resultMap id="BaseResultMap" type="com.sust.entity.MeStatus">
+		<id column="st_id" jdbcType="INTEGER" property="stId" />
+		<result column="me_id" jdbcType="INTEGER" property="meId" />
+		<result column="us_id" jdbcType="INTEGER" property="usId" />
+		<result column="st_isread" jdbcType="TINYINT" property="stIsread" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		st_id, me_id, us_id, st_isread
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_me_status
+		where st_id = #{stId,jdbcType=INTEGER}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from sr_me_status
+		where st_id = #{stId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteBymeId" parameterType="java.lang.Integer">
+		delete from sr_me_status
+		where me_id = #{meId,jdbcType=INTEGER}
+	</delete>
+	
+	<insert id="insert" parameterType="com.sust.entity.MeStatus">
+		insert into sr_me_status (st_id, me_id, us_id,
+		st_isread)
+		values (#{stId,jdbcType=INTEGER}, #{meId,jdbcType=INTEGER},
+		#{usId,jdbcType=INTEGER},
+		#{stIsread,jdbcType=TINYINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sust.entity.MeStatus">
+		insert into sr_me_status
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="stId != null">
+				st_id,
+			</if>
+			<if test="meId != null">
+				me_id,
+			</if>
+			<if test="usId != null">
+				us_id,
+			</if>
+			<if test="stIsread != null">
+				st_isread,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="stId != null">
+				#{stId,jdbcType=INTEGER},
+			</if>
+			<if test="meId != null">
+				#{meId,jdbcType=INTEGER},
+			</if>
+			<if test="usId != null">
+				#{usId,jdbcType=INTEGER},
+			</if>
+			<if test="stIsread != null">
+				#{stIsread,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
 
-  
-  <update id="updateSetDelStatus" >
-    update sr_me_status set st_isread = 2 where  me_id = #{meId,jdbcType=INTEGER} and us_id = #{usId,jdbcType=INTEGER} 
-  </update>
-  <update id="updateSetNoReadStatus" >
-    update sr_me_status set st_isread = 0 where  me_id = #{meId,jdbcType=INTEGER} and us_id = #{usId,jdbcType=INTEGER} 
-  </update>
-  <update id="updateSetReadStatus" >
-    update sr_me_status set st_isread = 1 where  me_id = #{meId,jdbcType=INTEGER} and us_id = #{usId,jdbcType=INTEGER} 
-  </update>
-  
-  
-  <update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.MeStatus">
-    update sr_me_status
-    <set>
-      <if test="meId != null">
-        me_id = #{meId,jdbcType=INTEGER},
-      </if>
-      <if test="usId != null">
-        us_id = #{usId,jdbcType=INTEGER},
-      </if>
-      <if test="stIsread != null">
-        st_isread = #{stIsread,jdbcType=TINYINT},
-      </if>
-    </set>
-    where st_id = #{stId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sust.entity.MeStatus">
-    update sr_me_status
-    set me_id = #{meId,jdbcType=INTEGER},
-      us_id = #{usId,jdbcType=INTEGER},
-      st_isread = #{stIsread,jdbcType=TINYINT}
-    where st_id = #{stId,jdbcType=INTEGER}
-  </update>
+
+	<update id="updateSetDelStatus">
+		update sr_me_status set st_isread = 2 where me_id = #{meId,jdbcType=INTEGER}
+		and us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateSetNoReadStatus">
+		update sr_me_status set st_isread = 0 where me_id = #{meId,jdbcType=INTEGER}
+		and us_id = #{usId,jdbcType=INTEGER}
+	</update>
+	<update id="updateSetReadStatus">
+		update sr_me_status set st_isread = 1 where me_id = #{meId,jdbcType=INTEGER}
+		and us_id = #{usId,jdbcType=INTEGER}
+	</update>
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.MeStatus">
+		update sr_me_status
+		<set>
+			<if test="meId != null">
+				me_id = #{meId,jdbcType=INTEGER},
+			</if>
+			<if test="usId != null">
+				us_id = #{usId,jdbcType=INTEGER},
+			</if>
+			<if test="stIsread != null">
+				st_isread = #{stIsread,jdbcType=TINYINT},
+			</if>
+		</set>
+		where st_id = #{stId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sust.entity.MeStatus">
+		update sr_me_status
+		set me_id = #{meId,jdbcType=INTEGER},
+		us_id = #{usId,jdbcType=INTEGER},
+		st_isread = #{stIsread,jdbcType=TINYINT}
+		where st_id = #{stId,jdbcType=INTEGER}
+	</update>
 </mapper>

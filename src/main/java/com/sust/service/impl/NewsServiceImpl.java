@@ -8,7 +8,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.sust.dao.LoginMapper;
+import com.sust.dao.MeStatusMapper;
 import com.sust.dao.MessageMapper;
+import com.sust.entity.MeStatus;
 import com.sust.entity.Message;
 import com.sust.service.NewsService;
 
@@ -17,6 +20,12 @@ public class NewsServiceImpl implements NewsService {
 
 	@Resource
 	private MessageMapper messageMapper;
+	
+	@Resource
+	private MeStatusMapper meStatusMapper;
+	
+	@Resource
+	private LoginMapper loginMapper;
 
 	@Override
 	public List<Message> getUserMeDel(int usId) {
@@ -90,7 +99,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			this.messageMapper.updateByPrimaryKey(new Message(meId, meTitle, Integer.valueOf(meSend), meReceive, (Date)(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(meDate)), meAbout));
 		} catch (Exception e) {
-			return "更新信息失败！";
+			return "更新信息失败，请重试！";
 		}
 		return "更新信息成功！";
 	}
@@ -99,10 +108,25 @@ public class NewsServiceImpl implements NewsService {
 	public String deleteMessage(Integer meId) {
 		try {
 			this.messageMapper.deleteByPrimaryKey(meId);
+			this.meStatusMapper.deleteBymeId(meId);
 		} catch (Exception e) {
-			return "更新信息失败！";
+			return "删除信息失败，请重试！";
 		}
-		return "更新信息成功！";
+		return "删除信息成功！";
+	}
+
+	@Override
+	public String addMessage(Message message) {
+		try {
+			this.messageMapper.insertSelective(message);
+			List<Integer> usIdList = this.loginMapper.selectUsIdList();
+			for (int i = 0; i < usIdList.size(); i++) {
+				this.meStatusMapper.insertSelective(new MeStatus(message.getMeId(),usIdList.get(i),(byte) 0));
+			}
+		} catch (Exception e) {
+			return "发布新消息失败，请重试！";
+		}
+		return "发布新消息成功！";
 	}
 
 }

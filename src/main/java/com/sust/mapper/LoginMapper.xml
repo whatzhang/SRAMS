@@ -10,6 +10,9 @@
 	<sql id="Base_Column_List">
 		us_id, lo_login, lo_pass, lo_type
 	</sql>
+	<select id="selectUsIdList" resultType="java.lang.Integer">
+		select us_id from sr_login
+	</select>
 	<select id="selectThNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
 		select count(*) from sr_thesis where us_id =

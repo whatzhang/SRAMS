@@ -1,5 +1,7 @@
 package com.sust.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -65,5 +67,7 @@ public interface LoginMapper {
 	int selectAllMeNum();
 
 	int selectAllUser();
+
+	List<Integer> selectUsIdList();
 
 }

@@ -76,12 +76,12 @@
 									id="account" style="width: 100%;" id="largeinput"
 									placeholder="请输入您的账号" required="required">
 							</div>
-							<div class="form-group mb-n" style="margin-top: 2em;">
+							<div class="form-group mb-n" style="margin-top: 1.5em;">
 								<input type="password" class="form-control1 input-lg"
 									name="password" id="password" style="width: 100%;"
 									id="largeinput" placeholder="${loginInfo}" required="required">
 							</div>
-							<div class="form-group mb-n" style="margin-top: 2em;">
+							<div class="form-group mb-n" style="margin-top: 1em;">
 								<label class="checkbox-inline" style=""> <input checked
 									name="radio" type="radio" value="user"><span>普通用户</span>
 								</label> <label class="checkbox-inline " style="text-align: center;">
@@ -90,7 +90,10 @@
 									<input name="radio" type="radio" value="super"><span>超级管理员</span>
 								</label>
 							</div>
-							<div class="form-group mb-n" style="margin-top: 2em;margin-bottom: 1em;">
+							<div class="form-group mb-n" style="margin-top: 1em; height: 5em;border: 1px solid red;">
+							    
+							</div>
+							<div class="form-group mb-n" style="margin-top: 1.5em;margin-bottom: 1em;">
 								<input class="form-control btn btn-danger" type="submit" style="height: 2。5em;"
 									value="登录系统" /> 
 							</div>

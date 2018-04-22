@@ -33,4 +33,6 @@ public interface NewsService {
 
 	public String deleteMessage(Integer meId);
 
+	public String addMessage(Message message);
+
 }

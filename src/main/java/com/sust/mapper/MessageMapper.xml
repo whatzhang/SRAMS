@@ -107,7 +107,7 @@
 		#{meDate,jdbcType=TIMESTAMP}, #{meAbout,jdbcType=VARCHAR}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.sust.entity.Message">
+	<insert id="insertSelective" parameterType="com.sust.entity.Message" useGeneratedKeys="true" keyProperty="meId" keyColumn="me_id">
 		insert into sr_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="meId != null">

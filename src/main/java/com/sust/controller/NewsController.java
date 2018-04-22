@@ -1,5 +1,6 @@
 package com.sust.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -138,5 +139,19 @@ public class NewsController {
 	private AllInfo getReadNum(@RequestParam("meId") Integer meId) {
 		logger.info("deleteMessage++" + meId);
 		return new AllInfo(this.newsservice.deleteMessage(meId));
+	}
+	
+	@RequestMapping(value = "/addMessage", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo addMessage(@RequestParam("meTitle") String meTitle,
+							   @RequestParam("meReceive") String meReceive,
+							   @RequestParam("meAbout") String meAbout,HttpSession session) {
+		
+		logger.info("addMessage++" + meTitle+"++"+meReceive+"++"+meAbout);
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		if(meReceive == "" || meReceive == null){
+			meReceive = String.valueOf(0);
+		}
+		return new AllInfo(this.newsservice.addMessage(new Message(meTitle,usId,meReceive,new Date(System.currentTimeMillis()),meAbout)));
 	}
 }
