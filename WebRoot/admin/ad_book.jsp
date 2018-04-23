@@ -88,7 +88,8 @@ li {
 				</div>
 			</div>
 			<br>
-			<div class="panel-info" id="pa_show" style="padding: 1em 1em 1em 1em;">
+			<div class="panel-info" id="pa_show"
+				style="padding: 1em 1em 1em 1em;">
 				<table class="table table-bordered"
 					style="table-layout: fixed; width: 100%;">
 					<thead>
@@ -120,10 +121,10 @@ li {
 					</thead>
 					<tbody>
 						<c:forEach items="${requestScope.BookList}" var="RaceList">
-							<tr>
+							<tr id="${RaceList.boId}" onclick="chanceThis(${RaceList.boId});">
 								<td
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
-									type="checkbox" value="${RaceList.boId}" name="boId"></td>
+									type="checkbox" value="${RaceList.boId}" id="${RaceList.boId}"></td>
 								<td
 									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
@@ -586,9 +587,15 @@ li {
          });
     }
     function rePages(){
-   var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/book/getAllBoList?pageSize="+page;
-   window.parent.scrollTo(0, 0);
+	    var page = $("#pageSize").val();
+	    window.location.href = "${pageContext.request.contextPath}/book/getAllBoList?pageSize="+page;
+	    window.parent.scrollTo(0, 0);
    }
+   function chanceThis(usId){
+	   /*  $(usId).addClass("select");
+        $("#"+usId).attr("checked", true); */
+        //$(this).find("td").addClass("backcolor_font");
+         alert(usId);
+	}
 </script>
 </html>

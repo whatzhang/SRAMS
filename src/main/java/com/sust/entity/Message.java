@@ -64,7 +64,7 @@ public class Message {
 	}
 
 	public String getMeReceive() {
-		return meReceive;
+		return meReceive = meReceive == "0" ? "AllUsers" : meReceive;
 	}
 
 	public void setMeReceive(String meReceive) {

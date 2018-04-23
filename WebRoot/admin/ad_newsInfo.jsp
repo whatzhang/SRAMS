@@ -72,7 +72,7 @@ li {
 						<ul>
 							<div id="NEWS">
 								<c:forEach items="${requestScope.nowNews}" var="now">
-									<li><a href="javascript: showNewsInfo(${now.meId});"
+									<li><a href="javascript: showInfo(${now.meId});"
 										title="消息阅读情况">
 											<div class="chat-left">
 												<img class="img-circle" src="img/i3.png" alt="">
@@ -96,15 +96,14 @@ li {
 					<div class="panel-body">
 						<ul>
 							<li><a href="javascript:void(0);"><i
-									class="fa fa-flag-o"></i>未读消息用户数<span> <label
-										id="NoRead"></label>
+									class="fa fa-flag-o"></i>未读消息用户数<span><label id="NoRead">0</label>
 								</span></a></li>
 							<li><a href="javascript:void(0);"><i
 									class="fa fa-file-text-o"></i>已读消息用户数<span><label
-										id="Readed"></label></span></a></li>
+										id="Readed">0</label></span></a></li>
 							<li><a href="javascript:void(0);"><i
 									class=" fa fa fa-envelope-o"></i>删除消息用户数<span><label
-										id="delNews"></label></span></a></li>
+										id="delNews">0</label></span></a></li>
 						</ul>
 					</div>
 
@@ -118,7 +117,7 @@ li {
 				<div class="panel-body">
 					<form class="com-mail" id="addNew" name="addNew">
 						<div style="margin: 0em 0em 1em 0em;">
-							<div class="btn-group" >
+							<div class="btn-group">
 								<button type="button" class="btn btn-danger" id="Change"
 									onclick="AllUsers();">AllUsers</button>
 								<button type="button" class="btn btn-default" id="Add"
@@ -132,8 +131,8 @@ li {
 						<textarea rows="6" class="form-control1 control2" id="mmAbout"
 							placeholder="消息内容:" required="required"></textarea>
 
-						<input type="submit" class="btn btn-success" onclick="addMessage();"
-							style=" float: right;margin-right: 1em;"
+						<input type="submit" class="btn btn-success"
+							onclick="addMessage();" style=" float: right;margin-right: 1em;"
 							value="发布提交">
 					</form>
 				</div>
@@ -175,8 +174,9 @@ li {
 								data-toggle="tooltip" data-placement="top" title="${Me.meSend}">${Me.meSend}号用户</td>
 							<td
 								style="text-align: center; vertical-align: middle;width: 12%;"
-								data-toggle="tooltip" data-placement="top"
-								title="${Me.meReceive}">${Me.meReceive}号用户</td>
+								data-toggle="tooltip" data-placement="top"><c:if
+									test="${Me.meReceive==0}">AllUsers</c:if> <c:if
+									test="${Me.meReceive!=0}">${Me.meReceive}号用户</c:if></td>
 							<td
 								style="text-align: center; vertical-align: middle;width: 31%;"
 								data-toggle="tooltip" data-placement="top" title="${Me.meAbout}">${Me.meAbout}</td>
@@ -306,6 +306,36 @@ li {
 	function refresh() {
 		window.location.href = "${pageContext.request.contextPath}/news/getAdminNews";
 	}
+	function showInfo(daa) {
+		showNewsInfo(daa);
+		showInfoLeft(daa);
+	}
+	function showInfoLeft(daId) {
+		$.ajax({
+			type : "POST",
+			url : "${pageContext.request.contextPath}/news/getNewsById",
+			data : {
+				meId : daId
+			},
+			dataType : 'json',
+			cache : false,
+			async : true,
+			success : showLeft,
+			error : function(data) {
+				alert("获取信息错误!");
+			}
+		});
+	}
+	function showLeft(data) {
+		$("#toSe").show();
+		if (data.meReceive == "0") {
+			document.getElementById('toSe').value = "AllUsers";
+		} else {
+			document.getElementById('toSe').value = data.meReceive + "号用户";
+		}
+		document.getElementById('mmTitle').value = data.meTitle
+		document.getElementById('mmAbout').value = data.meAbout
+	}
 	function setReadNum(ww) {
 		document.getElementById('NoRead').innerText = ww.string1;
 		document.getElementById('Readed').innerText = ww.string2;
@@ -376,9 +406,9 @@ li {
 		isCh = "ch";
 		getNewsById(meId);
 	}
-	function updataMessage(){
-		if(confirm("确定要更新信息？")){
-		    updataMe();
+	function updataMessage() {
+		if (confirm("确定要更新信息？")) {
+			updataMe();
 		}
 	}
 	function updataMe() {
@@ -436,22 +466,22 @@ li {
 			deleteMe(me);
 		}
 	}
-	function AllUsers(){
-	    $("#Add").removeClass("btn btn-danger");
+	function AllUsers() {
+		$("#Add").removeClass("btn btn-danger");
 		$("#Add").addClass("btn btn-default");
 		$("#Change").addClass("btn btn-danger");
 		$("#toSe").hide();
 		document.getElementById('toSe').value = 0;
 	}
-	function SomeOne(){
+	function SomeOne() {
 		$("#Change").removeClass("btn btn-danger");
 		$("#Change").addClass("btn btn-default");
 		$("#Add").addClass("btn btn-danger");
 		$("#toSe").show();
 	}
-	function addMessage(){
+	function addMessage() {
 		if (confirm("确定发布此条消息？")) {
-			 addNews();
+			addNews();
 		}
 	}
 	function addNews() {
@@ -477,7 +507,7 @@ li {
 			error : function(data) {
 				alert("发布信息错误!");
 			}
-		}); 
+		});
 	}
 </script>
 </html>
