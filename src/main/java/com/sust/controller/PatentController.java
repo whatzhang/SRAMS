@@ -76,7 +76,7 @@ public class PatentController {
 		int re = this.patentService.addPaInfo(new Patent(usId, paName, paCategory, patentService.getUserNameById(usId),
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)),
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber, paAbout,
-				new Date(System.currentTimeMillis())));
+				new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 
@@ -92,7 +92,7 @@ public class PatentController {
 		int re = this.patentService.upPaInfo(new Patent(paId, usId, paName, paCategory,
 				patentService.getUserNameById(usId), (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paPlease)),
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(paDate)), paNumber, paAbout,
-				new Date(System.currentTimeMillis())));
+				new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 

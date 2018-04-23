@@ -73,7 +73,7 @@ public class PraiseController {
 				+ prAbout);
 		int re = this.praiseService.addPrInfo(
 				new Praise(usId, prName, prCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(prDate)), prUnit,
-						praiseService.getUserNameById(usId), prAbout, new Date(System.currentTimeMillis())));
+						praiseService.getUserNameById(usId), prAbout, new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 
@@ -88,7 +88,7 @@ public class PraiseController {
 				+ prUnit + "++" + prAbout);
 		int re = this.praiseService.upPrInfo(
 				new Praise(prId, usId, prName, prCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(prDate)),
-						prUnit, praiseService.getUserNameById(usId), prAbout, new Date(System.currentTimeMillis())));
+						prUnit, praiseService.getUserNameById(usId), prAbout, new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 

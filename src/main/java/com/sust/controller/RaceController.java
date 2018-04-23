@@ -76,7 +76,7 @@ public class RaceController {
 		int re = this.raceservice
 				.addRaInfo(new Race(usId, raName, raCategory, raType, raceservice.getUserNameById(usId), raLevel,
 						raTeacher, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), raAbout,
-						new Date(System.currentTimeMillis())));
+						new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 
@@ -93,7 +93,7 @@ public class RaceController {
 		int re = this.raceservice
 				.upRaInfo(new Race(raId, usId, raName, raCategory, raType, raceservice.getUserNameById(usId), raLevel,
 						raTeacher, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), raAbout,
-						new Date(System.currentTimeMillis())));
+						new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 

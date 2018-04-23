@@ -130,7 +130,7 @@ public class Project {
 	}
 
 	public String getProUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(proUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(proUptime);
 	}
 
 	public void setProUptime(Date proUptime) {

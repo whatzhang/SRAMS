@@ -108,8 +108,9 @@ public class SqlTest {
 			System.out.println(new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss:SSS")
 					.parse(new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss:SSS").format(new Date())));
 			System.out.println(
-					new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS").format(new Date(System.currentTimeMillis())));
+					new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS").format(new Date(System.currentTimeMillis()).getTime()));
 			System.out.println(new Date(System.currentTimeMillis()));
+			System.out.println(new Date().getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

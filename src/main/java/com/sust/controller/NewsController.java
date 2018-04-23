@@ -152,6 +152,6 @@ public class NewsController {
 			meReceive = String.valueOf(0);
 		}
 		return new AllInfo(this.newsservice
-				.addMessage(new Message(meTitle, usId, meReceive, new Date(System.currentTimeMillis()), meAbout)));
+				.addMessage(new Message(meTitle, usId, meReceive, new Date(), meAbout)));
 	}
 }

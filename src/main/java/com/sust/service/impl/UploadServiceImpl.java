@@ -47,7 +47,7 @@ public class UploadServiceImpl implements UploadService {
 			String oldName = file.getOriginalFilename();
 			// 删除旧文件
 			MyUtils.isExists(dir, getOldFileName(type, id));
-			String path = dir + setFileName(type, id, new Date(System.currentTimeMillis()))
+			String path = dir + setFileName(type, id, new Date())
 					+ oldName.substring(oldName.lastIndexOf('.'));
 			logger.info("UploadUserTypeFile++" + id + "++" + type + "++" + file.getOriginalFilename() + "++" + path);
 			File newFile = new File(path);

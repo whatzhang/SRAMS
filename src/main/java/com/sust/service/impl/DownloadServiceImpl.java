@@ -135,7 +135,7 @@ public class DownloadServiceImpl implements DownloadService {
 		if (MyUtils.CreatDir(new File(dir))) {
 			String re = MyUtils.deleteFile(dir, getFileUpTime(type, id));
 			if (!re.equals("NO_SUCH_FILE")) {
-				return "删除文件成功！";
+				return "删除成功！";
 			} else {
 				return "没有此文件文件，请及时上传！";
 			}

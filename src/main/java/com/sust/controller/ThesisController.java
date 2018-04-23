@@ -86,7 +86,7 @@ public class ThesisController {
 				+ thAbout);
 		int sta = this.thesisService.addThesis(new Thesis(usId, thName, thCate, thesisService.getUserNameById(usId),
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel, thfactor, thIscloud, thNum, thJour,
-				thPage, thAbout, new Date(System.currentTimeMillis())));
+				thPage, thAbout, new Date()));
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("status", String.valueOf(sta));
 		result.put("info", "添加论文信息成功！");
@@ -108,7 +108,7 @@ public class ThesisController {
 				+ "++" + thAbout);
 		int sta = this.thesisService.upThesisInfo(new Thesis(thId, usId, thName, thCate,
 				thesisService.getUserNameById(usId), (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel,
-				thfactor, thIscloud, thNum, thJour, thPage, thAbout, new Date(System.currentTimeMillis())));
+				thfactor, thIscloud, thNum, thJour, thPage, thAbout, new Date()));
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("status", String.valueOf(sta));
 		result.put("info", "修改论文信息成功！");

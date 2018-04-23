@@ -188,7 +188,7 @@ public class Thesis {
 	}
 
 	public String getThUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(thUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(thUptime);
 	}
 
 	public void setThUptime(Date thUptime) {

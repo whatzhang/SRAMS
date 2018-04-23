@@ -76,7 +76,7 @@ public class BookController {
 		try {
 			this.bookService.addBoInfo(
 					new Book(usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
-							boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
+							boEditor, boEditor2, boFont, boPublish, boAbout, new Date()));
 		} catch (Exception e) {
 			return new AllInfo("添加失败，请重试！");
 		}
@@ -97,7 +97,7 @@ public class BookController {
 		try {
 			this.bookService.upBoInfo(
 					new Book(boId, usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
-							boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
+							boEditor, boEditor2, boFont, boPublish, boAbout, new Date()));
 		} catch (Exception e) {
 			return new AllInfo("信息更新失败，请重试！");
 		}

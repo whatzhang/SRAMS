@@ -142,7 +142,7 @@ public class Race {
 	}
 
 	public String getRaUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(raUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(raUptime);
 	}
 
 	public void setRaUptime(Date raUptime) {

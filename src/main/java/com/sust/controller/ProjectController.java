@@ -74,7 +74,7 @@ public class ProjectController {
 				+ proLeader + "++" + proTeam + "++" + ProAbout);
 		int re = this.projectService.addProInfo(
 				new Project(usId, ProName, ProCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)),
-						proCash, proLeader, proTeam, ProAbout, new Date(System.currentTimeMillis())));
+						proCash, proLeader, proTeam, ProAbout, new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 
@@ -90,7 +90,7 @@ public class ProjectController {
 				+ proCash + "++" + proLeader + "++" + proTeam + "++" + ProAbout);
 		int re = this.projectService.upProInfo(new Project(ProId, usId, ProName, ProCategory,
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)), proCash, proLeader, proTeam, ProAbout,
-				new Date(System.currentTimeMillis())));
+				new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
 

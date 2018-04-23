@@ -142,7 +142,7 @@ public class Book {
 	}
 
 	public String getBoUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS").format(boUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(boUptime);
 	}
 
 	public void setBoUptime(Date boUptime) {
