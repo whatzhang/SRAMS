@@ -16,6 +16,29 @@ public class Message {
 
 	private String meAbout;
 
+	public Message() {
+
+	}
+
+	public Message(Integer meId, String meTitle, Integer meSend, String meReceive, Date meDate, String meAbout) {
+		super();
+		this.meId = meId;
+		this.meTitle = meTitle;
+		this.meSend = meSend;
+		this.meReceive = meReceive;
+		this.meDate = meDate;
+		this.meAbout = meAbout;
+	}
+
+	public Message(String meTitle, Integer meSend, String meReceive, Date meDate, String meAbout) {
+		super();
+		this.meTitle = meTitle;
+		this.meSend = meSend;
+		this.meReceive = meReceive;
+		this.meDate = meDate;
+		this.meAbout = meAbout;
+	}
+
 	public Integer getMeId() {
 		return meId;
 	}
@@ -63,4 +86,11 @@ public class Message {
 	public void setMeAbout(String meAbout) {
 		this.meAbout = meAbout == null ? null : meAbout.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "Message [meId=" + meId + ", meTitle=" + meTitle + ", meSend=" + meSend + ", meReceive=" + meReceive
+				+ ", meDate=" + meDate + ", meAbout=" + meAbout + "]";
+	}
+
 }

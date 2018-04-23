@@ -2,13 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
-	if (login == null) {
-		response.sendRedirect(basePath + "index.jsp");
-	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -42,8 +38,7 @@
 </head>
 <body class="cbp-spmenu-push">
 
-	<div class="main-content">
-		<!--left-fixed -navigation-->
+	<div class="main-content" style="overflow-y: hidden;">
 		<div class=" sidebar" role="navigation">
 			<div class="navbar-collapse">
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
@@ -89,26 +84,19 @@
 						class="chart-nav"><i class="fa fa-book nav_icon"></i>其他<span
 							class="nav-badge-btm pull-right">other</span></a></li>
 				</ul>
-				<!-- //sidebar-collapse --> </nav>
+				</nav>
 			</div>
 		</div>
-		<!--left-fixed -navigation-->
-		<!-- header-starts -->
 		<div class="sticky-header header-section ">
 			<div class="header-left">
-				<!--toggle button start-->
 				<button id="showLeftPush">
 					<i class="fa fa-bars"></i>
 				</button>
-				<!--toggle button end-->
-				<!--logo -->
 				<div class="logo">
-					<a href="users/user_index.jsp">
+					<a href="${pageContext.request.contextPath}/login/toUser">
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
-				<!--//logo-->
-				<!--search-box-->
 				<div class="search-box">
 					<form class="input">
 						<input class="sb-search-input input__field--madoka"
@@ -120,12 +108,10 @@
 						</label>
 					</form>
 				</div>
-				<!--//end-search-box-->
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
 				<div class="profile_details_left">
-					<!--notifications of menu start -->
 					<ul class="nofitications-dropdown">
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
@@ -290,7 +276,6 @@
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<!--notification menu end -->
 				<div class="profile_details">
 					<ul>
 						<li class="dropdown profile_details_drop"><a href="#"
@@ -315,6 +300,15 @@
 								<li><a
 									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
+								<%
+									if ("admin".equals(login.getLoType())) {
+								%>
+								<li><a
+									href="${pageContext.request.contextPath}/login/toAdmin"><i
+										class="fa fa-sign-out"></i>管理员界面</a></li>
+								<%
+									}
+								%>
 								<li><a
 									href="${pageContext.request.contextPath}/login/Layout"><i
 										class="fa fa-sign-out"></i>退出登录</a></li>
@@ -326,27 +320,13 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<!-- main content start-->
-		<div class="main-content">
-			<div id="page-wrapper">
-				<iframe id="iFrame" name="iFrame" width="100%"
-					onload="this.height=iFrame.document.body.scrollHeight"
-					frameborder="0" scrolling="no"
-					src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
-			</div>
+		<div id="page-wrapper">
+			<iframe id="iFrame" name="iFrame" width="100%"
+				onload="this.height=iFrame.document.body.scrollHeight"
+				frameborder="0" scrolling="no"
+				src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
 		</div>
 
-		<%-- <jsp:include page="users/userInfo.jsp"></jsp:include>
-		<jsp:include page="users/upPass.jsp"></jsp:include>
-		<jsp:include page="users/patent.jsp"></jsp:include>
-		<jsp:include page="users/praise.jsp"></jsp:include>
-		<jsp:include page="users/project.jsp"></jsp:include>
-		<jsp:include page="users/book.jsp"></jsp:include>
-		<jsp:include page="users/race.jsp"></jsp:include>
-		<jsp:include page="users/other.jsp"></jsp:include>
-		<jsp:include page="users/thesis.jsp"></jsp:include> --%>
-
-		<!-- Classie -->
 		<div class="footer">
 			<p>
 				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a
@@ -357,16 +337,18 @@
 
 	<script src="js/classie.js"></script>
 	<script>
-		var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
-				.getElementById('showLeftPush'), body = document.body;
-
+		var menuLeft = document.getElementById('cbp-spmenu-s1'),
+			showLeftPush = document
+				.getElementById('showLeftPush'),
+			body = document.body;
+	
 		showLeftPush.onclick = function() {
 			classie.toggle(this, 'active');
 			classie.toggle(body, 'cbp-spmenu-push-toright');
 			classie.toggle(menuLeft, 'cbp-spmenu-open');
 			disableOther('showLeftPush');
 		};
-
+	
 		function disableOther(button) {
 			if (button !== 'showLeftPush') {
 				classie.toggle(showLeftPush, 'disabled');

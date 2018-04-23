@@ -32,4 +32,6 @@ public interface RaceMapper {
 
 	String selectNameById(Integer id);
 
+	List<Race> selectAllRaceInfo();
+
 }

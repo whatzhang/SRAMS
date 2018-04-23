@@ -13,7 +13,6 @@
 <head>
 <base href="<%=basePath%>">
 
-
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -53,7 +52,7 @@ li {
 </style>
 
 </head>
-<body style="overflow-y: auto;">
+<body>
 	<%!int i = 0;%>
 	<input type="hidden" name="numJ" id="numJ" />
 	<div class="main-page">
@@ -65,8 +64,8 @@ li {
 							<label for="largeinput" class=" control-label label-input-lg"
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
 						</div>
-						<div class="form-group mb-n">
-							<div class="col-sm-1" style="margin-left: 1em">
+						<div class="form-group">
+							<div class="col-sm-2" style="margin-left: 1em">
 								<select class="form-control1">
 									<option>论文名称</option>
 									<option>发表时间</option>
@@ -75,15 +74,17 @@ li {
 								</select>
 							</div>
 							<label for="largeinput"
-								class="col-sm-1 control-label label-input-lg"
+								class="col-sm-2 control-label label-input-lg"
 								style="color: #e94e02;">关键信息：</label>
 							<div class="col-sm-4">
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
 							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<button type="button" class="btn btn-success col-sm-1"
-								style="float: right;margin-right: 2em;" onclick="dowenExcl();">导出Excl信息表</button>
+							<a
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=thesis"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
 					</form>
 				</div>
@@ -105,8 +106,7 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">起止页码</th>
-							<th
-								style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
+							<th style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
 							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
 						</tr>
 					</thead>
@@ -601,7 +601,7 @@ li {
 					url : "${pageContext.request.contextPath}/thesis/updateThInfo",
 					data : {
 					    usId : <%=login.getUsId()%>,
-					    thId : upThId,
+					    thId : idd,
 						thName : thName,
 						thCate : thCate,
 						Cdate : Cdate,
@@ -669,25 +669,7 @@ li {
 		    function rePages(){
 				   var page = $("#pageSize").val();
 				   window.location.href = "${pageContext.request.contextPath}/thesis/getUserThInfo?pageSize="+page;
-            }
-            function dowenExcl(){
-				$.ajax({
-					type : "POST",
-					url : "",
-					data : {
-					   type : "thesis",
-					   usId : <%=login.getUsId()%>
-					},
-					dataType : 'json',
-					cache : false,
-					async : true,
-					success : function(data){
-					     console.info(data.string1);
-					},
-					error : function(data) {
-						alert("下载信息出错!");
-					}
-				});
+				   window.parent.scrollTo(0, 0);
             }
 		</script>
 </body>

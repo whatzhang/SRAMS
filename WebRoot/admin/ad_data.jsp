@@ -46,7 +46,7 @@
 
 <body style="height: 63em;">
 
-	<div class="panel-group  widget-shadow" id="accordion" role="tablist"
+	<div class="panel-group " id="accordion" role="tablist"
 		aria-multiselectable="true"
 		style="padding: 2em 2em 2em 2em; height: 60em;">
 		<h4 class="title2" style="color: #4682B4; margin-bottom: 1em;">数据导出备份/导入:</h4>

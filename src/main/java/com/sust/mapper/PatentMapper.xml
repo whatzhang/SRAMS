@@ -20,6 +20,11 @@
 		pa_uptime
 	</sql>
 
+	<select id="selectAllPaInfo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_patent
+	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select pa_name

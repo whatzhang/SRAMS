@@ -10,7 +10,6 @@
 <head>
 <base href="<%=basePath%>">
 <title>SUST科研归档管理系统</title>
-
 </head>
 <body>
    <h1 align="center">404</h1>

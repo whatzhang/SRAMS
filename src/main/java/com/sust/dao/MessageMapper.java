@@ -29,4 +29,14 @@ public interface MessageMapper {
 	String selectUserNameById(int id);
 
 	int deleteReadNews(Integer usId);
+
+	List<Message> selectAllMessages();
+
+	List<Message> selectNowMessages();
+
+	Integer selectNoReadNum(Integer meId);
+
+	Integer selectReadedNum(Integer meId);
+
+	Integer selectDelNum(Integer meId);
 }

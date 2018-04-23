@@ -34,8 +34,8 @@ public class PraiseController {
 	private PraiseService praiseService;
 
 	@RequestMapping("/getUserPraiseInfo")
-	public String getUserPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session){
+	public String getUserPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserInfo++" + usId);
 		PageHelper.startPage(pa, pageSize);
@@ -59,7 +59,7 @@ public class PraiseController {
 	@ResponseBody
 	public AllInfo DeletePrInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeletePrInfo++" + deId+"++"+fg);
+		logger.info("DeletePrInfo++" + deId + "++" + fg);
 		return new AllInfo(this.praiseService.DeletePrInfo(deId, fg, "praise", session));
 	}
 
@@ -90,5 +90,22 @@ public class PraiseController {
 				new Praise(prId, usId, prName, prCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(prDate)),
 						prUnit, praiseService.getUserNameById(usId), prAbout, new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
+	}
+
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllPraiseInfo")
+	public String getAllPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllPraiseInfo++" + pageSize + "++" + pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Praise> list = this.praiseService.getAllPraiseInfo();
+		PageInfo<Praise> page = new PageInfo<Praise>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("Pa", list);
+		return "admin/ad_praise";
 	}
 }

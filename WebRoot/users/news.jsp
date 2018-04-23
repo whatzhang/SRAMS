@@ -154,157 +154,157 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	var meID = 0;
-	window.onload = function top() {
-		this.scroll(0, 0);
-	}
-	function showNews(da) {
-		meID = da;
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/getNewsById",
-			data : {
-				meId : da
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : setNewsInfo,
-			error : function(data) {
-				alert("获取信息错误!");
-			}
-		});
-	}
-	function setNewsInfo(data) {
-		$("#date").val("发送时间 :  " + data.meDate);
-		$("#Title").val("消息主题 :  " + data.meTitle);
-		$("#About").val("消息内容 :\n" + data.meAbout);
-		getUserName(data.meSend)
-	}
-	function getUserName(id) {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/getUserNameById",
-			data : {
-				usId : id
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				$("#From").val("发 送 人 :  " + data.string1);
-			},
-			error : function(data) {
-				alert("获取信息错误!");
-			}
-		});
-	}
-	function toRead() {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/setRead",
-			data : {
-				meId : meID
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				alert("设置消息状态为已读成功！");
-				window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
-			},
-			error : function(data) {
-				alert("设置消息状态错误!");
-			}
-		});
-	}
-	function toNoRead() {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/setNoRead",
-			data : {
-				meId : meID
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				alert("设置消息状态为未读成功！");
-				window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
-			},
-			error : function(data) {
-				alert("设置消息状态错误!");
-			}
-		});
-	}
-	function toDel() {
-		$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/setDel",
-			data : {
-				meId : meID
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				alert("移入垃圾箱成功！");
-				window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
-			},
-			error : function(data) {
-				alert("设置消息状态错误!");
-			}
-		});
-	}
-	function jud() {
-		if (meID == 0) {
-	    	alert("请选择所要设置的消息！");
-			return false;
-		} else {
-			return true;
+		var meID = 0;
+		window.onload = function top() {
+			this.scroll(0, 0);
 		}
-	}
-	function setRead() {
-		if (jud()) {
-			toRead();
+		function showNews(da) {
+			meID = da;
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/getNewsById",
+				data : {
+					meId : da
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : setNewsInfo,
+				error : function(data) {
+					alert("获取信息错误!");
+				}
+			});
 		}
-	}
-	function setNoRead() {
-		if (jud()) {
-			toNoRead();
+		function setNewsInfo(data) {
+			$("#date").val("发送时间 :  " + data.meDate);
+			$("#Title").val("消息主题 :  " + data.meTitle);
+			$("#About").val("消息内容 :\n" + data.meAbout);
+			getUserName(data.meSend)
 		}
-	}
-	function setDel() {
-		if (jud()) {
-			toDel();
+		function getUserName(id) {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/getUserNameById",
+				data : {
+					usId : id
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					$("#From").val("发 送 人 :  " + data.string1);
+				},
+				error : function(data) {
+					alert("获取信息错误!");
+				}
+			});
 		}
-	}
-	function removeMe(){
-	   if(confirm("确定将要永久清空垃圾箱消息！！")){
-	      reReadMe();
-	   }
-	}
-	function reReadMe(){
-	$.ajax({
-			type : "POST",
-			url : "${pageContext.request.contextPath}/news/deleteReadNews",
-			data : {
-			},
-			dataType : 'json',
-			cache : false,
-			async : true,
-			success : function(data) {
-				alert("清空垃圾箱成功！");
-				window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
-			},
-			error : function(data) {
-				alert("清空垃圾箱错误!");
+		function toRead() {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/setRead",
+				data : {
+					meId : meID
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					alert("设置消息状态为已读成功！");
+					window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
+				},
+				error : function(data) {
+					alert("设置消息状态错误!");
+				}
+			});
+		}
+		function toNoRead() {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/setNoRead",
+				data : {
+					meId : meID
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					alert("设置消息状态为未读成功！");
+					window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
+				},
+				error : function(data) {
+					alert("设置消息状态错误!");
+				}
+			});
+		}
+		function toDel() {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/setDel",
+				data : {
+					meId : meID
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					alert("移入垃圾箱成功！");
+					window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
+				},
+				error : function(data) {
+					alert("设置消息状态错误!");
+				}
+			});
+		}
+		function jud() {
+			if (meID == 0) {
+				alert("请选择所要设置的消息！");
+				return false;
+			} else {
+				return true;
 			}
-		});
-	}
-	function refresh(){
-	   window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
-	}
-</script>
+		}
+		function setRead() {
+			if (jud()) {
+				toRead();
+			}
+		}
+		function setNoRead() {
+			if (jud()) {
+				toNoRead();
+			}
+		}
+		function setDel() {
+			if (jud()) {
+				toDel();
+			}
+		}
+		function removeMe() {
+			if (confirm("确定将要永久清空垃圾箱消息！！")) {
+				reReadMe();
+			}
+		}
+		function reReadMe() {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/deleteReadNews",
+				data : {
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					alert("清空垃圾箱成功！");
+					window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
+				},
+				error : function(data) {
+					alert("清空垃圾箱错误!");
+				}
+			});
+		}
+		function refresh() {
+			window.location.href = "${pageContext.request.contextPath}/news/getUserNews";
+		}
+	</script>
 </body>
 </html>

@@ -20,6 +20,12 @@
 		ra_about, ra_uptime
 	</sql>
 	
+	<select id="selectAllRaceInfo" 
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_race
+	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select ra_name from sr_race where ra_id =

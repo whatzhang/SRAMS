@@ -19,8 +19,10 @@ public interface LoginService {
 
 	public String getPass(String usId);
 
-	public Map<String, String> getInitInfo(String account, String type);
+	public Map<String, String> getInitInfo(String account, String type, Integer id, boolean flg);
 
 	public int upDataPass(Integer usId, String pass);
+
+	public Map<String, String> getAdminInitInfo();
 
 }

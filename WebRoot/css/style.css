@@ -2259,7 +2259,7 @@ i.fa.fa-facebook.profile-icon {
 .scrollbar {
     height: 462px;
     background: #fff;
-    overflow-y: scroll;
+   /*  overflow-y: scroll; */
     padding:2em 1em 0;
 }
 .activity-row {
@@ -3984,3 +3984,12 @@ h4.title3 {
 }
 }
 /*--//responsive-design---*/
+.main-page{
+	height:auto;
+	overflow:auto;
+}
+
+
+
+
+

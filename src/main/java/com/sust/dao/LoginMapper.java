@@ -1,5 +1,7 @@
 package com.sust.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -49,5 +51,23 @@ public interface LoginMapper {
 	int selectMeNum(Integer id);
 
 	int updatePassword(@Param("usId") Integer usId, @Param("loPass") String pass);
+
+	int selectAllThNum();
+
+	int selectAllPaNum();
+
+	int selectAllPrNum();
+
+	int selectAllBoNum();
+
+	int selectAllProNum();
+
+	int selectAllRaNum();
+
+	int selectAllMeNum();
+
+	int selectAllUser();
+
+	List<Integer> selectUsIdList();
 
 }

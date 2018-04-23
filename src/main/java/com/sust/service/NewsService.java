@@ -18,4 +18,21 @@ public interface NewsService {
 
 	public String deleteReadNews(Integer usId);
 
+	public List<Message> getAllMessages();
+
+	public List<Message> getNowMessages();
+
+	public String getNoReadNum(Integer meId);
+
+	public String getReadedNum(Integer meId);
+
+	public String getDelNum(Integer meId);
+
+	public String updataMessage(Integer meId, String meTitle, String meSend, String meReceive, String meDate,
+			String meAbout);
+
+	public String deleteMessage(Integer meId);
+
+	public String addMessage(Message message);
+
 }

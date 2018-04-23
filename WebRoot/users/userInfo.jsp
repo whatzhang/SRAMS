@@ -1,10 +1,8 @@
-<%@ page language="java" import="java.util.*,com.sust.entity.*"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	Login login = (Login) session.getAttribute("login");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -203,7 +201,7 @@
 							</div>
 						</div>
 					</div>
-					<br><br>
+					<br> <br>
 					<hr>
 					<div class="form-group mb-n">
 						<a href="${pageContext.request.contextPath}/thesis/getUserThInfo">
@@ -215,8 +213,7 @@
 					</div>
 				</form>
 			</div>
-			<%
-				}
+			<% 	}
 			%>
 		</div>
 	</div>
@@ -251,7 +248,6 @@
 				type : "GET",
 				url : "${pageContext.request.contextPath}/users/upUserInfo",
 				data : {
-					usId : <%=login.getUsId()%>,
 					usName : $("#Name").val(),
 					usAge : $("#Age").val(),
 					usSex : $("#sex").val(),

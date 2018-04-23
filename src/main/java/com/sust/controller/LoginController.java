@@ -1,7 +1,6 @@
 package com.sust.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class LoginController {
 	private LoginService loginService;
 
 	@RequestMapping("/index")
-	private String toIndex(HttpServletRequest request, Model model) throws Exception {
+	private String toIndex(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
 		String result = "login";
 		String account = request.getParameter("account");
@@ -44,15 +43,20 @@ public class LoginController {
 
 		if (info.equals("yes")) {
 			Login login = loginService.getLogin(type, account, password);
-			request.getSession().setAttribute("login", login);
+			session.setAttribute("login", login);
 			// 初始化页面
-			Map<String, String> index = new HashMap<String, String>();
 			if (login.getLoType().equals("user")) {
-				index = loginService.getInitInfo(account, type);
-				model.addAttribute("index", index);
+				model.addAttribute("index", this.loginService.getInitInfo(account, type, 0, true));
 				result = "users/user_index";
-			} else if (login.getLoType().equals("admin") || login.getLoType().equals("super")) {
-				model.addAttribute("login", login);
+			} else if (login.getLoType().equals("admin")) {
+				Map<String, String> ifn = this.loginService.getAdminInitInfo();
+				model.addAttribute("da",
+						new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
+								ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"),
+								ifn.get("allData")));
+				result = "admin/admin_index";
+			} else {
+				// super用户条件
 				result = "admin/admin_index";
 			}
 		} else {
@@ -60,6 +64,25 @@ public class LoginController {
 			model.addAttribute("loginInfo", info);
 		}
 		return result;
+	}
+
+	@RequestMapping("/toUser")
+	private String toUser(HttpSession session, Model model) {
+
+		Login login = (Login) session.getAttribute("login");
+		Map<String, String> index = loginService.getInitInfo(login.getLoLogin(), login.getLoType(), login.getUsId(),
+				false);
+		model.addAttribute("index", index);
+		return "users/user_index";
+	}
+
+	@RequestMapping("/toAdmin")
+	private String toAdmin(HttpSession session, Model model) {
+
+		Map<String, String> ifn = this.loginService.getAdminInitInfo();
+		model.addAttribute("da", new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
+				ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"), ifn.get("allData")));
+		return "admin/admin_index";
 	}
 
 	@RequestMapping("/register")

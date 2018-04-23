@@ -32,6 +32,7 @@ public class Book {
 
 	public Book(Integer usId, String boName, String boCategory, Date boDate, String boEditor, String boEditor2,
 			Integer boFont, String boPublish, String boAbout, Date boUptime) {
+		super();
 		this.usId = usId;
 		this.boName = boName;
 		this.boCategory = boCategory;
@@ -140,8 +141,8 @@ public class Book {
 		this.boAbout = boAbout == null ? null : boAbout.trim();
 	}
 
-	public Date getBoUptime() {
-		return boUptime;
+	public String getBoUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS").format(boUptime);
 	}
 
 	public void setBoUptime(Date boUptime) {

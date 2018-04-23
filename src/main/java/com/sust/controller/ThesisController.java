@@ -35,10 +35,10 @@ public class ThesisController {
 	private ThesisService thesisService;
 
 	@RequestMapping(value = "/getUserThInfo")
-	private String getThesisInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session){
+	private String getUserThInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
-		logger.info("getThesisInfo++" + usId);
+		logger.info("getUserThInfo++" + usId);
 		PageHelper.startPage(pa, pageSize);
 		List<Thesis> thList = this.thesisService.getThesisInfo(usId);
 		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
@@ -60,7 +60,7 @@ public class ThesisController {
 	@ResponseBody
 	private AllInfo DeleteThInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteThInfo++" + deId+"++"+fg);
+		logger.info("DeleteThInfo++" + deId + "++" + fg);
 		return new AllInfo(this.thesisService.deleteThesisById(deId, fg, "thesis", session));
 	}
 
@@ -116,4 +116,20 @@ public class ThesisController {
 		return result;
 	}
 
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping(value = "/getAllThInfo")
+	private String getAllThInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getAllThInfo++" + pageSize + "++" + pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Thesis> thList = this.thesisService.getAllThInfo();
+		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("list", thList);
+		return "admin/ad_thesis";
+	}
 }

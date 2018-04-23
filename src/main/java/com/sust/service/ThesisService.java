@@ -19,4 +19,6 @@ public interface ThesisService {
 	String getUserNameById(int usId);
 
 	public int upThesisInfo(Thesis thesis);
+
+	public List<Thesis> getAllThInfo();
 }

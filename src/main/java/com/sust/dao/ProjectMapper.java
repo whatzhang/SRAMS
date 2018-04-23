@@ -30,4 +30,6 @@ public interface ProjectMapper {
 
 	String selectNameById(Integer proId);
 
+	List<Project> selectAllProjectList();
+
 }

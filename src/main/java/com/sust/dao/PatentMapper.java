@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Patent;
+import com.sust.entity.Thesis;
 
 @Repository
 public interface PatentMapper {
@@ -31,4 +32,6 @@ public interface PatentMapper {
 	Date selectUpTimeByKey(Integer paId);
 
 	String selectNameById(Integer paId);
+
+	List<Thesis> selectAllPaInfo();
 }

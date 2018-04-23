@@ -1,7 +1,11 @@
 package com.sust.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Message;
@@ -58,37 +64,94 @@ public class NewsController {
 
 	@RequestMapping(value = "/setRead", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo setRead(@RequestParam("meId") int meId, HttpServletRequest request) {
+	public AllInfo setRead(@RequestParam("meId") int meId, HttpSession session) {
 
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("setRead++" + meId + "++" + usId);
 		return new AllInfo(this.meStatusService.setReadStatus(meId, usId));
 	}
 
 	@RequestMapping(value = "/setNoRead", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo setNoRead(@RequestParam("meId") int meId, HttpServletRequest request) {
+	public AllInfo setNoRead(@RequestParam("meId") int meId, HttpSession session) {
 
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("setNoRead++" + meId + "++" + usId);
 		return new AllInfo(this.meStatusService.setNoReadStatus(meId, usId));
 	}
 
 	@RequestMapping(value = "/setDel", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo setDel(@RequestParam("meId") int meId, HttpServletRequest request) {
+	public AllInfo setDel(@RequestParam("meId") int meId, HttpSession session) {
 
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("setDel++" + meId + "++" + usId);
 		return new AllInfo(this.meStatusService.setDelStatus(meId, usId));
 	}
 
 	@RequestMapping(value = "/deleteReadNews", method = RequestMethod.POST)
 	@ResponseBody
-	private AllInfo deleteReadNews(HttpServletRequest request) {
+	private AllInfo deleteReadNews(HttpSession session) {
 
-		Integer usId = ((Login) request.getSession().getAttribute("login")).getUsId();
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("deleteReadNews++" + usId);
 		return new AllInfo(this.newsservice.deleteReadNews(usId));
+	}
+
+	/**
+	 * admin消息处理
+	 */
+	@RequestMapping("/getAdminNews")
+	private String getAdminNews(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		PageHelper.startPage(pa, pageSize);
+		List<Message> list = this.newsservice.getAllMessages();
+		PageInfo<Message> page = new PageInfo<Message>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("MeList", list);
+		model.addAttribute("nowNews", this.newsservice.getNowMessages());
+		return "admin/ad_newsInfo";
+	}
+
+	@RequestMapping(value = "/getReadNum", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo getReadNum(@RequestParam("meId") int meId) {
+
+		logger.info("getReadNum++" + meId);
+		return new AllInfo(this.newsservice.getNoReadNum(meId), this.newsservice.getReadedNum(meId),
+				this.newsservice.getDelNum(meId));
+	}
+
+	@RequestMapping(value = "/updataMessage", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo getReadNum(@RequestParam("meId") Integer meId, @RequestParam("meTitle") String meTitle,
+			@RequestParam("meSend") String meSend, @RequestParam("meReceive") String meReceive,
+			@RequestParam("meDate") String meDate, @RequestParam("meAbout") String meAbout) {
+		logger.info("updataMessage++" + meId + "++" + meTitle + "++" + meSend + "++" + meReceive + "++" + meDate + "++"
+				+ meAbout);
+		return new AllInfo(this.newsservice.updataMessage(meId, meTitle, meSend, meReceive, meDate, meAbout));
+	}
+
+	@RequestMapping(value = "/deleteMessage", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo getReadNum(@RequestParam("meId") Integer meId) {
+		logger.info("deleteMessage++" + meId);
+		return new AllInfo(this.newsservice.deleteMessage(meId));
+	}
+
+	@RequestMapping(value = "/addMessage", method = RequestMethod.POST)
+	@ResponseBody
+	private AllInfo addMessage(@RequestParam("meTitle") String meTitle, @RequestParam("meReceive") String meReceive,
+			@RequestParam("meAbout") String meAbout, HttpSession session) {
+
+		logger.info("addMessage++" + meTitle + "++" + meReceive + "++" + meAbout);
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		if (meReceive == "" || meReceive == null) {
+			meReceive = String.valueOf(0);
+		}
+		return new AllInfo(this.newsservice
+				.addMessage(new Message(meTitle, usId, meReceive, new Date(System.currentTimeMillis()), meAbout)));
 	}
 }

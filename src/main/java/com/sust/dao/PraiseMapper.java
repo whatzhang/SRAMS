@@ -32,4 +32,6 @@ public interface PraiseMapper {
 
 	String selectNameById(Integer prId);
 
+	List<Praise> selectAllPraiseInfo();
+
 }

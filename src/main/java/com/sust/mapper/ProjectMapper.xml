@@ -20,6 +20,12 @@
 		pro_about, pro_uptime
 	</sql>
 
+	<select id="selectAllProjectList"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_project
+	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select pro_name from sr_project where pro_id =

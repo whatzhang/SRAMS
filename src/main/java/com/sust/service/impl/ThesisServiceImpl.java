@@ -44,7 +44,8 @@ public class ThesisServiceImpl implements ThesisService {
 			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
-				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.thesisMapper.selectUpTimeByKey(deId)));
+				String re = MyUtils.deleteFile(dir,
+						new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.thesisMapper.selectUpTimeByKey(deId)));
 				this.thesisMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件成功！";
@@ -79,5 +80,11 @@ public class ThesisServiceImpl implements ThesisService {
 	public int upThesisInfo(Thesis thesis) {
 
 		return this.thesisMapper.updateByPrimaryKey(thesis);
+	}
+
+	@Override
+	public List<Thesis> getAllThInfo() {
+
+		return this.thesisMapper.selectAllThesis();
 	}
 }

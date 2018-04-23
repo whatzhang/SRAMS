@@ -17,6 +17,12 @@
 		pr_uptime
 	</sql>
 
+ 	<select id="selectAllPraiseInfo" 
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_praise
+	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select pr_name from sr_praise where pr_id =

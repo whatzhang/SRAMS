@@ -23,6 +23,12 @@
 		th_number, th_journal, th_page, th_about, th_uptime
 	</sql>
 	
+	<select id="selectAllThesis" 
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_thesis
+	</select>
 	<select id="selectNameByid" parameterType="java.lang.Integer"
 		resultType="String">
 		select th_name

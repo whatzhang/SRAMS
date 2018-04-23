@@ -23,4 +23,6 @@ public interface MeStatusMapper {
 	int updateSetNoReadStatus(@Param("meId") Integer meId, @Param("usId") Integer usId);
 
 	int updateSetDelStatus(@Param("meId") Integer meId, @Param("usId") Integer usId);
+
+	int deleteBymeId(Integer meId);
 }

@@ -34,8 +34,8 @@ public class ProjectController {
 	private ProjectService projectService;
 
 	@RequestMapping("/getUserProList")
-	private String getUserProList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session){
+	private String getUserProList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserProList++" + usId);
 		PageHelper.startPage(pa, pageSize);
@@ -59,7 +59,7 @@ public class ProjectController {
 	@ResponseBody
 	public AllInfo DeleteProInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteProInfo++" + deId+"++"+fg);
+		logger.info("DeleteProInfo++" + deId + "++" + fg);
 		return new AllInfo(this.projectService.DeleteProInfoById(deId, fg, "project", session));
 	}
 
@@ -92,5 +92,22 @@ public class ProjectController {
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(ProDate)), proCash, proLeader, proTeam, ProAbout,
 				new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
+	}
+
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllProList")
+	private String getAllProList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllProList++" + pageSize + "++" + pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Project> list = projectService.getAllProList();
+		PageInfo<Project> page = new PageInfo<Project>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("ProjectList", list);
+		return "admin/ad_project";
 	}
 }

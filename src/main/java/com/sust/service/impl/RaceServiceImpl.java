@@ -23,6 +23,7 @@ public class RaceServiceImpl implements RaceService {
 	private RaceMapper raceMapper;
 	@Autowired
 	private MyConfig config;
+
 	@Override
 	public List<Race> getUserRace(Integer usId) {
 
@@ -43,7 +44,8 @@ public class RaceServiceImpl implements RaceService {
 			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
-				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.raceMapper.selectUpTimeByKey(deId)));
+				String re = MyUtils.deleteFile(dir,
+						new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.raceMapper.selectUpTimeByKey(deId)));
 				this.raceMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件成功！";
@@ -76,6 +78,12 @@ public class RaceServiceImpl implements RaceService {
 	public int upRaInfo(Race race) {
 
 		return this.raceMapper.updateByPrimaryKey(race);
+	}
+
+	@Override
+	public List<Race> getAllRaceInfo() {
+
+		return this.raceMapper.selectAllRaceInfo();
 	}
 
 }

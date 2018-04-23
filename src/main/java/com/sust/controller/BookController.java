@@ -33,8 +33,8 @@ public class BookController {
 	private BookService bookService;
 
 	@RequestMapping("/getUserBoList")
-	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session) {
+	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserBoList++" + usId);
@@ -73,10 +73,14 @@ public class BookController {
 
 		logger.info("addBoInfo++" + usId + "++" + boName + "++" + boCategory + "++" + boDate + "++" + boEditor + "++"
 				+ boEditor2 + "++" + boFont + "++" + boPublish + "++" + boAbout);
-		int re = this.bookService
-				.addBoInfo(new Book(usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
-						boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
-		return new AllInfo(String.valueOf(re));
+		try {
+			this.bookService.addBoInfo(
+					new Book(usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
+							boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
+		} catch (Exception e) {
+			return new AllInfo("添加失败，请重试！");
+		}
+		return new AllInfo("添加成功");
 	}
 
 	@RequestMapping(value = "/upBoInfo", method = RequestMethod.GET)
@@ -90,9 +94,30 @@ public class BookController {
 
 		logger.info("upBoInfo++" + usId + "++" + boId + "++" + boName + "++" + boCategory + "++" + boDate + "++"
 				+ boEditor + "++" + boEditor2 + "++" + boFont + "++" + boPublish + "++" + boAbout);
-		int re = this.bookService.upBoInfo(
-				new Book(boId, usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
-						boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
-		return new AllInfo(String.valueOf(re));
+		try {
+			this.bookService.upBoInfo(
+					new Book(boId, usId, boName, boCategory, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(boDate)),
+							boEditor, boEditor2, boFont, boPublish, boAbout, new Date(System.currentTimeMillis())));
+		} catch (Exception e) {
+			return new AllInfo("信息更新失败，请重试！");
+		}
+		return new AllInfo("信息更新成功");
+	}
+
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllBoList")
+	private String getAllBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllBoList++" + pageSize + "++" + pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Book> list = bookService.getAllBoList();
+		PageInfo<Book> page = new PageInfo<Book>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("BookList", list);
+		return "admin/ad_book";
 	}
 }

@@ -20,4 +20,6 @@ public interface RaceService {
 
 	int upRaInfo(Race race);
 
+	List<Race> getAllRaceInfo();
+
 }

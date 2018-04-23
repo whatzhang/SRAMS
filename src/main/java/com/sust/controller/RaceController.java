@@ -34,8 +34,8 @@ public class RaceController {
 	private RaceService raceservice;
 
 	@RequestMapping("/getUserRaceInfo")
-	private String getUserRaceInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model,
-			HttpSession session){
+	private String getUserRaceInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		logger.info("getUserRaceInfo++" + usId);
 		PageHelper.startPage(pa, pageSize);
@@ -59,7 +59,7 @@ public class RaceController {
 	@ResponseBody
 	public AllInfo DeleteRaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 
-		logger.info("DeleteThInfo++" + deId+"++"+fg);
+		logger.info("DeleteThInfo++" + deId + "++" + fg);
 		return new AllInfo(this.raceservice.DeleteRaInfoByThid(deId, fg, "race", session));
 	}
 
@@ -95,5 +95,22 @@ public class RaceController {
 						raTeacher, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), raAbout,
 						new Date(System.currentTimeMillis())));
 		return new AllInfo(String.valueOf(re));
+	}
+
+	/**
+	 * admin数据处理
+	 */
+	@RequestMapping("/getAllRaceInfo")
+	private String getAllRaceInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model, HttpSession session) {
+
+		logger.info("getAllRaceInfo++" + pageSize + "++" + pa);
+		PageHelper.startPage(pa, pageSize);
+		List<Race> list = raceservice.getAllRaceInfo();
+		PageInfo<Race> page = new PageInfo<Race>(list);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("RaceList", list);
+		return "admin/ad_race";
 	}
 }

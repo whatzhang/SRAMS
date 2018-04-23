@@ -129,8 +129,8 @@ public class Patent {
 		this.paAbout = paAbout == null ? null : paAbout.trim();
 	}
 
-	public Date getPaUptime() {
-		return paUptime;
+	public String getPaUptime() {
+		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(paUptime);
 	}
 
 	public void setPaUptime(Date paUptime) {

@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	Login login = (Login) session.getAttribute("login");
 %>
@@ -38,7 +37,8 @@
 	src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/art-content.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <style type="text/css">
 td {
 	white-space: nowrap;
@@ -78,8 +78,11 @@ li {
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
-							<label class="col-sm-2 " align="center"><button
-									type="submit" class="btn btn-success">查找</button></label>
+							<button type="submit" class="btn btn-success col-sm-1">查找</button>
+							<a
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=project"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
 					</form>
 				</div>
@@ -154,7 +157,8 @@ li {
 												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-                                                href="${pageContext.request.contextPath}/download/downloadTypeFile?type=project&id=${RaceList.proId}"											title="下载文件"> <i class="fa fa-download mail-icon"
+											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=project&id=${RaceList.proId}"
+											title="下载文件"> <i class="fa fa-download mail-icon"
 												style="width: 1em; padding-left: 0.2em;"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
@@ -267,7 +271,7 @@ li {
 					</div>
 				</form>
 				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data" >
+					enctype="multipart/form-data">
 					<div class="form-group mb-n "
 						style="text-align: left; margin-left: 0.08em;">
 						<div style="float: left;">
@@ -552,6 +556,7 @@ li {
     function rePages(){
    var page = $("#pageSize").val();
    window.location.href = "${pageContext.request.contextPath}/project/getUserProList?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

@@ -1,3 +1,184 @@
+<error-page>
+		<!-- 将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径. -->
+		<error-code>404</error-code>
+		<!-- HTTP Error code,例如: 404、403 -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<exception-type>NullPointerException</exception-type>
+		<exception-type>java.text.ParseException</exception-type>
+		<exception-type>FileNotFoundException</exception-type>
+		<!-- 设置可能会发生的java异常类型,例如:java.lang.Exception -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+
+
+
+
+
+
+
+
+ var isCh = "ch";
+	    var meID = 0;
+		function refresh() {
+			window.location.href = "${pageContext.request.contextPath}/news/getAdminNews";
+		}
+		function setReadNum(ww) {
+		    document.getElementById('NoRead').innerText = ww.string1;
+		    document.getElementById('Readed').innerText = ww.string2;
+		    document.getElementById('delNews').innerText = ww.string3;
+		    $('NoRead').text(aa);
+	        $('Readed').val(bb);
+            $('delNews').html(cc);
+		}
+		function showNewsInfo(daa){
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/getReadNum",
+				data : {
+					meId : daa
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data){
+				    $('NoRead').text(data.string1);
+		            $('Readed').val(data.string2);
+		            $('delNews').html(data.string3);
+		            document.getElementById("NoRead").innerHTML = data.string1;
+				    document.getElementById("Readed").innerHTML = data.string2;
+				    document.getElementById("delNews").innerHTML = data.string3;
+				},
+				error : function(data) {
+					alert("获取信息错误!");
+				}
+			});
+		}
+		function setMyModel(data) {
+			if(isCh == "ch"){
+			    $("#meChange input").attr("readonly",false);
+			    alert(isCh);
+			}
+			document.getElementById('title').value = data.meTitle;
+			document.getElementById('send').value = data.meSend;
+			document.getElementById('resevice').value = data.meReceive;
+			document.getElementById('time').value = data.meDate;
+			document.getElementById('ab').value = data.meAbout;
+			alert("ss"+data.meTitle);
+		}
+		function getNewsById(meId) {
+		    meID = meId;
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/getNewsById",
+				data : {
+					meId : meId
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : setMyModel,
+				error : function(data) {
+					alert("获取信息错误!");
+				}
+			});
+		}
+		function rePages() {
+			var page = $("#pageSize").val();
+			window.location.href = "${pageContext.request.contextPath}/news/getAdminNews?pageSize=" + page;
+			window.parent.scrollTo(0, 0);
+		}
+		function showMessage(meId){
+		    alert(meId);
+		    isCh = "ch";
+			getNewsById(meId);
+		}
+		function chMessage(id){
+		    alert(id);
+		    isCh = "ch";
+		    getNewsById(id);
+		}
+		function updataMessage(){
+			var aa = document.getElementById('title').value;
+			var bb = document.getElementById('send').value;
+			var cc = document.getElementById('resevice').value;
+			var dd = document.getElementById('time').value;
+			var ee = document.getElementById('ab').value;
+			 var too ={
+			    meId : meID
+				meTitle : aa,
+				meSend : bb,
+				meReceive : cc,
+				meDate : dd,
+				meAbout : ee
+		     }
+		    $.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/news/updataMessage",
+				data : too,
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data){
+				    alert("更新成功！");
+					window.location.href = "${pageContext.request.contextPath}/news/getAdminNews";
+				}
+				error : function(data) {
+					alert("获取信息错误!");
+				}
+			});
+		}
+		function deleteMe(me){
+		    $.ajax({
+					type : "POST",
+					url : "${pageContext.request.contextPath}/news/deleteMessage",
+					data : {
+						meId : me
+					},
+					dataType : 'json',
+					cache : false,
+					async : true,
+					success : function(data){
+					    alert(data.string1);
+						window.location.href = "${pageContext.request.contextPath}/news/getAdminNews";
+					}
+					error : function(data) {
+						alert("获取信息错误!");
+					}
+				});
+		}
+		function deleteMessage(me){
+		    if(confirm("确定删除此条消息？")){ 
+			     alert(me);
+			     deleteMe(me);
+			}
+		}
+
+
+
+
+<error-page>
+		<!-- 将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径. -->
+		<error-code>404</error-code>
+		<!-- HTTP Error code,例如: 404、403 -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<exception-type>NullPointerException</exception-type>
+		<exception-type>java.text.ParseException</exception-type>
+		<exception-type>FileNotFoundException</exception-type>
+		<!-- 设置可能会发生的java异常类型,例如:java.lang.Exception -->
+		<location>/error.jsp</location>
+		<!-- 用来设置发生错误或异常时要显示的页面 -->
+	</error-page>
+
+
 ajax请求其实就是三种HTTP错误
 404 路径不正确,或者网络问题
 500 服务器内部错误,一般为程序代码错误

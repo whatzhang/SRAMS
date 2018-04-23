@@ -78,8 +78,11 @@ li {
 								<input type="text" class="form-control1 input-lg"
 									id="largeinput" placeholder=" ">
 							</div>
-							<label class="col-sm-2 " align="center"><button
-									type="submit" class="btn btn-success">查找</button></label>
+							<button type="submit" class="btn btn-success col-sm-1">查找</button>
+							<a
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=book"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
 					</form>
 				</div>
@@ -579,6 +582,7 @@ li {
     function rePages(){
    var page = $("#pageSize").val();
    window.location.href = "${pageContext.request.contextPath}/book/getUserBoList?pageSize="+page;
+   window.parent.scrollTo(0, 0);
    }
 </script>
 </html>

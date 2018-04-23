@@ -45,3 +45,15 @@ XMLHttpRequest.readyState: 状态码的意思
 5. URL路径问题
 
     路径不能有中文
+    
+    
+
+		<%-- <jsp:include page="users/userInfo.jsp"></jsp:include>
+		<jsp:include page="users/upPass.jsp"></jsp:include>
+		<jsp:include page="users/patent.jsp"></jsp:include>
+		<jsp:include page="users/praise.jsp"></jsp:include>
+		<jsp:include page="users/project.jsp"></jsp:include>
+		<jsp:include page="users/book.jsp"></jsp:include>
+		<jsp:include page="users/race.jsp"></jsp:include>
+		<jsp:include page="users/other.jsp"></jsp:include>
+		<jsp:include page="users/thesis.jsp"></jsp:include> --%>

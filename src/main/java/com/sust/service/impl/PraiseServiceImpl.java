@@ -23,6 +23,7 @@ public class PraiseServiceImpl implements PraiseService {
 	private PraiseMapper praiseMapper;
 	@Autowired
 	private MyConfig config;
+
 	@Override
 	public List<Praise> getUserPraiseInfo(Integer usId) {
 
@@ -43,7 +44,8 @@ public class PraiseServiceImpl implements PraiseService {
 			String dir = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
 					+ File.separatorChar;
 			if (MyUtils.CreatDir(new File(dir))) {
-				String re = MyUtils.deleteFile(dir, new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.praiseMapper.selectUpTimeByKey(deId)));
+				String re = MyUtils.deleteFile(dir,
+						new SimpleDateFormat("yyyyMMddhhmmssSSS").format(this.praiseMapper.selectUpTimeByKey(deId)));
 				this.praiseMapper.deleteByPrimaryKey(deId);
 				if (!re.equals("NO_SUCH_FILE")) {
 					result = "删除文件和信息成功！";
@@ -76,6 +78,12 @@ public class PraiseServiceImpl implements PraiseService {
 	public int upPrInfo(Praise praise) {
 
 		return this.praiseMapper.updateByPrimaryKey(praise);
+	}
+
+	@Override
+	public List<Praise> getAllPraiseInfo() {
+
+		return this.praiseMapper.selectAllPraiseInfo();
 	}
 
 }
