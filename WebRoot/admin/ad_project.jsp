@@ -80,7 +80,7 @@ li {
 							</div>
 							<button type="submit" class="btn btn-success col-sm-1">查找</button>
 							<a
-								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=project"><button
+								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=project"><button
 									type="button" class="btn btn-success col-sm-2"
 									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>

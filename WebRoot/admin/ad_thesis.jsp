@@ -84,7 +84,7 @@ li {
 							</div>
 							<button type="submit" class="btn btn-success col-sm-1">查找</button>
 							<a
-								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=thesis"><button
+								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=thesis"><button
 									type="button" class="btn btn-success col-sm-2"
 									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
 						</div>
@@ -107,7 +107,7 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
 							<th style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>thUptime
+							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
 							<th style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
 							<th
 								style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>

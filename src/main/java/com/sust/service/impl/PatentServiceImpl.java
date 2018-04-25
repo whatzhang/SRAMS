@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.sust.dao.PatentMapper;
 import com.sust.entity.MyConfig;
 import com.sust.entity.Patent;
-import com.sust.entity.Thesis;
 import com.sust.other.MyUtils;
 import com.sust.service.PatentService;
 
@@ -77,7 +76,7 @@ public class PatentServiceImpl implements PatentService {
 	}
 
 	@Override
-	public List<Thesis> getAllPaInfo() {
+	public List<Patent> getAllPaInfo() {
 
 		return this.petentMapper.selectAllPaInfo();
 	}

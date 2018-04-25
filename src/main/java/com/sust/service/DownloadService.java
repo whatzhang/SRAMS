@@ -11,5 +11,5 @@ public interface DownloadService {
 
 	String DeleteUnusedFile(HttpSession session, int id, String type);
 
-	File getWorkBookStream(int usId, String type, HttpSession session);
+	File getWorkBookStream(int usId, String type, HttpSession session, String flg);
 }

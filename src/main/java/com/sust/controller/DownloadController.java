@@ -124,7 +124,32 @@ public class DownloadController {
 		ResponseEntity<byte[]> entity = null;
 		try {
 			entity = new ResponseEntity<byte[]>(
-					FileUtils.readFileToByteArray(this.downloadService.getWorkBookStream(usId, type, session)), headers,
+					FileUtils.readFileToByteArray(this.downloadService.getWorkBookStream(usId, type, session, "PART")), headers,
+					HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadTypeExcl_ResponseEntity_error");
+		}
+		return entity;
+	}
+	
+	@RequestMapping("/downloadAllTypeExcl")
+	public ResponseEntity<byte[]> downloadAllTypeExcl(@RequestParam("type") String type, HttpSession session) {
+
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		logger.info("downloadTypeExcl+" + usId + "++" + type);
+		HttpHeaders headers = new HttpHeaders();
+		String FileName ="All" + type + "Excl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadTypeExcl_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getWorkBookStream(usId, type, session, "ALL")), headers,
 					HttpStatus.CREATED);
 		} catch (IOException e) {
 			logger.error("downloadTypeExcl_ResponseEntity_error");
@@ -132,4 +157,28 @@ public class DownloadController {
 		return entity;
 	}
 
+	@RequestMapping("/downloadExcelTemplets")
+	public ResponseEntity<byte[]> downloadExcelTemplets(@RequestParam("type") String type, HttpSession session) {
+
+		Integer usId = ((Login) session.getAttribute("login")).getUsId();
+		logger.info("downloadTypeExcl+" + usId + "++" + type);
+		HttpHeaders headers = new HttpHeaders();
+		String FileName ="Templets" + type + "Excl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadTypeExcl_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getWorkBookStream(usId, type, session, "ALL")), headers,
+					HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadTypeExcl_ResponseEntity_error");
+		}
+		return entity;
+	}
 }

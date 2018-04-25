@@ -22,7 +22,6 @@ import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Patent;
-import com.sust.entity.Thesis;
 import com.sust.service.PatentService;
 
 @Controller
@@ -105,8 +104,8 @@ public class PatentController {
 
 		logger.info("getAllPaInfo++" + pageSize + "++" + pa);
 		PageHelper.startPage(pa, pageSize);
-		List<Thesis> thList = this.patentService.getAllPaInfo();
-		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
+		List<Patent> thList = this.patentService.getAllPaInfo();
+		PageInfo<Patent> page = new PageInfo<Patent>(thList);
 		model.addAttribute("ps", pageSize);
 		model.addAttribute("page", page);
 		model.addAttribute("PatentList", thList);
