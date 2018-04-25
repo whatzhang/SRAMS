@@ -25,6 +25,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sr_race
+		order by ra_uptime desc
 	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">

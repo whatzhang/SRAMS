@@ -1,5 +1,7 @@
 package com.sust.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +26,12 @@ public class UserServiceImpl implements UserService {
 	public int upUserInfo(Users users) {
 
 		return this.userMapper.updateByPrimaryKey(users);
+	}
+
+	@Override
+	public List<String> getUsidByPartName(String usName) {
+		
+		return this.userMapper.selectUsidByPartName(usName);
 	}
 
 }

@@ -97,15 +97,19 @@ li {
 								style="text-align: center; vertical-align: middle; width: 5%;"><input
 								type="checkbox" name="prId"></th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖名称</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">获奖名称</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖类别</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">获奖者</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖日期</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">获奖类别</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">颁发单位</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">获奖日期</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 29%;">获奖简介</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">颁发单位</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 25%;">获奖简介</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
 							<th
 								style="text-align: center; vertical-align: middle; width: 10%;">操作</th>
 						</tr>
@@ -117,25 +121,33 @@ li {
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
 									type="checkbox" value="${RaceList.prId}" name="prId"></td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.prName}">${RaceList.prName}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${RaceList.prAuthor}">${RaceList.prAuthor}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.prCategory}">${RaceList.prCategory}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.prDate}">${RaceList.prDate}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.prUnit}">${RaceList.prUnit}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 29%;"
+									style="text-align: center; vertical-align: middle; width: 25%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.prAbout}">${RaceList.prAbout}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 10%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${RaceList.prUptime}">${RaceList.prUptime}</td>
 								<th align="center"
 									style="width: 10%; text-align: center; vertical-align: middle;">
 									<div style="width: 100%; height: 2em;">
@@ -233,6 +245,10 @@ li {
 								title="颁发单位" name="prUnit" placeholder="颁发单位"
 								required="required">
 						</div>
+					    <div class="col-sm-4">
+							<input type="text" name="prAuthor"  title="获奖人"
+								class="form-control1 input-lg" id="prAuthor" placeholder="获奖人" required="required">
+						</div>
 					</div>
 					<div class="form-group mb-n">
 						<div class="col-sm-12">
@@ -280,7 +296,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">获奖名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -299,6 +315,16 @@ li {
 									class=" control-label label-input-lg">获奖时间</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="pr_da" id="pr_da" readonly="true"></td>
+							</tr>
+							<tr>
+							<td><label for="largeinput"
+									class=" control-label label-input-lg">获奖人</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="pr_au" id="pr_au" readonly="true"></td>
+							    <td> <label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="pr_time" id="pr_time" readonly="true"></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -347,6 +373,7 @@ li {
 		$("#prCategory").val(data.prCategory);
 		$("#Cdate").val(data.prDate);
 		$("#prUnit").val(data.prUnit);
+		$("#prAuthor").val(data.prAuthor);
 		$("#prAbout").val(data.prAbout);
 	}
     function showInfoModel(data) {
@@ -354,6 +381,8 @@ li {
 		$("#pr_ca").val(data.prCategory);
 		$("#pr_da").val(data.prDate);
 		$("#pr_ty").val(data.prUnit);
+		$("#pr_au").val(data.prAuthor);
+		$("#pr_time").val(data.prUptime);
 		$("#pr_ab").val(data.prAbout);
 		showInfo(data);
 	}

@@ -1,5 +1,7 @@
 package com.sust.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Users;
@@ -21,4 +23,6 @@ public interface UsersMapper {
 	int insertUserInfo(Users users);
 
 	int selectByNum(String usNum);
+
+	List<String> selectUsidByPartName(String Part);
 }

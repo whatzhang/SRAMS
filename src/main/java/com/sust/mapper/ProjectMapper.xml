@@ -25,6 +25,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sr_project
+		order by pro_uptime desc
 	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">

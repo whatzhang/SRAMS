@@ -97,19 +97,23 @@ li {
 								style="text-align: center; vertical-align: middle; width: 5%;"><input
 								type="checkbox" name="raId"></th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">竞赛名称</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">竞赛名称</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">竞赛类别</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">获奖人</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">个人/团体</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">竞赛类别</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">获奖等级</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">个人/团体</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">指导老师</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">获奖等级</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">获奖日期</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">指导老师</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 25%;">竞赛简介</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">获奖日期</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 23%;">竞赛简介</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 8%;">上传日期</th>
 							<th
 								style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
 						</tr>
@@ -121,33 +125,41 @@ li {
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
 									type="checkbox" value="${RaceList.raId}" name="raId"></td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raName}">${RaceList.raName}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${RaceList.raAuthor}">${RaceList.raAuthor}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raCategory}">${RaceList.raCategory}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raType}">${RaceList.raType}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raLevel}">${RaceList.raLevel}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raTeacher}">${RaceList.raTeacher}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 25%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raDate}">${RaceList.raDate}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 25%;"
+									style="text-align: center; vertical-align: middle; width: 23%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raAbout}">${RaceList.raAbout}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 8%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${RaceList.raUptime}">${RaceList.raUptime}</td>
 								<th align="center"
 									style="width: 8%; text-align: center; vertical-align: middle;">
 									<div style="width: 100%; height: 2em;">
@@ -260,6 +272,13 @@ li {
 						</div>
 					</div>
 					<div class="form-group mb-n">
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="raAuthor"
+								title="获奖人" name="raAuthor" placeholder="获奖人"
+								required="required">
+						</div>
+					</div>
+					<div class="form-group mb-n">
 						<div class="col-sm-12">
 							<textarea rows="2" class="form-control1 control2 " name="raAbout"
 								id="raAbout" style="font-size: 1em;"
@@ -305,7 +324,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">竞赛名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -334,6 +353,16 @@ li {
 									class=" control-label label-input-lg">指导老师</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="ra_te" id="ra_te" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">获奖人</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_au" id="ra_au" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传日期</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_time" id="ra_time" readonly="true"></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -387,6 +416,7 @@ li {
 		$("#raLevel").val(data.raLevel);
 		$("#raType").get(0).options[0].text = data.raType;
 		$("#raTeacher").val(data.raTeacher);
+		$("#raAuthor").val(data.raAuthor);
 		$("#raAbout").val(data.raAbout);
 	}
     function showInfoModel(data) {
@@ -397,10 +427,12 @@ li {
 		$("#ra_ty").val(data.raType);
 		$("#ra_te").val(data.raTeacher);
 		$("#ra_ab").val(data.raAbout);
+		$("#ra_au").val(data.raAuthor);
+		$("#ra_time").val(data.raUptime);
 		showInfo(data);
 	}
     function setInfo(raId) {
-    	idd = reId;
+    	idd = raId;
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/race/getRaInfo",

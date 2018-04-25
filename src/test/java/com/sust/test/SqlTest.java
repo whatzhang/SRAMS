@@ -116,5 +116,15 @@ public class SqlTest {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	public void getUsidByPartName(){
+		
+		List<String> result = this.usersMapper.selectUsidByPartName("em");
+		System.out.println(result.get(0));
+		for (int i = 0; i < result.size(); i++) {
+			System.out.println(result.get(i));
+		}
+	}
 
 }

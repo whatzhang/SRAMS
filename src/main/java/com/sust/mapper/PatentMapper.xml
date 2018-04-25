@@ -24,6 +24,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sr_patent
+		order by pa_uptime desc
 	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">

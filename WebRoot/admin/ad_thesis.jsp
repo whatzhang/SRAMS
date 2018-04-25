@@ -100,16 +100,18 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 4%;"><input
 								type="checkbox" name="thId"></th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">论文类别</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">论文级别</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">影响因子</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">是否收录</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
+							<th style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">起止页码</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>thUptime
+							<th style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
 							<th
-								style="text-align: center;vertical-align: middle; width: 25%;">论文简介</th>
+								style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
 							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
 						</tr>
 					</thead>
@@ -125,19 +127,22 @@ li {
 							<td style="text-align: center;vertical-align: middle; width: 7%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThName()%>"><%=lt.get(i).getThName()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThCategory()%>"><%=lt.get(i).getThCategory()%></td>
 							<td style="text-align: center;vertical-align: middle; width: 7%;"
 								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
+								title="<%=lt.get(i).getThAuthor()%>"><%=lt.get(i).getThAuthor()%></td>
 							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThLevel()%>"><%=lt.get(i).getThLevel()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThFactor()%>"><%=lt.get(i).getThFactor()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
+							<td style="text-align: center;vertical-align: middle; width: 4%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThIncluded()%>"><%=lt.get(i).getThIncluded()%></td>
 							<td style="text-align: center;vertical-align: middle; width: 7%;"
@@ -146,13 +151,16 @@ li {
 							<td style="text-align: center;vertical-align: middle; width: 7%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThJournal()%>"><%=lt.get(i).getThJournal()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThPage()%>"><%=lt.get(i).getThPage()%></td>
 							<td
-								style="text-align: center;vertical-align: middle; width: 25%;"
+								style="text-align: center;vertical-align: middle; width: 17%;"
 								data-toggle="tooltip" data-placement="top"
 								title="<%=lt.get(i).getThAbout()%>"><%=lt.get(i).getThAbout()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThUptime()%>"><%=lt.get(i).getThUptime()%></td>
 							<th align="center"
 								style="width: 8%;text-align: center;vertical-align: middle;">
 								<div style="width: 100%;height: 2em;">
@@ -292,6 +300,13 @@ li {
 						</div>
 					</div>
 					<div class="form-group mb-n">
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="thAuthor"
+								title="论文作者" name="thAuthor" placeholder="论文作者"
+								required="required">
+						</div>
+					</div>
+					<div class="form-group mb-n">
 						<div class="col-sm-12">
 							<textarea rows="2" class="form-control1 control2 " name="thAbout"
 								id="thAbout" style="font-size: 1em;"
@@ -390,6 +405,15 @@ li {
 									name="th_pa" id="th_pa" readonly="true"></td>
 							</tr>
 							<tr>
+							    <td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="th_time" id="th_time" readonly="true"></td>
+								<td></td>
+								<td></td>
+							
+							</tr>
+							<tr>
 								<td colspan="4" style="text-align: left;"><label
 									for="largeinput" class=" control-label label-input-lg">论文简介</label></td>
 							</tr>
@@ -431,6 +455,7 @@ li {
 				$("#th_nu").val(data.thNumber);
 				$("#th_ja").val(data.thJournal);
 				$("#th_pa").val(data.thPage);
+				$("#th_time").val(data.thUptime);
 				$("#th_ab").val(data.thAbout);
 				showUpInfo(data);
 			}
@@ -460,6 +485,7 @@ li {
 				$("#thNum").val(data.thNumber);
 				$("#thJour").val(data.thJournal);
 				$("#thPage").val(data.thPage);
+				$("thAuthor").val(data.thAuthor);
 				$("#thAbout").val(data.thAbout);
 			}
 			function showUpThInfo(upId) {
@@ -556,14 +582,15 @@ li {
 				var thNum = $("#thNum").val();
 				var thJour = $("#thJour").val();
 				var thPage = $("#thPage").val();
+				var thAuthor = $("#thAuthor").val();
 				var thAbout = $("#thAbout").val();
 				//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
 				$.ajax({
 					type : "GET",
-					url : "${pageContext.request.contextPath}/thesis/addThesisInfo",
+					url : "${pageContext.request.contextPath}/thesis/addAllThesisInfo",
 					data : {
-					    usId : <%=login.getUsId()%>,
 						thName : thName,
+						thAuthor : thAuthor,
 						thCate : thCate,
 						Cdate : Cdate,
 						thLevel : thLevel,
@@ -597,15 +624,16 @@ li {
 				var thNum = $("#thNum").val();
 				var thJour = $("#thJour").val();
 				var thPage = $("#thPage").val();
+				var thAuthor = $("#thAuthor").val();
 				var thAbout = $("#thAbout").val();
 				//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
 				$.ajax({
 					type : "GET",
-					url : "${pageContext.request.contextPath}/thesis/updateThInfo",
+					url : "${pageContext.request.contextPath}/thesis/updateAllThInfo",
 					data : {
-					    usId : <%=login.getUsId()%>,
 					    thId : idd,
 						thName : thName,
+						thAuthor : thAuthor,
 						thCate : thCate,
 						Cdate : Cdate,
 						thLevel : thLevel,

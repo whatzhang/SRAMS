@@ -3,6 +3,7 @@ package com.sust.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -60,5 +61,19 @@ public class UserController {
 				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(usBirthday)), usNum, usDuty, usMajor, usAddress,
 				usMail, usPhone, usAcademy, usQuestion1, usKey1, usQuestion2, usKey2));
 		return new AllInfo(String.valueOf(re));
+	}
+
+	@RequestMapping(value = "/getUsidByPartName", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> getUsidByPartName(@RequestParam("Name") String usName) throws ParseException {
+
+		logger.info("getUsidByPartName++" + usName);
+
+		List<String> result = this.userService.getUsidByPartName(usName);
+		for (int i = 0; i < result.size(); i++) {
+			System.out.println(result.get(i));
+		}
+
+		return result;
 	}
 }

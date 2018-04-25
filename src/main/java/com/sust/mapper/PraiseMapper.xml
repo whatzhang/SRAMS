@@ -22,6 +22,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sr_praise
+		order by pr_uptime desc
 	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">

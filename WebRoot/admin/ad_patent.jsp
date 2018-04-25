@@ -97,17 +97,21 @@ li {
 								style="text-align: center; vertical-align: middle; width: 5%;"><input
 								type="checkbox" name="paId" id="paId"></th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">专利名称</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">专利名称</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 12%;">专利类别</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">专利作者</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 12%;">申请时间</th>
+								style="text-align: center; vertical-align: middle; width: 8%;">专利类别</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 12%;">授权时间</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">申请时间</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 12%;">专利号</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">授权时间</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 9%;">专利号</th>
 							<th
 								style="text-align: center; vertical-align: middle; width: 25%;">专利简介</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
 							<th
 								style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
 						</tr>
@@ -119,29 +123,37 @@ li {
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
 									type="checkbox" value="${List.paId}" name="paId"></td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paName}">${List.paName}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 12%;"
+									style="text-align: center; vertical-align: middle; width: 8%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paAuthor}">${List.paAuthor}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 8%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paCategory}">${List.paCategory}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 12%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paPlease}">${List.paPlease}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 12%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paDate}">${List.paDate}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 12%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paNumber}">${List.paNumber}</td>
 								<td
 									style="text-align: center; vertical-align: middle; width: 25%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${List.paAbout}">${List.paAbout}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 10%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paUptime}">${List.paUptime}</td>
 								<th align="center"
 									style="width: 8%; text-align: center; vertical-align: middle;">
 									<div style="width: 100%; height: 2em;">
@@ -241,6 +253,10 @@ li {
 							<input type="text" name="Cdate1" readonly="readonly" title="授权时间"
 								class="form-control1 input-lg" id="Cdate1" required="required">
 						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="paAuthor"
+								title="专利作者" name="paAuthor" placeholder="专利作者" required="required">
+						</div>
 					</div>
 					<div class="form-group mb-n">
 						<div class="col-sm-12">
@@ -288,7 +304,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">专利名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -313,6 +329,16 @@ li {
 									class=" control-label label-input-lg">专利号</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="ra_le" id="ra_le" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">专利作者</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_au" id="ra_au" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_time" id="ra_time" readonly="true"></td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -364,6 +390,7 @@ li {
 		$("#Cdate").val(data.paPlease);
 		$("#Cdate1").val(data.paDate);
 		$("#raAbout").val(data.paAbout);
+	    $("#paAuthor").val(data.paAuthor);
 	}
     function showInfoModel(data) {
     	 $("#ra_na").val(data.paName);
@@ -371,8 +398,10 @@ li {
 		 $("#ra_ty").val(data.paPlease);
 		 $("#ra_da").val(data.paDate);
 		 $("#ra_le").val(data.paNumber);
-		$("#ra_ab").val(data.paAbout);
-		showInfo(data);
+		 $("#ra_au").val(data.paAuthor);
+		 $("#ra_time").val(data.paUptime);
+		 $("#ra_ab").val(data.paAbout);
+		 showInfo(data);
 	}
     function setInfo(Id) {
     	idd = Id;
@@ -449,6 +478,7 @@ li {
 				usId : <%=login.getUsId()%>,
 				Id : idd,
 				paName : $("#raName").val(),
+				paAuthor : $("#paAuthor").val(),
 				paCategory : $("#raCategory").val(),
 				paNumber : $("#raLevel").val(),
 				paPlease : $("#Cdate").val(),

@@ -132,4 +132,51 @@ public class ThesisController {
 		model.addAttribute("list", thList);
 		return "admin/ad_thesis";
 	}
+	
+	@RequestMapping(value = "/addAllThesisInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, String> addAllThesisInfo(@RequestParam("usId") int usId, @RequestParam("thName") String thName,
+			@RequestParam("thAuthor") String thAuthor,
+			@RequestParam("thCate") String thCate, @RequestParam("Cdate") String Cdate,
+			@RequestParam("thLevel") String thLevel, @RequestParam("thfactor") String thfactor,
+			@RequestParam("thIscloud") String thIscloud, @RequestParam("thNum") String thNum,
+			@RequestParam("thJour") String thJour, @RequestParam("thPage") String thPage,
+			@RequestParam("thAbout") String thAbout) throws ParseException {
+
+		logger.info("addAllThesisInfo++" + usId + "++" + thName + "++" + thName + "++" + thCate + "++" + Cdate + "++"
+				+ thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++"
+				+ thAbout);
+		int sta = this.thesisService.addThesis(new Thesis(usId, thName, thCate, thAuthor,
+				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel, thfactor, thIscloud, thNum, thJour,
+				thPage, thAbout, new Date()));
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("status", String.valueOf(sta));
+		result.put("info", "添加论文信息成功！");
+		result.put("urlNext", "/thesis/getAllThInfo");
+		return result;
+	}
+	
+	@RequestMapping(value = "/updateAllThInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, String> updateAllThInfo(@RequestParam("usId") int usId, @RequestParam("thId") int thId,
+			@RequestParam("thName") String thName, @RequestParam("thCate") String thCate,
+			@RequestParam("Cdate") String Cdate, @RequestParam("thLevel") String thLevel,
+			@RequestParam("thfactor") String thfactor, @RequestParam("thIscloud") String thIscloud,
+			@RequestParam("thNum") String thNum, @RequestParam("thJour") String thJour,
+			@RequestParam("thPage") String thPage, @RequestParam("thAbout") String thAbout) throws ParseException {
+
+		logger.info("updateAllThInfo++" + usId + "++" + thId + "++" + thName + "++" + thName + "++" + thCate + "++" + Cdate
+				+ "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage
+				+ "++" + thAbout);
+		int sta = this.thesisService.upThesisInfo(new Thesis(thId, usId, thName, thCate,
+				thesisService.getUserNameById(usId), (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel,
+				thfactor, thIscloud, thNum, thJour, thPage, thAbout, new Date()));
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("status", String.valueOf(sta));
+		result.put("info", "修改论文信息成功！");
+		result.put("urlNext", "/thesis/getAllThInfo");
+		return result;
+	}
+	
+	
 }

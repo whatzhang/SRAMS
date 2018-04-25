@@ -25,6 +25,15 @@
 		us_mail, us_phone, us_academy, us_question1, us_key1, us_question2, us_key2
 	</sql>
 	
+	
+	<select id="selectUsidByPartName" parameterType="String"
+		resultType="String">
+		select us_name 
+		from sr_users 
+		<!-- where concat('%',#{Part,jdbcType=VARCHAR},'%') -->
+		<!-- where position('#{Part,jdbcType=VARCHAR}' in us_name)   -->
+		<!--  where us_name like "%"#{Part,jdbcType=VARCHAR}"%" --> 
+	</select>
 	<select id="selectByNum" parameterType="String"
 		resultType="java.lang.Integer">
 		select us_id from sr_users where us_num = #{usNum,jdbcType=VARCHAR}

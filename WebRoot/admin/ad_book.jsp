@@ -52,7 +52,6 @@ li {
 </style>
 </head>
 <body>
-
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
 			<div class="panel-info">
@@ -321,7 +320,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">教材名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -356,8 +355,11 @@ li {
 									class=" control-label label-input-lg">出版社</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="bo_pu" id="bo_pu" readonly="true"></td>
-								<td></td>
-								<td></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+										name="boUptime" title="文件上传时间" id="boUptime"
+										placeholder="文件上传时间" readonly="true"></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -419,6 +421,7 @@ li {
 		$("#bo_e2").val(data.boEditor2);
 		$("#bo_pa").val(data.boFont);
 		$("#bo_pu").val(data.boPublish);
+		$("#boUptime").val(data.boUptime);
 		$("#bo_ab").val(data.boAbout);
 		showInfo(data);
 	}
@@ -595,7 +598,7 @@ li {
 	   /*  $(usId).addClass("select");
         $("#"+usId).attr("checked", true); */
         //$(this).find("td").addClass("backcolor_font");
-         alert(usId);
+        // alert(usId);
 	}
 </script>
 </html>

@@ -52,7 +52,6 @@ li {
 }
 </style>
 </head>
-
 <body>
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
@@ -186,9 +185,9 @@ li {
 				</div>
 				<div style="width: 37%; float: right;padding-top: 5px;">
 					<div class="panel-info">
-						<div class=" panel-body-inputin" >
+						<div class=" panel-body-inputin">
 							<form class="form-horizontal" name="loginINFO" id="loginINFO">
-								<div class="form-group mb-n" >
+								<div class="form-group mb-n">
 									<div class="btn-group" style="margin-left: 1em;">
 										<button type="button" class="btn btn-danger" id="loginChange"
 											onclick="loginCh();">修改信息</button>
@@ -219,17 +218,20 @@ li {
 									</div>
 								</div>
 								<div class="form-group mb-n">
-									<div class="col-sm-6" style="font-size: 0.9em; color: #aaa;">
-										<input name="TType" type="radio" value="user" checked>普通用户&nbsp;&nbsp;&nbsp;&nbsp;
-										<input name="TType" type="radio" value="admin">管理员 &nbsp;&nbsp;&nbsp;&nbsp;
-										<input name="TType" type="radio" value="super">超级管理员
+									<div class="col-sm-6">
+										<select class="form-control1">
+											<option>用户权限</option>
+											<option>普通用户</option>
+											<option>管理员</option>
+										</select>
 									</div>
 								</div>
 								<br>
 								<hr>
 								<div class="form-group mb-n col-sm-6"
 									style="padding-right: 2em; float: right;">
-									<button style="float: right; margin-left: 1em;" type="reset" class="btn btn-info">重新填写</button>
+									<button style="float: right; margin-left: 1em;" type="reset"
+										class="btn btn-info">重新填写</button>
 									<button style="float: right;" type="submit"
 										class="btn btn-success" onclick="return loginIsOp();">确认提交</button>
 								</div>
@@ -267,7 +269,7 @@ li {
 						<%
 							for (int i = 0; i < 10; i++) {
 						%>
-						<tr >
+						<tr>
 							<td
 								style="text-align: center; vertical-align: middle; width: 4%;"><input
 								type="checkbox" value="${RaceList.prId}" name="usId"></td>
@@ -562,12 +564,12 @@ li {
 			return false;
 		}
 	}
-	function chanceThis(usId){
-	    document.getElementById("NumId").value = this.id; 
-	    $(this).addClass("select").siblings().removeClass("select");
-        $(this).find(":checkbox").attr("checked", true);
-        $(this).find("td").addClass("backcolor_font");
-	    alert(usId);
+	function chanceThis(usId) {
+		document.getElementById("NumId").value = this.id;
+		$(this).addClass("select").siblings().removeClass("select");
+		$(this).find(":checkbox").attr("checked", true);
+		$(this).find("td").addClass("backcolor_font");
+		alert(usId);
 	}
 </script>
 </html>

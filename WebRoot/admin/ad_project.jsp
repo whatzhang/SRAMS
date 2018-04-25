@@ -97,19 +97,21 @@ li {
 								style="text-align: center; vertical-align: middle; width: 5%;"><input
 								type="checkbox" name="proId"></th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">项目名称</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">项目名称</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">项目类别</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">项目类别</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">立项时间</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">立项时间</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">项目金额</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">项目金额</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">项目负责人</th>
+								style="text-align: center; vertical-align: middle; width: 9%;">项目负责人</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">团队成员</th>
+								style="text-align: center; vertical-align: middle; width: 10%;">团队成员</th>
 							<th
-								style="text-align: center; vertical-align: middle; width: 25%;">获奖简介</th>
+								style="text-align: center; vertical-align: middle; width: 21%;">获奖简介</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
 							<th
 								style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
 						</tr>
@@ -121,33 +123,37 @@ li {
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
 									type="checkbox" value="${RaceList.proId}" name="proId"></td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proName}">${RaceList.proName}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proCategory}">${RaceList.proCategory}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proDate}">${RaceList.proDate}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proCash}">${RaceList.proCash}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
+									style="text-align: center; vertical-align: middle; width: 9%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proLeader}">${RaceList.proLeader}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
+									style="text-align: center; vertical-align: middle; width: 10%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proTeam}">${RaceList.proTeam}</td>
 								<td
-									style="text-align: center; vertical-align: middle; width: 25%;"
+									style="text-align: center; vertical-align: middle; width: 21%;"
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.proAbout}">${RaceList.proAbout}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 10%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${RaceList.proUptime}">${RaceList.proUptime}</td>
 								<th align="center"
 									style="width: 8%; text-align: center; vertical-align: middle;">
 									<div style="width: 100%; height: 2em;">
@@ -301,7 +307,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">项目名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -330,6 +336,14 @@ li {
 									class=" control-label label-input-lg">团队成员</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="bo_pa" id="bo_pa" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="bo_time" id="bo_time" readonly="true"></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -380,6 +394,7 @@ li {
 		$("#proCash").val(data.proCash);
 		$("#proLeader").val(data.proLeader);
 		$("#proTeam").val(data.proTeam);
+		$("#proUptime").val(data.proUptime);
 		$("#proAbout").val(data.proAbout);
 	}
     function showInfoModel(data) {
@@ -389,6 +404,7 @@ li {
 		$("#bo_e1").val(data.proCash);
 		$("#bo_e2").val(data.proLeader);
 		$("#bo_pa").val(data.proTeam);
+		$("#bo_time").val(data.proUptime);
 		$("#bo_ab").val(data.proAbout);
 		showInfo(data);
 	}
