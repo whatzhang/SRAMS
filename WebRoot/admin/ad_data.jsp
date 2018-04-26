@@ -75,6 +75,9 @@
 						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="getTemplets('user');" data-target="#exampleModal1">获取用户Excel模板</button>
+						</label> <label class="col-sm-3 " align="center">
+							<button type="button" class="btn btn-danger" data-toggle="modal"
+								onclick="getTemplets('typeData')" data-target="#exampleModal1">获取以上所有Excel模板</button>
 					</div>
 				</div>
 			</div>
@@ -119,28 +122,9 @@
 						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="exportExcel('user')" data-target="#exampleModal1">导出用户信息</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="panel panel-success">
-			<div class="panel-heading" role="tab" id="headingTwo">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
-						aria-controls="collapseTwo">导出全部数据 </a>
-				</h4>
-			</div>
-			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="headingTwo">
-				<div class="panel-body">
-					<div class="form-group mb-n"
-						style="margin: 5em 0em 5em 0em; text-align: center;">
-						<!-- <a href="#exampleModal1" data-toggle="modal"
-							data-target="#exampleModal1"> -->
-						<button type="button" onclick="exportExcel('all')" class="btn btn-primary">一键导出所有信息</button>
-						<!-- </a> -->
+						</label> <label class="col-sm-3 " align="center">
+							<button type="button" class="btn btn-danger" data-toggle="modal"
+								onclick="exportExcel('typeData')" data-target="#exampleModal1">导出以上所有信息</button>
 					</div>
 				</div>
 			</div>
@@ -151,7 +135,7 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseThree"
-						aria-expanded="false" aria-controls="collapseThree"> 导入部分数据 </a>
+						aria-expanded="false" aria-controls="collapseThree"> 导入部分数信息</a>
 				</h4>
 			</div>
 			<div id="collapseThree" class="panel-collapse collapse"
@@ -233,7 +217,7 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseFour"
-						aria-expanded="false" aria-controls="collapseFour">导入全部数据 </a>
+						aria-expanded="false" aria-controls="collapseFour">导入全部信息 </a>
 				</h4>
 			</div>
 			<div id="collapseFour" class="panel-collapse collapse"
@@ -259,33 +243,33 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-		
-			
-				
-					
-						
-							
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div class="panel-group " id="accordion" role="tablist"
 		aria-multiselectable="true"
 		style="padding: 2em 2em 2em 2em; height: 60em;">
@@ -295,8 +279,7 @@
 			<div class="panel-heading" role="tab" id="headingOne">
 				<h4 class="panel-title">
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
-						href="#collapse1" aria-expanded="true"
-						aria-controls="collapse1">导出部分文件</a>
+						href="#collapse1" aria-expanded="true" aria-controls="collapse1">导出部分文件</a>
 				</h4>
 			</div>
 			<div id="collapse1" class="panel-collapse collapse" role="tabpanel"
@@ -323,7 +306,7 @@
 						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出竞赛文件</button>
-					    </label> <label class="col-sm-3 " align="center">
+						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出项目文件</button>
 						</label>
@@ -358,12 +341,12 @@
 			<div class="panel-heading" role="tab" id="headingThree">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion" href="#collapse3"
-						aria-expanded="false" aria-controls="collapse3"> 导入部分数据 </a>
+						data-parent="#accordion" href="#collapse3" aria-expanded="false"
+						aria-controls="collapse3"> 导入部分数据 </a>
 				</h4>
 			</div>
-			<div id="collapse3" class="panel-collapse collapse"
-				role="tabpanel" aria-labelledby="heading3">
+			<div id="collapse3" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="heading3">
 				<div class="panel-body">
 
 					<div class="form-group mb-n"
@@ -427,12 +410,12 @@
 			<div class="panel-heading" role="tab" id="headingFour">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion" href="#collapse4"
-						aria-expanded="false" aria-controls="collapse4">导入全部数据 </a>
+						data-parent="#accordion" href="#collapse4" aria-expanded="false"
+						aria-controls="collapse4">导入全部数据 </a>
 				</h4>
 			</div>
-			<div id="collapse4" class="panel-collapse collapse"
-				role="tabpanel" aria-labelledby="heading4">
+			<div id="collapse4" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="heading4">
 				<div class="panel-body">
 					<form action="" name="" enctype="multipart/form-data">
 						<div class="form-group mb-n" style="margin: 3em 0em 3em 0em;">
@@ -459,7 +442,7 @@
 			}
 		}
 		function exportExcel(info) {
-		    if (confirm("确定要提交操作？")) {
+			if (confirm("确定要提交操作？")) {
 				window.location.href = "${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=" + info;
 			}
 		}

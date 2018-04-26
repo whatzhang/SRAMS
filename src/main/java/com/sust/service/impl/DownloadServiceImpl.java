@@ -25,6 +25,7 @@ import com.sust.dao.PraiseMapper;
 import com.sust.dao.ProjectMapper;
 import com.sust.dao.RaceMapper;
 import com.sust.dao.ThesisMapper;
+import com.sust.dao.UsersMapper;
 import com.sust.entity.MyConfig;
 import com.sust.other.ExclUtils;
 import com.sust.other.MyUtils;
@@ -48,6 +49,8 @@ public class DownloadServiceImpl implements DownloadService {
 	private RaceMapper raceMapper;
 	@Resource
 	private ThesisMapper thesisMapper;
+	@Resource
+	private UsersMapper usersMapper;
 
 	@Override
 	public List<String> getDownloadFile(HttpSession session, String type, String id) {
@@ -153,89 +156,176 @@ public class DownloadServiceImpl implements DownloadService {
 
 		try {
 			os = new FileOutputStream(excelFile);
-			if("ALL".equals(flog)){
-				getUserTypeAllInfoList(type).write(os);
-			}else{
+			if ("PART".equals(flog)) {
 				getUserTypeInfoList(type, usId).write(os);
+			} else {
+				getUserTypeAllInfoList(type, flog).write(os);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("FileOutputStream(excelFile)_error");
 		} finally {
 			try {
 				os.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error("os.close()_error");
 			}
 		}
 
 		return excelFile;
 	}
+	
+	/**
+	 * admin下的Excel模板和数据下载
+	 * @param type
+	 * @param flog
+	 * @return
+	 */
+	private Workbook getUserTypeAllInfoList(String type, String flog) {
 
-	private Workbook getUserTypeAllInfoList(String type) {
-		
 		List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
 		Workbook wb = new HSSFWorkbook();
-		//专利
+		// 专利
 		String columnNames[] = { "序号", "专利名称", "专利类别", "专利拥有着", "申请日期", "授权时间", "专利序号", "专利内容", "文件上传时间" };// 列名
 		String keys[] = { "paId", "paName", "paCategory", "paAuthor", "paPlease", "paDate", "paNumber", "paAbout",
 				"paUptime" };// map中的key
-		//教材
+		// 教材
 		String columnNames1[] = { "序号", "教材名称", "教材类别", "出版日期", "教材主编", "教材参编", "教材字数", "出版社", "教材简介", "文件上传日期" };// 列名
 		String keys1[] = { "boId", "boName", "boCategory", "boDate", "boEditor", "boEditor2", "boFont", "boPublish",
 				"boAbout", "boUptime" };// map中的key
-		//获奖
+		// 获奖
 		String columnNames2[] = { "序号", "获奖名称", "获奖类别", "获奖日期", "颁奖机构", "获奖人", "获奖简介", "文件上传日期" };// 列名
 		String keys2[] = { "prId", "prName", "prCategory", "prDate", "prUnit", "prAuthor", "prAbout", "prUptime" };// map中的key
-		//项目
+		// 项目
 		String columnNames3[] = { "序号", "项目名称", "项目类别", "立项时间", "立项金额", "项目领导", "团队成员", "项目简介", "文件上传日期" };// 列名
-		String keys3[] = { "proId", "proName", "proCategory", "proDate", "proCash", "proLeader", "proTeam",
-				"proAbout", "proUptime" };// map中的key
-		//竞赛
+		String keys3[] = { "proId", "proName", "proCategory", "proDate", "proCash", "proLeader", "proTeam", "proAbout",
+				"proUptime" };// map中的key
+		// 竞赛
 		String columnNames4[] = { "序号", "竞赛名称", "竞赛类别", "个人/团体", "获奖人", "获奖等级", "指导老师", "竞赛日期", "竞赛简介", "文件上传日期" };// 列名
 		String keys4[] = { "raId", "raName", "raCategory", "raType", "raAuthor", "raLevel", "raTeacher", "raDate",
 				"raAbout", "raUptime" };// map中的key
-		//论文
-		String columnNames5[] = { "序号", "论文名称", "论文类别", "论文作者", "发表日期", "论文等级", "影响因子", "是否收录", "论文编号", "发表期刊",
-				"期刊页面", "论文简介", "文件上传日期" };// 列名
-		String keys5[] = { "thId", "thName", "thCategory", "thAuthor", "thDate", "thLevel", "thFactor",
-				"thIncluded", "thNumber", "thJournal", "thPage", "thAbout", "thUptime" };// map中的key
-		
-		switch (type) {
-		case "patent":
-			map = ExclUtils.createExcelPatent(this.patentMapper.selectAllPaInfo());
-			wb = ExclUtils.createWorkBook(map, keys, columnNames);
-			break;
-		case "book":
-			map = ExclUtils.createExcelBook(this.bookMapper.selectAllBoList());
-			wb = ExclUtils.createWorkBook(map, keys1, columnNames1);
-			break;
-		case "praise":
-			map = ExclUtils.createExcelPraise(this.praiseMapper.selectAllPraiseInfo());
-			wb = ExclUtils.createWorkBook(map, keys2, columnNames2);
-			break;
-		case "project":
-			map = ExclUtils.createExcelProject(this.projectMapper.selectAllProjectList());
-			wb = ExclUtils.createWorkBook(map, keys3, columnNames3);
-			break;
-		case "race":
-			map = ExclUtils.createExcelRace(this.raceMapper.selectAllRaceInfo());
-			wb = ExclUtils.createWorkBook(map, keys4, columnNames4);
-			break;
-		case "thesis":
-			map = ExclUtils.createExcelThesis(this.thesisMapper.selectAllThesis());
-			wb = ExclUtils.createWorkBook(map, keys5, columnNames5);
-			break;
-		case "all":
-			//所有信息
-			
-			
-			
-		default:
-			break;
+		// 论文
+		String columnNames5[] = { "序号", "论文名称", "论文类别", "论文作者", "发表日期", "论文等级", "影响因子", "是否收录", "论文编号", "发表期刊", "期刊页面",
+				"论文简介", "文件上传日期" };// 列名
+		String keys5[] = { "thId", "thName", "thCategory", "thAuthor", "thDate", "thLevel", "thFactor", "thIncluded",
+				"thNumber", "thJournal", "thPage", "thAbout", "thUptime" };// map中的key
+		// 用户
+		String columnNames6[] = { "序号", "用户姓名", "年龄", "性别", "出生日期", "学号/工号", "职称", "专业", "联系地址", "E-mail", "联系电话",
+				"学院" };// 列名
+		String keys6[] = { "usId", "usName", "usAge", "usSex", "usBirthday", "usNum", "usDuty", "usMajor", "usAddress",
+				"usMail", "usPhone", "usAcademy" };// map中的key
+		if ("ALL".equals(flog)) {
+			switch (type) {
+			case "patent":
+				map = ExclUtils.createExcelPatent(this.patentMapper.selectAllPaInfo());
+				wb = ExclUtils.createWorkBook(map, keys, columnNames);
+				break;
+			case "book":
+				map = ExclUtils.createExcelBook(this.bookMapper.selectAllBoList());
+				wb = ExclUtils.createWorkBook(map, keys1, columnNames1);
+				break;
+			case "praise":
+				map = ExclUtils.createExcelPraise(this.praiseMapper.selectAllPraiseInfo());
+				wb = ExclUtils.createWorkBook(map, keys2, columnNames2);
+				break;
+			case "project":
+				map = ExclUtils.createExcelProject(this.projectMapper.selectAllProjectList());
+				wb = ExclUtils.createWorkBook(map, keys3, columnNames3);
+				break;
+			case "race":
+				map = ExclUtils.createExcelRace(this.raceMapper.selectAllRaceInfo());
+				wb = ExclUtils.createWorkBook(map, keys4, columnNames4);
+				break;
+			case "thesis":
+				map = ExclUtils.createExcelThesis(this.thesisMapper.selectAllThesis());
+				wb = ExclUtils.createWorkBook(map, keys5, columnNames5);
+				break;
+			case "user":
+				map = ExclUtils.createExcelUsers(this.usersMapper.selectAllUsers());
+				wb = ExclUtils.createWorkBook(map, keys6, columnNames6);
+				break;
+			case "typeData":
+				List<List<Map<String, Object>>> mapList = ExclUtils.createExcelAllInfo(this.patentMapper.selectAllPaInfo(),this.bookMapper.selectAllBoList(),this.praiseMapper.selectAllPraiseInfo(),
+						this.projectMapper.selectAllProjectList(),this.raceMapper.selectAllRaceInfo(),this.thesisMapper.selectAllThesis(),this.usersMapper.selectAllUsers());
+				List<String[]>  key = new ArrayList<String[]>();
+				List<String[]>  columnName = new ArrayList<String[]>();
+				key.add(keys);
+				key.add(keys1);
+				key.add(keys2);
+				key.add(keys3);
+				key.add(keys4);
+				key.add(keys5);
+				key.add(keys6);
+				
+				columnName.add(columnNames);
+				columnName.add(columnNames1);
+				columnName.add(columnNames2);
+				columnName.add(columnNames3);
+				columnName.add(columnNames4);
+				columnName.add(columnNames5);
+				columnName.add(columnNames6);
+				wb = ExclUtils.createWorkBookAllData(mapList, key, columnName);
+				break;
+			default:
+				break;
+			}
+		}
+		if ("TEMPLET".equals(flog)) {
+			map = ExclUtils.createExcelTemplets(type);
+			switch (type) {
+			case "patent":
+				wb = ExclUtils.createWorkBook(map, keys, columnNames);
+				break;
+			case "book":
+				wb = ExclUtils.createWorkBook(map, keys1, columnNames1);
+				break;
+			case "praise":
+				wb = ExclUtils.createWorkBook(map, keys2, columnNames2);
+				break;
+			case "project":
+				wb = ExclUtils.createWorkBook(map, keys3, columnNames3);
+				break;
+			case "race":
+				wb = ExclUtils.createWorkBook(map, keys4, columnNames4);
+				break;
+			case "thesis":
+				wb = ExclUtils.createWorkBook(map, keys5, columnNames5);
+				break;
+			case "user":
+				wb = ExclUtils.createWorkBook(map, keys6, columnNames6);
+				break;
+			case "typeData":
+				List<String[]>  key = new ArrayList<String[]>();
+				List<String[]>  columnName = new ArrayList<String[]>();
+				key.add(keys);
+				key.add(keys1);
+				key.add(keys2);
+				key.add(keys3);
+				key.add(keys4);
+				key.add(keys5);
+				key.add(keys6);
+				
+				columnName.add(columnNames);
+				columnName.add(columnNames1);
+				columnName.add(columnNames2);
+				columnName.add(columnNames3);
+				columnName.add(columnNames4);
+				columnName.add(columnNames5);
+				columnName.add(columnNames6);
+				wb = ExclUtils.createWorkBookAllSheet(map, key, columnName);
+				break;
+			default:
+				break;
+			}
 		}
 		return wb;
 	}
 
+	/**
+	 * 用户下载所属的Excel
+	 * @param type
+	 * @param id
+	 * @return
+	 */
 	private Workbook getUserTypeInfoList(String type, Integer id) {
 
 		List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();

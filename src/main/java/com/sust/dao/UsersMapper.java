@@ -25,4 +25,6 @@ public interface UsersMapper {
 	int selectByNum(String usNum);
 
 	List<String> selectUsidByPartName(String Part);
+
+	List<Users> selectAllUsers();
 }

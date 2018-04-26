@@ -25,7 +25,12 @@
 		us_mail, us_phone, us_academy, us_question1, us_key1, us_question2, us_key2
 	</sql>
 	
-	
+	<select id="selectAllUsers" 
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_users
+	</select>
 	<select id="selectUsidByPartName" parameterType="String"
 		resultType="String">
 		select us_name 
