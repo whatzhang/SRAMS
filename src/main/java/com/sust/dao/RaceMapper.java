@@ -34,4 +34,6 @@ public interface RaceMapper {
 
 	List<Race> selectAllRaceInfo();
 
+	int deleteByUsId(Integer usId);
+
 }

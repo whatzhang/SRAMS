@@ -51,6 +51,12 @@
 		from sr_project
 		where pro_id = #{proId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_project
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		sr_project

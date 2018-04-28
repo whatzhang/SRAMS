@@ -69,6 +69,7 @@
 						</p>
 					</div>
 					<div class="login-body" style="margin-bottom: 1em;">
+					    <span>${loginInfo}</span>
 						<form action="${pageContext.request.contextPath}/login/index"
 							name="login" method="post">
 							<div class="form-group mb-n" style="margin-top: 0.5em;">
@@ -79,7 +80,7 @@
 							<div class="form-group mb-n" style="margin-top: 1.5em;">
 								<input type="password" class="form-control1 input-lg"
 									name="password" id="password" style="width: 100%;"
-									id="largeinput" placeholder="${loginInfo}" required="required">
+									id="largeinput"  required="required">
 							</div>
 							<div class="form-group mb-n" style="margin-top: 1em;">
 								<label class="checkbox-inline" style=""> <input checked

@@ -373,23 +373,25 @@ public final class ExclUtils {
 		Workbook wb = new HSSFWorkbook();
 		CellStyle aa1 = getExcelStyle(wb)[0];
 		CellStyle aa2 = getExcelStyle(wb)[1];
-		// 创建sheet
+		//遍历list<list<Map<String, Object>>>
 		for (int i = 0; i < list.size(); i++) {
 			Sheet sheet = null;
 			int s = 0;
+			//获取list<Map<String, Object>>
 			for (int f = 0; f < list.get(i).size(); f++) {
+				//获取map中数据
 				for (Map.Entry<String, Object> entry : list.get(i).get(f).entrySet()) {
-
+					//创建sheet
 					if (s == 0) {
 						sheet = wb.createSheet(entry.getValue().toString());
 						logger.info("createWorkBook++" + s + "++" + entry.getKey() + ":" + entry.getValue().toString());
 					}
 					if (sheet != null) {
+						//设置行宽
 						for (int q = 0; q < key.get(i).length; q++) {
 							sheet.setColumnWidth((short) q, (short) (35 * 200));
 						}
 						Row row = sheet.createRow((short) 0);
-
 						// 设置列名
 						for (int k = 0; k < columnName.get(i).length; k++) {
 							Cell cell = row.createCell(k);
@@ -397,7 +399,7 @@ public final class ExclUtils {
 							cell.setCellStyle(aa1);
 						}
 						// 加数据
-						for (int g = f + 1; g < list.get(i).size(); g++) {
+						for (int g = f ; g < list.get(i).size(); g++) {
 							// 创建一行，在页sheet上
 							Row row1 = sheet.createRow((short) g);
 							// 在row行上创建一个方格

@@ -33,4 +33,6 @@ public interface PatentMapper {
 	String selectNameById(Integer paId);
 
 	List<Patent> selectAllPaInfo();
+
+	int deleteByUsId(Integer usId);
 }

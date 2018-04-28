@@ -33,4 +33,6 @@ public interface ThesisMapper {
 	String selectNameByid(Integer id);
 
 	List<Thesis> selectAllThesis();
+
+	int deleteByUsId(Integer usId);
 }

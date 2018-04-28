@@ -53,6 +53,12 @@
 		from sr_praise
 		where pr_id = #{prId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_praise
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from sr_praise
 		where pr_id = #{prId,jdbcType=INTEGER}

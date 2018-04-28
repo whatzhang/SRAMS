@@ -34,4 +34,6 @@ public interface PraiseMapper {
 
 	List<Praise> selectAllPraiseInfo();
 
+	int deleteByUsId(Integer usId);
+
 }

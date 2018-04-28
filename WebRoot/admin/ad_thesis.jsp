@@ -354,7 +354,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center;vertical-align: middle; ">
+							<tr style="text-align: left;vertical-align: middle; ">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">论文名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"

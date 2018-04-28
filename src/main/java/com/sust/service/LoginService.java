@@ -25,4 +25,12 @@ public interface LoginService {
 
 	public Map<String, String> getAdminInitInfo();
 
+	public List<Login> getAllLoginInfo();
+
+	public Login getLoginInfoById(Integer usId);
+
+	public String updataLoginInfo(Login login);
+
+	public String addloginInfo(Login login);
+
 }

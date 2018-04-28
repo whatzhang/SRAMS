@@ -56,6 +56,12 @@
 		from sr_race
 		where ra_id = #{raId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_race
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from sr_race
 		where ra_id = #{raId,jdbcType=INTEGER}

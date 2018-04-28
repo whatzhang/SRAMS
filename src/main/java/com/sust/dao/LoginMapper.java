@@ -70,4 +70,8 @@ public interface LoginMapper {
 
 	List<Integer> selectUsIdList();
 
+	List<Login> selectAllLogin();
+
+	Integer selectUsIdByName(String loLogin);
+
 }

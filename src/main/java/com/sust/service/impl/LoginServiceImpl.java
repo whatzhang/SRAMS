@@ -125,11 +125,6 @@ public class LoginServiceImpl implements LoginService {
 		init.put("boNum", Integer.toString(this.loginMapper.selectBoNum(id)));
 		init.put("raNum", Integer.toString(this.loginMapper.selectRaNum(id)));
 		init.put("meNum", Integer.toString(this.loginMapper.selectMeNum(id)));
-		/*
-		 * for (Iterator<String> i = init.keySet().iterator(); i.hasNext();) {
-		 * Object obj = i.next(); System.out.println(obj);// 循环输出key
-		 * System.out.println("key=" + obj + " value=" + init.get(obj)); }
-		 */
 		return init;
 	}
 
@@ -162,6 +157,38 @@ public class LoginServiceImpl implements LoginService {
 		init.put("userNum", String.valueOf(userNum));
 		init.put("allData", String.valueOf(allData));
 		return init;
+	}
+
+	@Override
+	public List<Login> getAllLoginInfo() {
+
+		return this.loginMapper.selectAllLogin();
+	}
+
+	@Override
+	public Login getLoginInfoById(Integer usId) {
+
+		return this.loginMapper.selectByPrimaryKey(usId);
+	}
+
+	@Override
+	public String updataLoginInfo(Login login) {
+		try {
+			this.loginMapper.updateByPrimaryKeySelective(login);
+		} catch (Exception e) {
+			return "更新失败";
+		}
+		return "更新信息成功！";
+	}
+
+	@Override
+	public String addloginInfo(Login login) {
+		try {
+			this.loginMapper.insertSelective(login);
+		} catch (Exception e) {
+			return "添加失败";
+		}
+		return "添加信息成功！";
 	}
 
 }

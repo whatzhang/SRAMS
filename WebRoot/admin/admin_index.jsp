@@ -61,10 +61,9 @@
 				<ul class="nav" id="side-menu">
 					<li><a
 						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
-						" onclick="aa();" target="iFrame" class="chart-nav"><i
+						 onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge"
 							id="th">${da.string1}</span> <span class="fa arrow"></span></a></li>
-
 					<li><a
 						href="${pageContext.request.contextPath}/patent/getAllPaInfo"
 						onclick="aa();" target="iFrame" class="chart-nav"><i
@@ -93,6 +92,14 @@
 					<li><a href="admin/st_gui.jsp" onclick="aa();" target="iFrame"
 						class="chart-nav"><i class="fa fa-book nav_icon"></i>信息归纳<span
 							class="nav-badge">1</span> <span class="fa arrow"></span></a></li>
+					<li><a href="${pageContext.request.contextPath}/users/getAllUsersInfo" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
+							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_data.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
+							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="#" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
 							<span class="fa arrow"></span></a>
@@ -107,16 +114,8 @@
 						</ul></li>
 					<li><a href="${pageContext.request.contextPath}/news/getAdminNews" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>信息公告<span class="nav-badge"
+							class="fa fa-book nav_icon"></i>消息公告<span class="nav-badge"
 							id="me">${da.string7}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_userInfo.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
-							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_data.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>数据备份<span class="nav-badge"
-							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_other.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>其他<span

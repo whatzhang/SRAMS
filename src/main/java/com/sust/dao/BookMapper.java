@@ -34,4 +34,6 @@ public interface BookMapper {
 
 	List<Book> selectAllBoList();
 
+	int deleteByUsId(Integer usId);
+
 }

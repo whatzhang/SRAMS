@@ -27,4 +27,5 @@ public interface UsersMapper {
 	List<String> selectUsidByPartName(String Part);
 
 	List<Users> selectAllUsers();
+
 }

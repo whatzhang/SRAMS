@@ -77,7 +77,7 @@
 								onclick="getTemplets('user');" data-target="#exampleModal1">获取用户Excel模板</button>
 						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-danger" data-toggle="modal"
-								onclick="getTemplets('typeData')" data-target="#exampleModal1">获取以上所有Excel模板</button>
+								onclick="getTemplets('typeData')" data-target="#exampleModal1">获取以上Excel模板</button>
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 				<h4 class="panel-title">
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapseOne" aria-expanded="true"
-						aria-controls="collapseOne">导出部分数据</a>
+						aria-controls="collapseOne">导出信息</a>
 				</h4>
 			</div>
 			<div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
@@ -124,7 +124,7 @@
 								onclick="exportExcel('user')" data-target="#exampleModal1">导出用户信息</button>
 						</label> <label class="col-sm-3 " align="center">
 							<button type="button" class="btn btn-danger" data-toggle="modal"
-								onclick="exportExcel('typeData')" data-target="#exampleModal1">导出以上所有信息</button>
+								onclick="exportExcel('typeData')" data-target="#exampleModal1">导出以上信息</button>
 					</div>
 				</div>
 			</div>
@@ -135,79 +135,58 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapseThree"
-						aria-expanded="false" aria-controls="collapseThree"> 导入部分数信息</a>
+						aria-expanded="false" aria-controls="collapseThree"> 导入信息</a>
 				</h4>
 			</div>
 			<div id="collapseThree" class="panel-collapse collapse"
 				role="tabpanel" aria-labelledby="headingThree">
-				<div class="panel-body">
-
-					<div class="form-group mb-n"
-						style="margin: 1em 0em 0em 3em; text-align: center;">
-						<form action="" name="">
-							<table class="table">
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="color: lightgreen; padding: 3px 0px 1px 9em;">请先获取Excel表模板</label>
-									</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入论文数据</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="thesis" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入专利数据</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="patent" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入获奖数据</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="praise" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入项目数据</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="project" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入教材数据</label></td>
-									<td><input type="file" class="btn btn-default" name="book" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入竞赛数据</label></td>
-									<td><input type="file" class="btn btn-default" name="race" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入用户数据</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="users" /></td>
-								</tr>
-							</table>
-							<div class="modal-footer" style="margin-left: 2em;">
-								<!-- <a href="#exampleModal" data-toggle="modal"
-									data-target="#exampleModal"> -->
-								<button type="submit" onclick="sure()" class="btn btn-primary">提交</button>
-								<!-- </a> -->
-								<button type="reset" class="btn btn-default">取消</button>
+				<div class="panel-body" style="text-align: left;">
+					<form class="form-horizontal" action="" name="">
+						<div class="form-group mb-n">
+							<div class="col-sm-3">
+								<label for="largeinput" class="control-label"
+									style="color: lightgreen; ">请先获取Excel表模板</label>
 							</div>
-						</form>
-					</div>
+						</div>
+						<div class="form-group mb-n">
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入论文数据</label> <input
+									type="file" class="btn btn-default" name="thesis" />
+							</div>
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入专利数据</label> <input
+									type="file" class="btn btn-default" name="patent" />
+							</div>
+						</div>
+						<div class="form-group mb-n">
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入获奖数据</label> <input
+									type="file" class="btn btn-default" name="praise" />
+							</div>
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入教材数据</label> <input
+									type="file" class="btn btn-default" name="book" />
+							</div>
+						</div>
+						<div class="form-group mb-n">
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入竞赛数据</label> <input
+									type="file" class="btn btn-default" name="race" />
+							</div>
+							<div class="col-sm-6">
+								<label for="largeinput" class="control-label">导入用户数据</label> <input
+									type="file" class="btn btn-default" name="user" />
+							</div>
+						</div>
+						<div class="form-group mb-n"></div>
+						<div class="modal-footer" style="margin-left: 2em;">
+							<button type="submit" onclick="return sure();"
+								class="btn btn-primary">提交</button>
+							<button type="reset" class="btn btn-default">取消</button>
+						</div>
+					</form>
+
+
 
 				</div>
 			</div>
@@ -242,71 +221,39 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<div class="panel-group " id="accordion" role="tablist"
-		aria-multiselectable="true"
-		style="padding: 2em 2em 2em 2em; height: 60em;">
-		<h4 class="title2" style="color: #4682B4; margin-bottom: 1em;">文件导出备份/导入:</h4>
-
 		<div class="panel panel-success">
-			<div class="panel-heading" role="tab" id="headingOne">
+			<div class="panel-heading" role="tab" id="heading1">
 				<h4 class="panel-title">
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse1" aria-expanded="true" aria-controls="collapse1">导出部分文件</a>
 				</h4>
 			</div>
+
 			<div id="collapse1" class="panel-collapse collapse" role="tabpanel"
 				aria-labelledby="heading1">
 				<div class="panel-body">
 					<div class="form-group mb-n col-sm-12" style="text-align: center;"
 						align="center">
 
-						<label class="col-sm-3 " align="center">
+						<label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="export()" data-target="#exampleModal1">导出论文文件</button>
-						</label> <label class="col-sm-3 " align="center">
+						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出专利文件</button>
-						</label> <label class="col-sm-3 " align="center">
+						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出获奖文件</button>
 					</div>
 
 					<div class="form-group mb-n col-sm-12" style="text-align: center;">
-						<label class="col-sm-3 " align="center">
+						<label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出教材文件</button>
-						</label> <label class="col-sm-3 " align="center">
+						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出竞赛文件</button>
-						</label> <label class="col-sm-3 " align="center">
+						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								onclick="sure()" data-target="#exampleModal1">导出项目文件</button>
 						</label>
@@ -316,7 +263,7 @@
 		</div>
 
 		<div class="panel panel-success">
-			<div class="panel-heading" role="tab" id="headingTwo">
+			<div class="panel-heading" role="tab" id="heading2">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapse2" aria-expanded="false"
@@ -328,108 +275,8 @@
 				<div class="panel-body">
 					<div class="form-group mb-n"
 						style="margin: 5em 0em 5em 0em; text-align: center;">
-						<!-- <a href="#exampleModal1" data-toggle="modal"
-							data-target="#exampleModal1"> -->
 						<button type="button" onclick="sure()" class="btn btn-primary">一键导出所有文件</button>
-						<!-- </a> -->
 					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="panel panel-success">
-			<div class="panel-heading" role="tab" id="headingThree">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion" href="#collapse3" aria-expanded="false"
-						aria-controls="collapse3"> 导入部分数据 </a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="heading3">
-				<div class="panel-body">
-
-					<div class="form-group mb-n"
-						style="margin: 1em 0em 0em 3em; text-align: center;">
-						<form action="" name="">
-							<table class="table">
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入论文数据文件</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="thesis" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入专利数据文件</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="patent" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入获奖数据文件</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="praise" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入项目数据文件</label></td>
-									<td><input type="file" class="btn btn-default"
-										name="project" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入教材数据文件</label></td>
-									<td><input type="file" class="btn btn-default" name="book" /></td>
-								</tr>
-
-								<tr>
-									<td><label for="largeinput" class="control-label"
-										style="padding: 3px 0px 1px 9em;">导入竞赛数据文件</label></td>
-									<td><input type="file" class="btn btn-default" name="race" /></td>
-								</tr>
-							</table>
-							<div class="modal-footer" style="margin-left: 2em;">
-								<!-- <a href="#exampleModal" data-toggle="modal"
-									data-target="#exampleModal"> -->
-								<button type="submit" onclick="sure()" class="btn btn-primary">提交</button>
-								<!-- </a> -->
-								<button type="reset" class="btn btn-default">取消</button>
-							</div>
-						</form>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<div class="panel panel-success">
-			<div class="panel-heading" role="tab" id="headingFour">
-				<h4 class="panel-title">
-					<a class="collapsed" role="button" data-toggle="collapse"
-						data-parent="#accordion" href="#collapse4" aria-expanded="false"
-						aria-controls="collapse4">导入全部数据 </a>
-				</h4>
-			</div>
-			<div id="collapse4" class="panel-collapse collapse" role="tabpanel"
-				aria-labelledby="heading4">
-				<div class="panel-body">
-					<form action="" name="" enctype="multipart/form-data">
-						<div class="form-group mb-n" style="margin: 3em 0em 3em 0em;">
-							<div align="center">
-								<input type="file" class="btn btn-default" name="inputAllFile"
-									multiple="multiple">
-							</div>
-							<div style="margin-top: 2em;" align="center">
-								<button type="submit" onclick="sure()" class="btn btn-primary">提交</button>
-								<button type="reset" class="btn btn-default">取消</button>
-							</div>
-						</div>
-					</form>
-
 				</div>
 			</div>
 		</div>
@@ -445,6 +292,14 @@
 			if (confirm("确定要提交操作？")) {
 				window.location.href = "${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=" + info;
 			}
+		}
+		function sure() {
+			if (confirm("确定要提交操作？")) {
+				return true;
+			} else {
+				return false;
+			}
+	
 		}
 	</script>
 </body>

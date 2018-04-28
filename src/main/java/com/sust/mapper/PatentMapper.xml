@@ -57,6 +57,12 @@
 		from sr_patent
 		where pa_id = #{paId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_patent
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		sr_patent

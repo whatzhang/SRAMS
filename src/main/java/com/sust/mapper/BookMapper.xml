@@ -57,6 +57,12 @@
 		from sr_book
 		where bo_id = #{boId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_book
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		sr_book

@@ -63,6 +63,12 @@
 		from sr_thesis
 		where th_id = #{thId,jdbcType=INTEGER}
 	</select>
+	
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_thesis
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from sr_thesis
 		where th_id = #{thId,jdbcType=INTEGER}

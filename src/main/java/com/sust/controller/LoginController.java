@@ -138,8 +138,7 @@ public class LoginController {
 		String qu2 = request.getParameter("qu2").trim();
 		String id = request.getParameter("id").trim();
 
-		logger.info(
-				"forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
+		logger.info("forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
 
 		if (key1.equals(quk1) && key2.equals(quk2)) {
 			String pa = loginService.getPass(id);
@@ -154,9 +153,9 @@ public class LoginController {
 	}
 
 	@RequestMapping("Layout")
-	public String Layout(HttpServletRequest request) {
+	public String Layout(HttpSession session) {
 
-		request.getSession().invalidate();
+		session.invalidate();
 		return "login";
 	}
 
@@ -167,5 +166,33 @@ public class LoginController {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		return new AllInfo(String.valueOf(this.loginService.upDataPass(usId, pass)));
 	}
+	
+	@RequestMapping(value = "/getLoginInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Login getLoginInfo(@RequestParam("usId") Integer usId) {
 
+		return this.loginService.getLoginInfoById(usId);
+	}
+	
+	@RequestMapping(value = "/updataLoginInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public AllInfo updataLoginInfo(@RequestParam("usId") Integer usId,@RequestParam("loLogin") String loLogin,@RequestParam("loPass") String loPass,
+			@RequestParam("loType") String loType,@RequestParam("Status") String Status,@RequestParam("isALL") String isALL) {
+
+		logger.info("updataLoginInfo++"+usId+"++"+loLogin+"++"+loPass+"++"+loType+"++"+Status+"++"+isALL);
+		return new AllInfo(this.loginService.updataLoginInfo(new Login(usId,loLogin,loPass,loType)));
+	}
+	
+	@RequestMapping(value = "/addloginInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public AllInfo addloginInfo(@RequestParam("loLogin") String loLogin,@RequestParam("loPass") String loPass,
+			@RequestParam("loType") String loType,@RequestParam("Status") String Status,@RequestParam("isALL") String isALL) {
+
+		logger.info("addloginInfo++"+loLogin+"++"+loPass+"++"+loType+"++"+Status+"++"+isALL);
+		return new AllInfo(this.loginService.addloginInfo(new Login(loLogin,loPass,loType)));
+	}
+	
+	
+	
+	
 }

@@ -32,4 +32,6 @@ public interface ProjectMapper {
 
 	List<Project> selectAllProjectList();
 
+	int deleteByUsId(Integer usId);
+
 }
