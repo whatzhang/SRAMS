@@ -446,7 +446,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/patent/getAllPaInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -566,8 +566,8 @@ li {
     }
    function rePages(){
    var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/patent/getAllPaInfo?pageSize="+page;
-    window.parent.scrollTo(0, 0);
+       window.location.href = "${pageContext.request.contextPath}/patent/getAllPaInfo?pageSize="+page;
+       window.parent.scrollTo(0, 0);
    }
 </script>
 </body>

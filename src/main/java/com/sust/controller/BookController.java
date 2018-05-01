@@ -55,7 +55,7 @@ public class BookController {
 		return this.bookService.getBoInfoByboId(boId);
 	}
 
-	@RequestMapping(value = "/DeletePaInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteBoInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public AllInfo DeletePaInfo(@RequestParam("deId") int deId, @RequestParam("fg") String fg, HttpSession session) {
 

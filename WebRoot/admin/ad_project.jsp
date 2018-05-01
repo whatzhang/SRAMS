@@ -451,7 +451,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/project/getAllProList";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");

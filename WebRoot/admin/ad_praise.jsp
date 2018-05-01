@@ -429,7 +429,7 @@ li {
 			async : true,
 			success : function(data){
 				 alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");

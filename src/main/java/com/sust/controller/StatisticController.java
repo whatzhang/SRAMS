@@ -22,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -108,7 +107,7 @@ public class StatisticController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/GuiNaPatent", method = RequestMethod.POST)
+	@RequestMapping("/GuiNaPatent")
 	@ResponseBody
 	public void GuiNaPatent(@RequestParam("flg") String flg, @RequestParam("xuyuan") String xuyuan,
 			@RequestParam("sex") String sex, @RequestParam("duty") String duty, @RequestParam("bigAge") String bigAge,
@@ -141,7 +140,7 @@ public class StatisticController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/GuiNaPraise", method = RequestMethod.POST)
+	@RequestMapping("/GuiNaPraise")
 	@ResponseBody
 	public void GuiNaPraise(@RequestParam("flg") String flg, @RequestParam("xuyuan") String xuyuan,
 			@RequestParam("sex") String sex, @RequestParam("duty") String duty, @RequestParam("bigAge") String bigAge,
@@ -174,7 +173,7 @@ public class StatisticController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/GuiNaProject", method = RequestMethod.POST)
+	@RequestMapping("/GuiNaProject")
 	@ResponseBody
 	public void GuiNaProject(@RequestParam("flg") String flg, @RequestParam("xuyuan") String xuyuan,
 			@RequestParam("sex") String sex, @RequestParam("duty") String duty, @RequestParam("bigAge") String bigAge,
@@ -208,7 +207,7 @@ public class StatisticController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/GuiNaBook", method = RequestMethod.POST)
+	@RequestMapping("/GuiNaBook")
 	@ResponseBody
 	public void GuiNaBook(@RequestParam("flg") String flg, @RequestParam("xuyuan") String xuyuan,
 			@RequestParam("sex") String sex, @RequestParam("duty") String duty, @RequestParam("bigAge") String bigAge,
@@ -242,7 +241,7 @@ public class StatisticController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/GuiNaRace", method = RequestMethod.POST)
+	@RequestMapping("/GuiNaRace")
 	@ResponseBody
 	public void GuiNaRace(@RequestParam("flg") String flg, @RequestParam("xuyuan") String xuyuan,
 			@RequestParam("sex") String sex, @RequestParam("duty") String duty, @RequestParam("bigAge") String bigAge,
@@ -352,10 +351,10 @@ public class StatisticController {
 				file = this.downloadService.getGuiNaWorkBookStreamPro(type, this.getProjectList(), session);
 				break;
 			case "book":
-				this.downloadService.getGuiNaWorkBookStreamBo(type, this.getBookList(), session);
+				file = this.downloadService.getGuiNaWorkBookStreamBo(type, this.getBookList(), session);
 				break;
 			case "race":
-				this.downloadService.getGuiNaWorkBookStreamRa(type, this.getRaceList(), session);
+				file = this.downloadService.getGuiNaWorkBookStreamRa(type, this.getRaceList(), session);
 				break;
 			default:
 				break;

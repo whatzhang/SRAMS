@@ -461,14 +461,14 @@ li {
 		}
     	$.ajax({
 			type : "POST",
-			url : "${pageContext.request.contextPath}/book/DeletePaInfo",
+			url : "${pageContext.request.contextPath}/book/DeleteBoInfo",
 			data : too,
 			dataType : 'json',
 			cache : false,
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/book/getAllBoList";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");

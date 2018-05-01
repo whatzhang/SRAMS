@@ -21,7 +21,7 @@
 		ra_about, ra_uptime
 	</sql>
 
-	<select id="selectGuiNaThesis" resultMap="BaseResultMap">
+	<select id="selectGuiNaRace" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_race
