@@ -35,4 +35,9 @@ public interface PatentMapper {
 	List<Patent> selectAllPaInfo();
 
 	int deleteByUsId(Integer usId);
+
+	List<Patent> selectGuiNaPetent(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
+			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
 }

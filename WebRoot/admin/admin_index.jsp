@@ -49,7 +49,6 @@
 <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
 
-<script src="js/myjs.js"></script>
 </head>
 <body class="cbp-spmenu-push">
 
@@ -89,7 +88,7 @@
 						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>竞赛信息<span class="nav-badge"
 							id="ra">${da.string6}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/st_gui.jsp" onclick="aa();" target="iFrame"
+					<li><a href="${pageContext.request.contextPath}/CountData/getCountDataInit" onclick="aa();" target="iFrame"
 						class="chart-nav"><i class="fa fa-book nav_icon"></i>信息归纳<span
 							class="nav-badge">1</span> <span class="fa arrow"></span></a></li>
 					<li><a href="${pageContext.request.contextPath}/users/getAllUsersInfo" onclick="aa();"

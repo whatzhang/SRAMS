@@ -2,6 +2,7 @@ package com.sust.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,9 @@ import com.sust.dao.UsersMapper;
 import com.sust.entity.Login;
 import com.sust.entity.Thesis;
 import com.sust.entity.Users;
+import com.sust.other.PageUtil;
 import com.sust.service.LoginService;
+import com.sust.service.ThesisService;
 
 /**
  * @author zys0916 测试基本sqlCURD实现
@@ -29,6 +32,7 @@ public class SqlTest {
 	private LoginMapper loginMapper;
 	private UsersMapper usersMapper;
 	private ThesisMapper thesisMapper;
+	private ThesisService thesisService;
 
 	@Test
 	public void test() {
@@ -107,8 +111,8 @@ public class SqlTest {
 		try {
 			System.out.println(new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss:SSS")
 					.parse(new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss:SSS").format(new Date())));
-			System.out.println(
-					new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS").format(new Date(System.currentTimeMillis()).getTime()));
+			System.out.println(new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss:SSS")
+					.format(new Date(System.currentTimeMillis()).getTime()));
 			System.out.println(new Date(System.currentTimeMillis()));
 			System.out.println(new Date().getTime());
 		} catch (ParseException e) {
@@ -116,15 +120,52 @@ public class SqlTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
-	public void getUsidByPartName(){
-		
+	public void getUsidByPartName() {
+
 		List<String> result = this.usersMapper.selectUsidByPartName("em");
 		System.out.println(result.get(0));
 		for (int i = 0; i < result.size(); i++) {
 			System.out.println(result.get(i));
 		}
+	}
+
+	@Test
+	public void GuiNaThesis() {
+
+		/*
+		 * select * from sr_thesis where th_date > '2000-1-4' and th_date <
+		 * '2030-1-4' and th_category = 'hrfn' and th_level = '1' and
+		 * th_included = '1' and th_uptime > '2000-1-4' and th_uptime <
+		 * '2040-04-20' and us_id in(select us_id from sr_users where us_academy
+		 * = '1' and us_sex ='1' and us_duty = 'cgwri' and us_major = 'frxdc'
+		 * and us_age > 50 and us_age < 60) ;
+		 */
+		try {
+			Map<String, Object> map = this.thesisService.GuiNaThesis("1", "1", "1", "cgwri", "60", "50", "frxdc",
+					"2030-1-4", "2000-1-4", "hrfn", "1", "1", "2040-04-20", "2000-1-4");
+			System.out.println(map.get("flg").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Byte.valueOf("");
+	}
+
+	@Test
+	public void testPage() {
+
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < 103; i++) {
+			list.add(i);
+		}
+		PageUtil<Integer> page = new PageUtil<Integer>(list, 10, 10);
+		System.out.println(page.toString());
+		for (Integer aa : page.getPagedList()) {
+			System.out.println(aa.toString());
+		}
+
 	}
 
 }

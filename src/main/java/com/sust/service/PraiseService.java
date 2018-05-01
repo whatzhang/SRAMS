@@ -1,6 +1,7 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,5 +22,8 @@ public interface PraiseService {
 	int upPrInfo(Praise praise);
 
 	List<Praise> getAllPraiseInfo();
+
+	Map<String, Object> GuiNaPraise(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
+			String major, String prCate, String bigPrda, String smlPrda, String bigPrUp, String smlPrUp);
 
 }

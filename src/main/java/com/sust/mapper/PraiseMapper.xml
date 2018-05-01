@@ -16,7 +16,64 @@
 		pr_id, us_id, pr_name, pr_category, pr_date, pr_unit, pr_author, pr_about,
 		pr_uptime
 	</sql>
-
+	
+	<select id="selectGuiNaPraise" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_praise
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPrda != null">
+			 <![CDATA[
+                and pr_date >= #{smlPrda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPrda != null">
+			 <![CDATA[
+				and pr_date <= #{bigPrda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="PrCate != null and PrCate != ''">
+				and pr_category = #{PrCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPrUp != null">
+			 <![CDATA[
+				and pr_uptime >= #{smlPrUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPrUp != null">
+			 <![CDATA[
+				and pr_uptime <= #{bigPrUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>)
+		</if>
+	</select>
  	<select id="selectAllPraiseInfo" 
 		resultMap="BaseResultMap">
 		select

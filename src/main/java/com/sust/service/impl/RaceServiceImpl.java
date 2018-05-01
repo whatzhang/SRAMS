@@ -1,12 +1,18 @@
 package com.sust.service.impl;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +25,7 @@ import com.sust.service.RaceService;
 @Service
 public class RaceServiceImpl implements RaceService {
 
+	private static final Log logger = LogFactory.getLog(RaceServiceImpl.class);
 	@Resource
 	private RaceMapper raceMapper;
 	@Autowired
@@ -84,6 +91,39 @@ public class RaceServiceImpl implements RaceService {
 	public List<Race> getAllRaceInfo() {
 
 		return this.raceMapper.selectAllRaceInfo();
+	}
+
+	@Override
+	public Map<String, Object> GuiNaRace(String flg, String xuyuan, String sex, String duty, String bigAge,
+			String smlAge, String major, String raCate, String raTuan, String bigRada, String smlRada, String bigRaUp,
+			String smlRaUp) {
+		List<Race> list = null;
+		Map<String,Object> result = new HashMap<String, Object>();
+		try {
+			list =  this.raceMapper.selectGuiNaRace(Integer.valueOf(flg),(xuyuan != "" || xuyuan != null )? xuyuan:"", 
+					(sex == "" || sex == null )?null:Byte.valueOf(sex),
+					(duty == "" || duty == null )?"":duty, (bigAge == "" || bigAge == null )?null:Integer.valueOf(bigAge),
+					(smlAge == "" || smlAge == null )?null:Integer.valueOf(smlAge), (major == "" || major == null )?"":major,
+					(bigRada == "" || bigRada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigRada)),
+					(smlRada == "" || smlRada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlRada)),
+					(raCate == "" || raCate == null )?"":raCate,(raTuan == "" || raTuan == null )?"":raTuan, 
+				    (bigRaUp == "" || bigRaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigRaUp)),
+					(smlRaUp == "" || smlRaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlRaUp)));
+			if(list == null){
+				result.put("flg", null);
+				result.put("list", null);
+			}else{
+				result.put("flg", "yes");
+				result.put("list", list);
+			}
+		} catch (NumberFormatException e) {
+			logger.error("GuiNaRace_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("GuiNaRace_ParseException");
+			return null;
+		}
+		return result;
 	}
 
 }

@@ -20,6 +20,63 @@
 		pa_uptime
 	</sql>
 
+	<select id="selectGuiNaPetent" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_patent
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPada != null">
+			 <![CDATA[
+                and pa_date >= #{smlPada,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPada != null">
+			 <![CDATA[
+				and pa_date <= #{bigPada,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="paCate != null and paCate != ''">
+				and pa_category = #{paCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPaUp != null">
+			 <![CDATA[
+				and pa_uptime >= #{smlPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPaUp != null">
+			 <![CDATA[
+				and pa_uptime <= #{bigPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>)
+		</if>
+	</select>
 	<select id="selectAllPaInfo" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

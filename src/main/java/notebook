@@ -1,3 +1,43 @@
+
+/* 	thesis = {
+					flg : flog,
+					xuyuan : $("#xuyuan").val(),
+					sex : $("#sex").val(),
+					duty : $("#duty").val(),
+					bigAge : $("#bigAge").val(),
+					smlAge : $("#smlAge").val(),
+					major : $("#major").val(),
+					bigThda : $("#date").val(),
+					smlThda : $("#Cdate").val(),
+					thCate : $("#thCate").val(),
+					thle : $("#thle").val(),
+					thIsCl : $("#thIsCl").val(),
+					bigThUp : $("#date1").val(),
+					smlThUp : $("#Cdate1").val()
+				} */
+	/* $.ajax({
+		type : "POST",
+		url : "${pageContext.request.contextPath}/CountData/" + url,
+		data : too,
+		dataType : 'json',
+		cache : false,
+		async : false,
+		success : function(data) {
+			alert(data.string1+data.string2);
+			location.reload();
+		},
+		error : function(data) {
+			alert("获取归纳信息出错!");
+		}
+	});  */
+
+
+
+
+
+
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" style="margin: 15% 0 0 0;">
 		<div class="modal-dialog" role="document" style="width: 18em;">

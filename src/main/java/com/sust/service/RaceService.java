@@ -1,6 +1,7 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,5 +22,8 @@ public interface RaceService {
 	int upRaInfo(Race race);
 
 	List<Race> getAllRaceInfo();
+
+	Map<String, Object> GuiNaRace(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
+			String major, String raCate, String raTuan, String bigRada, String smlRada, String bigRaUp, String smlRaUp);
 
 }

@@ -34,4 +34,10 @@ public interface ProjectMapper {
 
 	int deleteByUsId(Integer usId);
 
+	List<Project> selectGuiNaThesis(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigProda") Date bigProda, @Param("smlProda") Date smlProda,
+			@Param("proCate") String proCate, @Param("bigMoney") Integer bigMoney, @Param("smlMoney") Integer smlMoney,
+			@Param("bigProUp") Date bigProUp, @Param("smlProUp") Date smlProUp);
+
 }

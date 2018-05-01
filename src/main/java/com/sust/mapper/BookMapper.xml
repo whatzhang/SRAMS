@@ -20,7 +20,74 @@
 		bo_publish,
 		bo_about, bo_uptime
 	</sql>
-
+	
+	<select id="selectGuiNaBook" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_book
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlBoda != null">
+			 <![CDATA[
+                and bo_date >= #{smlBoda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigBoda != null">
+			 <![CDATA[
+				and bo_date <= #{bigBoda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="boCate != null and boCate != ''">
+				and bo_category = #{boCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlFont != null">
+			 <![CDATA[
+				and bo_font >= #{smlFont,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigFont != null">
+			 <![CDATA[
+				and bo_font <= #{bigFont,jdbcType=INTEGER}
+				]]>
+				</if>
+			<if test="smlBoUp != null">
+			 <![CDATA[
+				and bo_uptime >= #{smlBoUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigBoUp != null">
+			 <![CDATA[
+				and bo_uptime <= #{bigBoUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>)
+		</if>
+	</select>
  	<select id="selectAllBoList"
 		resultMap="BaseResultMap">
 		select

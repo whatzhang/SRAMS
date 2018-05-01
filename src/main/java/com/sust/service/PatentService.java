@@ -1,6 +1,7 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,5 +22,8 @@ public interface PatentService {
 	int upPaInfo(Patent patent);
 
 	List<Patent> getAllPaInfo();
+
+	Map<String, Object> GuiNaPatent(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
+			String major, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
 
 }

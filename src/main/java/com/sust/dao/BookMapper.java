@@ -36,4 +36,10 @@ public interface BookMapper {
 
 	int deleteByUsId(Integer usId);
 
+	List<Book> selectGuiNaBook(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigBoda") Date bigBoda, @Param("smlBoda") Date smlBoda,
+			@Param("boCate") String boCate, @Param("bigFont") Integer bigFont, @Param("smlFont") Integer smlFont,
+			@Param("bigBoUp") Date bigBoUp, @Param("smlBoUp") Date smlBoUp);
+
 }

@@ -255,7 +255,7 @@ li {
 							<th style="text-align: center; vertical-align: middle;width: 8%;">年龄</th>
 							<th style="text-align: center; vertical-align: middle;width: 8%;">性别</th>
 							<th style="text-align: center; vertical-align: middle;width: 8%;">生日</th>
-							<th style="text-align: center; vertical-align: middle;width: 8%;">身份</th>
+							<th style="text-align: center; vertical-align: middle;width: 8%;">职称</th>
 							<th style="text-align: center; vertical-align: middle;width: 8%;">专业</th>
 							<th style="text-align: center; vertical-align: middle;width: 8%;">学/工号</th>
 							<th style="text-align: center; vertical-align:middle;width: 11%;">联系地址</th>

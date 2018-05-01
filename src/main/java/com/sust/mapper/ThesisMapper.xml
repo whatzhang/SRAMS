@@ -17,14 +17,75 @@
 		<result column="th_about" jdbcType="VARCHAR" property="thAbout" />
 		<result column="th_uptime" jdbcType="TIMESTAMP" property="thUptime" />
 	</resultMap>
-	<sql id="Base_Column_List">
-		th_id, us_id, th_name, th_category, th_author, th_date, th_level, th_factor,
-		th_included,
-		th_number, th_journal, th_page, th_about, th_uptime
+	<sql id="Base_Column_List">th_id, us_id, th_name, th_category, th_author,
+		th_date,th_level, th_factor, th_included, th_number, th_journal,
+		th_page, th_about, th_uptime
 	</sql>
-	
-	<select id="selectAllThesis" 
-		resultMap="BaseResultMap">
+
+	<select id="selectGuiNaThesis" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_thesis
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlThda != null">
+			 <![CDATA[
+                and th_date >= #{smlThda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigThda != null">
+			 <![CDATA[
+				and th_date <= #{bigThda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="thle != null and thle != ''">
+				and th_level = #{thle,jdbcType=VARCHAR}
+			</if>
+			<if test="thCate != null and thCate != ''">
+				and th_category = #{thCate,jdbcType=VARCHAR}
+			</if>
+			<if test="thIsCl != null and thIsCl != ''">
+				and th_included = #{thIsCl,jdbcType=VARCHAR}
+			</if>
+			<if test="smlThUp != null">
+			 <![CDATA[
+				and th_uptime >= #{smlThUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigThUp != null">
+			 <![CDATA[
+				and th_uptime <= #{bigThUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>)
+		</if>
+	</select>
+	<select id="selectAllThesis" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_thesis
@@ -63,28 +124,34 @@
 		from sr_thesis
 		where th_id = #{thId,jdbcType=INTEGER}
 	</select>
-	
+
 	<delete id="deleteByUsId" parameterType="java.lang.Integer">
 		delete from
 		sr_thesis
 		where us_id = #{usId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sr_thesis
+		delete from
+		sr_thesis
 		where th_id = #{thId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.sust.entity.Thesis">
-		insert into sr_thesis (th_id, us_id, th_name,
+		insert into sr_thesis (th_id,
+		us_id, th_name,
 		th_category, th_author, th_date,
-		th_level, th_factor, th_included,
+		th_level, th_factor,
+		th_included,
 		th_number, th_journal, th_page,
 		th_about, th_uptime)
-		values (#{thId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
+		values
+		(#{thId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
 		#{thName,jdbcType=VARCHAR},
-		#{thCategory,jdbcType=VARCHAR}, #{thAuthor,jdbcType=VARCHAR}, #{thDate,jdbcType=DATE},
+		#{thCategory,jdbcType=VARCHAR},
+		#{thAuthor,jdbcType=VARCHAR}, #{thDate,jdbcType=DATE},
 		#{thLevel,jdbcType=VARCHAR}, #{thFactor,jdbcType=VARCHAR},
 		#{thIncluded,jdbcType=VARCHAR},
-		#{thNumber,jdbcType=VARCHAR}, #{thJournal,jdbcType=VARCHAR}, #{thPage,jdbcType=VARCHAR},
+		#{thNumber,jdbcType=VARCHAR},
+		#{thJournal,jdbcType=VARCHAR}, #{thPage,jdbcType=VARCHAR},
 		#{thAbout,jdbcType=VARCHAR}, #{thUptime,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="com.sust.entity.Thesis">
@@ -180,7 +247,8 @@
 	</insert>
 
 	<update id="updateUpTime">
-		update sr_thesis set th_uptime = #{thUptime,jdbcType=TIMESTAMP}
+		update sr_thesis set th_uptime =
+		#{thUptime,jdbcType=TIMESTAMP}
 		where th_id = #{thId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Thesis">
@@ -231,18 +299,26 @@
 	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Thesis">
 		update sr_thesis
 		set us_id = #{usId,jdbcType=INTEGER},
-		th_name = #{thName,jdbcType=VARCHAR},
-		th_category = #{thCategory,jdbcType=VARCHAR},
-		th_author = #{thAuthor,jdbcType=VARCHAR},
+		th_name =
+		#{thName,jdbcType=VARCHAR},
+		th_category =
+		#{thCategory,jdbcType=VARCHAR},
+		th_author =
+		#{thAuthor,jdbcType=VARCHAR},
 		th_date = #{thDate,jdbcType=DATE},
 		th_level = #{thLevel,jdbcType=VARCHAR},
-		th_factor = #{thFactor,jdbcType=VARCHAR},
-		th_included = #{thIncluded,jdbcType=VARCHAR},
-		th_number = #{thNumber,jdbcType=VARCHAR},
-		th_journal = #{thJournal,jdbcType=VARCHAR},
+		th_factor =
+		#{thFactor,jdbcType=VARCHAR},
+		th_included =
+		#{thIncluded,jdbcType=VARCHAR},
+		th_number =
+		#{thNumber,jdbcType=VARCHAR},
+		th_journal =
+		#{thJournal,jdbcType=VARCHAR},
 		th_page = #{thPage,jdbcType=VARCHAR},
 		th_about = #{thAbout,jdbcType=VARCHAR},
-		th_uptime = #{thUptime,jdbcType=TIMESTAMP}
+		th_uptime =
+		#{thUptime,jdbcType=TIMESTAMP}
 		where th_id = #{thId,jdbcType=INTEGER}
 	</update>
 </mapper>

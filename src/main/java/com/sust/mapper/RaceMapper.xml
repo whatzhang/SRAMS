@@ -15,13 +15,74 @@
 		<result column="ra_uptime" jdbcType="TIMESTAMP" property="raUptime" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ra_id, us_id, ra_name, ra_category, ra_type, ra_author, ra_level,
+		ra_id, us_id, ra_name, ra_category, ra_type, ra_author,
+		ra_level,
 		ra_teacher, ra_date,
 		ra_about, ra_uptime
 	</sql>
-	
-	<select id="selectAllRaceInfo" 
-		resultMap="BaseResultMap">
+
+	<select id="selectGuiNaThesis" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_race
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlRada != null">
+			 <![CDATA[
+                and ra_date >= #{smlRada,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigRada != null">
+			 <![CDATA[
+				and ra_date <= #{bigRada,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="raTuan != null and raTuan != ''">
+				and ra_type = #{raTuan,jdbcType=VARCHAR}
+			</if>
+			<if test="raCate != null and raCate != ''">
+				and ra_category = #{raCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlRaUp != null">
+			 <![CDATA[
+				and ra_uptime >= #{smlRaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigRaUp != null">
+			 <![CDATA[
+				and ra_uptime <= #{bigRaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>
+			)
+		</if>
+	</select>
+	<select id="selectAllRaceInfo" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_race
@@ -56,25 +117,32 @@
 		from sr_race
 		where ra_id = #{raId,jdbcType=INTEGER}
 	</select>
-	
+
 	<delete id="deleteByUsId" parameterType="java.lang.Integer">
 		delete from
 		sr_race
-		where us_id = #{usId,jdbcType=INTEGER}
+		where
+		us_id = #{usId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sr_race
+		delete from
+		sr_race
 		where ra_id = #{raId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.sust.entity.Race">
-		insert into sr_race (ra_id, us_id, ra_name,
+		insert into sr_race (ra_id,
+		us_id, ra_name,
 		ra_category, ra_type, ra_author,
-		ra_level, ra_teacher, ra_date,
+		ra_level, ra_teacher,
+		ra_date,
 		ra_about, ra_uptime)
-		values (#{raId,jdbcType=INTEGER}, #{usId,jdbcType=INTEGER},
+		values (#{raId,jdbcType=INTEGER},
+		#{usId,jdbcType=INTEGER},
 		#{raName,jdbcType=VARCHAR},
-		#{raCategory,jdbcType=VARCHAR}, #{raType,jdbcType=VARCHAR}, #{raAuthor,jdbcType=VARCHAR},
-		#{raLevel,jdbcType=VARCHAR}, #{raTeacher,jdbcType=VARCHAR},
+		#{raCategory,jdbcType=VARCHAR}, #{raType,jdbcType=VARCHAR},
+		#{raAuthor,jdbcType=VARCHAR},
+		#{raLevel,jdbcType=VARCHAR},
+		#{raTeacher,jdbcType=VARCHAR},
 		#{raDate,jdbcType=DATE},
 		#{raAbout,jdbcType=VARCHAR}, #{raUptime,jdbcType=TIMESTAMP})
 	</insert>
@@ -195,16 +263,20 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.sust.entity.Race">
 		update sr_race
-		set us_id = #{usId,jdbcType=INTEGER},
+		set
+		us_id = #{usId,jdbcType=INTEGER},
 		ra_name = #{raName,jdbcType=VARCHAR},
 		ra_category = #{raCategory,jdbcType=VARCHAR},
-		ra_type = #{raType,jdbcType=VARCHAR},
+		ra_type =
+		#{raType,jdbcType=VARCHAR},
 		ra_author = #{raAuthor,jdbcType=VARCHAR},
 		ra_level = #{raLevel,jdbcType=VARCHAR},
-		ra_teacher = #{raTeacher,jdbcType=VARCHAR},
+		ra_teacher =
+		#{raTeacher,jdbcType=VARCHAR},
 		ra_date = #{raDate,jdbcType=DATE},
 		ra_about = #{raAbout,jdbcType=VARCHAR},
-		ra_uptime = #{raUptime,jdbcType=TIMESTAMP}
+		ra_uptime =
+		#{raUptime,jdbcType=TIMESTAMP}
 		where ra_id = #{raId,jdbcType=INTEGER}
 	</update>
 </mapper>

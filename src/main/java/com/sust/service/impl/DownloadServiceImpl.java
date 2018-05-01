@@ -26,7 +26,13 @@ import com.sust.dao.ProjectMapper;
 import com.sust.dao.RaceMapper;
 import com.sust.dao.ThesisMapper;
 import com.sust.dao.UsersMapper;
+import com.sust.entity.Book;
 import com.sust.entity.MyConfig;
+import com.sust.entity.Patent;
+import com.sust.entity.Praise;
+import com.sust.entity.Project;
+import com.sust.entity.Race;
+import com.sust.entity.Thesis;
 import com.sust.other.ExclUtils;
 import com.sust.other.MyUtils;
 import com.sust.service.DownloadService;
@@ -173,9 +179,10 @@ public class DownloadServiceImpl implements DownloadService {
 
 		return excelFile;
 	}
-	
+
 	/**
 	 * admin下的Excel模板和数据下载
+	 * 
 	 * @param type
 	 * @param flog
 	 * @return
@@ -244,10 +251,13 @@ public class DownloadServiceImpl implements DownloadService {
 				wb = ExclUtils.createWorkBook(map, keys6, columnNames6);
 				break;
 			case "typeData":
-				List<List<Map<String, Object>>> mapList = ExclUtils.createExcelAllInfo(this.patentMapper.selectAllPaInfo(),this.bookMapper.selectAllBoList(),this.praiseMapper.selectAllPraiseInfo(),
-						this.projectMapper.selectAllProjectList(),this.raceMapper.selectAllRaceInfo(),this.thesisMapper.selectAllThesis(),this.usersMapper.selectAllUsers());
-				List<String[]>  key = new ArrayList<String[]>();
-				List<String[]>  columnName = new ArrayList<String[]>();
+				List<List<Map<String, Object>>> mapList = ExclUtils.createExcelAllInfo(
+						this.patentMapper.selectAllPaInfo(), this.bookMapper.selectAllBoList(),
+						this.praiseMapper.selectAllPraiseInfo(), this.projectMapper.selectAllProjectList(),
+						this.raceMapper.selectAllRaceInfo(), this.thesisMapper.selectAllThesis(),
+						this.usersMapper.selectAllUsers());
+				List<String[]> key = new ArrayList<String[]>();
+				List<String[]> columnName = new ArrayList<String[]>();
 				key.add(keys);
 				key.add(keys1);
 				key.add(keys2);
@@ -255,7 +265,7 @@ public class DownloadServiceImpl implements DownloadService {
 				key.add(keys4);
 				key.add(keys5);
 				key.add(keys6);
-				
+
 				columnName.add(columnNames);
 				columnName.add(columnNames1);
 				columnName.add(columnNames2);
@@ -294,8 +304,8 @@ public class DownloadServiceImpl implements DownloadService {
 				wb = ExclUtils.createWorkBook(map, keys6, columnNames6);
 				break;
 			case "typeData":
-				List<String[]>  key = new ArrayList<String[]>();
-				List<String[]>  columnName = new ArrayList<String[]>();
+				List<String[]> key = new ArrayList<String[]>();
+				List<String[]> columnName = new ArrayList<String[]>();
 				key.add(keys);
 				key.add(keys1);
 				key.add(keys2);
@@ -303,7 +313,7 @@ public class DownloadServiceImpl implements DownloadService {
 				key.add(keys4);
 				key.add(keys5);
 				key.add(keys6);
-				
+
 				columnName.add(columnNames);
 				columnName.add(columnNames1);
 				columnName.add(columnNames2);
@@ -322,6 +332,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	/**
 	 * 用户下载所属的Excel
+	 * 
 	 * @param type
 	 * @param id
 	 * @return
@@ -375,6 +386,197 @@ public class DownloadServiceImpl implements DownloadService {
 			break;
 		default:
 			break;
+		}
+		return wb;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamTh(String type, List<Thesis> list, HttpSession session) {
+
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamPa(String type, List<Patent> list, HttpSession session) {
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamPr(String type, List<Praise> list, HttpSession session) {
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamPro(String type, List<Project> list, HttpSession session) {
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamBo(String type, List<Book> list, HttpSession session) {
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@Override
+	public File getGuiNaWorkBookStreamRa(String type, List<Race> list, HttpSession session) {
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
+				+ "temp" + File.separatorChar + "temp.xls");
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeGuiNaInfoList(type, list).write(os);
+
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return excelFile;
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> Workbook getUserTypeGuiNaInfoList(String type, List<T> ob) {
+
+		List<Map<String, Object>> map = new ArrayList<Map<String, Object>>();
+		Workbook wb = new HSSFWorkbook();
+		try {
+			switch (type) {
+			case "patent":
+				map = ExclUtils.createExcelPatent(ob == null ? this.patentMapper.selectAllPaInfo() : (List<Patent>) ob);
+				String columnNames[] = { "序号", "专利名称", "专利类别", "专利拥有着", "申请日期", "授权时间", "专利序号", "专利内容", "文件上传时间" };// 列名
+				String keys[] = { "paId", "paName", "paCategory", "paAuthor", "paPlease", "paDate", "paNumber",
+						"paAbout", "paUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys, columnNames);
+				break;
+			case "book":
+				map = ExclUtils.createExcelBook(ob == null ? this.bookMapper.selectAllBoList() : (List<Book>) ob);
+				String columnNames1[] = { "序号", "教材名称", "教材类别", "出版日期", "教材主编", "教材参编", "教材字数", "出版社", "教材简介",
+						"文件上传日期" };// 列名
+				String keys1[] = { "boId", "boName", "boCategory", "boDate", "boEditor", "boEditor2", "boFont",
+						"boPublish", "boAbout", "boUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys1, columnNames1);
+				break;
+			case "praise":
+				map = ExclUtils
+						.createExcelPraise(ob == null ? this.praiseMapper.selectAllPraiseInfo() : (List<Praise>) ob);
+				String columnNames2[] = { "序号", "获奖名称", "获奖类别", "获奖日期", "颁奖机构", "获奖人", "获奖简介", "文件上传日期" };// 列名
+				String keys2[] = { "prId", "prName", "prCategory", "prDate", "prUnit", "prAuthor", "prAbout",
+						"prUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys2, columnNames2);
+				break;
+			case "project":
+				map = ExclUtils.createExcelProject(
+						ob == null ? this.projectMapper.selectAllProjectList() : (List<Project>) ob);
+				String columnNames3[] = { "序号", "项目名称", "项目类别", "立项时间", "立项金额", "项目领导", "团队成员", "项目简介", "文件上传日期" };// 列名
+				String keys3[] = { "proId", "proName", "proCategory", "proDate", "proCash", "proLeader", "proTeam",
+						"proAbout", "proUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys3, columnNames3);
+				break;
+			case "race":
+				map = ExclUtils.createExcelRace(ob == null ? this.raceMapper.selectAllRaceInfo() : (List<Race>) ob);
+				String columnNames4[] = { "序号", "竞赛名称", "竞赛类别", "个人/团体", "获奖人", "获奖等级", "指导老师", "竞赛日期", "竞赛简介",
+						"文件上传日期" };// 列名
+				String keys4[] = { "raId", "raName", "raCategory", "raType", "raAuthor", "raLevel", "raTeacher",
+						"raDate", "raAbout", "raUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys4, columnNames4);
+				break;
+			case "thesis":
+				map = ExclUtils.createExcelThesis(ob == null ? this.thesisMapper.selectAllThesis() : (List<Thesis>) ob);
+				String columnNames5[] = { "序号", "论文名称", "论文类别", "论文作者", "发表日期", "论文等级", "影响因子", "是否收录", "论文编号", "发表期刊",
+						"期刊页面", "论文简介", "文件上传日期" };// 列名
+				String keys5[] = { "thId", "thName", "thCategory", "thAuthor", "thDate", "thLevel", "thFactor",
+						"thIncluded", "thNumber", "thJournal", "thPage", "thAbout", "thUptime" };// map中的key
+				wb = ExclUtils.createWorkBook(map, keys5, columnNames5);
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			logger.error("getUserTypeGuiNaInfoList_error");
+			return null;
 		}
 		return wb;
 	}

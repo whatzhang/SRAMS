@@ -35,6 +35,10 @@ public class Thesis {
 	public Thesis() {
 
 	}
+	public Thesis(String thName) {
+		super();
+		this.thName = thName;
+	}
 
 	public Thesis(Integer thId, Integer usId, String thName, String thCategory, String thAuthor, Date thDate,
 			String thLevel, String thFactor, String thIncluded, String thNumber, String thJournal, String thPage,

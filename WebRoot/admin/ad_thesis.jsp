@@ -109,8 +109,7 @@ li {
 							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
 							<th style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
-							<th
-								style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
+							<th style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
 							<th style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
 							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
 						</tr>
@@ -405,13 +404,13 @@ li {
 									name="th_pa" id="th_pa" readonly="true"></td>
 							</tr>
 							<tr>
-							    <td><label for="largeinput"
+								<td><label for="largeinput"
 									class=" control-label label-input-lg">文件上传时间</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="th_time" id="th_time" readonly="true"></td>
 								<td></td>
 								<td></td>
-							
+
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -434,275 +433,276 @@ li {
 
 	</div>
 	<script type="text/javascript">
-			var num = 0;
-			var idd = 0;
-			var flog = 1;
-			var ms = "确认修改此信息？";
-			function setNum(d) {
-				document.getElementById("numJ").value = d;
-				num = document.getElementById("numJ").value;
-				idd = d;
-				show();
-			}
-			function showModal(data) {
-				$("#th_na").val(data.thName);
-				$("#th_ca").val(data.thCategory);
-				$("#th_au").val(data.thAuthor);
-				$("#th_da").val(data.thDate);
-				$("#th_le").val(data.thLevel);
-				$("#th_fa").val(data.thFactor);
-				$("#th_is").val(data.thIncluded);
-				$("#th_nu").val(data.thNumber);
-				$("#th_ja").val(data.thJournal);
-				$("#th_pa").val(data.thPage);
-				$("#th_time").val(data.thUptime);
-				$("#th_ab").val(data.thAbout);
-				showUpInfo(data);
-			}
-			function show() {
-				$.ajax({
-					type : "POST",
-					url : "${pageContext.request.contextPath}/thesis/getShowInfo",
-					data : {
-						thId : idd
-					},
-					dataType : 'json',
-					cache : false,
-					async : true,
-					success : showModal,
-					error : function(data) {
-						alert("showThesis error!");
-					}
-				});
-			}
-			function showUpInfo(data) {
-				$("#thName").val(data.thName);
-				$("#thCate").get(0).options[0].text = data.thCategory;
-				$("#Cdate").val(data.thDate);
-				$("#thLevel").val(data.thLevel);
-				$("#thfactor").val(data.thFactor);
-				$("#thIscloud").get(0).options[0].text = data.thIncluded;
-				$("#thNum").val(data.thNumber);
-				$("#thJour").val(data.thJournal);
-				$("#thPage").val(data.thPage);
-				$("thAuthor").val(data.thAuthor);
-				$("#thAbout").val(data.thAbout);
-			}
-			function showUpThInfo(upId) {
-			    idd = upId;
-				$.ajax({
-					type : "POST",
-					url : "${pageContext.request.contextPath}/thesis/getThInfoUp",
-					data : {
-						upId : upId
-					},
-					dataType : 'json',
-					cache : false,
-					async : true,
-					success : showUpInfo,
-					error : function(data) {
-						alert("updateThesis error!");
-					}
-				});
-			}
-			function delThesis(deId,fg) {
-			var too ={"deId" : deId,
-			          "fg" : fg 
-		     }
-				$.ajax({
-					type : "POST",
-					url : "${pageContext.request.contextPath}/thesis/DeleteThInfo",
-					data : too,
-					dataType : 'json',
-					cache : false,
-					async : true,
-					success : function(data){
-					     alert(data.string1);
-					     window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo";
-					},
-					error : function(data) {
-						alert("删除信息出错!");
-					}
-				});
-			}
-			function delThInfo(deId){
-			    var fg ;
-			    if (confirm("确定要删除吗？") == true) {
-				      if(confirm("是否删除电子文件？")){
-				         fg = "yes";
-				      }else{
-				         fg = 'no';
-				      }
-					  delThesis(deId,fg);
-			    } else {
-					return false;
+		var num = 0;
+		var idd = 0;
+		var flog = 1;
+		var ms = "确认修改此信息？";
+		function setNum(d) {
+			document.getElementById("numJ").value = d;
+			num = document.getElementById("numJ").value;
+			idd = d;
+			show();
+		}
+		function showModal(data) {
+			$("#th_na").val(data.thName);
+			$("#th_ca").val(data.thCategory);
+			$("#th_au").val(data.thAuthor);
+			$("#th_da").val(data.thDate);
+			$("#th_le").val(data.thLevel);
+			$("#th_fa").val(data.thFactor);
+			$("#th_is").val(data.thIncluded);
+			$("#th_nu").val(data.thNumber);
+			$("#th_ja").val(data.thJournal);
+			$("#th_pa").val(data.thPage);
+			$("#th_time").val(data.thUptime);
+			$("#th_ab").val(data.thAbout);
+			showUpInfo(data);
+		}
+		function show() {
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/thesis/getShowInfo",
+				data : {
+					thId : idd
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : showModal,
+				error : function(data) {
+					alert("showThesis error!");
 				}
-			}
-			function reSet() {
-				$("#thCate").get(0).options[0].text = "论文类别";
-				$("#thIscloud").get(0).options[0].text = "是否收录";
-			}
-			function add() {
-				$("#Change").removeClass("btn btn-danger");
-				$("#Change").addClass("btn btn-default");
-				$("#Add").addClass("btn btn-danger");
-				$("sureCh").button("确认添加");
-				ms = "确认添加此信息？";
-				$('#upAndadd')[0].reset();
-				reSet();
-				flog = 0;
-			}
-			function change() {
-				$("#Add").removeClass("btn btn-danger");
-				$("#Add").addClass("btn btn-default");
-				$("#Change").addClass("btn btn-danger");
-				$("sureCh").button("确认修改");
-				ms = "确认修改此信息？";
-				flog = 1;
-			}
-			function getObjectURL(file) {
-				var url = null;
-				if (window.createObjcectURL != undefined) {
-					url = window.createOjcectURL(file);
-				} else if (window.URL != undefined) {
-					url = window.URL.createObjectURL(file);
-				} else if (window.webkitURL != undefined) {
-					url = window.webkitURL.createObjectURL(file);
+			});
+		}
+		function showUpInfo(data) {
+			$("#thName").val(data.thName);
+			$("#thCate").get(0).options[0].text = data.thCategory;
+			$("#Cdate").val(data.thDate);
+			$("#thLevel").val(data.thLevel);
+			$("#thfactor").val(data.thFactor);
+			$("#thIscloud").get(0).options[0].text = data.thIncluded;
+			$("#thNum").val(data.thNumber);
+			$("#thJour").val(data.thJournal);
+			$("#thPage").val(data.thPage);
+			$("thAuthor").val(data.thAuthor);
+			$("#thAbout").val(data.thAbout);
+		}
+		function showUpThInfo(upId) {
+			idd = upId;
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/thesis/getThInfoUp",
+				data : {
+					upId : upId
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : showUpInfo,
+				error : function(data) {
+					alert("updateThesis error!");
 				}
-				return url;
+			});
+		}
+		function delThesis(deId, fg) {
+			var too = {
+				"deId" : deId,
+				"fg" : fg
 			}
-			//添加信息
-			function addThInfo() {
-				var thName = $("#thName").val();
-				var thCate = $("#thCate").val();
-				var Cdate = $("#Cdate").val();
-				var thLevel = $("#thLevel").val();
-				var thfactor = $("#thfactor").val();
-				var thIscloud = $("#thIscloud").val();
-				var thNum = $("#thNum").val();
-				var thJour = $("#thJour").val();
-				var thPage = $("#thPage").val();
-				var thAuthor = $("#thAuthor").val();
-				var thAbout = $("#thAbout").val();
-				//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
-				$.ajax({
-					type : "GET",
-					url : "${pageContext.request.contextPath}/thesis/addAllThesisInfo",
-					data : {
-						thName : thName,
-						thAuthor : thAuthor,
-						thCate : thCate,
-						Cdate : Cdate,
-						thLevel : thLevel,
-						thfactor : thfactor,
-						thIscloud : thIscloud,
-						thNum : thNum,
-						thJour : thJour,
-						thPage : thPage,
-						thAbout : thAbout
-					},
-					dataType : 'json',
-					cache : false,
-					async : false,
-					success : function(data) {
-						alert(data.info);
-					    window.location.href = "${pageContext.request.contextPath}"+data.urlNext;
-					}, 
-					error : function() {
-                        alert("添加信息出错！");
-					}
-				});
-			}
-			//更新信息
-			function updateThInfo() {
-				var thName = $("#thName").val();
-				var thCate = $("#thCate").val();
-				var Cdate = $("#Cdate").val();
-				var thLevel = $("#thLevel").val();
-				var thfactor = $("#thfactor").val();
-				var thIscloud = $("#thIscloud").val();
-				var thNum = $("#thNum").val();
-				var thJour = $("#thJour").val();
-				var thPage = $("#thPage").val();
-				var thAuthor = $("#thAuthor").val();
-				var thAbout = $("#thAbout").val();
-				//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
-				$.ajax({
-					type : "GET",
-					url : "${pageContext.request.contextPath}/thesis/updateAllThInfo",
-					data : {
-					    thId : idd,
-						thName : thName,
-						thAuthor : thAuthor,
-						thCate : thCate,
-						Cdate : Cdate,
-						thLevel : thLevel,
-						thfactor : thfactor,
-						thIscloud : thIscloud,
-						thNum : thNum,
-						thJour : thJour,
-						thPage : thPage,
-						thAbout : thAbout
-					},
-					dataType : 'json',
-					cache : false,
-					async : false,
-					success : function(data) {
-						alert(data.info);
-					    window.location.href = "${pageContext.request.contextPath}"+data.urlNext; 
-					}, 
-					error : function() {
-					    alert("修改信息出错！");
-					}
-				});
-			}
-			function isOp() {
-				if (confirm(ms) == true) {
-					if (flog == 0) {
-						addThInfo();
-					} else {
-						updateThInfo();
-					}
-					return true;
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/thesis/DeleteThInfo",
+				data : too,
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data) {
+					alert(data.string1);
+					window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo";
+				},
+				error : function(data) {
+					alert("删除信息出错!");
+				}
+			});
+		}
+		function delThInfo(deId) {
+			var fg;
+			if (confirm("确定要删除吗？") == true) {
+				if (confirm("是否删除电子文件？")) {
+					fg = "yes";
 				} else {
-					return false;
+					fg = 'no';
 				}
+				delThesis(deId, fg);
+			} else {
+				return false;
 			}
-			function checkFile(){
-		        var allowtype =  ["doc","docx","pdf","rar","zip"];
-				var filename = $("#upfile").val();  
-				if(idd != null){
-					if ($.inArray(filename.substring(filename.lastIndexOf(".")+1,filename.length).toLowerCase(),allowtype) == -1){
-					    alert("请输入正确的格式(doc,docx,pdf,rar,zip)");
-					}else{
-						upFile();
-					}
-				}else{
-					alert("选择要上传文件的信息！");
+		}
+		function reSet() {
+			$("#thCate").get(0).options[0].text = "论文类别";
+			$("#thIscloud").get(0).options[0].text = "是否收录";
+		}
+		function add() {
+			$("#Change").removeClass("btn btn-danger");
+			$("#Change").addClass("btn btn-default");
+			$("#Add").addClass("btn btn-danger");
+			$("sureCh").button("确认添加");
+			ms = "确认添加此信息？";
+			$('#upAndadd')[0].reset();
+			reSet();
+			flog = 0;
+		}
+		function change() {
+			$("#Add").removeClass("btn btn-danger");
+			$("#Add").addClass("btn btn-default");
+			$("#Change").addClass("btn btn-danger");
+			$("sureCh").button("确认修改");
+			ms = "确认修改此信息？";
+			flog = 1;
+		}
+		function getObjectURL(file) {
+			var url = null;
+			if (window.createObjcectURL != undefined) {
+				url = window.createOjcectURL(file);
+			} else if (window.URL != undefined) {
+				url = window.URL.createObjectURL(file);
+			} else if (window.webkitURL != undefined) {
+				url = window.webkitURL.createObjectURL(file);
+			}
+			return url;
+		}
+		//添加信息
+		function addThInfo() {
+			var thName = $("#thName").val();
+			var thCate = $("#thCate").val();
+			var Cdate = $("#Cdate").val();
+			var thLevel = $("#thLevel").val();
+			var thfactor = $("#thfactor").val();
+			var thIscloud = $("#thIscloud").val();
+			var thNum = $("#thNum").val();
+			var thJour = $("#thJour").val();
+			var thPage = $("#thPage").val();
+			var thAuthor = $("#thAuthor").val();
+			var thAbout = $("#thAbout").val();
+			//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
+			$.ajax({
+				type : "GET",
+				url : "${pageContext.request.contextPath}/thesis/addAllThesisInfo",
+				data : {
+					thName : thName,
+					thAuthor : thAuthor,
+					thCate : thCate,
+					Cdate : Cdate,
+					thLevel : thLevel,
+					thfactor : thfactor,
+					thIscloud : thIscloud,
+					thNum : thNum,
+					thJour : thJour,
+					thPage : thPage,
+					thAbout : thAbout
+				},
+				dataType : 'json',
+				cache : false,
+				async : false,
+				success : function(data) {
+					alert(data.info);
+					window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
+				},
+				error : function() {
+					alert("添加信息出错！");
 				}
+			});
+		}
+		//更新信息
+		function updateThInfo() {
+			var thName = $("#thName").val();
+			var thCate = $("#thCate").val();
+			var Cdate = $("#Cdate").val();
+			var thLevel = $("#thLevel").val();
+			var thfactor = $("#thfactor").val();
+			var thIscloud = $("#thIscloud").val();
+			var thNum = $("#thNum").val();
+			var thJour = $("#thJour").val();
+			var thPage = $("#thPage").val();
+			var thAuthor = $("#thAuthor").val();
+			var thAbout = $("#thAbout").val();
+			//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
+			$.ajax({
+				type : "GET",
+				url : "${pageContext.request.contextPath}/thesis/updateAllThInfo",
+				data : {
+					thId : idd,
+					thName : thName,
+					thAuthor : thAuthor,
+					thCate : thCate,
+					Cdate : Cdate,
+					thLevel : thLevel,
+					thfactor : thfactor,
+					thIscloud : thIscloud,
+					thNum : thNum,
+					thJour : thJour,
+					thPage : thPage,
+					thAbout : thAbout
+				},
+				dataType : 'json',
+				cache : false,
+				async : false,
+				success : function(data) {
+					alert(data.info);
+					window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
+				},
+				error : function() {
+					alert("修改信息出错！");
+				}
+			});
+		}
+		function isOp() {
+			if (confirm(ms) == true) {
+				if (flog == 0) {
+					addThInfo();
+				} else {
+					updateThInfo();
+				}
+				return true;
+			} else {
+				return false;
 			}
-		    function upFile(){
-		    	$("#upFile").ajaxSubmit({
-		            type : 'POST',
-		            url : "${pageContext.request.contextPath}/upload/uploadFileAjax?type=thesis",
-		            contentType : "application/x-www-form-urlencoded; charset=utf-8",
-		            data : {
-		            	ID : idd
-		            },
-		            success: function(data) {
-			            alert(data.string1);
-		            },
-		            error: function (data){
-		                alert("出错");
-		            }  
-		         });
-		    }
-		    function relodePage(){
-				   var page = $("#pageSize").val();
-				   window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo?pageSize="+page;
-				   window.parent.scrollTo(0, 0);
-            }
-		</script>
+		}
+		function checkFile() {
+			var allowtype = [ "doc", "docx", "pdf", "rar", "zip" ];
+			var filename = $("#upfile").val();
+			if (idd != null) {
+				if ($.inArray(filename.substring(filename.lastIndexOf(".") + 1, filename.length).toLowerCase(), allowtype) == -1) {
+					alert("请输入正确的格式(doc,docx,pdf,rar,zip)");
+				} else {
+					upFile();
+				}
+			} else {
+				alert("选择要上传文件的信息！");
+			}
+		}
+		function upFile() {
+			$("#upFile").ajaxSubmit({
+				type : 'POST',
+				url : "${pageContext.request.contextPath}/upload/uploadFileAjax?type=thesis",
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				data : {
+					ID : idd
+				},
+				success : function(data) {
+					alert(data.string1);
+				},
+				error : function(data) {
+					alert("出错");
+				}
+			});
+		}
+		function relodePage() {
+			var page = $("#pageSize").val();
+			window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo?pageSize=" + page;
+			window.parent.scrollTo(0, 0);
+		}
+	</script>
 </body>
 </html>
 

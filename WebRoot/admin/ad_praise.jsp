@@ -544,9 +544,9 @@ li {
          });
     }
     function rePages(){
-   var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo?pageSize="+page;
-   window.parent.scrollTo(0, 0);
-   }
+	   var page = $("#pageSize").val();
+	   window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo?pageSize="+page;
+	   window.parent.scrollTo(0, 0);
+    }
 </script>
 </html>
