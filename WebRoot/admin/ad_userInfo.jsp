@@ -496,7 +496,6 @@ li {
 		</div>
 	</div>
 
-
 	<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -507,88 +506,91 @@ li {
 					<h4 class="modal-title" id="myModalLabel">详细信息</h4>
 				</div>
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
-					<table class="table" style="text-align: left;">
-						<tbody style="font-size: 1em;">
-							<tr>
-								<td><label for="largeinput"
-									class="control-label label-input-lg">用户姓名</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_na" id="th_na" readonly="true"></td>
-								<td><label for="largeinput"
-									class="control-label label-input-lg">用户年龄</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_ca" id="th_ca" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">出生日期</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_au" id="th_au" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">用户身份</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_da" id="th_da" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">学号/工号</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_le" id="th_le" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">联系地址</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_fa" id="th_fa" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">联系电话</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_is" id="th_is" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">E-mail</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_nu" id="th_nu" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">所属学院</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_ja" id="th_ja" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">专业</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_pa" id="th_pa" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">密保问题一</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_qq1" id="th_qq1" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">预留答案一</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_pass1" id="th_pass1" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">密保问题二</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_qq2" id="th_qq2" readonly="true"></td>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">预留答案二</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_pass2" id="th_pass2" readonly="true"></td>
-							</tr>
-							<tr>
-								<td><label for="largeinput"
-									class=" control-label label-input-lg">用户性别</label></td>
-								<td><input type="text" class="form-control1 input-lg"
-									name="th_time" id="th_time" readonly="true"></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+					<div id="what">
+						<table class="table" style="text-align: left;">
+							<tbody style="font-size: 1em;">
+								<tr>
+									<td><label for="largeinput"
+										class="control-label label-input-lg">用户姓名</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_na" id="th_na" readonly="true"></td>
+									<td><label for="largeinput"
+										class="control-label label-input-lg">用户年龄</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_ca" id="th_ca" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">出生日期</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_au" id="th_au" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">用户身份</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_da" id="th_da" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">学号/工号</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_le" id="th_le" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">联系地址</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_fa" id="th_fa" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">联系电话</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_is" id="th_is" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">E-mail</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_nu" id="th_nu" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">所属学院</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_ja" id="th_ja" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">专业</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_pa" id="th_pa" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">密保问题一</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_qq1" id="th_qq1" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">预留答案一</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_pass1" id="th_pass1" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">密保问题二</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_qq2" id="th_qq2" readonly="true"></td>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">预留答案二</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_pass2" id="th_pass2" readonly="true"></td>
+								</tr>
+								<tr>
+									<td><label for="largeinput"
+										class=" control-label label-input-lg">用户性别</label></td>
+									<td><input type="text" class="form-control1 input-lg"
+										name="th_time" id="th_time" readonly="true"></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="info" style="margin-bottom: 1em;"><span>此用户暂时无具体信息,请及时上传！</span></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary"
@@ -653,7 +655,7 @@ li {
 			async : true,
 			success : function(data) {
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/users/getAllUsersInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("addUserInfo error!");
@@ -678,10 +680,9 @@ li {
 			async : true,
 			success : function(data) {
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/users/getAllUsersInfo";
-			},
+				location.reload();			},
 			error : function(data) {
-				alert("updateUserInfo error!");
+				console.log("updateUserInfo error!");
 			}
 		});
 	}
@@ -734,9 +735,9 @@ li {
 		window.location.href = "${pageContext.request.contextPath}/users/getAllUsers?pageSize=" + page;
 		window.parent.scrollTo(0, 0);
 	}
-	function showLoginInfo(Id){
-	   showLogin(Id);
-	   showUserMadel(Id,1);
+	function showLoginInfo(Id) {
+		showLogin(Id);
+		showUserMadel(Id, 1);
 	}
 	function showLogin(Id) {
 		loid = Id;
@@ -762,8 +763,8 @@ li {
 			}
 		});
 	}
-	function addUserDataInfo(){
-	$.ajax({
+	function addUserDataInfo() {
+		$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/users/addUserDataInfo",
 			data : {
@@ -789,7 +790,7 @@ li {
 			async : true,
 			success : function(data) {
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/users/getAllUsersInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("update error!");
@@ -823,7 +824,7 @@ li {
 			async : true,
 			success : function(data) {
 				alert("修改成功！");
-				window.location.href = "${pageContext.request.contextPath}/users/getAllUsersInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("update error!");
@@ -831,7 +832,7 @@ li {
 		});
 	}
 	function showUserMadel(id, fg) {
-	    usid = id;
+		usid = id;
 		$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/users/getUserInfoById",
@@ -843,10 +844,24 @@ li {
 			async : true,
 			success : function(data) {
 				if (fg == 1) {
-					showInModel(data);
-					showInUpData(data);
+					if (data == null) {
+						$("#what").hide();
+						$("#info").show();
+					} else {
+				    	$("#info").hide();
+				    	$("#what").show();
+						showInModel(data);
+						showInUpData(data);
+					}
 				} else {
-					showInUpData(data);
+					if (data == null) {
+						$("#what").hide();
+						$("#info").show();
+					} else {
+				    	$("#info").hide();
+				    	$("#what").show();
+						showInUpData(data);
+					}
 				}
 			},
 			error : function(data) {
@@ -855,7 +870,7 @@ li {
 		});
 	}
 	function showInModel(data) {
-	    $("#th_na").val(data.usName);
+		$("#th_na").val(data.usName);
 		$("#th_ca").val(data.usAge);
 		$("#th_time").val(data.usSex);
 		$("#th_au").val(data.usBirthday);
@@ -903,20 +918,20 @@ li {
 			return false;
 		}
 	}
-	function delUsersByID(id,fg) {
-	$.ajax({
+	function delUsersByID(id, fg) {
+		$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/users/DeleteUserInfo",
 			data : {
-			   usId : id,
-			   fg : fg
+				usId : id,
+				fg : fg
 			},
 			dataType : 'json',
 			cache : false,
 			async : true,
-			success : function(data){
-			     alert(data.string1);
-			     window.location.href = "${pageContext.request.contextPath}/users/getAllUsersInfo";
+			success : function(data) {
+				alert(data.string1);
+			    location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");

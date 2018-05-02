@@ -440,8 +440,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${thList.thUptime}">${thList.thUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('thesis',${thList.thId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 1em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('thesis',${thList.thId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -519,8 +519,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${paList.paUptime}">${paList.paUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('patent',${paList.paId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('patent',${paList.paId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -592,8 +592,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${prList.prUptime}">${prList.prUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('praise',${prList.prId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('praise',${prList.prId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -671,8 +671,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${proList.proUptime}">${proList.proUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('project',${proList.proId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('project',${proList.proId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -756,8 +756,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${boList.boUptime}">${boList.boUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('book',${boList.boId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('book',${boList.boId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -841,8 +841,8 @@ li {
 									data-toggle="tooltip" data-placement="top"
 									title="${RaceList.raUptime}">${RaceList.raUptime}</td>
 								<th
-									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><span
-									onclick="deleteInfo('race',${RaceList.raId})">删除</span></th>
+									style="width: 8%; text-align: center; vertical-align: middle; font-size: 0.8em;"><a href="javascript: void(0);"
+									onclick="deleteInfo('race',${RaceList.raId})">删除</a></th>
 							</tr>
 						</c:forEach>
 					</tbody>

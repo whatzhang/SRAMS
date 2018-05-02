@@ -54,8 +54,9 @@ li {
 
 	<div class="main-page">
 		<div class="panel-info" style="margin:  2em 3em 1em 1em; ">
-			<button type="button" class="btn btn-info" onclick="refresh();"
-				style="width: 100%; height:3em; margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;">接收/刷新信息</button>
+			<button type="button" class="btn btn-info"
+				style="width: 100%; height:3em; margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;"
+				onclick="refresh();">接收/刷新信息</button>
 		</div>
 
 		<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">
@@ -108,33 +109,34 @@ li {
 					</div>
 
 				</div>
-
 			</div>
 
 
-			<div class="panel panel-info col-md-8 compose-right">
-				<div class="panel-heading" style="padding: 1em 0em 1em 2em; ">发布新消息</div>
-				<div class="panel-body">
-					<form class="com-mail" id="addNew" name="addNew">
-						<div style="margin: 0em 0em 1em 0em;">
-							<div class="btn-group">
-								<button type="button" class="btn btn-danger" id="Change"
-									onclick="AllUsers();">AllUsers</button>
-								<button type="button" class="btn btn-default" id="Add"
-									onclick="SomeOne();">SomeOne</button>
+			<div class="col-md-8 compose-right">
+				<div class="panel panel-info">
+					<div class="panel-heading" style="padding: 1em 0em 1em 2em; ">发布新消息</div>
+					<div class="panel-body">
+						<form class="com-mail" id="addNew" name="addNew">
+							<div style="margin: 0em 0em 1em 0em;">
+								<div class="btn-group">
+									<button type="button" class="btn btn-danger" id="Change"
+										onclick="AllUsers();">AllUsers</button>
+									<button type="button" class="btn btn-default" id="Add"
+										onclick="SomeOne();">SomeOne</button>
+								</div>
 							</div>
-						</div>
-						<input type="text" class="form-control1 control3" id="toSe"
-							style="display:none" placeholder="To :"> <input
-							id="mmTitle" type="text" class="form-control1 control3"
-							placeholder="消息主题">
-						<textarea rows="6" class="form-control1 control2" id="mmAbout"
-							placeholder="消息内容:" required="required"></textarea>
+							<input type="text" class="form-control1 control3" id="toSe"
+								style="display:none" placeholder="To :"> <input
+								id="mmTitle" type="text" class="form-control1 control3"
+								placeholder="消息主题">
+							<textarea rows="6" class="form-control1 control2" id="mmAbout"
+								placeholder="消息内容:" required="required"></textarea>
 
-						<input type="submit" class="btn btn-success"
-							onclick="addMessage();" style=" float: right;margin-right: 1em;"
-							value="发布提交">
-					</form>
+							<input type="submit" class="btn btn-success"
+								onclick="addMessage();" style=" float: right;margin-right: 1em;"
+								value="发布提交">
+						</form>
+					</div>
 				</div>
 			</div>
 
@@ -189,11 +191,12 @@ li {
 											class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 									</a>
 									</li>
-									<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-										<a href="javascript: showNewsInfo(${Me.meId});"
-										title="消息阅读情况"> <i class="fa fa-download mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
+									<li style="float: left; width: 0.7em; margin-left: 0.9em;">
+										<a href="javascript: showNewsInfo(${Me.meId});" title="消息阅读情况">
+											<i class="fa fa-download mail-icon"
+											style="width: 1em; padding-left: 0.2em;"></i>
+									</a>
+									</li>
 									<li style="float: left; width: 0.7em; margin-left: 1em;"><a
 										href="javascript: deleteMessage(${Me.meId});" title="删除信息">
 											<i class="fa fa-trash-o mail-icon"
@@ -297,8 +300,6 @@ li {
 			</div>
 		</div>
 	</div>
-
-
 </body>
 <script type="text/javascript">
 	var isCh = "ch";
@@ -333,8 +334,8 @@ li {
 		} else {
 			document.getElementById('toSe').value = data.meReceive + "号用户";
 		}
-		document.getElementById('mmTitle').value = data.meTitle
-		document.getElementById('mmAbout').value = data.meAbout
+		document.getElementById('mmTitle').value = data.meTitle;
+		document.getElementById('mmAbout').value = data.meAbout;
 	}
 	function setReadNum(ww) {
 		document.getElementById('NoRead').innerText = ww.string1;
