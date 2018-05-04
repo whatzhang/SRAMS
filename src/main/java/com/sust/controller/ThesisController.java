@@ -1,5 +1,6 @@
 package com.sust.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -24,6 +28,7 @@ import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Thesis;
+import com.sust.other.PageUtil;
 import com.sust.service.ThesisService;
 
 @Controller
@@ -33,6 +38,7 @@ public class ThesisController {
 	private static final Log logger = LogFactory.getLog(ThesisController.class);
 	@Resource
 	private ThesisService thesisService;
+	private List<Thesis> ThesisList = null;
 
 	@RequestMapping(value = "/getUserThInfo")
 	private String getUserThInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
@@ -119,7 +125,7 @@ public class ThesisController {
 	/**
 	 * admin数据处理
 	 */
-	@RequestMapping(value = "/getAllThInfo")
+	@RequestMapping("/getAllThInfo")
 	private String getAllThInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
 			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
 
@@ -132,30 +138,29 @@ public class ThesisController {
 		model.addAttribute("list", thList);
 		return "admin/ad_thesis";
 	}
-	
+
 	@RequestMapping(value = "/addAllThesisInfo", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> addAllThesisInfo(@RequestParam("usId") int usId, @RequestParam("thName") String thName,
-			@RequestParam("thAuthor") String thAuthor,
-			@RequestParam("thCate") String thCate, @RequestParam("Cdate") String Cdate,
-			@RequestParam("thLevel") String thLevel, @RequestParam("thfactor") String thfactor,
-			@RequestParam("thIscloud") String thIscloud, @RequestParam("thNum") String thNum,
-			@RequestParam("thJour") String thJour, @RequestParam("thPage") String thPage,
-			@RequestParam("thAbout") String thAbout) throws ParseException {
+			@RequestParam("thAuthor") String thAuthor, @RequestParam("thCate") String thCate,
+			@RequestParam("Cdate") String Cdate, @RequestParam("thLevel") String thLevel,
+			@RequestParam("thfactor") String thfactor, @RequestParam("thIscloud") String thIscloud,
+			@RequestParam("thNum") String thNum, @RequestParam("thJour") String thJour,
+			@RequestParam("thPage") String thPage, @RequestParam("thAbout") String thAbout) throws ParseException {
 
 		logger.info("addAllThesisInfo++" + usId + "++" + thName + "++" + thName + "++" + thCate + "++" + Cdate + "++"
 				+ thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++"
 				+ thAbout);
-		int sta = this.thesisService.addThesis(new Thesis(usId, thName, thCate, thAuthor,
-				(Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel, thfactor, thIscloud, thNum, thJour,
-				thPage, thAbout, new Date()));
+		int sta = this.thesisService.addThesis(
+				new Thesis(usId, thName, thCate, thAuthor, (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)),
+						thLevel, thfactor, thIscloud, thNum, thJour, thPage, thAbout, new Date()));
 		Map<String, String> result = new HashMap<String, String>();
 		result.put("status", String.valueOf(sta));
 		result.put("info", "添加论文信息成功！");
 		result.put("urlNext", "/thesis/getAllThInfo");
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/updateAllThInfo", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> updateAllThInfo(@RequestParam("usId") int usId, @RequestParam("thId") int thId,
@@ -165,9 +170,9 @@ public class ThesisController {
 			@RequestParam("thNum") String thNum, @RequestParam("thJour") String thJour,
 			@RequestParam("thPage") String thPage, @RequestParam("thAbout") String thAbout) throws ParseException {
 
-		logger.info("updateAllThInfo++" + usId + "++" + thId + "++" + thName + "++" + thName + "++" + thCate + "++" + Cdate
-				+ "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage
-				+ "++" + thAbout);
+		logger.info("updateAllThInfo++" + usId + "++" + thId + "++" + thName + "++" + thName + "++" + thCate + "++"
+				+ Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++"
+				+ thPage + "++" + thAbout);
 		int sta = this.thesisService.upThesisInfo(new Thesis(thId, usId, thName, thCate,
 				thesisService.getUserNameById(usId), (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(Cdate)), thLevel,
 				thfactor, thIscloud, thNum, thJour, thPage, thAbout, new Date()));
@@ -177,6 +182,58 @@ public class ThesisController {
 		result.put("urlNext", "/thesis/getAllThInfo");
 		return result;
 	}
-	
-	
+
+	@RequestMapping(value = "/findThesisInfo", method = RequestMethod.GET)
+	private void findThesisInfo(@RequestParam("date") String bigThda, @RequestParam("Cdate") String smlThda,
+			@RequestParam("thCate") String thCate, @RequestParam("thle") String thle,
+			@RequestParam("thIsCl") String thIsCl, @RequestParam("date1") String bigThUp,
+			@RequestParam("Cdate1") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		logger.info("findThesisInfo++" + bigThda + "++" + thCate);
+		this.setThesisList(this.thesisService.findThInfo(bigThda, smlThda, thCate, thle, thIsCl, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/thesis/getPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findThesisInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+        logger.info("/thesis/getPage");
+	}
+
+	@RequestMapping("/getPage")
+	public String getPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getPage++" + pageSize + "++" + pa);
+		/*PageHelper.startPage(pa, pageSize);
+		List<Thesis> thList = this.thesisService.getAllThInfo();
+		PageInfo<Thesis> page = new PageInfo<Thesis>(thList);
+		model.addAttribute("ps", pageSize);
+		model.addAttribute("page", page);
+		model.addAttribute("list", thList);*/
+		if (this.getThesisList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Thesis> page1 = new PageUtil<Thesis>(this.getThesisList(), pa, pageSize);
+			model.addAttribute("ThList", page1.getPagedList());
+			for (Thesis thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}
+			model.addAttribute("ps1", 10);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "admin/ad_thesis";
+	}
+
+	public List<Thesis> getThesisList() {
+		return ThesisList;
+	}
+
+	public void setThesisList(List<Thesis> thesisList) {
+		ThesisList = thesisList;
+	}
+
 }

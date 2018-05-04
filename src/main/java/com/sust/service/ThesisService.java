@@ -26,4 +26,7 @@ public interface ThesisService {
 	public Map<String,Object>  GuiNaThesis(String flg,String xuyuan, String sex, String duty, String bigAge, String smlAge, String major,
 			String bigThda, String smlThda, String thCate, String thle, String thIsCl, String bigThUp, String smlThUp);
 
+	public List<Thesis> findThInfo(String bigThda, String smlThda, String thCate, String thle, String thIsCl,
+			String bigThUp, String smlThUp);
+
 }

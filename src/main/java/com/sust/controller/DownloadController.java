@@ -38,7 +38,9 @@ public class DownloadController {
 
 	@RequestMapping(value = "/downloadTypeFile")
 	public ResponseEntity<byte[]> downloadTypeFile(HttpSession session, @RequestParam("type") String type,
-			@RequestParam("id") String id, HttpServletResponse response, HttpServletRequest request) {
+			@RequestParam("id") String id, @RequestParam(value = "isFind", defaultValue = "no") String isFind,
+			@RequestParam(value = "role", defaultValue = "USER") String rloe, HttpServletResponse response,
+			HttpServletRequest request) {
 
 		List<String> list = this.downloadService.getDownloadFile(session, type, id);
 		if (list != null && !"NO_SUCH_FILE".equals(list.get(0))) {
@@ -62,27 +64,78 @@ public class DownloadController {
 			return entity;
 		} else {
 			String urlString = "";
-			switch (type) {
-			case "patent":
-				urlString = "/patent/getUserPaInfo";
-				break;
-			case "book":
-				urlString = "/book/getUserBoList";
-				break;
-			case "praise":
-				urlString = "/praise/getUserPraiseInfo";
-				break;
-			case "project":
-				urlString = "/project/getUserProList";
-				break;
-			case "race":
-				urlString = "/race/getUserRaceInfo";
-				break;
-			case "thesis":
-				urlString = "/thesis/getUserThInfo";
-				break;
-			default:
-				break;
+			if ("no".equals(isFind)) {
+				if ("USER".equals(rloe)) {
+					switch (type) {
+					case "patent":
+						urlString = "/patent/getUserPaInfo";
+						break;
+					case "book":
+						urlString = "/book/getUserBoList";
+						break;
+					case "praise":
+						urlString = "/praise/getUserPraiseInfo";
+						break;
+					case "project":
+						urlString = "/project/getUserProList";
+						break;
+					case "race":
+						urlString = "/race/getUserRaceInfo";
+						break;
+					case "thesis":
+						urlString = "/thesis/getUserThInfo";
+						break;
+					default:
+						break;
+					}
+				} else {
+					switch (type) {
+					case "patent":
+						urlString = "/patent/getAllPaInfo";
+						break;
+					case "book":
+						urlString = "/book/getAllBoList";
+						break;
+					case "praise":
+						urlString = "/praise/getAllPraiseInfo";
+						break;
+					case "project":
+						urlString = "/project/getAllProList";
+						break;
+					case "race":
+						urlString = "/race/getAllRaceInfo";
+						break;
+					case "thesis":
+						urlString = "/thesis/getAllThInfo";
+						break;
+					default:
+						break;
+					}
+
+				}
+			} else {
+				switch (type) {
+				case "patent":
+					urlString = "/patent/getPage";
+					break;
+				case "book":
+					urlString = "/book/getPage";
+					break;
+				case "praise":
+					urlString = "/praise/getPage";
+					break;
+				case "project":
+					urlString = "/project/getPage";
+					break;
+				case "race":
+					urlString = "/race/getPage";
+					break;
+				case "thesis":
+					urlString = "/thesis/getPage";
+					break;
+				default:
+					break;
+				}
 			}
 			try {
 				PrintWriter out = response.getWriter();

@@ -58,175 +58,392 @@ li {
 	<%!int i = 0;%>
 	<input type="hidden" name="numJ" id="numJ" />
 	<div class="main-page">
-		<div class="media" style="padding: 1em 1em 1em 1em;">
+		<div class="media" style="padding: 2em 1em 0em 1em;">
 			<div class="panel-info">
 				<div class=" panel-body-inputin">
-					<form class="form-horizontal">
+					<form class="form-horizontal"
+						action="${pageContext.request.contextPath}/thesis/findThesisInfo"
+						id="findThesisInfo" name="findThesisInfo" method="get">
 						<div class="form-group mb-n">
 							<label for="largeinput" class=" control-label label-input-lg"
-								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
+								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label> <a
+								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=thesis"><button
+									type="button" class="btn btn-success col-sm-1"
+									style="float: right;margin-right: 2em;width: 10em;">导出信息为Excl</button></a>
+							<button class="btn btn-danger" id="find" type="submit"
+								style="float: right;margin-right: 2em;"
+								onclick="return indInfo();">查询信息</button>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-2" style="margin-left: 1em">
-								<select class="form-control1">
-									<option>论文名称</option>
-									<option>发表时间</option>
-									<option>发表期刊</option>
-									<option>论文类别</option>
+						<div class="form-group" style="margin-left: 1em;margin-top: 1em;">
+							<div class="col-sm-2" style="width: 19em;">
+								<div class="form-group mb-n">
+									发表时间&le;<input type="text" name="date" title="发表时间"
+										class="form-control1 input-lg" id="date" style="width: 7em;">
+									&ge;<input type="text" name="Cdate" title="发表时间"
+										class="form-control1 input-lg" id="Cdate" style="width: 7em;">
+								</div>
+							</div>
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="thCate" name="thCate">
+									<option value="">论文类别</option>
+									<option value="类别1">类别1</option>
+									<option value="类别2">类别2</option>
 								</select>
 							</div>
-							<label for="largeinput"
-								class="col-sm-2 control-label label-input-lg"
-								style="color: #e94e02;">关键信息：</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg"
-									id="largeinput" placeholder=" ">
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="thle" name="thle">
+									<option value="">论文级别</option>
+									<option value="1">一级</option>
+									<option value="2">二级</option>
+								</select>
 							</div>
-							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<a
-								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=thesis"><button
-									type="button" class="btn btn-success col-sm-2"
-									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="thIsCl" name="thIsCl">
+									<option value="">是否收录</option>
+									<option value="1">已收录</option>
+									<option value="0">没收录</option>
+								</select>
+							</div>
+							<div class="col-sm-2" style="width: 20em;">
+								<div class="form-group mb-n">
+									文件上传时间&le;<input type="text" name="date1" title="文件上传时间"
+										class="form-control1 input-lg" id="date1" style="width: 7em;">
+									&ge;<input type="text" name="Cdate1" title="文件上传时间"
+										class="form-control1 input-lg" id="Cdate1" style="width: 7em;">
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 			<br> <br>
-			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
-				<table class="table table-bordered"
-					style="table-layout: fixed; width: 100%;">
-					<thead>
-						<tr class="success">
-							<th style="text-align: center;vertical-align: middle; width: 4%;"><input
-								type="checkbox" name="thId"></th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
-							<th style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
-							<th style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
-							<th style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
-							<th style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
-							<th style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
-							<th style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
-							<th style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
-							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							List<Thesis> lt = (List<Thesis>) request.getAttribute("list");
-							if (lt != null) {
-								for (i = 0; i < lt.size(); i++) {
-						%>
-						<tr>
-							<td style="text-align: center;vertical-align: middle; width: 4%;"><input
-								type="checkbox" value="<%=lt.get(i).getThId()%>" name="thId"></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThName()%>"><%=lt.get(i).getThName()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 6%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThCategory()%>"><%=lt.get(i).getThCategory()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThAuthor()%>"><%=lt.get(i).getThAuthor()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 6%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThLevel()%>"><%=lt.get(i).getThLevel()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 6%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThFactor()%>"><%=lt.get(i).getThFactor()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 4%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThIncluded()%>"><%=lt.get(i).getThIncluded()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThNumber()%>"><%=lt.get(i).getThNumber()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThJournal()%>"><%=lt.get(i).getThJournal()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 6%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThPage()%>"><%=lt.get(i).getThPage()%></td>
-							<td
-								style="text-align: center;vertical-align: middle; width: 17%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThAbout()%>"><%=lt.get(i).getThAbout()%></td>
-							<td style="text-align: center;vertical-align: middle; width: 7%;"
-								data-toggle="tooltip" data-placement="top"
-								title="<%=lt.get(i).getThUptime()%>"><%=lt.get(i).getThUptime()%></td>
-							<th align="center"
-								style="width: 8%;text-align: center;vertical-align: middle;">
-								<div style="width: 100%;height: 2em;">
-									<li style="float: left; width: 0.7em;margin-left: 0.85em;"><a
-										href="javascript:void(0);"
-										onclick="showUpThInfo(<%=lt.get(i).getThId()%>);" title="修改信息">
-											<i class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
-									</a></li>
-									<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
-										href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>"
-										title="下载文件"> <i class="fa fa-download mail-icon"
-											style="width: 1em;padding-left: 0.2em; "></i>
-									</a></li>
-									<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
-										href="javascript:void(0);"
-										onclick="delThInfo(<%=lt.get(i).getThId()%>);" title="删除信息">
-											<i class="fa fa-trash-o mail-icon"
-											style="width: 1em;padding-left: 0.2em; "></i>
-									</a></li>
-									<li
-										style="float: left; width: 0.7em;margin-left: 0.8em;margin-right: 0.4em;"><a
-										href="#myLookModal"
-										onclick="setNum(<%=lt.get(i).getThId()%>);"
-										data-toggle="modal" data-target="#myLookModal" title="查看信息">
-											<i class="fa fa-book nav_icon"
-											style="width: 0.15em;padding-left: 0.1em; "></i>
-									</a></li>
-								</div>
-							</th>
-						</tr>
-						<%
-							}
-							}
-						%>
-						<script>
-							$(function() {
-								$('[data-toggle="tooltip"]').tooltip({
-									container : 'body'
-								});
-							})
-						</script>
-					</tbody>
-				</table>
-				<p>
-				<div style="float: left;">
-					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
-					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-						onchange="relodePage()" size="1">
-						<option value="${page.pageSize}">${page.pageSize}</option>
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>条记录
+			<c:if test="${isShow == 'yes'}">
+				<div class="panel-info" style="padding: 1em 1em 1em 1em;"
+					id="findThesis">
+					<div class="panel-heading success" style="vertical-align: middle;">
+						查找信息 <a
+							href="${pageContext.request.contextPath}/thesis/getShowInfo"
+							style="color: red;float: right;"> 取消查找信息 </a>
+					</div>
+					<table class="table table-bordered"
+						style="table-layout: fixed; width: 100%;">
+						<thead>
+							<tr>
+								<th
+									style="text-align: center;vertical-align: middle; width: 4%;"><input
+									type="checkbox" name="thId"></th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.ThList}" var="thList">
+								<tr onclick="chanceThis('thesis',${thList.thId});">
+									<td
+										style="text-align: center;vertical-align: middle; width: 4%;"><input
+										type="checkbox" value="${thList.thId}" name="thId"></td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thName}">${thList.thName}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 6%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thCategory}">${thList.thCategory}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thAuthor}">${thList.thAuthor}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thDate}">${thList.thDate}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 6%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thLevel}">${thList.thLevel}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 6%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thFactor}">${thList.thFactor}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 4%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thIncluded}">${thList.thIncluded}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thNumber}">${thList.thNumber}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thJournal}">${thList.thJournal}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 6%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thPage}">${thList.thPage}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 17%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thAbout}">${thList.thAbout}</td>
+									<td
+										style="text-align: center;vertical-align: middle; width: 7%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${thList.thUptime}">${thList.thUptime}</td>
+									<th align="center"
+										style="width: 8%;text-align: center;vertical-align: middle;">
+										<div style="width: 100%;height: 2em;">
+											<li style="float: left; width: 0.7em;margin-left: 0.85em;"><a
+												href="javascript:void(0);"
+												onclick="showUpThInfo(${thList.thId});" title="修改信息"> <i
+													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=${thList.thId}&isFind=yes&role=AD"
+												title="下载文件"> <i class="fa fa-download mail-icon"
+													style="width: 1em;padding-left: 0.2em; "></i>
+											</a></li>
+											<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+												href="javascript:void(0);"
+												onclick="delThInfo(${thList.thId});" title="删除信息"> <i
+													class="fa fa-trash-o mail-icon"
+													style="width: 1em;padding-left: 0.2em; "></i>
+											</a></li>
+											<li
+												style="float: left; width: 0.7em;margin-left: 0.8em;margin-right: 0.4em;"><a
+												href="#myLookModal" onclick="setNum(${thList.thId});"
+												data-toggle="modal" data-target="#myLookModal" title="查看信息">
+													<i class="fa fa-book nav_icon"
+													style="width: 0.15em;padding-left: 0.1em; "></i>
+											</a></li>
+										</div>
+									</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<script>
+						$(function() {
+							$('[data-toggle="tooltip"]').tooltip({
+								container : 'body'
+							});
+						})
+					</script>
+					<p>
+					<div style="float: left;">
+						显示第${page1.startRow}至${page1.endRow}项/第${page1.nowPage}页，共
+						${page1.totalCount}项/${page1.totalPage}页， 每页显示 <select
+							id="pageSize" onchange="rePages()" size="1">
+							<option value="${page1.pageSize}">${page1.pageSize}</option>
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>条记录
+					</div>
+					<div style="float:right;">
+						<a
+							href="${pageContext.request.contextPath}/thesis/getPage?page=${page1.firstPage}&pageSize=${ps1}">第一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getPage?page=${page1.nextPage}&pageSize=${ps1}">下一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getPage?page=${page1.prePage}&pageSize=${ps1}">上一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getPage?page=${page1.lastPage}&pageSize=${ps1}">最后页</a>
+					</div>
+					</p>
 				</div>
-				<div style="float:right;">
-					<a
-						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
-					<a
-						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
-					<a
-						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
-					<a
-						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+			</c:if>
+			<c:if test="${isShow != 'yes'}">
+				<div class="panel-info" style="padding: 1em 1em 1em 1em;"
+					id="AllThesis">
+					<div class="panel-heading success">所有论文信息</div>
+					<table class="table table-bordered"
+						style="table-layout: fixed; width: 100%;">
+						<thead>
+							<tr>
+								<th
+									style="text-align: center;vertical-align: middle; width: 4%;"><input
+									type="checkbox" name="thId"></th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
+								<th
+									style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<Thesis> lt = (List<Thesis>) request.getAttribute("list");
+									if (lt != null) {
+										for (i = 0; i < lt.size(); i++) {
+							%>
+							<tr>
+								<td
+									style="text-align: center;vertical-align: middle; width: 4%;"><input
+									type="checkbox" value="<%=lt.get(i).getThId()%>" name="thId"></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThName()%>"><%=lt.get(i).getThName()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 6%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThCategory()%>"><%=lt.get(i).getThCategory()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThAuthor()%>"><%=lt.get(i).getThAuthor()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 6%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThLevel()%>"><%=lt.get(i).getThLevel()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 6%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThFactor()%>"><%=lt.get(i).getThFactor()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 4%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThIncluded()%>"><%=lt.get(i).getThIncluded()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThNumber()%>"><%=lt.get(i).getThNumber()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThJournal()%>"><%=lt.get(i).getThJournal()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 6%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThPage()%>"><%=lt.get(i).getThPage()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 17%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThAbout()%>"><%=lt.get(i).getThAbout()%></td>
+								<td
+									style="text-align: center;vertical-align: middle; width: 7%;"
+									data-toggle="tooltip" data-placement="top"
+									title="<%=lt.get(i).getThUptime()%>"><%=lt.get(i).getThUptime()%></td>
+								<th align="center"
+									style="width: 8%;text-align: center;vertical-align: middle;">
+									<div style="width: 100%;height: 2em;">
+										<li style="float: left; width: 0.7em;margin-left: 0.85em;"><a
+											href="javascript:void(0);"
+											onclick="showUpThInfo(<%=lt.get(i).getThId()%>);"
+											title="修改信息"> <i class="fa fa-cogs nav_icon"
+												style="width: 0.15em"></i>
+										</a></li>
+										<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>"
+											title="下载文件"> <i class="fa fa-download mail-icon"
+												style="width: 1em;padding-left: 0.2em; "></i>
+										</a></li>
+										<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+											href="javascript:void(0);"
+											onclick="delThInfo(<%=lt.get(i).getThId()%>);" title="删除信息">
+												<i class="fa fa-trash-o mail-icon"
+												style="width: 1em;padding-left: 0.2em; "></i>
+										</a></li>
+										<li
+											style="float: left; width: 0.7em;margin-left: 0.8em;margin-right: 0.4em;"><a
+											href="#myLookModal"
+											onclick="setNum(<%=lt.get(i).getThId()%>);"
+											data-toggle="modal" data-target="#myLookModal" title="查看信息">
+												<i class="fa fa-book nav_icon"
+												style="width: 0.15em;padding-left: 0.1em; "></i>
+										</a></li>
+									</div>
+								</th>
+							</tr>
+							<%
+								}
+									}
+							%>
+							<script>
+								$(function() {
+									$('[data-toggle="tooltip"]').tooltip({
+										container : 'body'
+									});
+								})
+							</script>
+						</tbody>
+					</table>
+					<p>
+					<div style="float: left;">
+						显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+						${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+							onchange="relodePage()" size="1">
+							<option value="${page.pageSize}">${page.pageSize}</option>
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>条记录
+					</div>
+					<div style="float:right;">
+						<a
+							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						<a
+							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+					</div>
+					</p>
 				</div>
-				</p>
-			</div>
+			</c:if>
 		</div>
 		<div class="media">
 			<div class="panel-info" style="padding: 0em 2em 1em 2em;"
@@ -256,8 +473,8 @@ li {
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<input type="text" name="Cdate" readonly="readonly" title="发表时间"
-								class="form-control1 input-lg" id="Cdate" required="required">
+							<input type="text" name="Cdate9" readonly="readonly" title="发表时间"
+								class="form-control1 input-lg" id="Cdate9" required="required">
 						</div>
 					</div>
 					<div class="form-group mb-n">
@@ -430,8 +647,8 @@ li {
 				</div>
 			</div>
 		</div>
-
 	</div>
+
 	<script type="text/javascript">
 		var num = 0;
 		var idd = 0;
@@ -477,7 +694,7 @@ li {
 		function showUpInfo(data) {
 			$("#thName").val(data.thName);
 			$("#thCate").get(0).options[0].text = data.thCategory;
-			$("#Cdate").val(data.thDate);
+			$("#Cdate9").val(data.thDate);
 			$("#thLevel").val(data.thLevel);
 			$("#thfactor").val(data.thFactor);
 			$("#thIscloud").get(0).options[0].text = data.thIncluded;
@@ -575,7 +792,7 @@ li {
 		function addThInfo() {
 			var thName = $("#thName").val();
 			var thCate = $("#thCate").val();
-			var Cdate = $("#Cdate").val();
+			var Cdate = $("#Cdate9").val();
 			var thLevel = $("#thLevel").val();
 			var thfactor = $("#thfactor").val();
 			var thIscloud = $("#thIscloud").val();
@@ -584,7 +801,7 @@ li {
 			var thPage = $("#thPage").val();
 			var thAuthor = $("#thAuthor").val();
 			var thAbout = $("#thAbout").val();
-			//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
+			//alert(thName + "++" + thCate + "++" + Cdate9 + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
 			$.ajax({
 				type : "GET",
 				url : "${pageContext.request.contextPath}/thesis/addAllThesisInfo",
@@ -617,7 +834,7 @@ li {
 		function updateThInfo() {
 			var thName = $("#thName").val();
 			var thCate = $("#thCate").val();
-			var Cdate = $("#Cdate").val();
+			var Cdate = $("#Cdate9").val();
 			var thLevel = $("#thLevel").val();
 			var thfactor = $("#thfactor").val();
 			var thIscloud = $("#thIscloud").val();
@@ -626,7 +843,7 @@ li {
 			var thPage = $("#thPage").val();
 			var thAuthor = $("#thAuthor").val();
 			var thAbout = $("#thAbout").val();
-			//alert(thName + "++" + thCate + "++" + Cdate + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
+			//alert(thName + "++" + thCate + "++" + Cdate9 + "++" + thLevel + "++" + thfactor + "++" + thIscloud + "++" + thNum + "++" + thJour + "++" + thPage + "++" + thAbout);
 			$.ajax({
 				type : "GET",
 				url : "${pageContext.request.contextPath}/thesis/updateAllThInfo",
@@ -701,6 +918,17 @@ li {
 			var page = $("#pageSize").val();
 			window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo?pageSize=" + page;
 			window.parent.scrollTo(0, 0);
+		}
+		function findInfo() {
+			if (confirm("确定要查找？")) {
+				return true;
+			} else {
+				return false;
+			}
+		/* thesis = "bigThda=" + $("#date").val() + "&smlThda=" + $("#Cdate").val() + "&thCate=" + $("#thCate").val() + "&thle=" + $("#thle").val() + "&thIsCl=" + $("#thIsCl").val() + "&bigThUp=" + $("#date1").val() + "&smlThUp=" + $("#Cdate1").val();
+		var hh = "${pageContext.request.contextPath}/thesis/findThesisInfo?";
+		alert(hh + thesis);
+		window.location.href = hh + thesis; */
 		}
 	</script>
 </body>

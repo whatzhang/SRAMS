@@ -1,4 +1,27 @@
 
+
+
+
+
+
+
+ this.data = data;
+        this.pageSize = pageSize;
+        
+        this.totalCount = data.size();
+        this.totalPage = (totalCount + pageSize - 1) / pageSize;
+        
+        this.firstPage = 1;
+        this.prePage = nowPage-1<1?1:nowPage-1;
+        this.nowPage = nowPage;
+        this.nextPage = nowPage>=totalPage? totalPage: nowPage + 1;
+        this.lastPage = totalPage;   
+        
+        this.startRow = nowPage * pageSize - (pageSize-1);
+        this.endRow = nowPage == lastPage? totalCount:nowPage * pageSize;
+        
+        
+        
 /* 	thesis = {
 					flg : flog,
 					xuyuan : $("#xuyuan").val(),
