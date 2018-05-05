@@ -69,7 +69,7 @@ li {
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label> <a
 								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=thesis"><button
 									type="button" class="btn btn-success col-sm-1"
-									style="float: right;margin-right: 2em;width: 10em;">导出信息为Excl</button></a>
+									style="float: right;margin-right: 2em;width: 10em;">导出所有信息为Excl</button></a>
 							<button class="btn btn-danger" id="find" type="submit"
 								style="float: right;margin-right: 2em;"
 								onclick="return indInfo();">查询信息</button>
@@ -122,8 +122,9 @@ li {
 					id="findThesis">
 					<div class="panel-heading success" style="vertical-align: middle;">
 						查找信息 <a
-							href="${pageContext.request.contextPath}/thesis/getShowInfo"
-							style="color: red;float: right;"> 取消查找信息 </a>
+							href="${pageContext.request.contextPath}/thesis/getAllThInfo"
+							style="color: red;float: right;"> 取消查找信息 </a> <a href="${pageContext.request.contextPath}/thesis/downloadFind"
+							style="color: red;float: right;margin-right: 1em;"> 导出查找信息 </a>
 					</div>
 					<table class="table table-bordered"
 						style="table-layout: fixed; width: 100%;">
@@ -257,7 +258,7 @@ li {
 					<div style="float: left;">
 						显示第${page1.startRow}至${page1.endRow}项/第${page1.nowPage}页，共
 						${page1.totalCount}项/${page1.totalPage}页， 每页显示 <select
-							id="pageSize" onchange="rePages()" size="1">
+							id="pageSize11" onchange="rePages()" size="1">
 							<option value="${page1.pageSize}">${page1.pageSize}</option>
 							<option value="10">10</option>
 							<option value="25">25</option>
@@ -918,6 +919,12 @@ li {
 			var page = $("#pageSize").val();
 			window.location.href = "${pageContext.request.contextPath}/thesis/getAllThInfo?pageSize=" + page;
 			window.parent.scrollTo(0, 0);
+		}
+		function rePages(){
+		    var page = $("#pageSize11").val();
+			window.location.href = "${pageContext.request.contextPath}/thesis/getPage?pageSize=" + page;
+			window.parent.scrollTo(0, 0);
+		
 		}
 		function findInfo() {
 			if (confirm("确定要查找？")) {

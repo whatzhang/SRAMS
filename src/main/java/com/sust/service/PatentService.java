@@ -26,4 +26,6 @@ public interface PatentService {
 	Map<String, Object> GuiNaPatent(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
 			String major, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
 
+	List<Patent>  findThInfo(String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
+
 }

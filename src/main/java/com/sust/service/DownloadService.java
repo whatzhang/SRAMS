@@ -32,5 +32,4 @@ public interface DownloadService {
 
 	File getGuiNaWorkBookStreamRa(String type, List<Race> raceList, HttpSession session);
 
-
 }

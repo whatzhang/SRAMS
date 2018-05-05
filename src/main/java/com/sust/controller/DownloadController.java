@@ -137,6 +137,7 @@ public class DownloadController {
 					break;
 				}
 			}
+			logger.info(urlString);
 			try {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");

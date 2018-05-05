@@ -136,4 +136,12 @@ public class Patent {
 	public void setPaUptime(Date paUptime) {
 		this.paUptime = paUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Patent [paId=" + paId + ", usId=" + usId + ", paName=" + paName + ", paCategory=" + paCategory
+				+ ", paAuthor=" + paAuthor + ", paPlease=" + paPlease + ", paDate=" + paDate + ", paNumber=" + paNumber
+				+ ", paAbout=" + paAbout + ", paUptime=" + paUptime + "]";
+	}
+	
 }
