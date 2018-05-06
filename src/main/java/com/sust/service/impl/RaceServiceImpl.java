@@ -126,4 +126,23 @@ public class RaceServiceImpl implements RaceService {
 		return result;
 	}
 
+	@Override
+	public List<Race> findRaInfo(String bigRada, String smlRada, String raCate, String raTuan, String bigRaUp,
+			String smlRaUp) {
+		try {
+			return this.raceMapper.selectGuiNaRace(0,"",null,"",null,null,"",
+					(bigRada == "" || bigRada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigRada)),
+							(smlRada == "" || smlRada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlRada)),
+							(raCate == "" || raCate == null )?"":raCate,(raTuan == "" || raTuan == null )?"":raTuan, 
+						    (bigRaUp == "" || bigRaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigRaUp)),
+							(smlRaUp == "" || smlRaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlRaUp)));
+		} catch (NumberFormatException e) {
+			logger.error("findRaInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findRaInfo_ParseException");
+			return null;
+		}
+	}
+
 }

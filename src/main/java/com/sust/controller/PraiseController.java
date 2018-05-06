@@ -1,15 +1,25 @@
 package com.sust.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +32,8 @@ import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Login;
 import com.sust.entity.Praise;
+import com.sust.other.PageUtil;
+import com.sust.service.DownloadService;
 import com.sust.service.PraiseService;
 
 @Controller
@@ -32,6 +44,9 @@ public class PraiseController {
 
 	@Resource
 	private PraiseService praiseService;
+	@Resource
+	private DownloadService downloadService;
+	private List<Praise> praiseList = null;
 
 	@RequestMapping("/getUserPraiseInfo")
 	public String getUserPraiseInfo(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
@@ -107,5 +122,74 @@ public class PraiseController {
 		model.addAttribute("page", page);
 		model.addAttribute("Pa", list);
 		return "admin/ad_praise";
+	}
+	
+	@RequestMapping(value = "/findPraiseInfo", method = RequestMethod.GET)
+	private void findPraiseInfo(@RequestParam("date4") String bigThda, @RequestParam("Cdate4") String smlThda,
+			@RequestParam("PrCate") String PrCate, @RequestParam("date5") String bigThUp,
+			@RequestParam("Cdate5") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		logger.info("findPraiseInfo++" + bigThda + "++" + PrCate);
+		this.setPraiseList(this.praiseService.findPrInfo(bigThda, smlThda, PrCate, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/praise/getPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findpraiseInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+        logger.info("/praise/getPage");
+	}
+
+	@RequestMapping("/getPage")
+	public String getPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getPage++" + pageSize + "++" + pa);
+		if (this.getPraiseList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Praise> page1 = new PageUtil<Praise>(this.getPraiseList(), pa, pageSize);
+			model.addAttribute("PraiseList", page1.getPagedList());
+			for (Praise thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "admin/ad_praise";
+	}
+	
+	@RequestMapping("/downloadFind")
+	public ResponseEntity<byte[]> downloadFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamPr("praise", this.getPraiseList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadFind_ResponseEntity_error");
+		}
+		return entity;
+	}
+
+	public List<Praise> getPraiseList() {
+		return praiseList;
+	}
+
+	public void setPraiseList(List<Praise> praiseList) {
+		this.praiseList = praiseList;
 	}
 }

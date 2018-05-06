@@ -136,4 +136,12 @@ public class Project {
 	public void setProUptime(Date proUptime) {
 		this.proUptime = proUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Project [proId=" + proId + ", usId=" + usId + ", proName=" + proName + ", proCategory=" + proCategory
+				+ ", proDate=" + proDate + ", proCash=" + proCash + ", proLeader=" + proLeader + ", proTeam=" + proTeam
+				+ ", proAbout=" + proAbout + ", proUptime=" + proUptime + "]";
+	}
+	
 }

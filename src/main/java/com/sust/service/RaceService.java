@@ -26,4 +26,6 @@ public interface RaceService {
 	Map<String, Object> GuiNaRace(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
 			String major, String raCate, String raTuan, String bigRada, String smlRada, String bigRaUp, String smlRaUp);
 
+	List<Race> findRaInfo(String bigThda, String smlThda, String raCate, String raTuan, String bigThUp, String smlThUp);
+
 }

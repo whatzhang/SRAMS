@@ -72,7 +72,7 @@ li {
 									style="float: right;margin-right: 2em;width: 10em;">导出所有信息为Excl</button></a>
 							<button class="btn btn-danger" id="find" type="submit"
 								style="float: right;margin-right: 2em;"
-								onclick="return indInfo();">查询信息</button>
+								onclick="return findInfo();">查询信息</button>
 						</div>
 						<div class="form-group" style="margin-left: 1em;margin-top: 1em;">
 							<div class="col-sm-2" style="width: 19em;">
@@ -163,7 +163,7 @@ li {
 						</thead>
 						<tbody>
 							<c:forEach items="${requestScope.ThList}" var="thList">
-								<tr onclick="chanceThis('thesis',${thList.thId});">
+								<tr>
 									<td
 										style="text-align: center;vertical-align: middle; width: 4%;"><input
 										type="checkbox" value="${thList.thId}" name="thId"></td>
@@ -386,7 +386,7 @@ li {
 												style="width: 0.15em"></i>
 										</a></li>
 										<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
-											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>"
+											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>&role=AD"
 											title="下载文件"> <i class="fa fa-download mail-icon"
 												style="width: 1em;padding-left: 0.2em; "></i>
 										</a></li>
@@ -807,6 +807,7 @@ li {
 				type : "GET",
 				url : "${pageContext.request.contextPath}/thesis/addAllThesisInfo",
 				data : {
+					usId : <%=login.getUsId()%>,
 					thName : thName,
 					thAuthor : thAuthor,
 					thCate : thCate,
@@ -821,10 +822,11 @@ li {
 				},
 				dataType : 'json',
 				cache : false,
-				async : false,
+				async : true,
 				success : function(data) {
 					alert(data.info);
-					window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
+					location.reload();
+					//window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
 				},
 				error : function() {
 					alert("添加信息出错！");
@@ -849,6 +851,7 @@ li {
 				type : "GET",
 				url : "${pageContext.request.contextPath}/thesis/updateAllThInfo",
 				data : {
+					usId : <%=login.getUsId()%>,
 					thId : idd,
 					thName : thName,
 					thAuthor : thAuthor,
@@ -864,10 +867,11 @@ li {
 				},
 				dataType : 'json',
 				cache : false,
-				async : false,
+				async : true,
 				success : function(data) {
 					alert(data.info);
-					window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
+					location.reload();
+					//window.location.href = "${pageContext.request.contextPath}" + data.urlNext;
 				},
 				error : function() {
 					alert("修改信息出错！");

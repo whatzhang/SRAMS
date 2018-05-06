@@ -25,4 +25,7 @@ public interface ProjectService {
 			String major, String proCate, String bigProda, String smlProda, String bigMoney, String smlMoney,
 			String bigProUp, String smlProUp);
 
+	List<Project> findProInfo(String bigThda, String smlThda, String proCate, String bigMoney, String smlMoney,
+			String bigThUp, String smlThUp);
+
 }

@@ -126,4 +126,23 @@ public class PraiseServiceImpl implements PraiseService {
 		return result;
 	}
 
+	@Override
+	public List<Praise> findPrInfo(String bigPrda, String smlPrda, String prCate, String bigPrUp, String smlPrUp) {
+
+		try {
+			return  this.praiseMapper.selectGuiNaPraise(0,"",null,"",null,null,"",
+					(bigPrda == "" || bigPrda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigPrda)),
+					(smlPrda == "" || smlPrda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlPrda)),
+					(prCate == "" || prCate == null )?"":prCate,
+				    (bigPrUp == "" || bigPrUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigPrUp)),
+					(smlPrUp == "" || smlPrUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlPrUp)));
+		} catch (NumberFormatException e) {
+			logger.error("findPrInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findPrInfo_ParseException");
+			return null;
+		}
+	}
+
 }

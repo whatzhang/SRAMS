@@ -124,4 +124,12 @@ public class Praise {
 	public void setPrUptime(Date prUptime) {
 		this.prUptime = prUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Praise [prId=" + prId + ", usId=" + usId + ", prName=" + prName + ", prCategory=" + prCategory
+				+ ", prDate=" + prDate + ", prUnit=" + prUnit + ", prAuthor=" + prAuthor + ", prAbout=" + prAbout
+				+ ", prUptime=" + prUptime + "]";
+	}
+	
 }

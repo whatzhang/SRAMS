@@ -26,4 +26,6 @@ public interface PraiseService {
 	Map<String, Object> GuiNaPraise(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
 			String major, String prCate, String bigPrda, String smlPrda, String bigPrUp, String smlPrUp);
 
+	List<Praise> findPrInfo(String bigThda, String smlThda, String prCate, String bigThUp, String smlThUp);
+
 }

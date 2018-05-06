@@ -148,4 +148,12 @@ public class Race {
 	public void setRaUptime(Date raUptime) {
 		this.raUptime = raUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Race [raId=" + raId + ", usId=" + usId + ", raName=" + raName + ", raCategory=" + raCategory
+				+ ", raType=" + raType + ", raAuthor=" + raAuthor + ", raLevel=" + raLevel + ", raTeacher=" + raTeacher
+				+ ", raDate=" + raDate + ", raAbout=" + raAbout + ", raUptime=" + raUptime + "]";
+	}
+	
 }

@@ -27,4 +27,7 @@ public interface BookService {
 			String major, String boCate, String bigBoda, String smlBoda, String bigFont, String smlFont, String bigBoUp,
 			String smlBoUp);
 
+	List<Book> findBoInfo(String bigThda, String smlThda, String boCate, String bigFont, String smlFont, String bigThUp,
+			String smlThUp);
+
 }

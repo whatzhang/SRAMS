@@ -324,7 +324,7 @@ li {
 													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 											</a></li>
 											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=patent&id=${List.paId}"
+												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=patent&id=${List.paId}&role=AD"
 												title="下载文件"> <i class="fa fa-download mail-icon"
 													style="width: 1em; padding-left: 0.2em;"></i>
 											</a></li>
@@ -655,10 +655,10 @@ li {
 			},
 			dataType : 'json',
 			cache : false,
-			async : false,
+			async : true,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/patent/getAllPaInfo";
+			    location.reload();
 			}, 
 			error : function(data) {
 				alert("updateRace error!");
@@ -680,10 +680,10 @@ li {
 			},
 			dataType : 'json',
 			cache : false,
-			async : false,
+			async : true,
 			success : function(data) {
 				alert("添加成功！");
-				 window.location.href = "${pageContext.request.contextPath}/patent/getAllPaInfo";
+				location.reload();
 			}, 
 			error : function(data) {
 				alert("updateRace error!");

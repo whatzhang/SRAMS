@@ -1,15 +1,25 @@
 package com.sust.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +32,9 @@ import com.github.pagehelper.PageInfo;
 import com.sust.entity.AllInfo;
 import com.sust.entity.Book;
 import com.sust.entity.Login;
+import com.sust.other.PageUtil;
 import com.sust.service.BookService;
+import com.sust.service.DownloadService;
 
 @Controller
 @RequestMapping("/book")
@@ -31,6 +43,10 @@ public class BookController {
 	private static final Log logger = LogFactory.getLog(BookController.class);
 	@Resource
 	private BookService bookService;
+	@Resource
+	private DownloadService downloadService;
+	private List<Book> BookList = null;
+
 
 	@RequestMapping("/getUserBoList")
 	private String getUserBoList(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
@@ -119,5 +135,75 @@ public class BookController {
 		model.addAttribute("page", page);
 		model.addAttribute("BookList", list);
 		return "admin/ad_book";
+	}
+	
+	@RequestMapping(value = "/findBookInfo", method = RequestMethod.GET)
+	private void findBookInfo(@RequestParam("date8") String bigThda, @RequestParam("Cdate8") String smlThda,
+			@RequestParam("BoCate") String BoCate, @RequestParam("bigFont") String bigFont,
+			@RequestParam("smlFont") String smlFont, @RequestParam("date9") String bigThUp,
+			@RequestParam("Cdate9") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		logger.info("findBookInfo++" + bigThda + "++" + BoCate);
+		this.setBookList(this.bookService.findBoInfo(bigThda, smlThda, BoCate, bigFont,smlFont, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/book/getPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findBookInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+        logger.info("/book/getPage");
+	}
+
+	@RequestMapping("/getPage")
+	public String getPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getPage++" + pageSize + "++" + pa);
+		if (this.getBookList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Book> page1 = new PageUtil<Book>(this.getBookList(), pa, pageSize);
+			model.addAttribute("BoList", page1.getPagedList());
+			for (Book thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "admin/ad_book";
+	}
+	
+	@RequestMapping("/downloadFind")
+	public ResponseEntity<byte[]> downloadFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamBo("book", this.getBookList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadFind_ResponseEntity_error");
+		}
+		return entity;
+	}
+
+	public List<Book> getBookList() {
+		return BookList;
+	}
+
+	public void setBookList(List<Book> bookList) {
+		BookList = bookList;
 	}
 }

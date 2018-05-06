@@ -42,6 +42,7 @@ public class DownloadController {
 			@RequestParam(value = "role", defaultValue = "USER") String rloe, HttpServletResponse response,
 			HttpServletRequest request) {
 
+		logger.info("downloadTypeFile++"+type+"++"+isFind+"++"+rloe);
 		List<String> list = this.downloadService.getDownloadFile(session, type, id);
 		if (list != null && !"NO_SUCH_FILE".equals(list.get(0))) {
 			File dowenloadFile = new File(list.get(1));
@@ -111,7 +112,6 @@ public class DownloadController {
 					default:
 						break;
 					}
-
 				}
 			} else {
 				switch (type) {
