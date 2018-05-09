@@ -17,6 +17,37 @@
 		pr_uptime
 	</sql>
 	
+	<select id="selectPraiseFind" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_praise
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPrda != null">
+			 <![CDATA[
+                and pr_date >= #{smlPrda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPrda != null">
+			 <![CDATA[
+				and pr_date <= #{bigPrda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="PrCate != null and PrCate != ''">
+				and pr_category = #{PrCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPrUp != null">
+			 <![CDATA[
+				and pr_uptime >= #{smlPrUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPrUp != null">
+			 <![CDATA[
+				and pr_uptime <= #{bigPrUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+			and us_id = #{usId,jdbcType=INTEGER}
+	</select>
 	<select id="selectGuiNaPraise" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

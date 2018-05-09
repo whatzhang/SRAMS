@@ -20,6 +20,47 @@
 		pro_about, pro_uptime
 	</sql>
 	
+	<select id="selectProjectFind" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_project
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlProda != null">
+			 <![CDATA[
+                and pro_date >= #{smlProda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigProda != null">
+			 <![CDATA[
+				and pro_date <= #{bigProda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="proCate != null and proCate != ''">
+				and pro_category = #{proCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlMoney != null">
+			 <![CDATA[
+				and pro_cash >= #{smlMoney,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigMoney != null">
+			 <![CDATA[
+				and pro_cash <= #{bigMoney,jdbcType=INTEGER}
+				]]>
+				</if>
+			<if test="smlProUp != null">
+			 <![CDATA[
+				and pro_uptime >= #{smlProUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigProUp != null">
+			 <![CDATA[
+				and pro_uptime <= #{bigProUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+			and us_id = #{usId,jdbcType=INTEGER}
+	</select>
 	<select id="selectGuiNaThesis" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

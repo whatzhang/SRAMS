@@ -42,4 +42,8 @@ public interface ThesisMapper {
 			@Param("thCate") String thCate, @Param("thle") String thle, @Param("thIsCl") String thIsCl,
 			@Param("bigThUp") Date bigThUp, @Param("smlThUp") Date smlThUp);
 
+	List<Thesis> selectThesisFind(@Param("usId") Integer usId, @Param("bigThda") Date bigThda, @Param("smlThda") Date smlThda,
+			@Param("thCate") String thCate, @Param("thle") String thle, @Param("thIsCl") String thIsCl,
+			@Param("bigThUp") Date bigThUp, @Param("smlThUp") Date smlThUp);
+
 }

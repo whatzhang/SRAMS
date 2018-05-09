@@ -41,4 +41,7 @@ public interface RaceMapper {
 			@Param("major") String major, @Param("bigRada") Date bigRada, @Param("smlRada") Date smlRada,
 			@Param("raCate") String raCate, @Param("raTuan") String raTuan,@Param("bigRaUp") Date bigRaUp, @Param("smlRaUp") Date smlRaUp);
 
+	List<Race> selectRaceFind(@Param("usId") Integer usId,  @Param("bigRada") Date bigRada, @Param("smlRada") Date smlRada,
+			@Param("raCate") String raCate, @Param("raTuan") String raTuan,@Param("bigRaUp") Date bigRaUp, @Param("smlRaUp") Date smlRaUp);
+
 }

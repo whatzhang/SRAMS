@@ -40,4 +40,7 @@ public interface PatentMapper {
 			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
 			@Param("major") String major, @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
 			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
+
+	List<Patent> selectPetentFind(@Param("usId") Integer usId,  @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
+			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
 }

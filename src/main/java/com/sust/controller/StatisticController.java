@@ -67,6 +67,15 @@ public class StatisticController {
 	private List<Book> BookList = null;
 	private List<Race> RaceList = null;
 
+	@RequestMapping("/getMenuInit")
+	public String getMenuInit(Model model) {
+		return "users/menu";
+	}
+	@RequestMapping("/getAdminMenuInit")
+	public String getAdminMenuInit(Model model) {
+		return "admin/ad_menu";
+	}
+	
 	@RequestMapping("/getCountDataInit")
 	public String getCountDataInit(Model model) {
 		model.addAttribute("flog", "none");

@@ -42,4 +42,8 @@ public interface BookMapper {
 			@Param("boCate") String boCate, @Param("bigFont") Integer bigFont, @Param("smlFont") Integer smlFont,
 			@Param("bigBoUp") Date bigBoUp, @Param("smlBoUp") Date smlBoUp);
 
+	List<Book> selectBookFind(@Param("usId") Integer usId, @Param("bigBoda") Date bigBoda, @Param("smlBoda") Date smlBoda,
+			@Param("boCate") String boCate, @Param("bigFont") Integer bigFont, @Param("smlFont") Integer smlFont,
+			@Param("bigBoUp") Date bigBoUp, @Param("smlBoUp") Date smlBoUp);
+
 }

@@ -130,6 +130,67 @@ public class ThesisController {
 		result.put("urlNext", "/thesis/getUserThInfo");
 		return result;
 	}
+	
+	@RequestMapping(value = "/findUserThesisInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("date") String bigThda, @RequestParam("Cdate") String smlThda,
+			@RequestParam("thCate") String thCate, @RequestParam("thle") String thle,
+			@RequestParam("thIsCl") String thIsCl, @RequestParam("date1") String bigThUp,
+			@RequestParam("Cdate1") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) {
+
+		logger.info("findUserThesisInfo++" + bigThda + "++" + thCate);
+		this.setThesisList(this.thesisService.findUserThesisInfo(((Login)session.getAttribute("login")).getUsId(),bigThda, smlThda, thCate, thle, thIsCl, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/thesis/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findThesisInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getThesisList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Thesis> page1 = new PageUtil<Thesis>(this.getThesisList(), pa, pageSize);
+			model.addAttribute("ThesisList", page1.getPagedList());
+			/*for (Thesis thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}*/
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/thesis";
+	}
+	
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamTh("thesis", this.getThesisList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
 
 	/**
 	 * admin数据处理

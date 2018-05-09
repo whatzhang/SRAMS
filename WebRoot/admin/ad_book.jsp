@@ -147,8 +147,7 @@ li {
 							</thead>
 							<tbody>
 								<c:forEach items="${requestScope.BoList}" var="boList">
-									<tr onclick="chanceThis('book',${boList.boId});"
-										data-toggle="modal" data-target="#myLookModal4">
+									<tr>
 										<td
 											style="text-align: center; vertical-align: middle; width: 5%;"><input
 											type="checkbox" value="${boList.boId}" id="${boList.boId}"></td>
@@ -257,7 +256,7 @@ li {
 					</c:if>
 				</c:if>
 				<c:if test="${isShow != 'yes'}">
-					<div class="panel-heading success">所有论文信息</div>
+					<div class="panel-heading success">所有教材信息</div>
 					<table class="table table-bordered"
 						style="table-layout: fixed; width: 100%;">
 						<thead>

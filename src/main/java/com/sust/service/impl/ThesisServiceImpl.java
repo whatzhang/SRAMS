@@ -149,4 +149,24 @@ public class ThesisServiceImpl implements ThesisService {
 		}
 	}
 
+	@Override
+	public List<Thesis> findUserThesisInfo(Integer usId, String bigThda, String smlThda, String thCate, String thle, String thIsCl,
+			String bigThUp, String smlThUp) {
+		try {
+			return this.thesisMapper.selectThesisFind(usId,
+					(bigThda == "" || bigThda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigThda)),
+					(smlThda == "" || smlThda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlThda)),
+					(thCate == "" || thCate == null )?"":thCate,
+					(thle == "" || thle == null )?"":thle, (thIsCl == "" || thIsCl == null )?"":thIsCl,
+				    (bigThUp == "" || bigThUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigThUp)),
+					(smlThUp == "" || smlThUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlThUp)));
+		 } catch (NumberFormatException e) {
+			logger.error("findThInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findThInfo_ParseException");
+			return null;
+		}
+	}
+
 }

@@ -27,5 +27,7 @@ public interface PraiseService {
 			String major, String prCate, String bigPrda, String smlPrda, String bigPrUp, String smlPrUp);
 
 	List<Praise> findPrInfo(String bigThda, String smlThda, String prCate, String bigThUp, String smlThUp);
+	
+	List<Praise> findUserPraiseInfo(Integer usId, String bigThda, String smlThda, String prCate, String bigThUp, String smlThUp);
 
 }

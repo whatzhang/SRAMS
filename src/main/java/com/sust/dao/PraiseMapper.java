@@ -40,4 +40,7 @@ public interface PraiseMapper {
 			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
 			@Param("major") String major, @Param("bigPrda") Date bigPrda, @Param("smlPrda") Date smlPrda,
 			@Param("PrCate") String PrCate,@Param("bigPrUp") Date bigPrUp, @Param("smlPrUp") Date smlPrUp);
+
+	List<Praise> selectPraiseFind(@Param("usId") Integer usId, @Param("bigPrda") Date bigPrda, @Param("smlPrda") Date smlPrda,
+			@Param("PrCate") String PrCate,@Param("bigPrUp") Date bigPrUp, @Param("smlPrUp") Date smlPrUp);
 }

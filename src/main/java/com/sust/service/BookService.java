@@ -30,4 +30,7 @@ public interface BookService {
 	List<Book> findBoInfo(String bigThda, String smlThda, String boCate, String bigFont, String smlFont, String bigThUp,
 			String smlThUp);
 
+	List<Book> findUserBookInfo(Integer usId, String bigThda, String smlThda, String boCate, String bigFont,
+			String smlFont, String bigThUp, String smlThUp);
+
 }

@@ -146,4 +146,24 @@ public class BookServiceImpl implements com.sust.service.BookService {
 		}
 	}
 
+	@Override
+	public List<Book> findUserBookInfo(Integer usId, String bigBoda, String smlBoda, String boCate, String bigFont, String smlFont,
+			String bigBoUp, String smlBoUp) {
+		try {
+			return this.bookMapper.selectBookFind(usId,
+					(bigBoda == "" || bigBoda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigBoda)),
+					(smlBoda == "" || smlBoda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlBoda)),
+					(boCate == "" || boCate == null )?"":boCate,
+					(bigFont == "" || bigFont == null )?null:Integer.valueOf(bigFont), (smlFont == "" || smlFont == null )?null:Integer.valueOf(smlFont),
+				    (bigBoUp == "" || bigBoUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigBoUp)),
+					(smlBoUp == "" || smlBoUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlBoUp)));
+		} catch (NumberFormatException e) {
+			logger.error("GuiNaBook_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("GuiNaBook_ParseException");
+			return null;
+		}
+	}
+
 }

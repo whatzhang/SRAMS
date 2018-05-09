@@ -119,6 +119,67 @@ public class BookController {
 		}
 		return new AllInfo("信息更新成功");
 	}
+	
+	@RequestMapping(value = "/findUserBookInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("date8") String bigThda, @RequestParam("Cdate8") String smlThda,
+			@RequestParam("BoCate") String BoCate, @RequestParam("bigFont") String bigFont,
+			@RequestParam("smlFont") String smlFont, @RequestParam("date9") String bigThUp,
+			@RequestParam("Cdate9") String smlThUp, Model model, HttpServletRequest request,HttpSession session,
+			HttpServletResponse response) {
+
+		logger.info("findUserBookInfo++" + bigThda + "++" + BoCate);
+		this.setBookList(this.bookService.findUserBookInfo(((Login)session.getAttribute("login")).getUsId(),bigThda, smlThda, BoCate, bigFont,smlFont, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/book/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findBookInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getBookList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Book> page1 = new PageUtil<Book>(this.getBookList(), pa, pageSize);
+			model.addAttribute("BoList", page1.getPagedList());
+			/*for (Book thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}*/
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/book";
+	}
+	
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamBo("book", this.getBookList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
 
 	/**
 	 * admin数据处理
@@ -152,7 +213,6 @@ public class BookController {
 			logger.error("findBookInfo_getRequestDispatcher_error");
 			e.printStackTrace();
 		}
-        logger.info("/book/getPage");
 	}
 
 	@RequestMapping("/getPage")
@@ -164,9 +224,9 @@ public class BookController {
 			model.addAttribute("isFind", "yes");
 			PageUtil<Book> page1 = new PageUtil<Book>(this.getBookList(), pa, pageSize);
 			model.addAttribute("BoList", page1.getPagedList());
-			for (Book thesis : page1.getPagedList()) {
+			/*for (Book thesis : page1.getPagedList()) {
 				System.out.println(thesis.toString());
-			}
+			}*/
 			model.addAttribute("ps1", pageSize);
 			model.addAttribute("page1", page1);
 		} else {

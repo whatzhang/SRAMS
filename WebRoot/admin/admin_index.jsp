@@ -362,7 +362,7 @@
 			<iframe id="iFrame" name="iFrame" width="100%"
 				onload="this.height=iFrame.document.body.scrollHeight"
 				frameborder="0" scrolling="no"
-				src="${pageContext.request.contextPath}/thesis/getAllThInfo"></iframe>
+				src="${pageContext.request.contextPath}/CountData/getAdminMenuInit"></iframe>
 		</div>
 
 		<div class="footer">

@@ -109,6 +109,66 @@ public class PatentController {
 				new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
+	
+	@RequestMapping(value = "/findUserPatentInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("PaCate") String PaCate, @RequestParam("date7") String bigPada,
+			@RequestParam("Cdate7") String smlPada, @RequestParam("date8") String bigPaUp,
+			@RequestParam("Cdate8") String smlPaUp, Model model, HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) {
+
+		logger.info("findUserPatentInfo++" + smlPada + "++" + PaCate);
+		this.setPatentList(this.patentService.findUserPatentInfo(((Login)session.getAttribute("login")).getUsId(),PaCate, bigPada, smlPada, bigPaUp, smlPaUp));
+		try {
+			request.getRequestDispatcher("/patent/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findPatentInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getPatentList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Patent> page1 = new PageUtil<Patent>(this.getPatentList(), pa, pageSize);
+			model.addAttribute("paList", page1.getPagedList());
+			/*for (Patent thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}*/
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/patent";
+	}
+	
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamPa("patent", this.getPatentList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
 
 	/**
 	 * admin数据处理
@@ -152,9 +212,9 @@ public class PatentController {
 			model.addAttribute("isFind", "yes");
 			PageUtil<Patent> page1 = new PageUtil<Patent>(this.getPatentList(), pa, pageSize);
 			model.addAttribute("PaList", page1.getPagedList());
-			for (Patent patent : page1.getPagedList()) {
+			/*for (Patent patent : page1.getPagedList()) {
 				System.out.println(patent.toString());
-			}
+			}*/
 			model.addAttribute("ps1", pageSize);
 			model.addAttribute("page1", page1);
 		} else {

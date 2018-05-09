@@ -58,91 +58,86 @@ li {
 				style="width: 100%; height:3em; margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;"
 				onclick="refresh();">接收/刷新信息</button>
 		</div>
-
-		<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">
-			<div class="col-md-4 compose-left ">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-
-						<input type="text" class="form-control1 input-lg"
-							style="overflow:auto;" id="chooseUser" placeholder="查找要给发送信息用户">
-					</div>
-					<div class="panel-body" data-spy="scroll"
+	</div>
+	<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">
+		<div class="col-md-4 compose-left ">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<input type="text" class="form-control1 input-lg"
+						style="overflow:auto;" id="chooseUser" placeholder="查找要给发送信息用户">
+				</div>
+				<div class="panel-body" data-spy="scroll"
 						data-target="#navbar-example" data-offset="0"
 						style="height:15em; overflow:auto;">
-						<ul>
-							<div id="NEWS">
-								<c:forEach items="${requestScope.nowNews}" var="now">
-									<li><a href="javascript: showInfo(${now.meId});"
-										title="消息阅读情况">
-											<div class="chat-left">
-												<img class="img-circle" src="img/i3.png" alt="">
-											</div>
-											<div class="chat-right">
-												<p style="color: red;">${now.meTitle}</p>
-												<p style="font-size: 1px; color: lightblue;">${now.meDate}</p>
-											</div>
-											<div class="clearfix"></div>
-									</a></li>
-								</c:forEach>
-							</div>
-						</ul>
-
-					</div>
-				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">文件</h3>
-					</div>
-					<div class="panel-body">
-						<ul>
-							<li><a href="javascript:void(0);"><i
-									class="fa fa-flag-o"></i>未读消息用户数<span><label id="NoRead">0</label>
-								</span></a></li>
-							<li><a href="javascript:void(0);"><i
-									class="fa fa-file-text-o"></i>已读消息用户数<span><label
-										id="Readed">0</label></span></a></li>
-							<li><a href="javascript:void(0);"><i
-									class=" fa fa fa-envelope-o"></i>删除消息用户数<span><label
-										id="delNews">0</label></span></a></li>
-						</ul>
-					</div>
-
+					<ul>
+						<div id="NEWS">
+							<c:forEach items="${requestScope.nowNews}" var="now">
+								<li><a href="javascript: showInfo(${now.meId});"
+									title="消息阅读情况">
+										<div class="chat-left">
+											<img class="img-circle" src="img/i3.png" alt="">
+										</div>
+										<div class="chat-right">
+											<p style="color: red;">${now.meTitle}</p>
+											<p style="font-size: 1px; color: lightblue;">${now.meDate}</p>
+											<p style="font-size: 1px; color: lightblue;width:22em; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${now.meAbout}</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+							</c:forEach>
+						</div>
+					</ul>
 				</div>
 			</div>
-
-
-			<div class="col-md-8 compose-right">
-				<div class="panel panel-info">
-					<div class="panel-heading" style="padding: 1em 0em 1em 2em; ">发布新消息</div>
-					<div class="panel-body">
-						<form class="com-mail" id="addNew" name="addNew">
-							<div style="margin: 0em 0em 1em 0em;">
-								<div class="btn-group">
-									<button type="button" class="btn btn-danger" id="Change"
-										onclick="AllUsers();">AllUsers</button>
-									<button type="button" class="btn btn-default" id="Add"
-										onclick="SomeOne();">SomeOne</button>
-								</div>
-							</div>
-							<input type="text" class="form-control1 control3" id="toSe"
-								style="display:none" placeholder="To :"> <input
-								id="mmTitle" type="text" class="form-control1 control3"
-								placeholder="消息主题">
-							<textarea rows="6" class="form-control1 control2" id="mmAbout"
-								placeholder="消息内容:" required="required"></textarea>
-
-							<input type="submit" class="btn btn-success"
-								onclick="addMessage();" style=" float: right;margin-right: 1em;"
-								value="发布提交">
-						</form>
-					</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">文件</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li><a href="javascript:void(0);"><i class="fa fa-flag-o"></i>未读消息用户数<span><label
+									id="NoRead">0</label> </span></a></li>
+						<li><a href="javascript:void(0);"><i
+								class="fa fa-file-text-o"></i>已读消息用户数<span><label
+									id="Readed">0</label></span></a></li>
+						<li><a href="javascript:void(0);"><i
+								class=" fa fa fa-envelope-o"></i>删除消息用户数<span><label
+									id="delNews">0</label></span></a></li>
+					</ul>
 				</div>
 			</div>
-
-			<div class="clearfix"></div>
 		</div>
 
+		<div class="col-md-6 compose-right">
+			<div class="panel panel-info">
+				<div class="panel-heading" style="padding: 1em 0em 0.6em 2em; ">发布新消息</div>
+				<div class="panel-body">
+					<form class="com-mail" id="addNew" name="addNew">
+						<div style="margin: 0em 0em 1em 0em;">
+							<div class="btn-group">
+								<button type="button" class="btn btn-danger" id="Change"
+									onclick="AllUsers();">AllUsers</button>
+								<button type="button" class="btn btn-default" id="Add"
+									onclick="SomeOne();">SomeOne</button>
+							</div>
+						</div>
+						<input type="text" class="form-control1 control3" id="toSe"
+							style="display:none" placeholder="To :"> <input
+							id="mmTitle" type="text" class="form-control1 control3"
+							placeholder="消息主题">
+						<textarea rows="6" class="form-control1 control2" id="mmAbout"
+							placeholder="消息内容:" required="required"></textarea>
+
+						<input type="submit" class="btn btn-success"
+							onclick="addMessage();" style=" float: right;margin-right: 1em;"
+							value="发布提交">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-page">
 		<div class="panel-info" style="padding: 1em 2em 2em 2em;">
 			<div class="panel-heading">消息列表</div>
 			<table class="table table-bordered"

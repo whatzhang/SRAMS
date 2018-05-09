@@ -140,4 +140,23 @@ public class PatentServiceImpl implements PatentService {
 		}
 	}
 
+	@Override
+	public List<Patent> findUserPatentInfo(Integer usId, String paCate, String bigPada, String smlPada, String bigPaUp,
+			String smlPaUp) {
+		try {
+			return this.petentMapper.selectPetentFind(usId,
+					(bigPada == "" || bigPada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigPada)),
+							(smlPada == "" || smlPada == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlPada)),
+							(paCate == "" || paCate == null )?"":paCate,
+						    (bigPaUp == "" || bigPaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigPaUp)),
+							(smlPaUp == "" || smlPaUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlPaUp)));
+		 } catch (NumberFormatException e) {
+			logger.error("findThInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findThInfo_ParseException");
+			return null;
+		}
+	}
+
 }

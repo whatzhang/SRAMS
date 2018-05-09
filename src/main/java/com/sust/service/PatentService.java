@@ -27,5 +27,7 @@ public interface PatentService {
 			String major, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
 
 	List<Patent>  findThInfo(String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
+	
+	List<Patent> findUserPatentInfo(Integer usId, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
 
 }

@@ -111,6 +111,66 @@ public class RaceController {
 						new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
+	
+	@RequestMapping(value = "/findUserRaceInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("date10") String bigThda, @RequestParam("Cdate10") String smlThda,
+			@RequestParam("RaCate") String RaCate, @RequestParam("RaTuan") String RaTuan,
+			@RequestParam("date11") String bigThUp, @RequestParam("Cdate11") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) {
+
+		logger.info("findUserRaceInfo++" + bigThda + "++" + RaCate);
+		this.setRaceList(this.raceService.findUserRaceInfo(((Login)session.getAttribute("login")).getUsId(),bigThda, smlThda, RaCate, RaTuan, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/race/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findRaceInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getRaceList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Race> page1 = new PageUtil<Race>(this.getRaceList(), pa, pageSize);
+			model.addAttribute("RaList", page1.getPagedList());
+			/*for (Race thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}*/
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/race";
+	}
+	
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamRa("race", this.getRaceList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
 
 	/**
 	 * admin数据处理
@@ -155,9 +215,9 @@ public class RaceController {
 			model.addAttribute("isFind", "yes");
 			PageUtil<Race> page1 = new PageUtil<Race>(this.getRaceList(), pa, pageSize);
 			model.addAttribute("RaLists", page1.getPagedList());
-			for (Race thesis : page1.getPagedList()) {
+			/*for (Race thesis : page1.getPagedList()) {
 				System.out.println(thesis.toString());
-			}
+			}*/
 			model.addAttribute("ps1", pageSize);
 			model.addAttribute("page1", page1);
 		} else {

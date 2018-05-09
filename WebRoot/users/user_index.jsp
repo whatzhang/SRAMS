@@ -324,7 +324,7 @@
 			<iframe id="iFrame" name="iFrame" width="100%"
 				onload="this.height=iFrame.document.body.scrollHeight"
 				frameborder="0" scrolling="no"
-				src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
+				src="${pageContext.request.contextPath}/CountData/getMenuInit"></iframe>
 		</div>
 
 		<div class="footer">

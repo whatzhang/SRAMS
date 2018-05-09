@@ -114,27 +114,52 @@ public class DownloadController {
 					}
 				}
 			} else {
-				switch (type) {
-				case "patent":
-					urlString = "/patent/getPage";
-					break;
-				case "book":
-					urlString = "/book/getPage";
-					break;
-				case "praise":
-					urlString = "/praise/getPage";
-					break;
-				case "project":
-					urlString = "/project/getPage";
-					break;
-				case "race":
-					urlString = "/race/getPage";
-					break;
-				case "thesis":
-					urlString = "/thesis/getPage";
-					break;
-				default:
-					break;
+				if ("USER".equals(rloe)) {
+					switch (type) {
+					case "patent":
+						urlString = "/patent/getUserPage";
+						break;
+					case "book":
+						urlString = "/book/getUserPage";
+						break;
+					case "praise":
+						urlString = "/praise/getUserPage";
+						break;
+					case "project":
+						urlString = "/project/getUserPage";
+						break;
+					case "race":
+						urlString = "/race/getUserPage";
+						break;
+					case "thesis":
+						urlString = "/thesis/getUserPage";
+						break;
+					default:
+						break;
+					}
+				}else{
+					switch (type) {
+					case "patent":
+						urlString = "/patent/getPage";
+						break;
+					case "book":
+						urlString = "/book/getPage";
+						break;
+					case "praise":
+						urlString = "/praise/getPage";
+						break;
+					case "project":
+						urlString = "/project/getPage";
+						break;
+					case "race":
+						urlString = "/race/getPage";
+						break;
+					case "thesis":
+						urlString = "/thesis/getPage";
+						break;
+					default:
+						break;
+					}
 				}
 			}
 			logger.info(urlString);

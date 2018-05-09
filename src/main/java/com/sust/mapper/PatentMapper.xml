@@ -20,6 +20,37 @@
 		pa_uptime
 	</sql>
 
+	<select id="selectPetentFind" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_patent
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPada != null">
+			 <![CDATA[
+                and pa_date >= #{smlPada,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPada != null">
+			 <![CDATA[
+				and pa_date <= #{bigPada,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="paCate != null and paCate != ''">
+				and pa_category = #{paCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPaUp != null">
+			 <![CDATA[
+				and pa_uptime >= #{smlPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPaUp != null">
+			 <![CDATA[
+				and pa_uptime <= #{bigPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		and us_id = #{usId,jdbcType=INTEGER}
+	</select>
 	<select id="selectGuiNaPetent" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -74,7 +105,8 @@
 				and us_age <= #{bigAge,jdbcType=INTEGER}
 				]]>
 				</if>
-			</trim>)
+			</trim>
+			)
 		</if>
 	</select>
 	<select id="selectAllPaInfo" resultMap="BaseResultMap">
@@ -114,7 +146,7 @@
 		from sr_patent
 		where pa_id = #{paId,jdbcType=INTEGER}
 	</select>
-	
+
 	<delete id="deleteByUsId" parameterType="java.lang.Integer">
 		delete from
 		sr_patent

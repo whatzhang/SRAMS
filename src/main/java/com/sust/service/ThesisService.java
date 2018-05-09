@@ -28,5 +28,8 @@ public interface ThesisService {
 
 	public List<Thesis> findThInfo(String bigThda, String smlThda, String thCate, String thle, String thIsCl,
 			String bigThUp, String smlThUp);
+	
+	List<Thesis> findUserThesisInfo(Integer usId, String bigThda, String smlThda, String thCate, String thle, String thIsCl,
+			String bigThUp, String smlThUp);
 
 }

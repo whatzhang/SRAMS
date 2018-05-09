@@ -106,6 +106,66 @@ public class PraiseController {
 						prUnit, praiseService.getUserNameById(usId), prAbout, new Date()));
 		return new AllInfo(String.valueOf(re));
 	}
+	
+	@RequestMapping(value = "/findUserPraiseInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("date4") String bigThda, @RequestParam("Cdate4") String smlThda,
+			@RequestParam("PrCate") String PrCate, @RequestParam("date5") String bigThUp,
+			@RequestParam("Cdate5") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response,HttpSession session) {
+
+		logger.info("findUserPraiseInfo++" + bigThda + "++" + PrCate);
+		this.setPraiseList(this.praiseService.findUserPraiseInfo(((Login)session.getAttribute("login")).getUsId(),bigThda, smlThda, PrCate, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/praise/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findPraiseInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getPraiseList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Praise> page1 = new PageUtil<Praise>(this.getPraiseList(), pa, pageSize);
+			model.addAttribute("PrList", page1.getPagedList());
+			/*for (Praise thesis : page1.getPagedList()) {
+				System.out.println(thesis.toString());
+			}*/
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/praise";
+	}
+	
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamPr("praise", this.getPraiseList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
 
 	/**
 	 * admin数据处理
@@ -150,9 +210,9 @@ public class PraiseController {
 			model.addAttribute("isFind", "yes");
 			PageUtil<Praise> page1 = new PageUtil<Praise>(this.getPraiseList(), pa, pageSize);
 			model.addAttribute("PraiseList", page1.getPagedList());
-			for (Praise thesis : page1.getPagedList()) {
+			/*for (Praise thesis : page1.getPagedList()) {
 				System.out.println(thesis.toString());
-			}
+			}*/
 			model.addAttribute("ps1", pageSize);
 			model.addAttribute("page1", page1);
 		} else {

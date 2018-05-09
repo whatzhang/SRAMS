@@ -141,4 +141,24 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 	}
 
+	@Override
+	public List<Project> findUserProjectInfo(Integer usId, String bigProda, String smlProda, String proCate, String bigMoney, String smlMoney,
+			String bigProUp, String smlProUp) {
+		try {
+			return this.projectMapper.selectProjectFind(usId,
+					(bigProda == "" || bigProda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigProda)),
+							(smlProda == "" || smlProda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlProda)),
+							(proCate == "" || proCate == null )?"":proCate,
+							(bigMoney == "" || bigMoney == null )?null:Integer.valueOf(bigMoney), (smlMoney == "" || smlMoney == null )?null:Integer.valueOf(smlMoney),
+						    (bigProUp == "" || bigProUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigProUp)),
+							(smlProUp == "" || smlProUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlProUp)));
+		} catch (NumberFormatException e) {
+			logger.error("findProInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findProInfo_ParseException");
+			return null;
+		}
+	}
+
 }

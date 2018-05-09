@@ -109,6 +109,70 @@ public class ProjectController {
 		return new AllInfo(String.valueOf(re));
 	}
 
+	@RequestMapping(value = "/findUserProjectInfo", method = RequestMethod.GET)
+	private void findUserBookInfo(@RequestParam("date6") String bigThda, @RequestParam("Cdate6") String smlThda,
+			@RequestParam("ProCate") String ProCate, @RequestParam("bigMoney") String bigMoney,
+			@RequestParam("smlMoney") String smlMoney, @RequestParam("date7") String bigThUp,
+			@RequestParam("Cdate7") String smlThUp, Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+
+		logger.info("findUserProjectInfo++" + bigMoney + "++" + ProCate);
+		this.setProjectList(this.projectService.findUserProjectInfo(((Login) session.getAttribute("login")).getUsId(),
+				bigThda, smlThda, ProCate, bigMoney, smlMoney, bigThUp, smlThUp));
+		try {
+			request.getRequestDispatcher("/project/getUserPage").forward(request, response);
+		} catch (ServletException | IOException e) {
+			logger.error("findProjectInfo_getRequestDispatcher_error");
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping("/getUserPage")
+	public String getUserPage(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
+
+		logger.info("getUserPage++" + pageSize + "++" + pa);
+		if (this.getProjectList().size() > 0) {
+			model.addAttribute("isFind", "yes");
+			PageUtil<Project> page1 = new PageUtil<Project>(this.getProjectList(), pa, pageSize);
+			model.addAttribute("ProjectList", page1.getPagedList());
+			/*
+			 * for (Project thesis : page1.getPagedList()) {
+			 * System.out.println(thesis.toString()); }
+			 */
+			model.addAttribute("ps1", pageSize);
+			model.addAttribute("page1", page1);
+		} else {
+			model.addAttribute("isFind", "no");
+		}
+		model.addAttribute("isShow", "yes");
+		return "users/project";
+	}
+
+	@RequestMapping("/downloadUserFind")
+	public ResponseEntity<byte[]> downloadUserFind(HttpSession session) {
+
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = "findExcl" + ".xls";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadUserFind_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(
+							this.downloadService.getGuiNaWorkBookStreamPro("project", this.getProjectList(), session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadUserFind_ResponseEntity_error");
+		}
+		return entity;
+	}
+
 	/**
 	 * admin数据处理
 	 */
@@ -125,7 +189,7 @@ public class ProjectController {
 		model.addAttribute("ProjectList", list);
 		return "admin/ad_project";
 	}
-	
+
 	@RequestMapping(value = "/findProjectInfo", method = RequestMethod.GET)
 	private void findProjectInfo(@RequestParam("date6") String bigThda, @RequestParam("Cdate6") String smlThda,
 			@RequestParam("ProCate") String ProCate, @RequestParam("bigMoney") String bigMoney,
@@ -135,14 +199,14 @@ public class ProjectController {
 
 		logger.info("findProjectInfo++" + bigThda + "++" + ProCate);
 		this.setProjectList(
-				this.projectService.findProInfo(bigThda, smlThda, ProCate,bigMoney, smlMoney, bigThUp, smlThUp));
+				this.projectService.findProInfo(bigThda, smlThda, ProCate, bigMoney, smlMoney, bigThUp, smlThUp));
 		try {
 			request.getRequestDispatcher("/project/getPage").forward(request, response);
 		} catch (ServletException | IOException e) {
 			logger.error("findprojectInfo_getRequestDispatcher_error");
 			e.printStackTrace();
 		}
-        logger.info("/project/getPage");
+		logger.info("/project/getPage");
 	}
 
 	@RequestMapping("/getPage")
@@ -154,9 +218,10 @@ public class ProjectController {
 			model.addAttribute("isFind", "yes");
 			PageUtil<Project> page1 = new PageUtil<Project>(this.getProjectList(), pa, pageSize);
 			model.addAttribute("ProjectList", page1.getPagedList());
-			for (Project thesis : page1.getPagedList()) {
-				System.out.println(thesis.toString());
-			}
+			/*
+			 * for (Project thesis : page1.getPagedList()) {
+			 * System.out.println(thesis.toString()); }
+			 */
 			model.addAttribute("ps1", pageSize);
 			model.addAttribute("page1", page1);
 		} else {
@@ -165,7 +230,7 @@ public class ProjectController {
 		model.addAttribute("isShow", "yes");
 		return "admin/ad_project";
 	}
-	
+
 	@RequestMapping("/downloadFind")
 	public ResponseEntity<byte[]> downloadFind(HttpSession session) {
 
@@ -181,7 +246,8 @@ public class ProjectController {
 		ResponseEntity<byte[]> entity = null;
 		try {
 			entity = new ResponseEntity<byte[]>(
-					FileUtils.readFileToByteArray(this.downloadService.getGuiNaWorkBookStreamPro("project", this.getProjectList(), session)),
+					FileUtils.readFileToByteArray(
+							this.downloadService.getGuiNaWorkBookStreamPro("project", this.getProjectList(), session)),
 					headers, HttpStatus.CREATED);
 		} catch (IOException e) {
 			logger.error("downloadFind_ResponseEntity_error");

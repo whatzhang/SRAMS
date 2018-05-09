@@ -145,4 +145,22 @@ public class PraiseServiceImpl implements PraiseService {
 		}
 	}
 
+	@Override
+	public List<Praise> findUserPraiseInfo(Integer usId, String bigPrda, String smlPrda, String prCate, String bigPrUp, String smlPrUp) {
+		try {
+			return  this.praiseMapper.selectPraiseFind(usId,
+					(bigPrda == "" || bigPrda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(bigPrda)),
+					(smlPrda == "" || smlPrda == null )? null: (Date) (new SimpleDateFormat("yyyy-MM-dd").parse(smlPrda)),
+					(prCate == "" || prCate == null )?"":prCate,
+				    (bigPrUp == "" || bigPrUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(bigPrUp)),
+					(smlPrUp == "" || smlPrUp == null )? null: (new SimpleDateFormat("yyyy-MM-dd").parse(smlPrUp)));
+		} catch (NumberFormatException e) {
+			logger.error("findPrInfo_NumberFormatException");
+			return null;
+		} catch (ParseException e) {
+			logger.error("findPrInfo_ParseException");
+			return null;
+		}
+	}
+
 }

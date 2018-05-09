@@ -22,6 +22,43 @@
 		th_page, th_about, th_uptime
 	</sql>
 
+	<select id="selectThesisFind" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_thesis
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlThda != null">
+			 <![CDATA[
+                and th_date >= #{smlThda,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigThda != null">
+			 <![CDATA[
+				and th_date <= #{bigThda,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="thle != null and thle != ''">
+				and th_level = #{thle,jdbcType=VARCHAR}
+			</if>
+			<if test="thCate != null and thCate != ''">
+				and th_category = #{thCate,jdbcType=VARCHAR}
+			</if>
+			<if test="thIsCl != null and thIsCl != ''">
+				and th_included = #{thIsCl,jdbcType=VARCHAR}
+			</if>
+			<if test="smlThUp != null">
+			 <![CDATA[
+				and th_uptime >= #{smlThUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigThUp != null">
+			 <![CDATA[
+				and th_uptime <= #{bigThUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+			and us_id = #{usId,jdbcType=INTEGER}
+	</select>
 	<select id="selectGuiNaThesis" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
