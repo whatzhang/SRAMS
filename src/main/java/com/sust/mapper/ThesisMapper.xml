@@ -21,7 +21,13 @@
 		th_date,th_level, th_factor, th_included, th_number, th_journal,
 		th_page, th_about, th_uptime
 	</sql>
-
+	
+	
+    <select id="selectAllThesisFileName" resultType="java.util.Date">
+		select th_uptime
+		from sr_thesis
+		order by th_uptime desc
+	</select>
 	<select id="selectThesisFind" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

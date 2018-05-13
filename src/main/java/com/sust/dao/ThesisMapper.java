@@ -46,4 +46,6 @@ public interface ThesisMapper {
 			@Param("thCate") String thCate, @Param("thle") String thle, @Param("thIsCl") String thIsCl,
 			@Param("bigThUp") Date bigThUp, @Param("smlThUp") Date smlThUp);
 
+	List<Date> selectAllThesisFileName();
+
 }

@@ -43,4 +43,6 @@ public interface PraiseMapper {
 
 	List<Praise> selectPraiseFind(@Param("usId") Integer usId, @Param("bigPrda") Date bigPrda, @Param("smlPrda") Date smlPrda,
 			@Param("PrCate") String PrCate,@Param("bigPrUp") Date bigPrUp, @Param("smlPrUp") Date smlPrUp);
+
+	List<Date> selectAllPraiseFileName();
 }

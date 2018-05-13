@@ -21,6 +21,11 @@
 		ra_about, ra_uptime
 	</sql>
 	
+	<select id="selectAllRaceFileName" resultType="java.util.Date">
+		select ra_uptime
+		from sr_race
+		order by ra_uptime desc
+	</select>
     <select id="selectRaceFind" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

@@ -20,6 +20,11 @@
 		pa_uptime
 	</sql>
 
+ 	<select id="selectAllPatentFileName" resultType="java.util.Date">
+		select pa_uptime
+		from sr_patent
+		order by pa_uptime desc
+	</select>
 	<select id="selectPetentFind" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

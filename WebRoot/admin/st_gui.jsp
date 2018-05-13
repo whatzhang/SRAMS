@@ -349,7 +349,7 @@ li {
 						<div style="float: right;margin-right: 1em;padding-top: 0.5em;">
 							<button type="button" class="btn btn-danger"
 								onclick="getGuiNaInfo();">展示归纳信息</button>
-							<button type="reset" class="btn btn-info" onclick="reSetAll();">重置</button>
+							<button type="reset" class="btn btn-info" onclick="reSetAll();">重置归纳条件</button>
 						</div>
 					</div>
 				</form>

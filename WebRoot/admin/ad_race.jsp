@@ -108,7 +108,6 @@ li {
 					</form>
 				</div>
 			</div>
-			<br>
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
 				<c:if test="${isShow == 'yes'}">
 					<c:if test="${isFind == 'yes'}">

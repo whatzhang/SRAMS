@@ -52,8 +52,9 @@ li {
 
 </head>
 <body>
-
-menu
+ <%
+    response.sendRedirect(basePath+"/CountData/toStatisticInit");
+  %>
 
 
 

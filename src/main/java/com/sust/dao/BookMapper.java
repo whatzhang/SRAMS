@@ -46,4 +46,6 @@ public interface BookMapper {
 			@Param("boCate") String boCate, @Param("bigFont") Integer bigFont, @Param("smlFont") Integer smlFont,
 			@Param("bigBoUp") Date bigBoUp, @Param("smlBoUp") Date smlBoUp);
 
+	List<Date> selectAllBoFileName();
+
 }

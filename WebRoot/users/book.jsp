@@ -54,7 +54,7 @@ li {
 <body>
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
-			<div class="panel-info" style="margin: 1em 0em 4em 0em;">
+			<div class="panel-info" style="margin-bottom: 4em;">
 				<div class=" panel-body-inputin">
 					<form class="form-horizontal"
 						action="${pageContext.request.contextPath}/book/findUserBookInfo"

@@ -116,14 +116,14 @@ li {
 					</form>
 				</div>
 			</div>
-			<br> <br>
-			<c:if test="${isShow == 'yes'}">
-				<div class="panel-info" style="padding: 1em 1em 1em 1em;"
-					id="findThesis">
+			<div class="panel-info" style="padding: 1em 1em 1em 1em;"
+				id="AllThesis">
+				<c:if test="${isShow == 'yes'}">
 					<div class="panel-heading success" style="vertical-align: middle;">
 						查找信息 <a
 							href="${pageContext.request.contextPath}/thesis/getAllThInfo"
-							style="color: red;float: right;"> 取消查找信息 </a> <a href="${pageContext.request.contextPath}/thesis/downloadFind"
+							style="color: red;float: right;"> 取消查找信息 </a> <a
+							href="${pageContext.request.contextPath}/thesis/downloadFind"
 							style="color: red;float: right;margin-right: 1em;"> 导出查找信息 </a>
 					</div>
 					<table class="table table-bordered"
@@ -277,285 +277,255 @@ li {
 							href="${pageContext.request.contextPath}/thesis/getPage?page=${page1.lastPage}&pageSize=${ps1}">最后页</a>
 					</div>
 					</p>
-				</div>
+			</div>
 			</c:if>
 			<c:if test="${isShow != 'yes'}">
-				<div class="panel-info" style="padding: 1em 1em 1em 1em;"
-					id="AllThesis">
-					<div class="panel-heading success">所有论文信息</div>
-					<table class="table table-bordered"
-						style="table-layout: fixed; width: 100%;">
-						<thead>
-							<tr>
-								<th
-									style="text-align: center;vertical-align: middle; width: 4%;"><input
-									type="checkbox" name="thId"></th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
-								<th
-									style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%
-								List<Thesis> lt = (List<Thesis>) request.getAttribute("list");
-									if (lt != null) {
-										for (i = 0; i < lt.size(); i++) {
-							%>
-							<tr>
-								<td
-									style="text-align: center;vertical-align: middle; width: 4%;"><input
-									type="checkbox" value="<%=lt.get(i).getThId()%>" name="thId"></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThName()%>"><%=lt.get(i).getThName()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 6%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThCategory()%>"><%=lt.get(i).getThCategory()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThAuthor()%>"><%=lt.get(i).getThAuthor()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 6%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThLevel()%>"><%=lt.get(i).getThLevel()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 6%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThFactor()%>"><%=lt.get(i).getThFactor()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 4%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThIncluded()%>"><%=lt.get(i).getThIncluded()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThNumber()%>"><%=lt.get(i).getThNumber()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThJournal()%>"><%=lt.get(i).getThJournal()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 6%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThPage()%>"><%=lt.get(i).getThPage()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 17%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThAbout()%>"><%=lt.get(i).getThAbout()%></td>
-								<td
-									style="text-align: center;vertical-align: middle; width: 7%;"
-									data-toggle="tooltip" data-placement="top"
-									title="<%=lt.get(i).getThUptime()%>"><%=lt.get(i).getThUptime()%></td>
-								<th align="center"
-									style="width: 8%;text-align: center;vertical-align: middle;">
-									<div style="width: 100%;height: 2em;">
-										<li style="float: left; width: 0.7em;margin-left: 0.85em;"><a
-											href="javascript:void(0);"
-											onclick="showUpThInfo(<%=lt.get(i).getThId()%>);"
-											title="修改信息"> <i class="fa fa-cogs nav_icon"
-												style="width: 0.15em"></i>
-										</a></li>
-										<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
-											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>&role=AD"
-											title="下载文件"> <i class="fa fa-download mail-icon"
-												style="width: 1em;padding-left: 0.2em; "></i>
-										</a></li>
-										<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
-											href="javascript:void(0);"
-											onclick="delThInfo(<%=lt.get(i).getThId()%>);" title="删除信息">
-												<i class="fa fa-trash-o mail-icon"
-												style="width: 1em;padding-left: 0.2em; "></i>
-										</a></li>
-										<li
-											style="float: left; width: 0.7em;margin-left: 0.8em;margin-right: 0.4em;"><a
-											href="#myLookModal"
-											onclick="setNum(<%=lt.get(i).getThId()%>);"
-											data-toggle="modal" data-target="#myLookModal" title="查看信息">
-												<i class="fa fa-book nav_icon"
-												style="width: 0.15em;padding-left: 0.1em; "></i>
-										</a></li>
-									</div>
-								</th>
-							</tr>
-							<%
+				<div class="panel-heading success">所有论文信息</div>
+				<table class="table table-bordered"
+					style="table-layout: fixed; width: 100%;">
+					<thead>
+						<tr>
+							<th style="text-align: center;vertical-align: middle; width: 4%;"><input
+								type="checkbox" name="thId"></th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">论文名称</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">论文类别</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">论文作者</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">发表时间</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">论文级别</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">影响因子</th>
+							<th style="text-align: center;vertical-align: middle; width: 4%;">收录</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">收录编号</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">发表期刊</th>
+							<th style="text-align: center;vertical-align: middle; width: 6%;">起止页码</th>
+							<th
+								style="text-align: center;vertical-align: middle; width: 17%;">论文简介</th>
+							<th style="text-align: center;vertical-align: middle; width: 7%;">上传时间</th>
+							<th style="text-align: center;vertical-align: middle; width: 8%;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<Thesis> lt = (List<Thesis>) request.getAttribute("list");
+								if (lt != null) {
+									for (i = 0; i < lt.size(); i++) {
+						%>
+						<tr>
+							<td style="text-align: center;vertical-align: middle; width: 4%;"><input
+								type="checkbox" value="<%=lt.get(i).getThId()%>" name="thId"></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThName()%>"><%=lt.get(i).getThName()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThCategory()%>"><%=lt.get(i).getThCategory()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThAuthor()%>"><%=lt.get(i).getThAuthor()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThDate()%>"><%=lt.get(i).getThDate()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThLevel()%>"><%=lt.get(i).getThLevel()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThFactor()%>"><%=lt.get(i).getThFactor()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 4%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThIncluded()%>"><%=lt.get(i).getThIncluded()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThNumber()%>"><%=lt.get(i).getThNumber()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThJournal()%>"><%=lt.get(i).getThJournal()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 6%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThPage()%>"><%=lt.get(i).getThPage()%></td>
+							<td
+								style="text-align: center;vertical-align: middle; width: 17%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThAbout()%>"><%=lt.get(i).getThAbout()%></td>
+							<td style="text-align: center;vertical-align: middle; width: 7%;"
+								data-toggle="tooltip" data-placement="top"
+								title="<%=lt.get(i).getThUptime()%>"><%=lt.get(i).getThUptime()%></td>
+							<th align="center"
+								style="width: 8%;text-align: center;vertical-align: middle;">
+								<div style="width: 100%;height: 2em;">
+									<li style="float: left; width: 0.7em;margin-left: 0.85em;"><a
+										href="javascript:void(0);"
+										onclick="showUpThInfo(<%=lt.get(i).getThId()%>);" title="修改信息">
+											<i class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+									</a></li>
+									<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+										href="${pageContext.request.contextPath}/download/downloadTypeFile?type=thesis&id=<%=lt.get(i).getThId()%>&role=AD"
+										title="下载文件"> <i class="fa fa-download mail-icon"
+											style="width: 1em;padding-left: 0.2em; "></i>
+									</a></li>
+									<li style="float: left; width: 0.7em;margin-left: 0.9em;"><a
+										href="javascript:void(0);"
+										onclick="delThInfo(<%=lt.get(i).getThId()%>);" title="删除信息">
+											<i class="fa fa-trash-o mail-icon"
+											style="width: 1em;padding-left: 0.2em; "></i>
+									</a></li>
+									<li
+										style="float: left; width: 0.7em;margin-left: 0.8em;margin-right: 0.4em;"><a
+										href="#myLookModal"
+										onclick="setNum(<%=lt.get(i).getThId()%>);"
+										data-toggle="modal" data-target="#myLookModal" title="查看信息">
+											<i class="fa fa-book nav_icon"
+											style="width: 0.15em;padding-left: 0.1em; "></i>
+									</a></li>
+								</div>
+							</th>
+						</tr>
+						<%
+							}
 								}
-									}
-							%>
-							<script>
-								$(function() {
-									$('[data-toggle="tooltip"]').tooltip({
-										container : 'body'
-									});
-								})
-							</script>
-						</tbody>
-					</table>
-					<p>
-					<div style="float: left;">
-						显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
-						${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-							onchange="relodePage()" size="1">
-							<option value="${page.pageSize}">${page.pageSize}</option>
-							<option value="10">10</option>
-							<option value="25">25</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>条记录
-					</div>
-					<div style="float:right;">
-						<a
-							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
-						<a
-							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
-						<a
-							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
-						<a
-							href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
-					</div>
-					</p>
+						%>
+						<script>
+							$(function() {
+								$('[data-toggle="tooltip"]').tooltip({
+									container : 'body'
+								});
+							})
+						</script>
+					</tbody>
+				</table>
+				<p>
+				<div style="float: left;">
+					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+						onchange="relodePage()" size="1">
+						<option value="${page.pageSize}">${page.pageSize}</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>条记录
 				</div>
-			</c:if>
+				<div style="float:right;">
+					<a
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+					<a
+						href="${pageContext.request.contextPath}/thesis/getAllThInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+				</div>
+				</p>
 		</div>
-		<div class="media">
-			<div class="panel-info" style="padding: 0em 2em 1em 2em;"
-				id="UpAndDe">
-				<form class="form-horizontal" id="upAndadd" name="upAndadd">
-					<div class="form-group mb-n">
-						<div class="btn-group" style="margin-left: 1em;">
-							<button type="button" class="btn btn-danger" id="Change"
-								onclick="change();">修改信息</button>
-							<button type="button" class="btn btn-default" id="Add"
-								onclick="add();">添加信息</button>
-						</div>
+		</c:if>
+	</div>
+	<div class="media">
+		<div class="panel-info" style="padding: 0em 2em 1em 2em;" id="UpAndDe">
+			<form class="form-horizontal" id="upAndadd" name="upAndadd">
+				<div class="form-group mb-n">
+					<div class="btn-group" style="margin-left: 1em;">
+						<button type="button" class="btn btn-danger" id="Change"
+							onclick="change();">修改信息</button>
+						<button type="button" class="btn btn-default" id="Add"
+							onclick="add();">添加信息</button>
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" name="thName"
-								title="论文名称" id="thName" placeholder="论文名称" required="required">
-						</div>
-						<div class="col-sm-4">
-							<select class="form-control1" required="required" name="thCate"
-								id="thCate" title="论文类别">
-								<option value="">论文类别</option>
-								<option value="类别1">类别1</option>
-								<option value="类别2">类别2</option>
-								<option value="类别3">类别3</option>
-								<option value="其它">其他</option>
-							</select>
-						</div>
-						<div class="col-sm-4">
-							<input type="text" name="Cdate9" readonly="readonly" title="发表时间"
-								class="form-control1 input-lg" id="Cdate9" required="required">
-						</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" name="thName"
+							title="论文名称" id="thName" placeholder="论文名称" required="required">
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="thLevel"
-								title="论文级别" name="thLevel" placeholder="论文级别"
-								required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="thfactor"
-								title="影响因子" name="thfactor" placeholder="影响因子"
-								required="required">
-						</div>
-						<div class="col-sm-4">
-							<select class="form-control1" required="required" title="是否收录"
-								name="thIscloud" id="thIscloud">
-								<option value="">是否收录</option>
-								<option value="1">是</option>
-								<option value="0">否</option>
-								<option value="2">其它</option>
-							</select>
-						</div>
+					<div class="col-sm-4">
+						<select class="form-control1" required="required" name="thCate"
+							id="thCate" title="论文类别">
+							<option value="">论文类别</option>
+							<option value="类别1">类别1</option>
+							<option value="类别2">类别2</option>
+							<option value="类别3">类别3</option>
+							<option value="其它">其他</option>
+						</select>
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
+					<div class="col-sm-4">
+						<input type="text" name="Cdate9" readonly="readonly" title="发表时间"
+							class="form-control1 input-lg" id="Cdate9" required="required">
+					</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="thLevel"
+							title="论文级别" name="thLevel" placeholder="论文级别"
+							required="required">
+					</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="thfactor"
+							title="影响因子" name="thfactor" placeholder="影响因子"
+							required="required">
+					</div>
+					<div class="col-sm-4">
+						<select class="form-control1" required="required" title="是否收录"
+							name="thIscloud" id="thIscloud">
+							<option value="">是否收录</option>
+							<option value="1">是</option>
+							<option value="0">否</option>
+							<option value="2">其它</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
 
-							<input type="text" class="form-control1 input-lg" id="thNum"
-								title="收录编码" name="thNum" placeholder="收录号码" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="thJour"
-								title="发表期刊" name="thJour" placeholder="发表期刊"
-								required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="thPage"
-								title="起止页码" name="thPage" placeholder="起止页码（例：12-15）"
-								required="required">
-						</div>
+						<input type="text" class="form-control1 input-lg" id="thNum"
+							title="收录编码" name="thNum" placeholder="收录号码" required="required">
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="thAuthor"
-								title="论文作者" name="thAuthor" placeholder="论文作者"
-								required="required">
-						</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="thJour"
+							title="发表期刊" name="thJour" placeholder="发表期刊" required="required">
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-12">
-							<textarea rows="2" class="form-control1 control2 " name="thAbout"
-								id="thAbout" style="font-size: 1em;"
-								placeholder="请简要描述论文信息，不超过200字" required="required"></textarea>
-						</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="thPage"
+							title="起止页码" name="thPage" placeholder="起止页码（例：12-15）"
+							required="required">
 					</div>
-					<div class="form-group mb-n col-sm-6"
-						style="padding-right: 2em;float: right;">
-						<button style="float: right;" type="reset" class="btn btn-info"
-							onclick="reSet();">重新填写</button>
-						<button style="float: right; margin-right: 1em;" type="submit"
-							class="btn btn-success" onclick="return isOp();">确认提交</button>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="thAuthor"
+							title="论文作者" name="thAuthor" placeholder="论文作者"
+							required="required">
 					</div>
-				</form>
-				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data">
-					<div class="form-group mb-n "
-						style="text-align: left; margin-left: 0.08em;">
-						<div style="float: left;">
-							<div class="btn btn-default btn-file" title="上传电子文件">
-								<input type="file" name="upfile" id="upfile" size="1">
-							</div>
-							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
-						</div>
-						<div style="text-align: left; margin-left: 0.08em;">
-							<button style="margin-left: 2em;" type="button"
-								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
-						</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-12">
+						<textarea rows="2" class="form-control1 control2 " name="thAbout"
+							id="thAbout" style="font-size: 1em;"
+							placeholder="请简要描述论文信息，不超过200字" required="required"></textarea>
 					</div>
-				</form>
-			</div>
+				</div>
+				<div class="form-group mb-n col-sm-6"
+					style="padding-right: 2em;float: right;">
+					<button style="float: right;" type="reset" class="btn btn-info"
+						onclick="reSet();">重新填写</button>
+					<button style="float: right; margin-right: 1em;" type="submit"
+						class="btn btn-success" onclick="return isOp();">确认提交</button>
+				</div>
+			</form>
+			<form class="form-horizontal" id="upFile" name="upFile"
+				enctype="multipart/form-data">
+				<div class="form-group mb-n "
+					style="text-align: left; margin-left: 0.08em;">
+					<div style="float: left;">
+						<div class="btn btn-default btn-file" title="上传电子文件">
+							<input type="file" name="upfile" id="upfile" size="1">
+						</div>
+						<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
+					</div>
+					<div style="text-align: left; margin-left: 0.08em;">
+						<button style="margin-left: 2em;" type="button"
+							class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+					</div>
+				</div>
+			</form>
 		</div>
+	</div>
 	</div>
 
 

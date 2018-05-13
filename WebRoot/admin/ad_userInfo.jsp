@@ -115,8 +115,8 @@ li {
 							</thead>
 							<tbody>
 								<c:forEach items="${requestScope.loginList}" var="Ra">
-									<tr onclick="showLoginInfo(${Ra.usId})" data-toggle="modal"
-										data-target="#myLookModal">
+									<tr data-toggle="modal"
+										data-target="#myLookModal" onclick="showLoginInfo(${Ra.usId})">
 										<td
 											style="text-align: center; vertical-align: middle; width: 4%;"><input
 											type="checkbox" value="${Ra.usId}" name="loId"></td>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ import com.sust.entity.Race;
 import com.sust.entity.Thesis;
 import com.sust.other.ExclUtils;
 import com.sust.other.MyUtils;
+import com.sust.other.ZipUtil;
 import com.sust.service.DownloadService;
 
 @Service
@@ -108,34 +110,6 @@ public class DownloadServiceImpl implements DownloadService {
 		return new SimpleDateFormat("yyyyMMddhhmmssSSS").format(da);
 	}
 
-	@SuppressWarnings("unused")
-	private String getTypeName(String type, Integer id) {
-		String name = "";
-		switch (type) {
-		case "patent":
-			name = this.patentMapper.selectNameById(id);
-			break;
-		case "book":
-			name = this.bookMapper.selectNameById(id);
-			break;
-		case "praise":
-			name = this.praiseMapper.selectNameById(id);
-			break;
-		case "project":
-			name = this.projectMapper.selectNameById(id);
-			break;
-		case "race":
-			name = this.raceMapper.selectNameById(id);
-			break;
-		case "thesis":
-			name = this.thesisMapper.selectNameByid(id);
-			break;
-		default:
-			break;
-		}
-		return name;
-	}
-
 	@Override
 	public String DeleteUnusedFile(HttpSession session, int id, String type) {
 
@@ -156,8 +130,7 @@ public class DownloadServiceImpl implements DownloadService {
 	@Override
 	public File getWorkBookStream(int usId, String type, HttpSession session, String flog) {
 
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.EXCEL_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 
 		try {
@@ -178,6 +151,26 @@ public class DownloadServiceImpl implements DownloadService {
 		}
 
 		return excelFile;
+	}
+	private String getWorkBookFilePath(String type, HttpSession session, String flog) {
+
+		String result = session.getServletContext().getRealPath(config.EXCEL_URL) + File.separatorChar + "temp.xls";
+		File excelFile = new File(result);
+		FileOutputStream os = null;
+
+		try {
+			os = new FileOutputStream(excelFile);
+			getUserTypeAllInfoList(type, flog).write(os);
+		} catch (IOException e) {
+			logger.error("FileOutputStream(excelFile)_error");
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+				logger.error("os.close()_error");
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -393,8 +386,7 @@ public class DownloadServiceImpl implements DownloadService {
 	@Override
 	public File getGuiNaWorkBookStreamTh(String type, List<Thesis> list, HttpSession session) {
 
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.EXCEL_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -414,8 +406,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	@Override
 	public File getGuiNaWorkBookStreamPa(String type, List<Patent> list, HttpSession session) {
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -435,8 +426,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	@Override
 	public File getGuiNaWorkBookStreamPr(String type, List<Praise> list, HttpSession session) {
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -456,8 +446,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	@Override
 	public File getGuiNaWorkBookStreamPro(String type, List<Project> list, HttpSession session) {
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -477,8 +466,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	@Override
 	public File getGuiNaWorkBookStreamBo(String type, List<Book> list, HttpSession session) {
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -498,8 +486,7 @@ public class DownloadServiceImpl implements DownloadService {
 
 	@Override
 	public File getGuiNaWorkBookStreamRa(String type, List<Race> list, HttpSession session) {
-		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar
-				+ "temp" + File.separatorChar + "temp.xls");
+		File excelFile = new File(session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + "temp.xls");
 		FileOutputStream os = null;
 		try {
 			os = new FileOutputStream(excelFile);
@@ -580,5 +567,107 @@ public class DownloadServiceImpl implements DownloadService {
 		}
 		return wb;
 	}
+	/**
+	 * 压缩文件，并返回文件对象
+	 * @param type
+	 * @param session
+	 * @return
+	 */
+	@Override
+	public File getFileStream(String type, HttpSession session) {
 
+		String zipFilePath = session.getServletContext().getRealPath(config.ZIP_URL)+ File.separatorChar + type + "Info.zip";
+		logger.info("getFileStream+++"+zipFilePath);
+		zipFileToTemp2(type, session, zipFilePath);
+		return new File(zipFilePath);
+	}
+	
+	private void zipFileToTemp2(String type, HttpSession session, String zipFilePath) {
+		
+		String path = session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar;
+		MyUtils.delAllFile(session.getServletContext().getRealPath(config.ZIP_URL));
+		try {
+			if (type.equals("all")) {
+				ZipUtil.zipFolder(path,zipFilePath);
+			}else if (type.equals("allData")) {
+				ZipUtil.zipFolder(path,zipFilePath);
+				ZipUtil.AddFilesToZipFile(zipFilePath, "AllDataInfo.xls", getWorkBookFilePath("typeData", session, "ALL"));
+				
+				/*ArrayList<File> fileList = new ArrayList<File>();
+				fileList.add(new File(zipFilePath));
+				fileList.add(new File(getWorkBookFilePath("typeData", session, "ALL")));
+				ZipUtil.zipFiles(fileList,zipFilePath);*/
+			}
+			else{
+				ZipUtil.zipFolder(path + type + File.separatorChar, zipFilePath);
+			}
+		} catch (Exception e) {
+			logger.error("zipFileToTemp2_error!");
+		}
+	}
+
+	/**
+	 * 根据类别压缩文件
+	 * @param type
+	 * @param session
+	 * @param zipFilePath
+	 */
+	@SuppressWarnings("unused")
+	private void zipFileToTemp(String type, HttpSession session, String zipFilePath) {
+		
+		List<Date> fileNameList = new ArrayList<Date>();
+		Map<String, List<Date>> allMap = new HashMap<String, List<Date>>();
+		boolean flog = false;
+		if("allData".equals(type)){
+			flog = true;
+			type = "all";
+		}
+		switch (type) {
+		case "thesis":
+			fileNameList = thesisMapper.selectAllThesisFileName();
+			break;
+		case "patent":
+			fileNameList = patentMapper.selectAllPatentFileName();
+			break;
+		case "book":
+			fileNameList = bookMapper.selectAllBoFileName();
+			break;
+		case "praise":
+			fileNameList = praiseMapper.selectAllPraiseFileName();
+			break;
+		case "project":
+			fileNameList = projectMapper.selectAllProjectFileName();
+			break;
+		case "race":
+			fileNameList = raceMapper.selectAllRaceFileName();
+			break;
+		case "all":
+			allMap.put("thesis", thesisMapper.selectAllThesisFileName());
+			allMap.put("patent", patentMapper.selectAllPatentFileName());
+			allMap.put("book", bookMapper.selectAllBoFileName());
+			allMap.put("praise", praiseMapper.selectAllPraiseFileName());
+			allMap.put("project", projectMapper.selectAllProjectFileName());
+			allMap.put("race", raceMapper.selectAllRaceFileName());
+			break;
+		default:
+			break;
+		}
+		if (flog) {
+			ZipUtil.zipFiles(MyUtils.getTypeFileNameList(allMap,session.getServletContext().getRealPath(config.UPLOADE_URL)), zipFilePath);
+			ZipUtil.AddFilesToZipFile(zipFilePath, "AllInfoExcel.xls", getWorkBookFilePath("typeData", session, "ALL"));
+		}else{
+			if (fileNameList.size() > 0) {
+				ZipUtil.zipFiles(MyUtils.getFileNameList(fileNameList,session.getServletContext().getRealPath(config.UPLOADE_URL), type), zipFilePath);
+			}
+		}
+	}
+	
+	@SuppressWarnings("unused")
+	private File getZipFileByStrList(String type,List<String> fileNameList, HttpSession session){
+		
+		String path = session.getServletContext().getRealPath(config.ZIP_URL)+ File.separatorChar + type + ".zip";
+		ZipUtil.zipFiles(MyUtils.getFileNameByList(fileNameList,session.getServletContext().getRealPath(config.UPLOADE_URL) + File.separatorChar + type
+				+ File.separatorChar), path);
+		return new File(path);
+	}
 }

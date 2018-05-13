@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sust.entity.Book;
+import com.sust.entity.Charts;
 import com.sust.entity.Patent;
 import com.sust.entity.Praise;
 import com.sust.entity.Project;
@@ -66,6 +67,7 @@ public class StatisticController {
 	private List<Project> ProjectList = null;
 	private List<Book> BookList = null;
 	private List<Race> RaceList = null;
+	private Charts chart = new Charts();
 
 	@RequestMapping("/getMenuInit")
 	public String getMenuInit(Model model) {
@@ -76,6 +78,20 @@ public class StatisticController {
 		return "admin/ad_menu";
 	}
 	
+	/**
+	 * 统计模块
+	 */
+	@RequestMapping("/toStatisticInit")
+	public String toStatisticInit(Model model) {
+		
+		model.addAttribute("typeName", this.chart.getTypeName());
+		return "admin/st_all";
+	}
+	
+	/**
+	 * 归纳信息模块
+	 * 
+	 */
 	@RequestMapping("/getCountDataInit")
 	public String getCountDataInit(Model model) {
 		model.addAttribute("flog", "none");
@@ -214,7 +230,26 @@ public class StatisticController {
 		}
 		logger.info("end++" + str);
 	}
-
+    /**
+     * 归纳教材
+     * @param flg
+     * @param xuyuan
+     * @param sex
+     * @param duty
+     * @param bigAge
+     * @param smlAge
+     * @param major
+     * @param BoCate
+     * @param bigBoda
+     * @param smlBoda
+     * @param bigFont
+     * @param smlFont
+     * @param bigBoUp
+     * @param smlBoUp
+     * @param model
+     * @param request
+     * @param response
+     */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/GuiNaBook")
 	@ResponseBody

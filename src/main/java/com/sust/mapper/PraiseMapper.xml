@@ -17,6 +17,11 @@
 		pr_uptime
 	</sql>
 	
+	<select id="selectAllPraiseFileName" resultType="java.util.Date">
+		select pa_uptime
+		from sr_patent
+		order by pa_uptime desc
+	</select>
 	<select id="selectPraiseFind" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />

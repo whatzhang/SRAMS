@@ -130,7 +130,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-success">
+		<!-- <div class="panel panel-success">
 			<div class="panel-heading" role="tab" id="headingThree">
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
@@ -185,9 +185,6 @@
 							<button type="reset" class="btn btn-default">取消</button>
 						</div>
 					</form>
-
-
-
 				</div>
 			</div>
 		</div>
@@ -220,7 +217,7 @@
 					</form>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="panel panel-success">
 			<div class="panel-heading" role="tab" id="heading1">
 				<h4 class="panel-title">
@@ -237,25 +234,25 @@
 
 						<label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="export()" data-target="#exampleModal1">导出论文文件</button>
+								onclick="exportFile('thesis')" data-target="#exampleModal1">导出论文文件</button>
 						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="sure()" data-target="#exampleModal1">导出专利文件</button>
+								onclick="exportFile('patent')" data-target="#exampleModal1">导出专利文件</button>
 						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="sure()" data-target="#exampleModal1">导出获奖文件</button>
+								onclick="exportFile('praise')" data-target="#exampleModal1">导出获奖文件</button>
 					</div>
 
 					<div class="form-group mb-n col-sm-12" style="text-align: center;">
 						<label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="sure()" data-target="#exampleModal1">导出教材文件</button>
+								onclick="exportFile('book')" data-target="#exampleModal1">导出教材文件</button>
 						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="sure()" data-target="#exampleModal1">导出竞赛文件</button>
+								onclick="exportFile('race')" data-target="#exampleModal1">导出竞赛文件</button>
 						</label> <label class="col-sm-4 " align="center">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								onclick="sure()" data-target="#exampleModal1">导出项目文件</button>
+								onclick="exportFile('project')" data-target="#exampleModal1">导出项目文件</button>
 						</label>
 					</div>
 				</div>
@@ -267,7 +264,7 @@
 				<h4 class="panel-title">
 					<a class="collapsed" role="button" data-toggle="collapse"
 						data-parent="#accordion" href="#collapse2" aria-expanded="false"
-						aria-controls="collapse2">导出全部文件 </a>
+						aria-controls="collapse2">导出全部 </a>
 				</h4>
 			</div>
 			<div id="collapse2" class="panel-collapse collapse" role="tabpanel"
@@ -275,7 +272,8 @@
 				<div class="panel-body">
 					<div class="form-group mb-n"
 						style="margin: 5em 0em 5em 0em; text-align: center;">
-						<button type="button" onclick="sure()" class="btn btn-primary">一键导出所有文件</button>
+						<button type="button" onclick="exportFile('all')" class="btn btn-primary">一键导出所有文件</button>
+						<button type="button" onclick="exportFile('allData')" class="btn btn-primary">一键导出所有文件及Excel表</button>
 					</div>
 				</div>
 			</div>
@@ -299,7 +297,11 @@
 			} else {
 				return false;
 			}
-	
+		}
+		function exportFile(info) {
+			if (confirm("确定要提交操作？")) {
+				window.location.href = "${pageContext.request.contextPath}/download/downloadTypeZipFiles?type=" + info;
+			}
 		}
 	</script>
 </body>

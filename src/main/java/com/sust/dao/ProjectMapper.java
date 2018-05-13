@@ -44,4 +44,6 @@ public interface ProjectMapper {
 			@Param("proCate") String proCate, @Param("bigMoney") Integer bigMoney, @Param("smlMoney") Integer smlMoney,
 			@Param("bigProUp") Date bigProUp, @Param("smlProUp") Date smlProUp);
 
+	List<Date> selectAllProjectFileName();
+
 }

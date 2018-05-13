@@ -102,9 +102,8 @@ li {
 					</form>
 				</div>
 			</div>
-			<br>
-			<c:if test="${isShow == 'yes'}">
-				<div class="panel-info" style="padding: 1em 1em 1em 1em;">
+			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
+				<c:if test="${isShow == 'yes'}">
 					<c:if test="${isFind == 'yes'}">
 						<div class="panel-heading success" style="vertical-align: middle;">
 							查找信息 <a
@@ -245,215 +244,213 @@ li {
 						<span
 							style="text-align: center;vertical-align: middle;color: red;">没有满足查询条件的信息！</span>
 					</c:if>
-				</div>
+			</div>
 			</c:if>
 			<c:if test="${isShow != 'yes'}">
-				<div class="panel-info" style="padding: 1em 1em 1em 1em;">
-					<div class="panel-heading success">所有论文信息</div>
-					<table class="table table-bordered"
-						style="table-layout: fixed; width: 100%;">
-						<thead>
+				<div class="panel-heading success">所有论文信息</div>
+				<table class="table table-bordered"
+					style="table-layout: fixed; width: 100%;">
+					<thead>
+						<tr>
+							<th
+								style="text-align: center; vertical-align: middle; width: 5%;"><input
+								type="checkbox" name="paId" id="paId"></th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 9%;">专利名称</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 8%;">专利作者</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 8%;">专利类别</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 9%;">申请时间</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 9%;">授权时间</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 9%;">专利号</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 25%;">专利简介</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
+							<th
+								style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${requestScope.PatentList}" var="List">
 							<tr>
-								<th
+								<td
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
-									type="checkbox" name="paId" id="paId"></th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 9%;">专利名称</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 8%;">专利作者</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 8%;">专利类别</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 9%;">申请时间</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 9%;">授权时间</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 9%;">专利号</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 25%;">专利简介</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
-								<th
-									style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
+									type="checkbox" value="${List.paId}" name="paId"></td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 9%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paName}">${List.paName}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 8%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paAuthor}">${List.paAuthor}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 8%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paCategory}">${List.paCategory}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 9%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paPlease}">${List.paPlease}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 9%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paDate}">${List.paDate}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 9%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paNumber}">${List.paNumber}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 25%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paAbout}">${List.paAbout}</td>
+								<td
+									style="text-align: center; vertical-align: middle; width: 10%;"
+									data-toggle="tooltip" data-placement="top"
+									title="${List.paUptime}">${List.paUptime}</td>
+								<th align="center"
+									style="width: 8%; text-align: center; vertical-align: middle;">
+									<div style="width: 100%; height: 2em;">
+										<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
+											href="javascript:void(0);"
+											onclick="showUpInfo(${List.paId});" title="修改信息"> <i
+												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+										</a></li>
+										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=patent&id=${List.paId}&role=AD"
+											title="下载文件"> <i class="fa fa-download mail-icon"
+												style="width: 1em; padding-left: 0.2em;"></i>
+										</a></li>
+										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+											href="javascript:void(0);" onclick="delInfo(${List.paId});"
+											title="删除信息"> <i class="fa fa-trash-o mail-icon"
+												style="width: 1em; padding-left: 0.2em;"></i>
+										</a></li>
+										<li
+											style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
+											href="#myLookModal" onclick="setInfo(${List.paId});"
+											data-toggle="modal" data-target="#myLookModal" title="查看信息">
+												<i class="fa fa-book nav_icon"
+												style="width: 0.15em; padding-left: 0.1em;"></i>
+										</a></li>
+									</div>
+								</th>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${requestScope.PatentList}" var="List">
-								<tr>
-									<td
-										style="text-align: center; vertical-align: middle; width: 5%;"><input
-										type="checkbox" value="${List.paId}" name="paId"></td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 9%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paName}">${List.paName}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 8%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paAuthor}">${List.paAuthor}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 8%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paCategory}">${List.paCategory}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 9%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paPlease}">${List.paPlease}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 9%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paDate}">${List.paDate}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 9%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paNumber}">${List.paNumber}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 25%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paAbout}">${List.paAbout}</td>
-									<td
-										style="text-align: center; vertical-align: middle; width: 10%;"
-										data-toggle="tooltip" data-placement="top"
-										title="${List.paUptime}">${List.paUptime}</td>
-									<th align="center"
-										style="width: 8%; text-align: center; vertical-align: middle;">
-										<div style="width: 100%; height: 2em;">
-											<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
-												href="javascript:void(0);"
-												onclick="showUpInfo(${List.paId});" title="修改信息"> <i
-													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
-											</a></li>
-											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=patent&id=${List.paId}&role=AD"
-												title="下载文件"> <i class="fa fa-download mail-icon"
-													style="width: 1em; padding-left: 0.2em;"></i>
-											</a></li>
-											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-												href="javascript:void(0);" onclick="delInfo(${List.paId});"
-												title="删除信息"> <i class="fa fa-trash-o mail-icon"
-													style="width: 1em; padding-left: 0.2em;"></i>
-											</a></li>
-											<li
-												style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
-												href="#myLookModal" onclick="setInfo(${List.paId});"
-												data-toggle="modal" data-target="#myLookModal" title="查看信息">
-													<i class="fa fa-book nav_icon"
-													style="width: 0.15em; padding-left: 0.1em;"></i>
-											</a></li>
-										</div>
-									</th>
-								</tr>
-							</c:forEach>
-							<script>
-								$(function() {
-									$('[data-toggle="tooltip"]').tooltip({
-										container : 'body'
-									});
-								})
-							</script>
-						</tbody>
-					</table>
-					<p>
-					<div style="float: left;">
-						显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
-						${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-							onchange="rePages()" size="1">
-							<option value="${page.pageSize}">${page.pageSize}</option>
-							<option value="10">10</option>
-							<option value="25">25</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>条记录
-					</div>
-					<div style="float:right;">
-						<a
-							href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
-						<a
-							href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
-						<a
-							href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
-						<a
-							href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
-					</div>
-					</p>
+						</c:forEach>
+						<script>
+							$(function() {
+								$('[data-toggle="tooltip"]').tooltip({
+									container : 'body'
+								});
+							})
+						</script>
+					</tbody>
+				</table>
+				<p>
+				<div style="float: left;">
+					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+						onchange="rePages()" size="1">
+						<option value="${page.pageSize}">${page.pageSize}</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>条记录
 				</div>
-			</c:if>
+				<div style="float:right;">
+					<a
+						href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+					<a
+						href="${pageContext.request.contextPath}/patent/getAllPaInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+				</div>
+				</p>
 		</div>
-		<div class="media">
-			<div class="panel-info" style="padding: 0em 2em 1em 2em;"
-				id="UpAndDe">
-				<form class="form-horizontal" id="upAndaddRa" name="upAndaddRa">
-					<div class="form-group mb-n">
-						<div class="btn-group" style="margin-left: 1em;">
-							<button type="button" class="btn btn-danger" id="Change"
-								onclick="change();">修改信息</button>
-							<button type="button" class="btn btn-default" id="Add"
-								onclick="add();">添加信息</button>
-						</div>
+		</c:if>
+	</div>
+	<div class="media">
+		<div class="panel-info" style="padding: 0em 2em 1em 2em;" id="UpAndDe">
+			<form class="form-horizontal" id="upAndaddRa" name="upAndaddRa">
+				<div class="form-group mb-n">
+					<div class="btn-group" style="margin-left: 1em;">
+						<button type="button" class="btn btn-danger" id="Change"
+							onclick="change();">修改信息</button>
+						<button type="button" class="btn btn-default" id="Add"
+							onclick="add();">添加信息</button>
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" name="raName"
-								title="专利名称" id="raName" placeholder="专利名称" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg"
-								name="raCategory" title="专利类别" id="raCategory"
-								placeholder="专利类别" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="raLevel"
-								title="专利号" name="raLevel" placeholder="专利号" required="required">
-						</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" name="raName"
+							title="专利名称" id="raName" placeholder="专利名称" required="required">
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-4">
-							<input type="text" name="Cdate" readonly="readonly" title="申请时间"
-								class="form-control1 input-lg" id="Cdate" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" name="Cdate1" readonly="readonly" title="授权时间"
-								class="form-control1 input-lg" id="Cdate1" required="required">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" class="form-control1 input-lg" id="paAuthor"
-								title="专利作者" name="paAuthor" placeholder="专利作者"
-								required="required">
-						</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg"
+							name="raCategory" title="专利类别" id="raCategory" placeholder="专利类别"
+							required="required">
 					</div>
-					<div class="form-group mb-n">
-						<div class="col-sm-12">
-							<textarea rows="2" class="form-control1 control2 " name="raAbout"
-								id="raAbout" style="font-size: 1em;"
-								placeholder="请简要描述专利信息，不超过200字" required="required"></textarea>
-						</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="raLevel"
+							title="专利号" name="raLevel" placeholder="专利号" required="required">
 					</div>
-					<div class="form-group mb-n col-sm-6"
-						style="padding-right: 2em; float: right;">
-						<button style="float: right;" type="reset" class="btn btn-info"
-							onclick="reSet();">重新填写</button>
-						<button style="float: right; margin-right: 1em;" type="submit"
-							class="btn btn-success" onclick="return isOp();">确认提交</button>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-4">
+						<input type="text" name="Cdate" readonly="readonly" title="申请时间"
+							class="form-control1 input-lg" id="Cdate" required="required">
 					</div>
-				</form>
-				<form class="form-horizontal" id="upFile" name="upFile"
-					enctype="multipart/form-data">
-					<div class="form-group mb-n "
-						style="text-align: left; margin-left: 0.08em;">
-						<div style="float: left;">
-							<div class="btn btn-default btn-file" title="上传电子文件">
-								<input type="file" name="upfile" id="upfile" size="1">
-							</div>
-							<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
-						</div>
-						<div style="text-align: left; margin-left: 0.08em;">
-							<button style="margin-left: 2em;" type="button"
-								class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
-						</div>
+					<div class="col-sm-4">
+						<input type="text" name="Cdate1" readonly="readonly" title="授权时间"
+							class="form-control1 input-lg" id="Cdate1" required="required">
 					</div>
-				</form>
-			</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control1 input-lg" id="paAuthor"
+							title="专利作者" name="paAuthor" placeholder="专利作者"
+							required="required">
+					</div>
+				</div>
+				<div class="form-group mb-n">
+					<div class="col-sm-12">
+						<textarea rows="2" class="form-control1 control2 " name="raAbout"
+							id="raAbout" style="font-size: 1em;"
+							placeholder="请简要描述专利信息，不超过200字" required="required"></textarea>
+					</div>
+				</div>
+				<div class="form-group mb-n col-sm-6"
+					style="padding-right: 2em; float: right;">
+					<button style="float: right;" type="reset" class="btn btn-info"
+						onclick="reSet();">重新填写</button>
+					<button style="float: right; margin-right: 1em;" type="submit"
+						class="btn btn-success" onclick="return isOp();">确认提交</button>
+				</div>
+			</form>
+			<form class="form-horizontal" id="upFile" name="upFile"
+				enctype="multipart/form-data">
+				<div class="form-group mb-n "
+					style="text-align: left; margin-left: 0.08em;">
+					<div style="float: left;">
+						<div class="btn btn-default btn-file" title="上传电子文件">
+							<input type="file" name="upfile" id="upfile" size="1">
+						</div>
+						<p class="help-block">(格式为：zip/rar/doc/docx/pdf)Max.20MB</p>
+					</div>
+					<div style="text-align: left; margin-left: 0.08em;">
+						<button style="margin-left: 2em;" type="button"
+							class="btn btn-success" onclick="checkFile();">上&nbsp;传</button>
+					</div>
+				</div>
+			</form>
 		</div>
+	</div>
 	</div>
 	<div class="modal fade" id="myLookModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

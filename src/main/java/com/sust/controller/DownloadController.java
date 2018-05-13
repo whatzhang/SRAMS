@@ -35,7 +35,17 @@ public class DownloadController {
 	private static final Log logger = LogFactory.getLog(DownloadController.class);
 	@Resource
 	private DownloadService downloadService;
-
+	/**
+	 * 下载不同类型单一文件
+	 * @param session
+	 * @param type
+	 * @param id
+	 * @param isFind
+	 * @param rloe
+	 * @param response
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/downloadTypeFile")
 	public ResponseEntity<byte[]> downloadTypeFile(HttpSession session, @RequestParam("type") String type,
 			@RequestParam("id") String id, @RequestParam(value = "isFind", defaultValue = "no") String isFind,
@@ -177,7 +187,13 @@ public class DownloadController {
 			return null;
 		}
 	}
-
+	/**
+	 * 删除 不同类型文件
+	 * @param id
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/DeleteAllFile", method = RequestMethod.GET)
 	@ResponseBody
 	public AllInfo DeleteFile(@RequestParam("Id") int id, @RequestParam("type") String type, HttpSession session) {
@@ -185,7 +201,12 @@ public class DownloadController {
 		logger.info("DeleteFile++" + id + "++" + type);
 		return new AllInfo(this.downloadService.DeleteUnusedFile(session, id, type));
 	}
-
+	/**
+	 * 下载不同类型的数据Excel
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/downloadTypeExcl")
 	public ResponseEntity<byte[]> downloadTypeExcl(@RequestParam("type") String type, HttpSession session) {
 
@@ -210,7 +231,12 @@ public class DownloadController {
 		}
 		return entity;
 	}
-
+	/**
+	 * 下载所有类型的Excel文档
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/downloadAllTypeExcl")
 	public ResponseEntity<byte[]> downloadAllTypeExcl(@RequestParam("type") String type, HttpSession session) {
 
@@ -235,7 +261,12 @@ public class DownloadController {
 		}
 		return entity;
 	}
-
+	/**
+	 * 下载不同类型信息Excel模板
+	 * @param type
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/downloadExcelTemplets")
 	public ResponseEntity<byte[]> downloadExcelTemplets(@RequestParam("type") String type, HttpSession session) {
 
@@ -258,6 +289,36 @@ public class DownloadController {
 					headers, HttpStatus.CREATED);
 		} catch (IOException e) {
 			logger.error("downloadTypeExcl_ResponseEntity_error");
+		}
+		return entity;
+	}
+	/**
+	 * 下载不同类型下的所有文件
+	 * @param type
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/downloadTypeZipFiles")
+	public ResponseEntity<byte[]> downloadTypeFiles(@RequestParam("type") String type, HttpSession session) {
+
+		logger.info("downloadTypeFiles+" + type);
+		HttpHeaders headers = new HttpHeaders();
+		String FileName = type + "Info.zip";
+		try {
+			FileName = new String(FileName.getBytes("UTF-8"), "iso-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("downloadTypeFiles_error");
+		}
+		headers.setContentDispositionFormData("attachment", FileName);
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		ResponseEntity<byte[]> entity = null;
+		try {
+			entity = new ResponseEntity<byte[]>(
+					FileUtils.readFileToByteArray(
+							this.downloadService.getFileStream(type, session)),
+					headers, HttpStatus.CREATED);
+		} catch (IOException e) {
+			logger.error("downloadTypeFiles_ResponseEntity_error");
 		}
 		return entity;
 	}

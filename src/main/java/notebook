@@ -1,4 +1,150 @@
+optionc = {
+		    title: {
+		        text: '学院科研成果数据',
+		        subtext: '',
+		        sublink: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis',
+		        backgroundColor: 'rgba(255,255,255,0.7)',
+		        axisPointer: {
+		            type: 'shadow'
+		        },
+		        formatter: function(params) {
+		           
+		             var res = '<div style="color: #EE7942;">';
+		            res += '<strong>'+ params[0].name +'</strong>'
+		            for (var i = 0, l = params.length; i < l; i++) {
+		                res += '<br/>' + params[i].seriesName + ' : ' + params[i].value 
+		            }
+		            res += '</div>';
+		            return res;
+		        }
+		    },
+		    legend: {
+		        x: 'right',
+		        data: ${typeName}
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        y: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    grid: {
+		        y: 60,
+		        y2: 30,
+		        x: 50,
+		        x2: 50
+		    },
+		    xAxis: [
+		        {
+		            type: 'category',
+		            data: ['食品', '衣着', '居住', '家庭设备及用品', '医疗保健', '交通和通信', '文教娱乐服务', '其他', '111', '222', '333', '444']
+		        }
+		    ],
+		    yAxis: [
+		        {
+		            type: 'value'
+		        }
+		    ],
+		    series: [
+		        {
+		            name: '论文',
+		            type: 'bar',
+		            /* itemStyle: itemStyle, */
+		            data: [484.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,293,495,1239,1459]
+		        },
+		        {
+		            name: '专利',
+		            type: 'bar',
+		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,956,798,1459,1329]
+		        },
+		        {
+		            name: '获奖',
+		            type: 'bar',
+		            data: [600.9,1823.4,1484.3,1116.1,1063.7,2455.5,2033.5,657.1,933,755,988,1890]
+		        },
+		        {
+		            name: '项目',
+		            type: 'bar',
+		            data: [631.9,1902,1745.1,1215.1,1118.3,2736.9,2294,699.4,560,900,456,567]
+		        },
+		        {
+		            name: '教材',
+		            type: 'bar',
+		            data: [404.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,932,565,1233,956]
+		        },
+		        {
+		            name: '竞赛',
+		            type: 'bar',
+		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,450,670,900,1433]
+		        }
+		    ]
+		};
 
+
+
+
+//var chart = echarts.init(document.getElementById('main'), 'macarons');
+var option = {
+			title : {
+				text : 'ECharts 数据统计'
+			},
+			tooltip : {},
+			legend : {
+				data : [ '用户来源' ]
+			},
+			xAxis : {
+				data : [ "Android", "IOS", "PC", "Ohter" ]
+			},
+			yAxis : {
+	
+			},
+			series : [ {
+				name : '访问量',
+				type : 'line',
+				data : [ 500, 200, 360, 100 ]
+			} ]
+		};
+		var option1 = {
+			title : {
+				text : 'ECharts 数据统计'
+			},
+			series : [ {
+				name : '访问量',
+				type : 'pie',
+				radius : '60%',
+				data : [
+					{
+						value : 500,
+						name : 'Android'
+					},
+					{
+						value : 200,
+						name : 'IOS'
+					},
+					{
+						value : 360,
+						name : 'PC'
+					},
+					{
+						value : 100,
+						name : 'Ohter'
+					}
+				]
+			} ]
+		};
+		var myChart = echarts.init(document.getElementById('chartmain'));
+		myChart.setOption(option);
+		var myChart1 = echarts.init(document.getElementById('chartmain1'));
+		myChart1.setOption(option1);
 
 
 

@@ -43,4 +43,6 @@ public interface PatentMapper {
 
 	List<Patent> selectPetentFind(@Param("usId") Integer usId,  @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
 			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
+
+	List<Date> selectAllPatentFileName();
 }

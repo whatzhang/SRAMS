@@ -55,7 +55,7 @@ li {
 
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
-			<div class="panel-info">
+			<div class="panel-info" style="margin-bottom: 1em;">
 				<div class=" panel-body-inputin">
 					<form class="form-horizontal"
 						action="${pageContext.request.contextPath}/patent/findUserPatentInfo"
@@ -102,7 +102,6 @@ li {
 					</form>
 				</div>
 			</div>
-			<br>
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
 				<c:if test="${isShow == 'yes'}">
 					<c:if test="${isFind == 'yes'}">

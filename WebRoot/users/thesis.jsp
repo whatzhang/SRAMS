@@ -56,7 +56,7 @@ li {
 	<input type="hidden" name="numJ" id="numJ" />
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
-			<div class="panel-info">
+			<div class="panel-info" style="margin-bottom: 1em;">
 				<div class=" panel-body-inputin">
 					<form class="form-horizontal"
 						action="${pageContext.request.contextPath}/thesis/findUserThesisInfo"
@@ -64,7 +64,7 @@ li {
 						<div class="form-group mb-n">
 							<label for="largeinput" class=" control-label label-input-lg"
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label> <a
-								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=thesis"><button
+								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=thesis"><button
 									type="button" class="btn btn-success col-sm-1"
 									style="float: right;margin-right: 2em;width: 10em;">导出所有信息为Excl</button></a>
 							<button class="btn btn-danger" id="find" type="submit"
@@ -113,7 +113,6 @@ li {
 					</form>
 				</div>
 			</div>
-			<br> <br>
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
 				<c:if test="${isShow == 'yes'}">
 					<c:if test="${isFind == 'yes'}">

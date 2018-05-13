@@ -59,8 +59,31 @@
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
 					<li><a
+						href="${pageContext.request.contextPath}/users/getAllUsersInfo"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
+							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="admin/ad_data.jsp" onclick="aa();"
+						target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
+							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
+					<li><a href="#" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
+							<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level collapse">
+							<li><a
+								href="${pageContext.request.contextPath}/CountData/toStatisticInit"
+								target="iFrame">所有信息总和</a></li>
+							<li><a href="admin/st_info.jsp#thesis" target="iFrame">论文信息统计</a></li>
+							<li><a href="admin/st_info.jsp#patent" target="iFrame">专利信息统计</a></li>
+							<li><a href="admin/st_info.jsp#praise" target="iFrame">获奖信息统计</a></li>
+							<li><a href="admin/st_info.jsp#project" target="iFrame">项目信息统计</a></li>
+							<li><a href="admin/st_info.jsp#book" target="iFrame">教材信息统计</a></li>
+							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li>
+						</ul></li>
+					<li><a
 						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
-						 onclick="aa();" target="iFrame" class="chart-nav"><i
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>论文信息<span class="nav-badge"
 							id="th">${da.string1}</span> <span class="fa arrow"></span></a></li>
 					<li><a
@@ -88,31 +111,14 @@
 						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>竞赛信息<span class="nav-badge"
 							id="ra">${da.string6}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="${pageContext.request.contextPath}/CountData/getCountDataInit" onclick="aa();" target="iFrame"
-						class="chart-nav"><i class="fa fa-book nav_icon"></i>信息归纳<span
-							class="nav-badge">1</span> <span class="fa arrow"></span></a></li>
-					<li><a href="${pageContext.request.contextPath}/users/getAllUsersInfo" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
-							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="admin/ad_data.jsp" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
-							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="#" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
-							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<li><a href="admin/st_all.jsp" target="iFrame">所有信息总和</a></li>
-							<li><a href="admin/st_info.jsp#thesis" target="iFrame">论文信息统计</a></li>
-							<li><a href="admin/st_info.jsp#patent" target="iFrame">专利信息统计</a></li>
-							<li><a href="admin/st_info.jsp#praise" target="iFrame">获奖信息统计</a></li>
-							<li><a href="admin/st_info.jsp#project" target="iFrame">项目信息统计</a></li>
-							<li><a href="admin/st_info.jsp#book" target="iFrame">教材信息统计</a></li>
-							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li>
-						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/news/getAdminNews" onclick="aa();"
-						target="iFrame" class="chart-nav"><i
+					<li><a
+						href="${pageContext.request.contextPath}/CountData/getCountDataInit"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>信息归纳<span class="nav-badge">1</span>
+							<span class="fa arrow"></span></a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/news/getAdminNews"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>消息公告<span class="nav-badge"
 							id="me">${da.string7}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_other.jsp" onclick="aa();"

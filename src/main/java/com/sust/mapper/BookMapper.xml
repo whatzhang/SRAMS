@@ -21,6 +21,11 @@
 		bo_about, bo_uptime
 	</sql>
 	
+	<select id="selectAllBoFileName" resultType="java.util.Date">
+		select bo_uptime
+		from sr_book
+		order by bo_uptime desc
+	</select>
 	<select id="selectBookFind" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
