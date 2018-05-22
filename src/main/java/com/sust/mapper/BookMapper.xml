@@ -20,7 +20,39 @@
 		bo_publish,
 		bo_about, bo_uptime
 	</sql>
-	
+
+	<select id="selectCateNumByFont" resultType="java.lang.Integer">
+		select count(*) from sr_book
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlFont != null">
+			 <![CDATA[
+				and bo_font >= #{smlFont,jdbcType=INTEGER}
+				]]>
+			</if>
+			<if test="bigFont != null">
+			 <![CDATA[
+				and bo_font <= #{bigFont,jdbcType=INTEGER}
+				]]>
+			</if>
+		</trim>
+	</select>
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_book where bo_category = #{boCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from sr_book where YEAR(bo_date) =
+		#{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_book where us_id in(select us_id from sr_users
+		where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	<select id="selectSexNumber" parameterType="java.lang.Byte"
+		resultType="java.lang.Integer">
+		select count(*) from sr_book where us_id in(select us_id
+		from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
 	<select id="selectAllBoFileName" resultType="java.util.Date">
 		select bo_uptime
 		from sr_book
@@ -48,12 +80,12 @@
 			 <![CDATA[
 				and bo_font >= #{smlFont,jdbcType=INTEGER}
 				]]>
-				</if>
-				<if test="bigFont != null">
+			</if>
+			<if test="bigFont != null">
 			 <![CDATA[
 				and bo_font <= #{bigFont,jdbcType=INTEGER}
 				]]>
-				</if>
+			</if>
 			<if test="smlBoUp != null">
 			 <![CDATA[
 				and bo_uptime >= #{smlBoUp,jdbcType=TIMESTAMP}
@@ -89,12 +121,12 @@
 			 <![CDATA[
 				and bo_font >= #{smlFont,jdbcType=INTEGER}
 				]]>
-				</if>
-				<if test="bigFont != null">
+			</if>
+			<if test="bigFont != null">
 			 <![CDATA[
 				and bo_font <= #{bigFont,jdbcType=INTEGER}
 				]]>
-				</if>
+			</if>
 			<if test="smlBoUp != null">
 			 <![CDATA[
 				and bo_uptime >= #{smlBoUp,jdbcType=TIMESTAMP}
@@ -131,22 +163,22 @@
 				and us_age <= #{bigAge,jdbcType=INTEGER}
 				]]>
 				</if>
-			</trim>)
+			</trim>
+			)
 		</if>
 	</select>
- 	<select id="selectAllBoList"
-		resultMap="BaseResultMap">
+	<select id="selectAllBoList" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_book
 		order by bo_uptime desc
 	</select>
-     <select id="selectNameById" parameterType="java.lang.Integer"
+	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
 		select bo_name from sr_book where bo_id =
 		#{boId,jdbcType=INTEGER}
 	</select>
-    <select id="selectUpTimeByKey" parameterType="java.lang.Integer"
+	<select id="selectUpTimeByKey" parameterType="java.lang.Integer"
 		resultType="java.util.Date">
 		select bo_uptime from sr_book where bo_id =
 		#{boId,jdbcType=INTEGER}
@@ -170,11 +202,12 @@
 		from sr_book
 		where bo_id = #{boId,jdbcType=INTEGER}
 	</select>
-	
+
 	<delete id="deleteByUsId" parameterType="java.lang.Integer">
 		delete from
 		sr_book
-		where us_id = #{usId,jdbcType=INTEGER}
+		where
+		us_id = #{usId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
@@ -271,10 +304,11 @@
 			</if>
 		</trim>
 	</insert>
-	
-	
+
+
 	<update id="updateUpTime">
-		update sr_book set bo_uptime = #{boUptime,jdbcType=TIMESTAMP}
+		update sr_book set bo_uptime =
+		#{boUptime,jdbcType=TIMESTAMP}
 		where bo_id = #{boId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKeySelective" parameterType="com.sust.entity.Book">

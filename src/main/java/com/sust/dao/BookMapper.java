@@ -48,4 +48,13 @@ public interface BookMapper {
 
 	List<Date> selectAllBoFileName();
 
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("boCate") String boCate);
+
+	int selectCateNumByFont(@Param("smlFont") Integer smlFont, @Param("bigFont") Integer bigFont);
 }

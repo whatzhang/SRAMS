@@ -32,11 +32,10 @@
 <!-- js-->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/modernizr.custom.js"></script>
-<!--webfonts-->
+<!-- 
 <link
-	href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
-	rel='stylesheet' type='text/css'>
-<!--//webfonts-->
+	href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel='stylesheet' type='text/css'>
+ -->
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css"
 	media="all">
@@ -58,19 +57,14 @@
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
-					<li><a
-						href="${pageContext.request.contextPath}/users/getAllUsersInfo"
-						onclick="aa();" target="iFrame" class="chart-nav"><i
-							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
-							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
 					<li><a href="admin/ad_data.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
 							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="#" class="chart-nav"><i
+					<li><a href="${pageContext.request.contextPath}/CountData/toStatisticInit" class="chart-nav" target="iFrame"><i
 							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
 							<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
+						<!-- <ul class="nav nav-second-level collapse">
 							<li><a
 								href="${pageContext.request.contextPath}/CountData/toStatisticInit"
 								target="iFrame">所有信息总和</a></li>
@@ -79,8 +73,9 @@
 							<li><a href="admin/st_info.jsp#praise" target="iFrame">获奖信息统计</a></li>
 							<li><a href="admin/st_info.jsp#project" target="iFrame">项目信息统计</a></li>
 							<li><a href="admin/st_info.jsp#book" target="iFrame">教材信息统计</a></li>
-							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li>
-						</ul></li>
+							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li> 
+						</ul>-->
+						</li>
 					<li><a
 						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
 						onclick="aa();" target="iFrame" class="chart-nav"><i
@@ -116,6 +111,11 @@
 						onclick="aa();" target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>信息归纳<span class="nav-badge">1</span>
 							<span class="fa arrow"></span></a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/users/getAllUsersInfo"
+						onclick="aa();" target="iFrame" class="chart-nav"><i
+							class="fa fa-book nav_icon"></i>用户管理<span class="nav-badge"
+							id="us">${da.string8}</span> <span class="fa arrow"></span></a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/news/getAdminNews"
 						onclick="aa();" target="iFrame" class="chart-nav"><i

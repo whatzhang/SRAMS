@@ -21,6 +21,18 @@
 		ra_about, ra_uptime
 	</sql>
 	
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_race where ra_category = #{raCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from sr_race where YEAR(ra_date) = #{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_race where us_id in(select us_id from sr_users where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	<select id="selectSexNumber" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_race where us_id in(select us_id from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
 	<select id="selectAllRaceFileName" resultType="java.util.Date">
 		select ra_uptime
 		from sr_race

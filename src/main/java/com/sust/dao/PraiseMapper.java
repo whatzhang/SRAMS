@@ -45,4 +45,12 @@ public interface PraiseMapper {
 			@Param("PrCate") String PrCate,@Param("bigPrUp") Date bigPrUp, @Param("smlPrUp") Date smlPrUp);
 
 	List<Date> selectAllPraiseFileName();
+	
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("prCate") String prCate);
 }

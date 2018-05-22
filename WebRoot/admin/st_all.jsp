@@ -186,7 +186,7 @@
 				{
 					name : '男',
 					type : 'bar',
-					data : [ 2.0, 4.9, 7.0, 23.2, 25.6, 76.7],
+					data : ${SexNanNumber},
 					markPoint : {
 						data : [
 							{
@@ -211,7 +211,7 @@
 				{
 					name : '女',
 					type : 'bar',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7],
+					data : ${SexNvNumber},
 					markPoint : {
 						data : [
 							{
@@ -288,32 +288,7 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '论文'
-						},
-						{
-							value : 310,
-							name : '专利'
-						},
-						{
-							value : 234,
-							name : '获奖'
-						},
-						{
-							value : 135,
-							name : '项目'
-						},
-						{
-							value : 1350,
-							name : '教材'
-						},
-						{
-							value : 55,
-							name : '竞赛'
-						}
-					]
+					data : ${allNumber}
 				}
 			]
 		};
@@ -350,7 +325,7 @@
 		    xAxis : [
 		        {
 		            type : 'category',
-		            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+		            data : ${academyName}
 		        }
 		    ],
 		    yAxis : [
@@ -362,32 +337,32 @@
 		        {
 		            name: '论文',
 		            type: 'bar',
-		            data: [484.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,293,495,1239,1459]
+		            data: ${academy1}
 		        },
 		        {
 		            name: '专利',
 		            type: 'bar',
-		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,956,798,1459,1329]
+		            data: ${academy2}
 		        },
 		        {
 		            name: '获奖',
 		            type: 'bar',
-		            data: [600.9,1823.4,1484.3,1116.1,1063.7,2455.5,2033.5,657.1,933,755,988,1890]
+		            data: ${academy3}
 		        },
 		        {
 		            name: '项目',
 		            type: 'bar',
-		            data: [631.9,1902,1745.1,1215.1,1118.3,2736.9,2294,699.4,560,900,456,567]
+		            data: ${academy4}
 		        },
 		        {
 		            name: '教材',
 		            type: 'bar',
-		            data: [404.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,932,565,1233,956]
+		            data: ${academy5}
 		        },
 		        {
 		            name: '竞赛',
 		            type: 'bar',
-		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,450,670,900,1433]
+		            data: ${academy6}
 		        }
 		    ]
 		};
@@ -425,7 +400,7 @@
 		        {
 		            type : 'category',
 		            boundaryGap : false,
-		            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+		            data : ${yearName}
 		        }
 		    ],
 		    yAxis : [
@@ -438,37 +413,37 @@
 		            name:'论文',
 		            type:'line',
 		            stack: '总量',
-		            data:[120, 132, 101, 134, 90, 1230, 210, 233, 563, 10, 90, 1230]
+		            data: ${thYear}
 		        },
 		        {
 		            name:'专利',
 		            type:'line',
 		            stack: '总量',
-		            data:[220, 182, 191, 234, 290, 330, 310, 234, 290, 123, 234, 290]
+		            data: ${paYear}
 		        },
 		        {
 		            name:'获奖',
 		            type:'line',
 		            stack: '总量',
-		            data:[150, 232, 201, 154, 190, 330, 410, 444, 230, 600, 154, 190]
+		            data: ${prYear}
 		        },
 		        {
 		            name:'项目',
 		            type:'line',
 		            stack: '总量',
-		            data:[320, 332, 301, 334, 390, 330, 320, 340, 77, 599, 332, 301]
+		            data:${proYear}
 		        },
 		        {
 		            name:'教材',
 		            type:'line',
 		            stack: '总量',
-		            data:[820, 932, 901, 934, 1290, 1330, 1320, 1000, 342, 888, 932, 901]
+		            data:  ${boYear}
 		        },
 		        {
 		            name:'竞赛',
 		            type:'line',
 		            stack: '总量',
-		            data:[620, 532, 901, 834, 290, 1330, 130, 1600, 342, 588, 532, 901]
+		            data: ${raYear}
 		        }
 		    ]
 		};
@@ -517,7 +492,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+					data : ${academyName}
 				}
 			],
 			yAxis : [
@@ -529,7 +504,7 @@
 				{
 					name : '论文',
 					type : 'bar',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4, 28.7, 70.7],
+					data : ${academy1},
 					markPoint : {
 						data : [
 							{
@@ -567,14 +542,7 @@
 	                      }
 	                  }
 	              },
-	              data:[
-	                  {value:1048, name:'百度'},
-	                  {value:251, name:'ss'},
-	                  {value:1048, name:'dd'},
-	                  {value:251, name:'谷歌'},
-	                  {value:147, name:'必应'},
-	                  {value:102, name:'其他'}
-	              ]
+	              data: ${thCateNum}
 	          }
 			]
 		};           
@@ -592,7 +560,7 @@
 			legend : {
 				orient : 'vertical',
 				x : 'left',
-				data : ['类别一','类别二','类别三','其他']
+				data : ${thCateName}
 			},
 			toolbox : {
 				show : true,
@@ -631,24 +599,7 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '类别一'
-						},
-						{
-							value : 310,
-							name : '类别二'
-						},
-						{
-							value : 234,
-							name : '类别三'
-						},
-						{
-							value : 135,
-							name : '其他'
-						}
-					]
+					data : ${thCateNum}
 				}
 			]
 		};
@@ -656,14 +607,14 @@
 		/* 专利 */
 		 optionhh = {
 			title : {
-				text : '不同学院论文数量',
+				text : '专利年份数量走向',
 				subtext : ''
 			},
 			tooltip : {
 				trigger : 'axis'
 			},
 			legend : {
-				data : ['论文']
+				data : ['专利']
 			},
 			toolbox : {
 				show : true,
@@ -697,7 +648,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月']
+					data : ${yearName}
 				}
 			],
 			yAxis : [
@@ -707,9 +658,9 @@
 			],
 			series : [
 				{
-					name : '论文',
+					name : '专利',
 					type : 'bar',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4],
+					data : ${paYear},
 					markPoint : {
 						data : [
 							{
@@ -730,32 +681,7 @@
 							}
 						]
 					}
-				},
-			    {
-	              name:'搜索引擎细分',
-	              type:'pie',
-	              tooltip : {
-	                  trigger: 'item',
-	                  formatter: '{a} <br/>{b} : {c} ({d}%)'
-	              },
-	              center: [160,130],
-	              radius : [0, 50],
-	              itemStyle :　{
-	                  normal : {
-	                      labelLine : {
-	                          length : 20
-	                      }
-	                  }
-	              },
-	              data:[
-	                  {value:1048, name:'百度'},
-	                  {value:251, name:'ss'},
-	                  {value:1048, name:'dd'},
-	                  {value:251, name:'谷歌'},
-	                  {value:147, name:'必应'},
-	                  {value:102, name:'其他'}
-	              ]
-	          }
+				}
 			]
 		};           
 		
@@ -772,7 +698,7 @@
 			legend : {
 				orient : 'vertical',
 				x : 'left',
-				data : ['类别一','类别二','类别三','其他']
+				data : ${paCateName}
 			},
 			toolbox : {
 				show : true,
@@ -811,24 +737,7 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '类别一'
-						},
-						{
-							value : 310,
-							name : '类别二'
-						},
-						{
-							value : 234,
-							name : '类别三'
-						},
-						{
-							value : 135,
-							name : '其他'
-						}
-					]
+					data : ${paCateNum}
 				}
 			]
 		};
@@ -836,7 +745,7 @@
 		/* 获奖 */
 		 optionll = {
 			title : {
-				text : '不同学院论文数量',
+				text : '不同学院获奖数量',
 				subtext : ''
 			},
 			tooltip : {
@@ -877,7 +786,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+					data : ${academyName}
 				}
 			],
 			yAxis : [
@@ -889,7 +798,7 @@
 				{
 					name : '论文',
 					type : 'bar',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4, 28.7, 70.7],
+					data : ${prYear},
 					markPoint : {
 						data : [
 							{
@@ -927,28 +836,21 @@
 	                      }
 	                  }
 	              },
-	              data:[
-	                  {value:1048, name:'百度'},
-	                  {value:251, name:'ss'},
-	                  {value:1048, name:'dd'},
-	                  {value:251, name:'谷歌'},
-	                  {value:147, name:'必应'},
-	                  {value:102, name:'其他'}
-	              ]
+	              data: ${prCateNum}
 	          }
 			]
 		};      
 		
 		optionmm = {
 			title : {
-				text : '不同学院论文数量',
+				text : '不同学院获奖时间趋势',
 				subtext : ''
 			},
 			tooltip : {
 				trigger : 'axis'
 			},
 			legend : {
-				data : ['论文']
+				data : ['获奖']
 			},
 			toolbox : {
 				show : true,
@@ -982,7 +884,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月']
+					data : ${yearName}
 				}
 			],
 			yAxis : [
@@ -994,7 +896,7 @@
 				{
 					name : '获奖',
 					type : 'line',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4],
+					data : ${prYear},
 					markPoint : {
 						data : [
 							{
@@ -1015,29 +917,7 @@
 							}
 						]
 					}
-				},
-			    {
-	              name:'搜索引擎细分',
-	              type:'pie',
-	              tooltip : {
-	                  trigger: 'item',
-	                  formatter: '{a} <br/>{b} : {c} ({d}%)'
-	              },
-	              center: [160,130],
-	              radius : [0, 50],
-	              itemStyle :　{
-	                  normal : {
-	                      labelLine : {
-	                          length : 20
-	                      }
-	                  }
-	              },
-	              data:[
-	                  {value:1048, name:'团体'},
-	                  {value:251, name:'个人'},
-	                  {value:1048, name:'其他'},
-	              ]
-	          }
+				}
 			]
 		};      
 		/* 项目 */
@@ -1054,7 +934,7 @@
 			legend : {
 				orient : 'vertical',
 				x : 'left',
-				data : ['类别一','类别二','类别三','其他']
+				data : ${proCateName}
 			},
 			toolbox : {
 				show : true,
@@ -1093,31 +973,14 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '类别一'
-						},
-						{
-							value : 310,
-							name : '类别二'
-						},
-						{
-							value : 234,
-							name : '类别三'
-						},
-						{
-							value : 135,
-							name : '其他'
-						}
-					]
+					data : ${proCateNum}
 				}
 			]
 		};
 		
 		optionqq = {
 			title : {
-				text : '不同学院论文数量',
+				text : '不同学院项目数量趋势',
 				subtext : ''
 			},
 			tooltip : {
@@ -1158,7 +1021,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月']
+					data : ${yearName}
 				}
 			],
 			yAxis : [
@@ -1170,7 +1033,7 @@
 				{
 					name : '获奖',
 					type : 'line',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4],
+					data : ${prYear},
 					markPoint : {
 						data : [
 							{
@@ -1208,11 +1071,7 @@
 	                      }
 	                  }
 	              },
-	              data:[
-	                  {value:1048, name:'>10000'},
-	                  {value:251, name:'>5000,<10000'},
-	                  {value:1048, name:'<5000'},
-	              ]
+	              data:${proMoney}
 	          }
 			]
 		};    
@@ -1231,7 +1090,7 @@
 			legend : {
 				orient : 'vertical',
 				x : 'left',
-				data : ['类别一','类别二','类别三','其他']
+				data : ${boCateName}
 			},
 			toolbox : {
 				show : true,
@@ -1270,31 +1129,14 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '类别一'
-						},
-						{
-							value : 310,
-							name : '类别二'
-						},
-						{
-							value : 234,
-							name : '类别三'
-						},
-						{
-							value : 135,
-							name : '其他'
-						}
-					]
+					data : ${boCateNum}
 				}
 			]
 		};
 		
 		optionuu = {
 			title : {
-				text : '不同学院论文数量',
+				text : '不同学院出版教材趋势',
 				subtext : ''
 			},
 			tooltip : {
@@ -1335,7 +1177,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月']
+					data : ${academyName}
 				}
 			],
 			yAxis : [
@@ -1345,9 +1187,9 @@
 			],
 			series : [
 				{
-					name : '获奖',
+					name : '教材',
 					type : 'line',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4],
+					data : ${academy5},
 					markPoint : {
 						data : [
 							{
@@ -1385,16 +1227,12 @@
 	                      }
 	                  }
 	              },
-	              data:[
-	                  {value:1048, name:'>10000'},
-	                  {value:251, name:'>5000,<10000'},
-	                  {value:1048, name:'<5000'},
-	              ]
+	              data: ${boFant}
 	          }
 			]
 		};    
 		
-		/* 教材 */
+		/* 竞赛 */
 		optionxx = {
 			title : {
 				text : '不同类别数量占比',
@@ -1408,7 +1246,7 @@
 			legend : {
 				orient : 'vertical',
 				x : 'left',
-				data : ['类别一','类别二','类别三','其他']
+				data : ${raCateName}
 			},
 			toolbox : {
 				show : true,
@@ -1447,38 +1285,21 @@
 					type : 'pie',
 					radius : '55%',
 					center : [ '50%', '60%' ],
-					data : [
-						{
-							value : 335,
-							name : '类别一'
-						},
-						{
-							value : 310,
-							name : '类别二'
-						},
-						{
-							value : 234,
-							name : '类别三'
-						},
-						{
-							value : 135,
-							name : '其他'
-						}
-					]
+					data : ${raCateNum}
 				}
 			]
 		};
 		
 		optionyy = {
 			title : {
-				text : '不同学院论文数量',
+				text : '不同学院竞赛数量趋势',
 				subtext : ''
 			},
 			tooltip : {
 				trigger : 'axis'
 			},
 			legend : {
-				data : ['论文']
+				data : ['竞赛']
 			},
 			toolbox : {
 				show : true,
@@ -1512,7 +1333,7 @@
 			xAxis : [
 				{
 					type : 'category',
-					data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月']
+					data : ${yearName}
 				}
 			],
 			yAxis : [
@@ -1524,7 +1345,7 @@
 				{
 					name : '获奖',
 					type : 'line',
-					data : [ 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 2.6, 5.9, 9.0, 26.4],
+					data : ${raYear},
 					markPoint : {
 						data : [
 							{
@@ -1545,36 +1366,14 @@
 							}
 						]
 					}
-				},
-			    {
-	              name:'搜索引擎细分',
-	              type:'pie',
-	              tooltip : {
-	                  trigger: 'item',
-	                  formatter: '{a} <br/>{b} : {c} ({d}%)'
-	              },
-	              center: [160,130],
-	              radius : [0, 50],
-	              itemStyle :　{
-	                  normal : {
-	                      labelLine : {
-	                          length : 20
-	                      }
-	                  }
-	              },
-	              data:[
-	                  {value:1048, name:'>10000'},
-	                  {value:251, name:'>5000,<10000'},
-	                  {value:1048, name:'<5000'},
-	              ]
-	          }
+				}
 			]
 		};
 		
 		/* 用户 */
 		optionttt = {
 		    title : {
-		        text: '',
+		        text: '用户男女比例',
 		        subtext: '',
 		        x:'center'
 		    },
@@ -1585,7 +1384,7 @@
 		    legend: {
 		        orient : 'vertical',
 		        x : 'left',
-		        data:['男','女']
+		        data: ${SexName}
 		    },
 		    toolbox: {
 		        show : true,
@@ -1615,10 +1414,7 @@
 		            type:'pie',
 		            radius : '55%',
 		            center: ['50%', '60%'],
-		            data:[
-		                {value:335, name:'男'},
-		                {value:120, name:'女'}
-		            ]
+		            data: ${SexNameNum}
 		        }
 		    ]
 		};
@@ -1636,7 +1432,7 @@
 		    legend: {
 		        orient : 'vertical',
 		        x : 'left',
-		        data: ['Age<20', '20<Age<30', '30<Age<40', '40<Age<50', 'Age>50']
+		        data: ${AgeName}
 		    },
 		    toolbox: {
 		        show : true,
@@ -1666,13 +1462,7 @@
 		            type:'pie',
 		            radius : '55%',
 		            center: ['50%', '60%'],
-		            data:[
-		                {value:335, name:'Age<20'},
-		                {value:120, name:'20<Age<30'},
-		                {value:335, name:'30<Age<40'},
-		                {value:120, name:'40<Age<50'},
-		                {value:335, name:'Age>50'}
-		            ]
+		            data: ${AgeNameNum}
 		        }
 		    ]
 		};

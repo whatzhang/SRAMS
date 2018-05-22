@@ -48,4 +48,11 @@ public interface ThesisMapper {
 
 	List<Date> selectAllThesisFileName();
 
+	int selectSexNumber(@Param("usSex") Byte usSex);
+
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("thCate") String thCate);
 }

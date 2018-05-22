@@ -45,4 +45,13 @@ public interface PatentMapper {
 			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
 
 	List<Date> selectAllPatentFileName();
+	
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("paCate") String paCate);
+
 }

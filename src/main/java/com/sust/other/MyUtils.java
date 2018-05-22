@@ -220,15 +220,6 @@ public final class MyUtils {
 		return reString;
 	}
 
-	public static String getData(List<String> listName) {
-
-		List<String> result = new ArrayList<String>();
-		for (String str : listName) {
-			result.add("'" + str + "'");
-		}
-		return result.toString();
-	}
-
 	/**
 	 * 获取不同类别文件名称
 	 * 
@@ -376,4 +367,31 @@ public final class MyUtils {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getData(List<String> listName) {
+
+		List<String> result = new ArrayList<String>();
+		for (String str : listName) {
+			result.add("'" + str + "'");
+		}
+		logger.info(result.toString());
+		return result.toString();
+	}
+	
+	public static String getAllNum(List<String> typeName, List<String> allNumber,int k) {
+		logger.info(typeName.toString()+"++"+typeName.size()+"++"+allNumber.toString()+"++"+allNumber.size());
+		String re = "[";
+		for (int i = 0; i < typeName.size(); i++) {
+			String ass ="{value:" + allNumber.get(i) +",name:'"+typeName.get(i) +"'}";
+			re += ass;
+			if(i != k-1){
+				re += ",";
+			}else{
+				re += "]";
+			}
+		}
+		logger.info(re);
+		return re;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.sust.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Users;
@@ -27,5 +28,9 @@ public interface UsersMapper {
 	List<String> selectUsidByPartName(String Part);
 
 	List<Users> selectAllUsers();
+
+	int selectAge(@Param("smlAge") Integer smlAge, @Param("bigAge") Integer bigAge);
+
+	int selectSexUser(@Param("usSex") Byte usSex);
 
 }

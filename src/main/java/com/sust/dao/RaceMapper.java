@@ -46,4 +46,11 @@ public interface RaceMapper {
 
 	List<Date> selectAllRaceFileName();
 
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("raCate") String raCate);
 }

@@ -17,9 +17,21 @@
 		pr_uptime
 	</sql>
 	
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_praise where pr_category = #{prCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from sr_praise where YEAR(pr_date) = #{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_praise where us_id in(select us_id from sr_users where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	 <select id="selectSexNumber" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_praise where us_id in(select us_id from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
 	<select id="selectAllPraiseFileName" resultType="java.util.Date">
 		select pa_uptime
-		from sr_patent
+		from sr_praise
 		order by pa_uptime desc
 	</select>
 	<select id="selectPraiseFind" resultMap="BaseResultMap">

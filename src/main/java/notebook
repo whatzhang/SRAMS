@@ -1,3 +1,23 @@
+/* 论文 */
+		charts.setThCateNum(getThCateNum());
+		//专利
+		charts.setPaCateNum(getPaCateNum());
+		//获奖
+		charts.setPrCateNum(getPrCateNum());
+		//项目
+		charts.setProCateNum(getProCateNum());
+		charts.setPrMoneyNum(getPrMoneyNum());
+		//教材
+		charts.setBoCateNum(getboCateNum());
+		charts.setBoFontNum(getFontNum());
+		//竞赛
+		charts.setRaCateNum(getRaCateNum());
+		//用户
+		charts.setSexNum(getSexNum());
+		charts.setAgeNum(getAgeNum());
+
+
+
 optionc = {
 		    title: {
 		        text: '学院科研成果数据',

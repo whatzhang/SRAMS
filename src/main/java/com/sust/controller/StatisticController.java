@@ -32,6 +32,7 @@ import com.sust.entity.Praise;
 import com.sust.entity.Project;
 import com.sust.entity.Race;
 import com.sust.entity.Thesis;
+import com.sust.other.MyUtils;
 import com.sust.other.PageUtil;
 import com.sust.service.BookService;
 import com.sust.service.DownloadService;
@@ -39,6 +40,7 @@ import com.sust.service.PatentService;
 import com.sust.service.PraiseService;
 import com.sust.service.ProjectService;
 import com.sust.service.RaceService;
+import com.sust.service.StatisticService;
 import com.sust.service.ThesisService;
 
 @Controller
@@ -60,6 +62,8 @@ public class StatisticController {
 	private BookService bookService;
 	@Resource
 	private DownloadService downloadService;
+	@Resource
+	private StatisticService statisticService;
 
 	private List<Thesis> ThesisList = null;
 	private List<Patent> PatentList = null;
@@ -67,7 +71,7 @@ public class StatisticController {
 	private List<Project> ProjectList = null;
 	private List<Book> BookList = null;
 	private List<Race> RaceList = null;
-	private Charts chart = new Charts();
+	
 
 	@RequestMapping("/getMenuInit")
 	public String getMenuInit(Model model) {
@@ -83,8 +87,53 @@ public class StatisticController {
 	 */
 	@RequestMapping("/toStatisticInit")
 	public String toStatisticInit(Model model) {
+		Charts chart = this.statisticService.getChartInfo();
+		model.addAttribute("typeName", MyUtils.getData(chart.getTypeName()));
+		model.addAttribute("allNumber", MyUtils.getAllNum(chart.getTypeName(),chart.getAllNumber(),6));
 		
-		model.addAttribute("typeName", this.chart.getTypeName());
+		model.addAttribute("SexNanNumber", chart.getSexNanNumber());
+		model.addAttribute("SexNvNumber", chart.getSexNvNumber());
+		
+		model.addAttribute("academyName", MyUtils.getData(chart.getAcademyName()));
+		model.addAttribute("academy1", chart.getAcademy1());
+		model.addAttribute("academy2", chart.getAcademy2());
+		model.addAttribute("academy3", chart.getAcademy3());
+		model.addAttribute("academy4", chart.getAcademy4());
+		model.addAttribute("academy5", chart.getAcademy5());
+		model.addAttribute("academy6", chart.getAcademy6());
+		
+		model.addAttribute("yearName", MyUtils.getData(chart.getYearName()));
+		model.addAttribute("thYear", chart.getThYear());
+		model.addAttribute("paYear", chart.getPaYear());
+		model.addAttribute("prYear", chart.getPrYear());
+		model.addAttribute("proYear", chart.getProYear());
+		model.addAttribute("boYear", chart.getBoYear());
+		model.addAttribute("raYear", chart.getRaYear());
+		
+		model.addAttribute("thCateName",MyUtils.getData(chart.getThCate()));
+		model.addAttribute("thCateNum",  MyUtils.getAllNum(chart.getThCate(),chart.getThCateNum(),4));
+		
+		model.addAttribute("paCateName",MyUtils.getData(chart.getPaCate()));
+		model.addAttribute("paCateNum",  MyUtils.getAllNum(chart.getPaCate(),chart.getPaCateNum(),4));
+		
+		model.addAttribute("prCateName",MyUtils.getData(chart.getPrCate()));
+		model.addAttribute("prCateNum",  MyUtils.getAllNum(chart.getPrCate(),chart.getPrCateNum(),3));
+		
+		model.addAttribute("proCateName",MyUtils.getData(chart.getProCate()));
+		model.addAttribute("proCateNum",  MyUtils.getAllNum(chart.getProCate(),chart.getProCateNum(),4));
+		model.addAttribute("proMoney",  MyUtils.getAllNum(chart.getPrMoney(),chart.getPrMoneyNum(),3));
+		
+		model.addAttribute("boCateName",MyUtils.getData(chart.getBoCate()));
+		model.addAttribute("boCateNum",  MyUtils.getAllNum(chart.getBoCate(),chart.getBoCateNum(),4));
+		model.addAttribute("boFant",  MyUtils.getAllNum(chart.getBoFont(),chart.getBoFontNum(),3));
+		
+		model.addAttribute("raCateName",MyUtils.getData(chart.getRaCate()));
+		model.addAttribute("raCateNum",  MyUtils.getAllNum(chart.getRaCate(),chart.getRaCateNum(),4));
+		
+		model.addAttribute("SexName",MyUtils.getData(chart.getSex()));
+		model.addAttribute("SexNameNum", MyUtils.getAllNum(chart.getSex(),chart.getSexNum(),2));
+		model.addAttribute("AgeName",MyUtils.getData(chart.getAge()));
+		model.addAttribute("AgeNameNum", MyUtils.getAllNum(chart.getAge(),chart.getAgeNum(),5));
 		return "admin/st_all";
 	}
 	

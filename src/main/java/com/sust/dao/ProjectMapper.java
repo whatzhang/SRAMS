@@ -46,4 +46,13 @@ public interface ProjectMapper {
 
 	List<Date> selectAllProjectFileName();
 
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("proCate") String proCate);
+
+	int selectCateNumByCash(@Param("smlMoney") Integer smlMoney, @Param("bigMoney") Integer bigMoney);
 }

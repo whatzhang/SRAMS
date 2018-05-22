@@ -19,7 +19,19 @@
 		pa_number, pa_about,
 		pa_uptime
 	</sql>
-
+	
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_patent where pa_category = #{paCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from sr_patent where YEAR(pa_date) = #{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_patent where us_id in(select us_id from sr_users where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	<select id="selectSexNumber" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_patent where us_id in(select us_id from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
  	<select id="selectAllPatentFileName" resultType="java.util.Date">
 		select pa_uptime
 		from sr_patent

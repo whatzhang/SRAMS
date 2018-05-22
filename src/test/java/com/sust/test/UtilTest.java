@@ -3,6 +3,7 @@ package com.sust.test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -30,7 +31,11 @@ public class UtilTest {
 	@Test
 	public void listName(){
 		 List<String> listName = Arrays.asList("论文","专利","获奖","项目","教材","竞赛");
+		 List<String> listName1 = Arrays.asList("12","23","343","44","55","564");
 		 System.out.println(MyUtils.getData(listName));
+		 System.out.println(listName1.toString());
+		 System.out.println(MyUtils.getAllNum(listName,listName1,6));
+		 
 	}
 	
 	@Test
@@ -45,7 +50,24 @@ public class UtilTest {
 	@Test
 	public void UnZipTest(){
 		
-		//ZipUtil.UnzipFile("C:/Users/Zhang/Desktop/毕业设计/资料/aa.zip", "C:/Users/Zhang/Desktop/毕业设计/资料/ss/", null);
+		ZipUtil.UnzipFile("C:/Users/Zhang/Desktop/毕业设计/资料/aa.zip", "C:/Users/Zhang/Desktop/毕业设计/资料/ss/", null);
 		ZipUtil.zipFolder("C:/Users/Zhang/Desktop/毕业设计/资料/", "C:/Users/Zhang/Desktop/毕业设计/资料/all.zip");
 	}
+	
+	@Test
+	public void MapToString(){
+		
+		/*Map<String , String> aaMap = new HashMap<String, String>();
+		aaMap.put("value", "aa");
+		aaMap.put("name", "aaa");
+		aaMap.put("value", "bb");
+		aaMap.put("nmae", "bbb");
+		//{value:335, name:'男'},
+        //{value:120, name:'女'}
+		System.out.println(aaMap.toString());
+		System.out.println(aaMap.toString());*/
+		
+		 System.out.println(Calendar.getInstance().get(Calendar.YEAR));
+	}
+	
 }

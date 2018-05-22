@@ -52,7 +52,9 @@ li {
 
 </head>
 <body>
-   
+   <%
+    response.sendRedirect(basePath+"/thesis/getUserThInfo");
+  %>
 
 
 <script type="text/javascript">

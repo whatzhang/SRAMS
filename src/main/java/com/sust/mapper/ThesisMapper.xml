@@ -22,7 +22,18 @@
 		th_page, th_about, th_uptime
 	</sql>
 	
-	
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_thesis where th_category = #{thCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from sr_thesis where YEAR(th_date) = #{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_thesis where us_id in(select us_id from sr_users where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	<select id="selectSexNumber" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_thesis where us_id in(select us_id from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
     <select id="selectAllThesisFileName" resultType="java.util.Date">
 		select th_uptime
 		from sr_thesis

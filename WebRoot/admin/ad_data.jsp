@@ -27,15 +27,44 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 
 <script src="js/bootstrap.js"></script>
+<style type="text/css">
+.kk {
+	height: 30em;
+	/* border: 1px solid red; */
+}
 
+.cc {
+	height: 2.5em;
+	width: 20%;
+	background-color: #FF9966;
+	border-radius: 0.5em;
+	margin-top: 1.5em;
+	text-align: center;
+	padding-top: 0.3em;
+	padding-bottom: 0.5em;
+	margin-left: 2em;
+}
+
+.dd {
+	height: 2.5em;
+	width: 80%;
+	margin-top: 1.5em;
+}
+
+.ee {
+	font-size: 1.3em;
+	color: #fff;
+}
+</style>
 </head>
-
 <body style="height: 63em;">
-
+	<div class="col-md-3 cc">
+		<span class="ee">信息导出备份/导入:</span>
+	</div>
+	
 	<div class="panel-group " id="accordion" role="tablist"
 		aria-multiselectable="true"
-		style="padding: 2em 2em 2em 2em; height: 60em;">
-		<h4 class="title2" style="color: #4682B4; margin-bottom: 1em;">信息导出备份/导入:</h4>
+		style="padding: 0em 2em 2em 2em; height: 60em;margin-top: 5em;">
 
 		<div class="panel panel-success">
 			<div class="panel-heading" role="tab" id="headingOne">
@@ -272,8 +301,10 @@
 				<div class="panel-body">
 					<div class="form-group mb-n"
 						style="margin: 5em 0em 5em 0em; text-align: center;">
-						<button type="button" onclick="exportFile('all')" class="btn btn-primary">一键导出所有文件</button>
-						<button type="button" onclick="exportFile('allData')" class="btn btn-primary">一键导出所有文件及Excel表</button>
+						<button type="button" onclick="exportFile('all')"
+							class="btn btn-primary">一键导出所有文件</button>
+						<button type="button" onclick="exportFile('allData')"
+							class="btn btn-primary">一键导出所有文件及Excel表</button>
 					</div>
 				</div>
 			</div>
