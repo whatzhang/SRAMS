@@ -449,11 +449,11 @@ px
 li.dropdown.head-dpdn {
 	display: inline-block;
 	padding: 1.7em 0;
-	border-left: 1px solid #E0E0E0;
+	border-right: 1px solid #E0E0E0;
 	float: left;
 }
 
-li.dropdown.head-dpdn:nth-child(3) {
+li.dropdown.head-dpdn:nth-child(2) {
 	border-right: 1px solid #E0E0E0;
 }
 

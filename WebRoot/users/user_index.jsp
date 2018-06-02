@@ -100,12 +100,14 @@
 				<div class="search-box">
 					<form class="input">
 						<input class="sb-search-input input__field--madoka"
-							placeholder="Search..." type="search" id="input-31" /> <label
+							placeholder="Search..." type="search" id="auto" onkeyup="jsAutoInstance.handleEvent(this.value,'auto',event)"/> <label
 							class="input__label" for="input-31"> <svg class="graphic"
 								width="100%" height="100%" viewBox="0 0 404 77"
 								preserveAspectRatio="none"> <path
 								d="m0,0l404,0l0,77l-404,0l0,-77z" /> </svg>
 						</label>
+						<div id="divc">
+						</div>
 					</form>
 				</div>
 				<div class="clearfix"></div>
@@ -117,162 +119,36 @@
 							class="dropdown-toggle" data-toggle="dropdown"
 							aria-expanded="false"><i class="fa fa-envelope"></i><span
 								class="badge">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
+							<%-- <ul class="dropdown-menu" style="width: 10em;">
 								<li>
 									<div class="notification_header">
-										<h3>You have 3 news</h3>
+										<h3>您有未读消息 &nbsp;${index.meNum}&nbsp;条</h3>
 									</div>
 								</li>
-								<li><a href="#">
+								<c:forEach items="${requestScope.News}" var="now">
+								<li><a href="javascript:void(0);">
 										<div class="user_img">
 											<img src="img/1.png" alt="">
 										</div>
 										<div class="notification_desc">
-											<p>AAAAAA</p>
+											<p>${now.meTitle}</p>
+											<!-- style="text-overflow: ellipsis;overflow: hidden;" -->
 											<p>
-												<span>1 hour ago</span>
+												<span>${now.meDate}</span>
 											</p>
 										</div>
 										<div class="clearfix"></div>
 								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-bell"></i><span
-								class="badge blue">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 new notification</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>AAAAAA</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-tasks"></i><span
-								class="badge blue1">15</span></a>
-							<ul class="dropdown-menu" style="width: 15em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 8 pending task</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Database update</span><span
-												class="percentage">40%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar yellow" style="width: 40%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Dashboard done</span><span
-												class="percentage">90%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar green" style="width: 90%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Mobile App</span><span
-												class="percentage">33%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar red" style="width: 33%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Issues fixed</span><span
-												class="percentage">80%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar  blue" style="width: 80%;"></div>
-										</div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all pending tasks</a>
-									</div>
-								</li>
-							</ul></li>
+							</c:forEach>
+							</ul> --%></li>
+						<li class="dropdown head-dpdn"><a href="javascript:void(0);"
+							class="dropdown-toggle" ><i class="fa fa-bell"></i><span
+								class="badge blue">5</span></a>
+						</li>
+						<li class="dropdown head-dpdn"><a href="javascript:void(0);"
+							class="dropdown-toggle" ><i class="fa fa-tasks"></i><span
+								class="badge blue1">10</span></a>
+						</li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>

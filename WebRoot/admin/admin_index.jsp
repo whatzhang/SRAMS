@@ -166,7 +166,7 @@
 							class="dropdown-toggle" data-toggle="dropdown"
 							aria-expanded="false"><i class="fa fa-envelope"></i><span
 								class="badge">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
+							<!-- <ul class="dropdown-menu" style="width: 10em;">
 								<li>
 									<div class="notification_header">
 										<h3>You have 3 news</h3>
@@ -213,12 +213,12 @@
 										<a href="#">See all messages</a>
 									</div>
 								</li>
-							</ul></li>
+							</ul> --></li>
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
 							aria-expanded="false"><i class="fa fa-bell"></i><span
 								class="badge blue">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
+							<!-- <ul class="dropdown-menu" style="width: 10em;">
 								<li>
 									<div class="notification_header">
 										<h3>You have 3 new notification</h3>
@@ -265,12 +265,12 @@
 										<a href="#">See all messages</a>
 									</div>
 								</li>
-							</ul></li>
+							</ul> --></li>
 						<li class="dropdown head-dpdn"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"
 							aria-expanded="false"><i class="fa fa-tasks"></i><span
 								class="badge blue1">15</span></a>
-							<ul class="dropdown-menu" style="width: 15em;">
+							<!-- <ul class="dropdown-menu" style="width: 15em;">
 								<li>
 									<div class="notification_header">
 										<h3>You have 8 pending task</h3>
@@ -321,11 +321,11 @@
 										<a href="#">See all pending tasks</a>
 									</div>
 								</li>
-							</ul></li>
+							</ul> --></li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				<!--notification menu end -->
+				
 				<div class="profile_details">
 					<ul>
 						<li class="dropdown profile_details_drop"><a href="#"

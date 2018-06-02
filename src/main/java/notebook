@@ -1,3 +1,5 @@
+
+
 /* 论文 */
 		charts.setThCateNum(getThCateNum());
 		//专利
@@ -717,7 +719,36 @@ XMLHttpRequest.readyState: 状态码的意思
 									class="btn btn-success" onclick="return checkFile();">上&nbsp;传</button>
 							</div>
 						</div>
-					</form> --%>       
+					</form> --%> 
+
+package com.sust.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AA {
+
+	public static void main(String[] args) {
+		
+		List<Integer> aa = new ArrayList<Integer>();
+		for (int i = 0; i < 7; i++) {
+			aa.add(raNum());
+		}
+		System.out.println(aa.toString());
+	}
+
+	private static Integer raNum() {
+		
+		int num=(int)(Math.random()*34); 
+		//暗香操作
+		if(num < 28){
+			return Integer.valueOf(num);
+		}else{
+			return raNum();
+		}
+	}
+}
+      
         
         
         

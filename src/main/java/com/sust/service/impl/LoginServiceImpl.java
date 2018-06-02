@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.sust.controller.LoginController;
 import com.sust.dao.LoginMapper;
+import com.sust.dao.MessageMapper;
 import com.sust.dao.UsersMapper;
 import com.sust.entity.Login;
+import com.sust.entity.Message;
 import com.sust.entity.Users;
 import com.sust.service.LoginService;
 
@@ -27,6 +29,8 @@ public class LoginServiceImpl implements LoginService {
 	private LoginMapper loginMapper;
 	@Resource
 	private UsersMapper usersMapper;
+	@Resource
+	private MessageMapper messageMapper;
 
 	@Override
 	public Login getLogin(String type, String account, String userPassword) throws Exception {
@@ -189,6 +193,17 @@ public class LoginServiceImpl implements LoginService {
 			return "添加失败";
 		}
 		return "添加信息成功！";
+	}
+
+	@Override
+	public List<Message> getNews(Integer usId) {
+		List<Message> aa = messageMapper.selectMeNoReadByUsId(usId);
+		logger.info(aa.size());
+		if(aa.size()>10){
+			return aa.subList(0, 10);
+		}else{
+			return aa;
+		}
 	}
 
 }

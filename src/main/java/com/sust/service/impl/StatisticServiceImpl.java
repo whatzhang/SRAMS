@@ -66,7 +66,7 @@ public class StatisticServiceImpl implements StatisticService {
 		charts.setProYear(getProYear());
 		charts.setBoYear(getBoYear());
 		charts.setRaYear(getRaYear());
-		/* 论文 */
+		 //论文 
 		charts.setThCateNum(getThCateNum());
 		//专利
 		charts.setPaCateNum(getPaCateNum());
@@ -83,7 +83,6 @@ public class StatisticServiceImpl implements StatisticService {
 		//用户
 		charts.setSexNum(getSexNum());
 		charts.setAgeNum(getAgeNum());
-		
 		
 		return charts;
 	}

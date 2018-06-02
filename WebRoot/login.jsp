@@ -94,7 +94,7 @@
 							</div>
 							<div class="form-group mb-n" style="margin-top: 1em;">
 								<canvas id="canvas" width="100" height="40"
-									style="border: 1px solid red;"></canvas>
+									style=""></canvas>
 								<input type="text" class="form-control1 input-lg" name="pic"
 									id="pic" style="width: 60%;float: right;" placeholder="输入验证码">
 							</div>
