@@ -109,10 +109,17 @@
 							<div class="col-sm-4">
 								<select class="form-control1" id="Xueyuan" title="所属学院">
 									<option>${user.usAcademy}</option>
-									<option>学院1</option>
-									<option>学院2</option>
-									<option>学院3</option>
-									<option>其他</option>
+									<option value="电气与信息工程学院">电气与信息工程学院</option>
+										<option value="化工科学与工程学院">化工科学与工程学院</option>
+										<option value="材料科学与工程学院">材料科学与工程学院</option>
+										<option value="环境科学与工程学院">环境科学与工程学院</option>
+										<option value="食品与生物工程学院">食品与生物工程学院</option>
+										<option value="机电工程学院">机电工程学院</option>
+										<option value="经济与管理学院">经济与管理学院</option>
+										<option value="化学与化工学院">化学与化工学院</option>
+										<option value="设计与艺术学院">设计与艺术学院</option>
+										<option value="文理学院">文理学院</option>
+										<option value="职业技术学院">职业技术学院</option>
 								</select>
 							</div>
 						</div>

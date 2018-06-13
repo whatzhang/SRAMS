@@ -48,7 +48,14 @@ public class LoginController {
 			if (login.getLoType().equals("user")) {
 				model.addAttribute("index", this.loginService.getInitInfo(account, type, 0, true));
 				result = "users/user_index";
-			} else {
+			} else if (login.getLoType().equals("admin")) {
+				Map<String, String> ifn = this.loginService.getAdminInitInfo();
+				model.addAttribute("da",
+						new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
+								ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"),
+								ifn.get("allData")));
+				result = "admin/admin_index";
+			}else{
 				Map<String, String> ifn = this.loginService.getAdminInitInfo();
 				model.addAttribute("da",
 						new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
@@ -188,8 +195,5 @@ public class LoginController {
 		logger.info("addloginInfo++"+loLogin+"++"+loPass+"++"+loType+"++"+Status+"++"+isALL);
 		return new AllInfo(this.loginService.addloginInfo(new Login(loLogin,loPass,loType)));
 	}
-	
-	
-	
 	
 }

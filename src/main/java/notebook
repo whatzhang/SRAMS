@@ -1,4 +1,230 @@
 
+<!-- <ul class="dropdown-menu" style="width: 15em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 8 pending task</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Database update</span><span
+												class="percentage">40%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar yellow" style="width: 40%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Dashboard done</span><span
+												class="percentage">90%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar green" style="width: 90%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Mobile App</span><span
+												class="percentage">33%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar red" style="width: 33%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Issues fixed</span><span
+												class="percentage">80%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar  blue" style="width: 80%;"></div>
+										</div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all pending tasks</a>
+									</div>
+								</li>
+							</ul> -->
+
+class="dropdown-toggle" data-toggle="dropdown"
+							aria-expanded="false"
+
+<!-- <ul class="dropdown-menu" style="width: 10em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 3 new notification</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/1.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>AAAAAA</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li class="odd"><a href="#">
+										<div class="user_img">
+											<img src="img/2.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>BBBBBB</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/3.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>CCCCCC</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all messages</a>
+									</div>
+								</li>
+							</ul> -->
+
+
+<!-- <ul class="dropdown-menu" style="width: 10em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 3 news</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/1.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>AAAAAA</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li class="odd"><a href="#">
+										<div class="user_img">
+											<img src="img/2.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>BBBBBB</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/3.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>CCCCCC</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all messages</a>
+									</div>
+								</li>
+							</ul> -->
+
+
+
+
+
+
+package com.sust.other;
+
+import java.security.MessageDigest;
+
+public class MD5Util {
+
+	// MD5加码32位
+	public static String MD5(String inStr) {
+
+		MessageDigest md5 = null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+			return "";
+		}
+		char[] charArray = inStr.toCharArray();
+		byte[] byteArray = new byte[charArray.length];
+		for (int i = 0; i < charArray.length; i++) {
+			byteArray[i] = (byte) charArray[i];
+		}
+		byte[] md5Bytes = md5.digest(byteArray);
+		StringBuffer hexValue = new StringBuffer();
+		for (int i = 0; i < md5Bytes.length; i++) {
+			int val = ((int) md5Bytes[i]) & 0xff;
+			if (val < 16)
+				hexValue.append("0");
+			hexValue.append(Integer.toHexString(val));
+		}
+		return hexValue.toString();
+	}
+
+	// 可逆的加密算法
+	public static String KL(String inStr) {
+
+		// String s = new String(inStr);
+		char[] a = inStr.toCharArray();
+		for (int i = 0; i < a.length; i++) {
+			a[i] = (char) (a[i] ^ 't');
+		}
+		String s = new String(a);
+		return s;
+	}
+
+	// 加密后解密
+	public static String JM(String inStr) {
+		char[] a = inStr.toCharArray();
+		for (int i = 0; i < a.length; i++) {
+			a[i] = (char) (a[i] ^ 't');
+		}
+		String k = new String(a);
+		return k;
+	}
+
+	// 测试主函数
+	public static void main(String args[]) {
+
+		String s = new String("a");
+		System.out.println("原始：" + s);
+		System.out.println("MD5后：" + MD5(s));
+		System.out.println("MD5后再加密：" + KL(MD5(s)));
+		System.out.println("解密为MD5后的：" + JM(KL(MD5(s))));
+	}
+
+}
 
 /* 论文 */
 		charts.setThCateNum(getThCateNum());

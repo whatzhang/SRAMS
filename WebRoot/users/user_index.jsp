@@ -115,33 +115,12 @@
 			<div class="header-right">
 				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-envelope"></i><span
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getUserNews"
+						target="iFrame"class="dropdown-toggle" ><i class="fa fa-envelope"></i><span
 								class="badge">3</span></a>
-							<%-- <ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>您有未读消息 &nbsp;${index.meNum}&nbsp;条</h3>
-									</div>
-								</li>
-								<c:forEach items="${requestScope.News}" var="now">
-								<li><a href="javascript:void(0);">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>${now.meTitle}</p>
-											<!-- style="text-overflow: ellipsis;overflow: hidden;" -->
-											<p>
-												<span>${now.meDate}</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-							</c:forEach>
-							</ul> --%></li>
-						<li class="dropdown head-dpdn"><a href="javascript:void(0);"
+							</li>
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getUserNews"
+						target="iFrame"
 							class="dropdown-toggle" ><i class="fa fa-bell"></i><span
 								class="badge blue">5</span></a>
 						</li>

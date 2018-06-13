@@ -32,10 +32,7 @@
 <!-- js-->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/modernizr.custom.js"></script>
-<!-- 
-<link
-	href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel='stylesheet' type='text/css'>
- -->
+
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css"
 	media="all">
@@ -57,6 +54,9 @@
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
+				<%
+				  if("super".equals(login.getLoType())){
+				 %>>
 					<li><a href="admin/ad_data.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
@@ -64,18 +64,8 @@
 					<li><a href="${pageContext.request.contextPath}/CountData/toStatisticInit" class="chart-nav" target="iFrame"><i
 							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
 							<span class="fa arrow"></span></a>
-						<!-- <ul class="nav nav-second-level collapse">
-							<li><a
-								href="${pageContext.request.contextPath}/CountData/toStatisticInit"
-								target="iFrame">所有信息总和</a></li>
-							<li><a href="admin/st_info.jsp#thesis" target="iFrame">论文信息统计</a></li>
-							<li><a href="admin/st_info.jsp#patent" target="iFrame">专利信息统计</a></li>
-							<li><a href="admin/st_info.jsp#praise" target="iFrame">获奖信息统计</a></li>
-							<li><a href="admin/st_info.jsp#project" target="iFrame">项目信息统计</a></li>
-							<li><a href="admin/st_info.jsp#book" target="iFrame">教材信息统计</a></li>
-							<li><a href="admin/st_info.jsp#race" target="iFrame">竞赛信息统计</a></li> 
-						</ul>-->
 						</li>
+				<%} %>
 					<li><a
 						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
 						onclick="aa();" target="iFrame" class="chart-nav"><i
@@ -125,7 +115,6 @@
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>其他<span
 							class="nav-badge-btm pull-right">other</span></a></li>
-
 				</ul>
 				</nav>
 			</div>
@@ -162,166 +151,21 @@
 			<div class="header-right">
 				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-envelope"></i><span
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
+						onclick="aa();" target="iFrame"
+							class="dropdown-toggle" ><i class="fa fa-envelope"></i><span
 								class="badge">3</span></a>
-							<!-- <ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 news</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>AAAAAA</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul> --></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-bell"></i><span
+							</li>
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
+						onclick="aa();" target="iFrame"
+							class="dropdown-toggle" ><i class="fa fa-bell"></i><span
 								class="badge blue">3</span></a>
-							<!-- <ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 new notification</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>AAAAAA</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul> --></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-tasks"></i><span
+							</li>
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
+						onclick="aa();" target="iFrame"
+							class="dropdown-toggle" ><i class="fa fa-tasks"></i><span
 								class="badge blue1">15</span></a>
-							<!-- <ul class="dropdown-menu" style="width: 15em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 8 pending task</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Database update</span><span
-												class="percentage">40%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar yellow" style="width: 40%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Dashboard done</span><span
-												class="percentage">90%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar green" style="width: 90%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Mobile App</span><span
-												class="percentage">33%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar red" style="width: 33%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Issues fixed</span><span
-												class="percentage">80%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar  blue" style="width: 80%;"></div>
-										</div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all pending tasks</a>
-									</div>
-								</li>
-							</ul> --></li>
+							</li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>

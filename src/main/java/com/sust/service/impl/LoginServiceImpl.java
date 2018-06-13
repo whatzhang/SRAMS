@@ -18,6 +18,7 @@ import com.sust.dao.UsersMapper;
 import com.sust.entity.Login;
 import com.sust.entity.Message;
 import com.sust.entity.Users;
+import com.sust.other.MD5Util;
 import com.sust.service.LoginService;
 
 @Service
@@ -35,15 +36,16 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public Login getLogin(String type, String account, String userPassword) throws Exception {
 
-		return loginMapper.selectLoginInfo(account, userPassword, type);
+		return loginMapper.selectLoginInfo(account, MD5Util.convertMD5(userPassword), type);
 	}
 
 	@Override
 	public String getLoginInfo(String account, String password, String type) {
-
+		
+		password = MD5Util.convertMD5(password);
 		logger.info("getLoginInfo:" + loginMapper.selectLoginByAccount(account) + "+++"
 				+ loginMapper.selectLoginByPass(password) + "+++"
-				+ loginMapper.selectLoginByAll(account, password, type));
+				+ loginMapper.selectLoginByAll(account,password, type));
 		if (loginMapper.selectLoginByAccount(account) > 0) {
 			if (loginMapper.selectLoginByPass(password) > 0) {
 				if (loginMapper.selectLoginByAll(account, password, type) > 0) {
@@ -135,7 +137,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public int upDataPass(Integer usId, String pass) {
 
-		return this.loginMapper.updatePassword(usId, pass);
+		return this.loginMapper.updatePassword(usId, MD5Util.convertMD5(pass));
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class StatisticServiceImpl implements StatisticService {
 		charts.setSexNanNumber(getSexNanNumber());
 		charts.setSexNvNumber(getSexNvNumber());
 		
-		charts.setAcademy1(getXueYuanNum1());
+		/*charts.setAcademy1(getXueYuanNum1());
 		charts.setAcademy2(getXueYuanNum2());
 		charts.setAcademy3(getXueYuanNum3());
 		charts.setAcademy4(getXueYuanNum4());
@@ -82,7 +82,7 @@ public class StatisticServiceImpl implements StatisticService {
 		charts.setRaCateNum(getRaCateNum());
 		//用户
 		charts.setSexNum(getSexNum());
-		charts.setAgeNum(getAgeNum());
+		charts.setAgeNum(getAgeNum());*/
 		
 		return charts;
 	}

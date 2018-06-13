@@ -1,5 +1,7 @@
 package com.sust.entity;
 
+import com.sust.other.MD5Util;
+
 public class Login {
 	private Integer usId;
 
@@ -12,13 +14,13 @@ public class Login {
 	public Login(Integer usId, String loLogin, String loPass, String loType) {
 		this.usId = usId;
 		this.loLogin = loLogin;
-		this.loPass = loPass;
+		this.loPass = MD5Util.convertMD5(loPass);
 		this.loType = loType;
 	}
 
 	public Login(String loLogin, String loPass, String loType) {
 		this.loLogin = loLogin;
-		this.loPass = loPass;
+		this.loPass = MD5Util.convertMD5(loPass);
 		this.loType = loType;
 	}
 
@@ -39,11 +41,11 @@ public class Login {
 	}
 
 	public String getLoPass() {
-		return loPass;
+		return MD5Util.convertMD5(MD5Util.convertMD5(loPass));
 	}
 
 	public void setLoPass(String loPass) {
-		this.loPass = loPass == null ? null : loPass.trim();
+		this.loPass = loPass == null ? null : (MD5Util.convertMD5(loPass).trim());
 	}
 
 	public String getLoType() {

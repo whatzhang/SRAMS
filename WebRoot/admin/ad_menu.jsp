@@ -5,6 +5,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	Login login = (Login) session.getAttribute("login");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -53,10 +54,12 @@ li {
 </head>
 <body>
  <%
-    response.sendRedirect(basePath+"/CountData/toStatisticInit");
+    if("super".equals(login.getLoType())){
+        response.sendRedirect(basePath+"/CountData/toStatisticInit");
+    }else{
+    	 response.sendRedirect(basePath+"/thesis/getAllThInfo");
+    }
   %>
-
-
 
 <script type="text/javascript">
 	

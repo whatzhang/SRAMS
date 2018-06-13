@@ -146,8 +146,8 @@
 			var val = $("#pic").val().toLowerCase();
 			var num = show_num.join("");
 			if (val == '') {
-				alert('请输入验证码！');
-				return false;
+				//alert('请输入验证码！');
+				return true;
 			} else if (val == num) {
 				$("#pic").val('');
 				draw(show_num);

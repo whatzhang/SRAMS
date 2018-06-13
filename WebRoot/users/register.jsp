@@ -214,12 +214,12 @@
 							</div>
 						</div>
 						<div class="form-group mb-n">
-
-							<div class="col-sm-3" style="text-align: center;">
-								<button type="submit" class="btn btn-danger">注册提交</button>
-							</div>
+							
 							<div class="col-sm-3" style="text-align: center;">
 								<button type="reset" class="btn btn-info">重置信息</button>
+							</div>
+							<div class="col-sm-3" style="text-align: center;">
+								<button type="submit" class="btn btn-danger">注册提交</button>
 							</div>
 							<div class="col-sm-3" style="text-align: center;">
 								<button type="button" class="btn btn-success"
