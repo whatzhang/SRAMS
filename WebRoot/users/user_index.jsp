@@ -97,19 +97,10 @@
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
-				<div class="search-box">
-					<form class="input">
-						<input class="sb-search-input input__field--madoka"
-							placeholder="Search..." type="search" id="auto" onkeyup="jsAutoInstance.handleEvent(this.value,'auto',event)"/> <label
-							class="input__label" for="input-31"> <svg class="graphic"
-								width="100%" height="100%" viewBox="0 0 404 77"
-								preserveAspectRatio="none"> <path
-								d="m0,0l404,0l0,77l-404,0l0,-77z" /> </svg>
-						</label>
-						<div id="divc">
-						</div>
-					</form>
-				</div>
+				<div style="padding-top: 1em;padding-left: 23em;">
+						<input class="form-control1 input-lg" style="width: 16em; height:3em; border: 1.2px solid #6164C1;"
+							placeholder="Search..." type="text" id="Search" name="Search" onchange="Search()"/> 
+			   	 </div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
@@ -156,7 +147,7 @@
 									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
 								<%
-									if ("admin".equals(login.getLoType())) {
+									if (!"user".equals(login.getLoType())) {
 								%>
 								<li><a
 									href="${pageContext.request.contextPath}/login/toAdmin"><i
@@ -184,8 +175,7 @@
 
 		<div class="footer">
 			<p>
-				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a
-					href="#" target="_blank">whatzhangy</a>
+				<a href="#" target="_blank"> 科研成果归档系统 </a> &nbsp;&copy;学生：张勇 &nbsp;&copy;指导老师：王长浩
 			</p>
 		</div>
 	</div>
@@ -209,10 +199,31 @@
 				classie.toggle(showLeftPush, 'disabled');
 			}
 		}
+		function Search(){ 
+	    	$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/login/search",
+				data : {
+					str : $("#Search").val()
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data){
+					//alert(data.string1);
+					if(data.string2 == "YES"){
+					 	$("#iFrame").attr("src","${pageContext.request.contextPath}" + data.string1);
+					}else{
+					   alert("没有找到选项，请重新输入！");
+					}
+			    },
+				error : function(data) {
+					alert("查找错误！");
+				}
+			});
+	     }
 	</script>
-	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.js">
-		
 	</script>
 </body>
 </html>

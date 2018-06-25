@@ -21,19 +21,15 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 
-<!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS -->
+
 <link href="css/style.css" rel='stylesheet' type='text/css' />
-<!-- font CSS -->
-<!-- font-awesome icons -->
+
 <link href="css/font-awesome.css" rel="stylesheet">
-<!-- //font-awesome icons -->
-<!-- js-->
+
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/modernizr.custom.js"></script>
 
-<!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css"
 	media="all">
 <script src="js/wow.min.js"></script>
@@ -46,7 +42,7 @@
 <link href="css/custom.css" rel="stylesheet">
 
 </head>
-<body class="cbp-spmenu-push">
+<body class="cbp-spmenu-push" >
 
 	<div class="main-content" style="overflow-y: hidden;">
 		<div class=" sidebar" role="navigation">
@@ -54,18 +50,21 @@
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
 					id="cbp-spmenu-s1">
 				<ul class="nav" id="side-menu">
-				<%
-				  if("super".equals(login.getLoType())){
-				 %>>
+					<%
+						if ("super".equals(login.getLoType())) {
+					%>
 					<li><a href="admin/ad_data.jsp" onclick="aa();"
 						target="iFrame" class="chart-nav"><i
 							class="fa fa-book nav_icon"></i>数据文件<span class="nav-badge"
 							id="al">${da.string9}</span> <span class="fa arrow"></span></a></li>
-					<li><a href="${pageContext.request.contextPath}/CountData/toStatisticInit" class="chart-nav" target="iFrame"><i
+					<li><a
+						href="${pageContext.request.contextPath}/CountData/toStatisticInit"
+						class="chart-nav" target="iFrame"><i
 							class="fa fa-book nav_icon"></i>信息统计<span class="nav-badge">6</span>
-							<span class="fa arrow"></span></a>
-						</li>
-				<%} %>
+							<span class="fa arrow"></span></a></li>
+					<%
+						}
+					%>
 					<li><a
 						href="${pageContext.request.contextPath}/thesis/getAllThInfo"
 						onclick="aa();" target="iFrame" class="chart-nav"><i
@@ -122,54 +121,42 @@
 
 		<div class="sticky-header header-section ">
 			<div class="header-left">
-				<!--toggle button start-->
+
 				<button id="showLeftPush">
 					<i class="fa fa-bars"></i>
 				</button>
-				<!--toggle button end-->
-				<!--logo -->
+				
 				<div class="logo">
 					<a href="${pageContext.request.contextPath}/login/toAdmin">
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
-				<!--//logo-->
-				<!--search-box-->
-				<div class="search-box">
-					<form class="input">
-						<input class="sb-search-input input__field--madoka"
-							placeholder="Search..." type="search" id="input-31" /> <label
-							class="input__label" for="input-31"> <svg class="graphic"
-								width="100%" height="100%" viewBox="0 0 404 77"
-								preserveAspectRatio="none"> <path
-								d="m0,0l404,0l0,77l-404,0l0,-77z" /> </svg>
-						</label>
-					</form>
+				
+				<div style="padding-top: 1em;padding-left: 23em;">
+					<input class="form-control1 input-lg" style="width: 16em; height:3em; border: 1.2px solid #6164C1;"
+						placeholder="Search..." type="text" id="Search" name="Search" onchange="Search()"/> 
 				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
 				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
-						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
-						onclick="aa();" target="iFrame"
-							class="dropdown-toggle" ><i class="fa fa-envelope"></i><span
-								class="badge">3</span></a>
-							</li>
-						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
-						onclick="aa();" target="iFrame"
-							class="dropdown-toggle" ><i class="fa fa-bell"></i><span
-								class="badge blue">3</span></a>
-							</li>
-						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getAdminNews"
-						onclick="aa();" target="iFrame"
-							class="dropdown-toggle" ><i class="fa fa-tasks"></i><span
-								class="badge blue1">15</span></a>
-							</li>
+						<li class="dropdown head-dpdn"><a
+							href="${pageContext.request.contextPath}/news/getAdminNews"
+							onclick="aa();" target="iFrame" class="dropdown-toggle"><i
+								class="fa fa-envelope"></i><span class="badge">3</span></a></li>
+						<li class="dropdown head-dpdn"><a
+							href="${pageContext.request.contextPath}/news/getAdminNews"
+							onclick="aa();" target="iFrame" class="dropdown-toggle"><i
+								class="fa fa-bell"></i><span class="badge blue">3</span></a></li>
+						<li class="dropdown head-dpdn"><a
+							href="${pageContext.request.contextPath}/news/getAdminNews"
+							onclick="aa();" target="iFrame" class="dropdown-toggle"><i
+								class="fa fa-tasks"></i><span class="badge blue1">15</span></a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>
-				
+
 				<div class="profile_details">
 					<ul>
 						<li class="dropdown profile_details_drop"><a href="#"
@@ -207,21 +194,19 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-
+      
 		<div id="page-wrapper">
 			<iframe id="iFrame" name="iFrame" width="100%"
-				onload="this.height=iFrame.document.body.scrollHeight"
+				 onload="this.height=iFrame.document.body.scrollHeight"
 				frameborder="0" scrolling="no"
 				src="${pageContext.request.contextPath}/CountData/getAdminMenuInit"></iframe>
 		</div>
 
 		<div class="footer">
 			<p>
-				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a
-					href="#" target="_blank">whatzhangy</a>
+				<a href="#" target="_blank"> 科研成果归档系统 </a> &nbsp;&copy;学生：张勇 &nbsp;&copy;指导老师：王长浩
 			</p>
 		</div>
-
 	</div>
 
 	<script src="js/classie.js"></script>
@@ -275,6 +260,29 @@
 			$("us").text(data.string8);
 			$("al").text(data.string9);
 		}
+		function Search(){ 
+	    	$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/login/search",
+				data : {
+					str : $("#Search").val()
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data){
+					//alert(data.string1);
+					if(data.string2 == "YES"){
+					   $("#iFrame").attr("src","${pageContext.request.contextPath}" + data.string1);
+					}else{
+					   alert("没有找到选项，请重新输入！");
+					}
+			    },
+				error : function(data) {
+					alert("查找错误！");
+				}
+			});
+	     }
 	</script>
 </body>
 </html>

@@ -51,6 +51,7 @@ public class StatisticServiceImpl implements StatisticService {
 		
 		charts.setSexNanNumber(getSexNanNumber());
 		charts.setSexNvNumber(getSexNvNumber());
+		charts.setYearName(getYearName());
 		
 		/*charts.setAcademy1(getXueYuanNum1());
 		charts.setAcademy2(getXueYuanNum2());
@@ -59,7 +60,6 @@ public class StatisticServiceImpl implements StatisticService {
 		charts.setAcademy5(getXueYuanNum5());
 		charts.setAcademy6(getXueYuanNum6());
 		
-		charts.setYearName(getYearName());
 		charts.setThYear(getThYear());
 		charts.setPaYear(getPaYear());
 		charts.setPrYear(getPrYear());

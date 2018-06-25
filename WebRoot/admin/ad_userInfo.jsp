@@ -57,32 +57,66 @@ li {
 		<div class="media" style="padding: 1em 1em 1em 1em;">
 			<div class="panel-info">
 				<div class=" panel-body-inputin">
-					<form class="form-horizontal">
+					<form class="form-horizontal"
+						action=""
+						id="findbookInfo" name="findbookInfo" method="get">
 						<div class="form-group mb-n">
 							<label for="largeinput" class=" control-label label-input-lg"
 								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
+								<a href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=user"><button
+									type="button" class="btn btn-success col-sm-2"
+									style="float: right;margin-right: 2em;width: 10em;">导出用户信息为Excl</button></a>
+							<button class="btn btn-danger" id="find" type="submit"
+								style="float: right;margin-right: 2em;"
+								onclick="return findInfo();">查询信息</button>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-2" style="margin-left: 1em">
-								<select class="form-control1">
-									<option>论文名称</option>
-									<option>发表时间</option>
-									<option>发表期刊</option>
-									<option>论文类别</option>
+						<div id="Book">
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="BoCate" name="BoCate">
+									<option>所属学院</option>
+									<option value="电气与信息工程学院">电气与信息工程学院</option>
+										<option value="化工科学与工程学院">化工科学与工程学院</option>
+										<option value="材料科学与工程学院">材料科学与工程学院</option>
+										<option value="环境科学与工程学院">环境科学与工程学院</option>
+										<option value="食品与生物工程学院">食品与生物工程学院</option>
+										<option value="机电工程学院">机电工程学院</option>
+										<option value="经济与管理学院">经济与管理学院</option>
+										<option value="化学与化工学院">化学与化工学院</option>
+										<option value="设计与艺术学院">设计与艺术学院</option>
+										<option value="文理学院">文理学院</option>
+										<option value="职业技术学院">职业技术学院</option>
 								</select>
 							</div>
-							<label for="largeinput"
-								class="col-sm-2 control-label label-input-lg"
-								style="color: #e94e02;">关键信息：</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg"
-									id="largeinput" placeholder=" ">
+							<div class="col-sm-2" style="width: 21em;">
+								<div class="form-group mb-n">
+									最后上线日期&le;<input type="text" name="date8" title="出版时间"
+										class="form-control1 input-lg" id="date8" style="width: 7em;">
+									&ge;<input type="text" name="Cdate8" title="出版时间"
+										class="form-control1 input-lg" id="Cdate8" style="width: 7em;">
+								</div>
 							</div>
-							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<a
-								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=user"><button
-									type="button" class="btn btn-success col-sm-2"
-									style="float: right; margin-right: 2em;">导出用户信息Excel</button></a>
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="BoCate" name="BoCate">
+									<option>性别</option>
+										<option value="1">男</option>
+										<option value="0">女</option>
+							    </select>
+							</div>
+							<div class="col-sm-2" style="width: 13em;">
+								<div class="form-group mb-n">
+									年龄&le;<input type="text" class="form-control1 input-lg"
+										style="width: 4em;" name="bigFont" id="bigFont">&ge;<input
+										type="text" class="form-control1 input-lg" style="width: 4em;"
+										name="smlFont" id="smlFont">
+								</div>
+							</div>
+							<div class="col-sm-2" style="width: 20em;">
+								<div class="form-group mb-n">
+									<input type="text" name="ma" title="专业"
+										class="form-control1 input-lg" id="ma" style="width: 10em;" placeholder="专业" >
+									
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -135,15 +169,15 @@ li {
 										<td
 											style="text-align: center; vertical-align: middle; width: 11%;"
 											data-toggle="tooltip1" data-placement="top"
-											title="${Ra.loLogin}">${Ra.loLogin}</td>
+											title="2018-06-02-16:24:12">2018-06-02-16:24:12</td>
 										<td
 											style="text-align: center; vertical-align: middle; width: 7%;"
 											data-toggle="tooltip1" data-placement="top"
-											title="${Ra.loLogin}">${Ra.loLogin}</td>
+											title="正常">正常</td>
 										<td
 											style="text-align: center; vertical-align: middle; width: 7%;"
 											data-toggle="tooltip1" data-placement="top"
-											title="${Ra.loLogin}">${Ra.loLogin}</td>
+											title="是">是</td>
 									</tr>
 								</c:forEach>
 								<script>
@@ -944,6 +978,10 @@ li {
 				alert("删除信息出错!");
 			}
 		});
+	}
+	function findInfo(){
+	  alert("功能未实现！");
+	  return false;
 	}
 </script>
 </html>

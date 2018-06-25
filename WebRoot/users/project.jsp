@@ -74,8 +74,9 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="ProCate" name="ProCate">
 									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="基础理论研究">基础理论研究</option>
+									<option value="应用性研究">应用性研究</option>
+									<option value="其他">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">

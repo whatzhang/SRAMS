@@ -75,8 +75,10 @@ li {
 								<div class="col-sm-1" style="width: 12em;">
 									<select class="form-control1" id="PrCate" name="PrCate">
 										<option value="">获奖类别</option>
-										<option value="类别1">类别1</option>
-										<option value="类别2">类别2</option>
+										<option value="特等奖">特等奖</option>
+										<option value="一等奖">一等奖</option>
+										<option value="二等奖">二等奖</option>
+										<option value="三等奖">三等奖</option>
 									</select>
 								</div>
 								<div class="col-sm-2" style="width: 19em;">
@@ -228,7 +230,7 @@ li {
 					</c:if>
 				</c:if>
 				<c:if test="${isShow != 'yes'}">
-					<div class="panel-heading success">用户论文信息</div>
+					<div class="panel-heading success">用户获奖信息</div>
 					<table class="table table-bordered"
 						style="table-layout: fixed; width: 100%;">
 						<thead>

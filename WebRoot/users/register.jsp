@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class="panel panel-danger" style="margin: 5em 10em 5em 10em;">
+	<div class="panel panel-danger" style="margin: 5em 25em 5em 25em;">
 		<div class="panel-heading" style="height: 3em;">
 			<h1 class="panel-title" style="text-align: left;">注册用户</h1>
 		</div>

@@ -75,8 +75,11 @@ li {
 								<div class="col-sm-1" style="width: 12em;">
 									<select class="form-control1" id="PaCate" name="PaCate">
 										<option value="">专利类别</option>
-										<option value="类别1">类别1</option>
-										<option value="类别2">类别2</option>
+										<option value="发明类">发明类</option>
+										<option value="实用新型">实用新型</option>
+										<option value="外观设计">外观设计</option>
+										<option value="国际专利">国际专利</option>
+										<option value="其他">其他</option>
 									</select>
 								</div>
 								<div class="col-sm-2" style="width: 19em;">

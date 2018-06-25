@@ -375,7 +375,7 @@ public final class MyUtils {
 		for (String str : listName) {
 			result.add("'" + str + "'");
 		}
-		logger.info(result.toString());
+		//logger.info(result.toString());
 		return result.toString();
 	}
 	
@@ -391,7 +391,7 @@ public final class MyUtils {
 				re += "]";
 			}
 		}
-		logger.info(re);
+		//logger.info(re);
 		return re;
 	}
 

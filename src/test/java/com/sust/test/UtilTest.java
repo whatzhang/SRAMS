@@ -66,8 +66,21 @@ public class UtilTest {
         //{value:120, name:'女'}
 		System.out.println(aaMap.toString());
 		System.out.println(aaMap.toString());*/
+		//System.out.println(Calendar.getInstance().get(Calendar.YEAR));
 		
-		 System.out.println(Calendar.getInstance().get(Calendar.YEAR));
+		String str = "论文添加";
+		List<String> info = Arrays.asList("论", "文", "专", "利", "获", "奖", "项", "目", "教", "材", "竞", "赛");
+		 labe:for (int i = 0; i < str.length(); i++) {
+			for (int j = 0; j < info.size(); j++) {
+				if (String.valueOf(str.charAt(i)).equals(info.get(j))) {
+
+					System.out.println("QQQQQQQQQ"+String.valueOf(str.charAt(i)) +"++"+ info.get(j));
+					break labe;
+				}
+				System.out.println(String.valueOf(str.charAt(i)) +"++"+ info.get(j));
+			}
+		}
+		
 	}
 	
 }

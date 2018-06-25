@@ -102,8 +102,10 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="thCate" name="thCate">
 									<option value="">论文类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="自然类">自然类</option>
+									<option value="人文类">人文类</option>
+									<option value="社科类">社科类</option>
+									<option value="其它">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-1" style="width: 12em;">
@@ -134,8 +136,11 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="PaCate" name="PaCate">
 									<option value="">专利类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+										<option value="发明类">发明类</option>
+										<option value="实用新型">实用新型</option>
+										<option value="外观设计">外观设计</option>
+										<option value="国际专利">国际专利</option>
+										<option value="其他">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">
@@ -160,8 +165,10 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="PrCate" name="PrCate">
 									<option value="">获奖类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="特等奖">特等奖</option>
+									<option value="一等奖">一等奖</option>
+									<option value="二等奖">二等奖</option>
+									<option value="三等奖">三等奖</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">
@@ -186,8 +193,9 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="ProCate" name="ProCate">
 									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="基础理论研究">基础理论研究</option>
+									<option value="应用性研究">应用性研究</option>
+									<option value="其他">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">
@@ -221,8 +229,11 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="BoCate" name="BoCate">
 									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+							    	<option value="文学艺术">文学艺术</option>
+									<option value="自然科学">自然科学</option>
+									<option value="医药卫生">医药卫生</option>
+									<option value="工业技术">工业技术</option>
+									<option value="哲学宗教">哲学宗教</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">
@@ -254,9 +265,10 @@ li {
 						<div id="Race" style="display:none">
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="RaCate" name="RaCate">
-									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="">竞赛类别</option>
+									<option value="学科竞赛">学科竞赛</option>
+									<option value="科技竞赛">科技竞赛</option>
+									<option value="其他">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-1" style="width: 12em;">

@@ -65,8 +65,10 @@
 		<div class="charts" style="margin: 0em 1.5em 3em 1.5em;">
 			<div class="col-md-3 cc">
 				<span class="ee">概要统计信息</span>
+				
 			</div>
-			<div class="col-md-9 dd"></div>
+			<div class="col-md-9 dd"> <button type="button" class="btn btn-success col-sm-1"
+								style="float: right;width: 8em;" onclick="javascript:window.print();">打印页面</button></div>
 			<div class="col-md-6 charts chrt-page-grids kk" id="bb"></div>
 			<div class="col-md-6 charts chrt-page-grids chrt-right kk" id="aa"></div>
 			<div class="col-md-12 charts chrt-page-grids kk" id="cc"

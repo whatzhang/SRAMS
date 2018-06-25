@@ -13,22 +13,22 @@ public class Charts {
 	private List<String> sexNanNumber = Arrays.asList("176","196","191","396","187","391");
 	private List<String> sexNvNumber = Arrays.asList("276","96","391","196","87","191");
 	//不同学院科研数量
-	private List<String> academyName = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy1 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy2 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy3 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy4 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy5 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
-	private List<String> academy6 = Arrays.asList("1","2","3","4","5","6","7","8","9","10","11","12");
+	private List<String> academyName = Arrays.asList("电气与信息","材料科学","化工科学","环境科学","食品与生物","机电工程","经济与管理","化学与化工","设计与艺术","文理","职业技术","镐京");
+	private List<String> academy1 = Arrays.asList("81","92","33","24","54","6","78","68","9","100","110","120");
+	private List<String> academy2 = Arrays.asList("100","104","3","49","5","26","70","89","9","140","11","12");
+	private List<String> academy3 = Arrays.asList("12","2","76","78","75","76","7","8","90","100","110","12");
+	private List<String> academy4 = Arrays.asList("18","33","73","4","57","76","7","8","9","10","11","12");
+	private List<String> academy5 = Arrays.asList("91","28","93","48","9","6","7","8","98","10","9","1");
+	private List<String> academy6 = Arrays.asList("14","2","34","4","59","6","70","8","98","10","11","12");
 	
 	//一定时间内数据趋势
-	private List<String> yearName = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> thYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> paYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> prYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> proYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> boYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
-	private List<String> raYear = Arrays.asList("1","2","3","4","5","6","7","8","9","10");
+	private List<String> yearName = Arrays.asList("1","21","3","4","5","6","17","38","9","10","11","12");
+	private List<String> thYear = Arrays.asList("1","2","33","4","5","6","7","8","49","10","11","12");
+	private List<String> paYear = Arrays.asList("13","2","3","44","5","6","7","8","9","10","11","12");
+	private List<String> prYear = Arrays.asList("1","25","3","4","55","6","7","18","90","10","111","120");
+	private List<String> proYear = Arrays.asList("1","12","3","4","5","66","7","8","9","10","11","12");
+	private List<String> boYear = Arrays.asList("15","32","3","4","5","6","77","8","9","10","11","12");
+	private List<String> raYear = Arrays.asList("1","2","3","4","52","6","73","88","9","10","11","12");
 	/* 论文 */
 	//不同学院论文数量
 	//不同类别数量占比

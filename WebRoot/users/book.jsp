@@ -72,9 +72,12 @@ li {
 						<div id="Book">
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="BoCate" name="BoCate">
-									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="">教材类别</option>
+									<option value="文学艺术">文学艺术</option>
+									<option value="自然科学">自然科学</option>
+									<option value="医药卫生">医药卫生</option>
+									<option value="工业技术">工业技术</option>
+									<option value="哲学宗教">哲学宗教</option>
 								</select>
 							</div>
 							<div class="col-sm-2" style="width: 19em;">

@@ -83,8 +83,10 @@ li {
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="thCate" name="thCate">
 									<option value="">论文类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="自然类">自然类</option>
+									<option value="人文类">人文类</option>
+									<option value="社科类">社科类</option>
+									<option value="其它">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-1" style="width: 12em;">
@@ -433,9 +435,9 @@ li {
 							<select class="form-control1" required="required" name="thCate"
 								id="thCate" title="论文类别">
 								<option value="">论文类别</option>
-								<option value="类别1">类别1</option>
-								<option value="类别2">类别2</option>
-								<option value="类别3">类别3</option>
+								<option value="自然类">自然类</option>
+								<option value="人文类">人文类</option>
+								<option value="社科类">社科类</option>
 								<option value="其它">其他</option>
 							</select>
 						</div>

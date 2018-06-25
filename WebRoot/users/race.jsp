@@ -73,9 +73,10 @@ li {
 						<div id="Race">
 							<div class="col-sm-1" style="width: 12em;">
 								<select class="form-control1" id="RaCate" name="RaCate">
-									<option value="">项目类别</option>
-									<option value="类别1">类别1</option>
-									<option value="类别2">类别2</option>
+									<option value="">竞赛类别</option>
+									<option value="学科竞赛">学科竞赛</option>
+									<option value="科技竞赛">科技竞赛</option>
+									<option value="其他">其他</option>
 								</select>
 							</div>
 							<div class="col-sm-1" style="width: 12em;">

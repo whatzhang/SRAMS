@@ -1,6 +1,7 @@
 package com.sust.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -55,14 +56,14 @@ public class LoginController {
 								ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"),
 								ifn.get("allData")));
 				result = "admin/admin_index";
-			}else{
+			} else {
 				Map<String, String> ifn = this.loginService.getAdminInitInfo();
 				model.addAttribute("da",
 						new AllInfo(ifn.get("thNum"), ifn.get("paNum"), ifn.get("prNum"), ifn.get("proNum"),
 								ifn.get("boNum"), ifn.get("raNum"), ifn.get("meNum"), ifn.get("userNum"),
 								ifn.get("allData")));
 				result = "admin/admin_index";
-			} 
+			}
 		} else {
 			result = "login";
 			model.addAttribute("loginInfo", info);
@@ -142,7 +143,8 @@ public class LoginController {
 		String qu2 = request.getParameter("qu2").trim();
 		String id = request.getParameter("id").trim();
 
-		logger.info("forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
+		logger.info(
+				"forgetPass++" + quk1 + "++" + quk2 + "++" + key1 + "++" + key2 + "++" + qu1 + "++" + qu2 + "+" + id);
 
 		if (key1.equals(quk1) && key2.equals(quk2)) {
 			String pa = loginService.getPass(id);
@@ -170,30 +172,70 @@ public class LoginController {
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
 		return new AllInfo(String.valueOf(this.loginService.upDataPass(usId, pass)));
 	}
-	
+
 	@RequestMapping(value = "/getLoginInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public Login getLoginInfo(@RequestParam("usId") Integer usId) {
 
 		return this.loginService.getLoginInfoById(usId);
 	}
-	
+
 	@RequestMapping(value = "/updataLoginInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo updataLoginInfo(@RequestParam("usId") Integer usId,@RequestParam("loLogin") String loLogin,@RequestParam("loPass") String loPass,
-			@RequestParam("loType") String loType,@RequestParam("Status") String Status,@RequestParam("isALL") String isALL) {
+	public AllInfo updataLoginInfo(@RequestParam("usId") Integer usId, @RequestParam("loLogin") String loLogin,
+			@RequestParam("loPass") String loPass, @RequestParam("loType") String loType,
+			@RequestParam("Status") String Status, @RequestParam("isALL") String isALL) {
 
-		logger.info("updataLoginInfo++"+usId+"++"+loLogin+"++"+loPass+"++"+loType+"++"+Status+"++"+isALL);
-		return new AllInfo(this.loginService.updataLoginInfo(new Login(usId,loLogin,loPass,loType)));
+		logger.info("updataLoginInfo++" + usId + "++" + loLogin + "++" + loPass + "++" + loType + "++" + Status + "++"
+				+ isALL);
+		return new AllInfo(this.loginService.updataLoginInfo(new Login(usId, loLogin, loPass, loType)));
 	}
-	
+
 	@RequestMapping(value = "/addloginInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public AllInfo addloginInfo(@RequestParam("loLogin") String loLogin,@RequestParam("loPass") String loPass,
-			@RequestParam("loType") String loType,@RequestParam("Status") String Status,@RequestParam("isALL") String isALL) {
+	public AllInfo addloginInfo(@RequestParam("loLogin") String loLogin, @RequestParam("loPass") String loPass,
+			@RequestParam("loType") String loType, @RequestParam("Status") String Status,
+			@RequestParam("isALL") String isALL) {
 
-		logger.info("addloginInfo++"+loLogin+"++"+loPass+"++"+loType+"++"+Status+"++"+isALL);
-		return new AllInfo(this.loginService.addloginInfo(new Login(loLogin,loPass,loType)));
+		logger.info("addloginInfo++" + loLogin + "++" + loPass + "++" + loType + "++" + Status + "++" + isALL);
+		return new AllInfo(this.loginService.addloginInfo(new Login(loLogin, loPass, loType)));
 	}
-	
+
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@ResponseBody
+	public AllInfo search(@RequestParam("str") String str,HttpSession session) {
+
+		logger.info("search++" + str);
+		String ty = ((Login) session.getAttribute("login")).getLoType();
+		String aaString = "";
+		String fg = "";
+		List<String> info = Arrays.asList("论", "文", "专", "利", "获", "奖", "项", "目", "教", "材", "竞", "赛", "统", "计");
+		List<String> admin = Arrays.asList("/thesis/getAllThInfo","/thesis/getAllThInfo", "/patent/getAllPaInfo","/patent/getAllPaInfo",
+				                          "/praise/getAllPraiseInfo","/praise/getAllPraiseInfo", "/project/getAllProList","/project/getAllProList",
+				                          "/book/getAllBoList", "/book/getAllBoList", "/race/getAllRaceInfo","/race/getAllRaceInfo");
+		List<String> user = Arrays.asList("/thesis/getUserThInfo","/thesis/getUserThInfo","/patent/getUserPaInfo","/patent/getUserPaInfo",
+									      "/praise/getUserPraiseInfo","/praise/getUserPraiseInfo", "/project/getUserProList", "/project/getUserProList",
+										  "/book/getUserBoList","/book/getUserBoList", "/race/getUserRaceInfo","/race/getUserRaceInfo");
+									
+		labe:for (int i = 0; i < str.length(); i++) {
+			for (int j = 0; j < info.size(); j++) {
+				if (String.valueOf(str.charAt(i)).equals(info.get(j))) {
+					if("user".equals(ty)){
+						aaString =user.get(j);
+						fg = "YES";
+					}else if("admin".equals(ty) || "super".equals(ty)){
+						aaString =admin.get(j);
+						fg = "YES";
+					}else{
+						fg = "NONE";
+						aaString =admin.get(0);
+					}
+					logger.info(String.valueOf(str.charAt(i)) +"++"+ info.get(j));
+					break labe;
+				}
+			}
+		}
+		logger.info(aaString+"++"+fg);
+		return new AllInfo(aaString,fg);
+	}
 }
