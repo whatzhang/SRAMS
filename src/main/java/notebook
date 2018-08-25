@@ -1,3 +1,1390 @@
+<!-- <div id="world"></div> -->
+var Colors = {
+			red : 0xf25346,
+			yellow : 0xedeb27,
+			white : 0xd8d0d1,
+			brown : 0x59332e,
+			pink : 0xF5986E,
+			brownDark : 0x23190f,
+			blue : 0x68c3c0,
+			green : 0x458248,
+			purple : 0x551A8B,
+			lightgreen : 0x629265,
+		};
+	
+		var scene,
+			camera,
+			fieldOfView,
+			aspectRatio,
+			nearPlane,
+			farPlane,
+			HEIGHT,
+			WIDTH,
+			renderer,
+			container;
+	
+		function createScene() {
+			// Get the width and height of the screen
+			// and use them to setup the aspect ratio
+			// of the camera and the size of the renderer.
+			HEIGHT = window.innerHeight;
+			WIDTH = window.innerWidth;
+	
+			// Create the scene.
+			scene = new THREE.Scene();
+	
+			// Add FOV Fog effect to the scene. Same colour as the BG int he stylesheet.
+			scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
+	
+			// Create the camera
+			aspectRatio = WIDTH / HEIGHT;
+			fieldOfView = 60;
+			nearPlane = 1;
+			farPlane = 10000;
+			camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio,
+				nearPlane, farPlane);
+			// Position the camera
+			camera.position.x = 100;
+			camera.position.y = 100;
+			camera.position.z = 100;
+	
+			// Create the renderer
+	
+			renderer = new THREE.WebGLRenderer({
+				// Alpha makes the background transparent, antialias is performant heavy
+				alpha : true,
+				antialias : true
+			});
+	
+			//set the size of the renderer to fullscreen
+			renderer.setSize(WIDTH, HEIGHT);
+			//enable shadow rendering
+			renderer.shadowMap.enabled = true;
+	
+			// Add the Renderer to the DOM, in the world div.
+			container = document.getElementById('world');
+			container.appendChild(renderer.domElement);
+	
+			//RESPONSIVE LISTENER
+			window.addEventListener('resize', handleWindowResize, false);
+		}
+	
+		//RESPONSIVE FUNCTION
+		function handleWindowResize() {
+			HEIGHT = window.innerHeight;
+			WIDTH = window.innerWidth;
+			renderer.setSize(WIDTH, HEIGHT);
+			camera.aspect = WIDTH / HEIGHT;
+			camera.updateProjectionMatrix();
+		}
+	
+		var hemispshereLight,
+			shadowLight;
+	
+		function createLights() {
+			// Gradient coloured light - Sky, Ground, Intensity
+			hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9)
+			// Parallel rays
+			shadowLight = new THREE.DirectionalLight(0xffffff, .9);
+	
+			shadowLight.position.set(0, 350, 350);
+			shadowLight.castShadow = true;
+	
+			// define the visible area of the projected shadow
+			shadowLight.shadow.camera.left = -650;
+			shadowLight.shadow.camera.right = 650;
+			shadowLight.shadow.camera.top = 650;
+			shadowLight.shadow.camera.bottom = -650;
+			shadowLight.shadow.camera.near = 1;
+			shadowLight.shadow.camera.far = 1000;
+	
+			// Shadow map size
+			shadowLight.shadow.mapSize.width = 2048;
+			shadowLight.shadow.mapSize.height = 2048;
+	
+			// Add the lights to the scene
+			scene.add(hemisphereLight);
+	
+			scene.add(shadowLight);
+		}
+	
+		Land = function() {
+			var geom = new THREE.CylinderGeometry(600, 600, 1700, 40, 10);
+			//rotate on the x axis
+			geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+			//create a material
+			var mat = new THREE.MeshPhongMaterial({
+				color : Colors.lightgreen,
+				shading : THREE.FlatShading,
+			});
+	
+			//create a mesh of the object
+			this.mesh = new THREE.Mesh(geom, mat);
+			//receive shadows
+			this.mesh.receiveShadow = true;
+		}
+	
+		Orbit = function() {
+	
+			var geom = new THREE.Object3D();
+	
+			this.mesh = geom;
+		//this.mesh.add(sun);
+		}
+	
+		Sun = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			var sunGeom = new THREE.SphereGeometry(400, 20, 10);
+			var sunMat = new THREE.MeshPhongMaterial({
+				color : Colors.yellow,
+				shading : THREE.FlatShading,
+			});
+			var sun = new THREE.Mesh(sunGeom, sunMat);
+			//sun.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
+			sun.castShadow = false;
+			sun.receiveShadow = false;
+			this.mesh.add(sun);
+		}
+	
+		Cloud = function() {
+			// Create an empty container for the cloud
+			this.mesh = new THREE.Object3D();
+			// Cube geometry and material
+			var geom = new THREE.DodecahedronGeometry(20, 0);
+			var mat = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+			});
+	
+			var nBlocs = 3 + Math.floor(Math.random() * 3);
+	
+			for (var i = 0; i < nBlocs; i++) {
+				//Clone mesh geometry
+				var m = new THREE.Mesh(geom, mat);
+				//Randomly position each cube
+				m.position.x = i * 15;
+				m.position.y = Math.random() * 10;
+				m.position.z = Math.random() * 10;
+				m.rotation.z = Math.random() * Math.PI * 2;
+				m.rotation.y = Math.random() * Math.PI * 2;
+	
+				//Randomly scale the cubes
+				var s = .1 + Math.random() * .9;
+				m.scale.set(s, s, s);
+				this.mesh.add(m);
+			}
+		}
+	
+		Sky = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			// Number of cloud groups
+			this.nClouds = 25;
+	
+			// Space the consistenly
+			var stepAngle = Math.PI * 2 / this.nClouds;
+	
+			// Create the Clouds
+	
+			for (var i = 0; i < this.nClouds; i++) {
+	
+				var c = new Cloud();
+	
+				//set rotation and position using trigonometry
+				var a = stepAngle * i;
+				// this is the distance between the center of the axis and the cloud itself
+				var h = 800 + Math.random() * 200;
+				c.mesh.position.y = Math.sin(a) * h;
+				c.mesh.position.x = Math.cos(a) * h;
+	
+				// rotate the cloud according to its position
+				c.mesh.rotation.z = a + Math.PI / 2;
+	
+				// random depth for the clouds on the z-axis
+				c.mesh.position.z = -400 - Math.random() * 400;
+	
+				// random scale for each cloud
+				var s = 1 + Math.random() * 2;
+				c.mesh.scale.set(s, s, s);
+	
+				this.mesh.add(c.mesh);
+			}
+		}
+	
+		Tree = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			var matTreeLeaves = new THREE.MeshPhongMaterial({
+				color : Colors.green,
+				shading : THREE.FlatShading
+			});
+	
+			var geonTreeBase = new THREE.BoxGeometry(10, 20, 10);
+			var matTreeBase = new THREE.MeshBasicMaterial({
+				color : Colors.brown
+			});
+			var treeBase = new THREE.Mesh(geonTreeBase, matTreeBase);
+			treeBase.castShadow = true;
+			treeBase.receiveShadow = true;
+			this.mesh.add(treeBase);
+	
+			var geomTreeLeaves1 = new THREE.CylinderGeometry(1, 12 * 3, 12 * 3,
+				4);
+			var treeLeaves1 = new THREE.Mesh(geomTreeLeaves1, matTreeLeaves);
+			treeLeaves1.castShadow = true;
+			treeLeaves1.receiveShadow = true;
+			treeLeaves1.position.y = 20
+			this.mesh.add(treeLeaves1);
+	
+			var geomTreeLeaves2 = new THREE.CylinderGeometry(1, 9 * 3, 9 * 3, 4);
+			var treeLeaves2 = new THREE.Mesh(geomTreeLeaves2, matTreeLeaves);
+			treeLeaves2.castShadow = true;
+			treeLeaves2.position.y = 40;
+			treeLeaves2.receiveShadow = true;
+			this.mesh.add(treeLeaves2);
+	
+			var geomTreeLeaves3 = new THREE.CylinderGeometry(1, 6 * 3, 6 * 3, 4);
+			var treeLeaves3 = new THREE.Mesh(geomTreeLeaves3, matTreeLeaves);
+			treeLeaves3.castShadow = true;
+			treeLeaves3.position.y = 55;
+			treeLeaves3.receiveShadow = true;
+			this.mesh.add(treeLeaves3);
+	
+		}
+	
+		Flower = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			var geomStem = new THREE.BoxGeometry(5, 50, 5, 1, 1, 1);
+			var matStem = new THREE.MeshPhongMaterial({
+				color : Colors.green,
+				shading : THREE.FlatShading
+			});
+			var stem = new THREE.Mesh(geomStem, matStem);
+			stem.castShadow = false;
+			stem.receiveShadow = true;
+			this.mesh.add(stem);
+	
+			var geomPetalCore = new THREE.BoxGeometry(10, 10, 10, 1, 1, 1);
+			var matPetalCore = new THREE.MeshPhongMaterial({
+				color : Colors.yellow,
+				shading : THREE.FlatShading
+			});
+			petalCore = new THREE.Mesh(geomPetalCore, matPetalCore);
+			petalCore.castShadow = false;
+			petalCore.receiveShadow = true;
+	
+			var petalColor = petalColors[Math.floor(Math.random() * 3)];
+	
+			var geomPetal = new THREE.BoxGeometry(15, 20, 5, 1, 1, 1);
+			var matPetal = new THREE.MeshBasicMaterial({
+				color : petalColor
+			});
+			geomPetal.vertices[5].y -= 4;
+			geomPetal.vertices[4].y -= 4;
+			geomPetal.vertices[7].y += 4;
+			geomPetal.vertices[6].y += 4;
+			geomPetal.translate(12.5, 0, 3);
+	
+			var petals = [];
+			for (var i = 0; i < 4; i++) {
+	
+				petals[i] = new THREE.Mesh(geomPetal, matPetal);
+				petals[i].rotation.z = i * Math.PI / 2;
+				petals[i].castShadow = true;
+				petals[i].receiveShadow = true;
+			}
+	
+			petalCore.add(petals[0], petals[1], petals[2], petals[3]);
+			petalCore.position.y = 25;
+			petalCore.position.z = 3;
+			this.mesh.add(petalCore);
+	
+		}
+	
+		var petalColors = [ Colors.red, Colors.yellow, Colors.blue ];
+	
+		Forest = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			// Number of Trees
+			this.nTrees = 300;
+	
+			// Space the consistenly
+			var stepAngle = Math.PI * 2 / this.nTrees;
+	
+			// Create the Trees
+	
+			for (var i = 0; i < this.nTrees; i++) {
+	
+				var t = new Tree();
+	
+				//set rotation and position using trigonometry
+				var a = stepAngle * i;
+				// this is the distance between the center of the axis and the tree itself
+				var h = 605;
+				t.mesh.position.y = Math.sin(a) * h;
+				t.mesh.position.x = Math.cos(a) * h;
+	
+				// rotate the tree according to its position
+				t.mesh.rotation.z = a + (Math.PI / 2) * 3;
+	
+				//Andreas Trigo funtime
+				//t.mesh.rotation.z = Math.atan2(t.mesh.position.y, t.mesh.position.x)-Math.PI/2;
+	
+				// random depth for the tree on the z-axis
+				t.mesh.position.z = 0 - Math.random() * 600;
+	
+				// random scale for each tree
+				var s = .3 + Math.random() * .75;
+				t.mesh.scale.set(s, s, s);
+	
+				this.mesh.add(t.mesh);
+			}
+	
+			// Number of Trees
+			this.nFlowers = 350;
+	
+			var stepAngle = Math.PI * 2 / this.nFlowers;
+	
+			for (var i = 0; i < this.nFlowers; i++) {
+	
+				var f = new Flower();
+				var a = stepAngle * i;
+	
+				var h = 605;
+				f.mesh.position.y = Math.sin(a) * h;
+				f.mesh.position.x = Math.cos(a) * h;
+	
+				f.mesh.rotation.z = a + (Math.PI / 2) * 3;
+	
+				f.mesh.position.z = 0 - Math.random() * 600;
+	
+				var s = .1 + Math.random() * .3;
+				f.mesh.scale.set(s, s, s);
+	
+				this.mesh.add(f.mesh);
+			}
+	
+		}
+	
+		var AirPlane = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			// Create the cabin
+			var geomCockpit = new THREE.BoxGeometry(80, 50, 50, 1, 1, 1);
+			var matCockpit = new THREE.MeshPhongMaterial({
+				color : Colors.red,
+				shading : THREE.FlatShading
+			});
+			geomCockpit.vertices[4].y -= 10;
+			geomCockpit.vertices[4].z += 20;
+			geomCockpit.vertices[5].y -= 10;
+			geomCockpit.vertices[5].z -= 20;
+			geomCockpit.vertices[6].y += 30;
+			geomCockpit.vertices[6].z += 20;
+			geomCockpit.vertices[7].y += 30;
+			geomCockpit.vertices[7].z -= 20;
+			var cockpit = new THREE.Mesh(geomCockpit, matCockpit);
+			cockpit.castShadow = true;
+			cockpit.receiveShadow = true;
+			this.mesh.add(cockpit);
+	
+			// Create the engine
+			var geomEngine = new THREE.BoxGeometry(20, 50, 50, 1, 1, 1);
+			var matEngine = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				shading : THREE.FlatShading
+			});
+			var engine = new THREE.Mesh(geomEngine, matEngine);
+			engine.position.x = 40;
+			engine.castShadow = true;
+			engine.receiveShadow = true;
+			this.mesh.add(engine);
+	
+			// Create the tail
+			var geomTailPlane = new THREE.BoxGeometry(15, 20, 5, 1, 1, 1);
+			var matTailPlane = new THREE.MeshPhongMaterial({
+				color : Colors.red,
+				shading : THREE.FlatShading
+			});
+			var tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane);
+			tailPlane.position.set(-35, 25, 0);
+			tailPlane.castShadow = true;
+			tailPlane.receiveShadow = true;
+			this.mesh.add(tailPlane);
+	
+			// Create the wing
+			var geomSideWing = new THREE.BoxGeometry(40, 4, 150, 1, 1, 1);
+			var matSideWing = new THREE.MeshPhongMaterial({
+				color : Colors.red,
+				shading : THREE.FlatShading
+			});
+	
+			var sideWingTop = new THREE.Mesh(geomSideWing, matSideWing);
+			var sideWingBottom = new THREE.Mesh(geomSideWing, matSideWing);
+			sideWingTop.castShadow = true;
+			sideWingTop.receiveShadow = true;
+			sideWingBottom.castShadow = true;
+			sideWingBottom.receiveShadow = true;
+	
+			sideWingTop.position.set(20, 12, 0);
+			sideWingBottom.position.set(20, -3, 0);
+			this.mesh.add(sideWingTop);
+			this.mesh.add(sideWingBottom);
+	
+			var geomWindshield = new THREE.BoxGeometry(3, 15, 20, 1, 1, 1);
+			var matWindshield = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				transparent : true,
+				opacity : .3,
+				shading : THREE.FlatShading
+			});
+			;
+			var windshield = new THREE.Mesh(geomWindshield, matWindshield);
+			windshield.position.set(5, 27, 0);
+	
+			windshield.castShadow = true;
+			windshield.receiveShadow = true;
+	
+			this.mesh.add(windshield);
+	
+			var geomPropeller = new THREE.BoxGeometry(20, 10, 10, 1, 1, 1);
+			geomPropeller.vertices[4].y -= 5;
+			geomPropeller.vertices[4].z += 5;
+			geomPropeller.vertices[5].y -= 5;
+			geomPropeller.vertices[5].z -= 5;
+			geomPropeller.vertices[6].y += 5;
+			geomPropeller.vertices[6].z += 5;
+			geomPropeller.vertices[7].y += 5;
+			geomPropeller.vertices[7].z -= 5;
+			var matPropeller = new THREE.MeshPhongMaterial({
+				color : Colors.brown,
+				shading : THREE.FlatShading
+			});
+			this.propeller = new THREE.Mesh(geomPropeller, matPropeller);
+			this.propeller.castShadow = true;
+			this.propeller.receiveShadow = true;
+	
+			var geomBlade1 = new THREE.BoxGeometry(1, 100, 10, 1, 1, 1);
+			var geomBlade2 = new THREE.BoxGeometry(1, 10, 100, 1, 1, 1);
+			var matBlade = new THREE.MeshPhongMaterial({
+				color : Colors.brownDark,
+				shading : THREE.FlatShading
+			});
+	
+			var blade1 = new THREE.Mesh(geomBlade1, matBlade);
+			blade1.position.set(8, 0, 0);
+			blade1.castShadow = true;
+			blade1.receiveShadow = true;
+	
+			var blade2 = new THREE.Mesh(geomBlade2, matBlade);
+			blade2.position.set(8, 0, 0);
+			blade2.castShadow = true;
+			blade2.receiveShadow = true;
+			this.propeller.add(blade1, blade2);
+			this.propeller.position.set(50, 0, 0);
+			this.mesh.add(this.propeller);
+	
+			var wheelProtecGeom = new THREE.BoxGeometry(30, 15, 10, 1, 1, 1);
+			var wheelProtecMat = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				shading : THREE.FlatShading
+			});
+			var wheelProtecR = new THREE.Mesh(wheelProtecGeom, wheelProtecMat);
+			wheelProtecR.position.set(25, -20, 25);
+			this.mesh.add(wheelProtecR);
+	
+			var wheelTireGeom = new THREE.BoxGeometry(24, 24, 4);
+			var wheelTireMat = new THREE.MeshPhongMaterial({
+				color : Colors.brownDark,
+				shading : THREE.FlatShading
+			});
+			var wheelTireR = new THREE.Mesh(wheelTireGeom, wheelTireMat);
+			wheelTireR.position.set(25, -28, 25);
+	
+			var wheelAxisGeom = new THREE.BoxGeometry(10, 10, 6);
+			var wheelAxisMat = new THREE.MeshPhongMaterial({
+				color : Colors.brown,
+				shading : THREE.FlatShading
+			});
+			var wheelAxis = new THREE.Mesh(wheelAxisGeom, wheelAxisMat);
+			wheelTireR.add(wheelAxis);
+	
+			this.mesh.add(wheelTireR);
+	
+			var wheelProtecL = wheelProtecR.clone();
+			wheelProtecL.position.z = -wheelProtecR.position.z;
+			this.mesh.add(wheelProtecL);
+	
+			var wheelTireL = wheelTireR.clone();
+			wheelTireL.position.z = -wheelTireR.position.z;
+			this.mesh.add(wheelTireL);
+	
+			var wheelTireB = wheelTireR.clone();
+			wheelTireB.scale.set(.5, .5, .5);
+			wheelTireB.position.set(-35, -5, 0);
+			this.mesh.add(wheelTireB);
+	
+			var suspensionGeom = new THREE.BoxGeometry(4, 20, 4);
+			suspensionGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0,
+				10, 0))
+			var suspensionMat = new THREE.MeshPhongMaterial({
+				color : Colors.red,
+				shading : THREE.FlatShading
+			});
+			var suspension = new THREE.Mesh(suspensionGeom, suspensionMat);
+			suspension.position.set(-35, -5, 0);
+			suspension.rotation.z = -.3;
+			this.mesh.add(suspension);
+		};
+	
+		var Fox = function() {
+	
+			this.mesh = new THREE.Object3D();
+	
+			var redFurMat = new THREE.MeshPhongMaterial({
+				color : Colors.red,
+				shading : THREE.FlatShading
+			});
+	
+			// Create the Body
+			var geomBody = new THREE.BoxGeometry(100, 50, 50, 1, 1, 1);
+			var body = new THREE.Mesh(geomBody, redFurMat);
+			body.castShadow = true;
+			body.receiveShadow = true;
+			this.mesh.add(body);
+	
+			// Create the Chest
+			var geomChest = new THREE.BoxGeometry(50, 60, 70, 1, 1, 1);
+			var chest = new THREE.Mesh(geomChest, redFurMat);
+			chest.position.x = 60;
+			chest.castShadow = true;
+			chest.receiveShadow = true;
+			this.mesh.add(chest);
+	
+			// Create the Head
+			var geomHead = new THREE.BoxGeometry(40, 55, 50, 1, 1, 1);
+			this.head = new THREE.Mesh(geomHead, redFurMat);
+			this.head.position.set(80, 35, 0);
+			this.head.castShadow = true;
+			this.head.receiveShadow = true;
+	
+			// Create the Snout
+			var geomSnout = new THREE.BoxGeometry(40, 30, 30, 1, 1, 1);
+			var snout = new THREE.Mesh(geomSnout, redFurMat);
+			geomSnout.vertices[0].y -= 5;
+			geomSnout.vertices[0].z += 5;
+			geomSnout.vertices[1].y -= 5;
+			geomSnout.vertices[1].z -= 5;
+			geomSnout.vertices[2].y += 5;
+			geomSnout.vertices[2].z += 5;
+			geomSnout.vertices[3].y += 5;
+			geomSnout.vertices[3].z -= 5;
+			snout.castShadow = true;
+			snout.receiveShadow = true;
+			snout.position.set(30, 0, 0);
+			this.head.add(snout);
+	
+			// Create the Nose
+			var geomNose = new THREE.BoxGeometry(10, 15, 20, 1, 1, 1);
+			var matNose = new THREE.MeshPhongMaterial({
+				color : Colors.brown,
+				shading : THREE.FlatShading
+			});
+			var nose = new THREE.Mesh(geomNose, matNose);
+			nose.position.set(55, 0, 0);
+			this.head.add(nose);
+	
+			// Create the Ears
+			var geomEar = new THREE.BoxGeometry(10, 40, 30, 1, 1, 1);
+			var earL = new THREE.Mesh(geomEar, redFurMat);
+			earL.position.set(-10, 40, -18);
+			this.head.add(earL);
+			earL.rotation.x = -Math.PI / 10;
+			geomEar.vertices[1].z += 5;
+			geomEar.vertices[4].z += 5;
+			geomEar.vertices[0].z -= 5;
+			geomEar.vertices[5].z -= 5;
+	
+			// Create the Ear Tips
+			var geomEarTipL = new THREE.BoxGeometry(10, 10, 20, 1, 1, 1);
+			var matEarTip = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				shading : THREE.FlatShading
+			});
+			var earTipL = new THREE.Mesh(geomEarTipL, matEarTip);
+			earTipL.position.set(0, 25, 0);
+			earL.add(earTipL);
+	
+			var earR = earL.clone();
+			earR.position.z = -earL.position.z;
+			earR.rotation.x = -earL.rotation.x;
+			this.head.add(earR);
+	
+			this.mesh.add(this.head);
+	
+			// Create the tail
+			var geomTail = new THREE.BoxGeometry(80, 40, 40, 2, 1, 1);
+			geomTail.vertices[4].y -= 10;
+			geomTail.vertices[4].z += 10;
+			geomTail.vertices[5].y -= 10;
+			geomTail.vertices[5].z -= 10;
+			geomTail.vertices[6].y += 10;
+			geomTail.vertices[6].z += 10;
+			geomTail.vertices[7].y += 10;
+			geomTail.vertices[7].z -= 10;
+			this.tail = new THREE.Mesh(geomTail, redFurMat);
+			this.tail.castShadow = true;
+			this.tail.receiveShadow = true;
+	
+			// Create the tail Tip
+			var geomTailTip = new THREE.BoxGeometry(20, 40, 40, 1, 1, 1);
+			var matTailTip = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				shading : THREE.FlatShading
+			});
+			var tailTip = new THREE.Mesh(geomTailTip, matTailTip);
+			tailTip.position.set(80, 0, 0);
+			tailTip.castShadow = true;
+			tailTip.receiveShadow = true;
+			this.tail.add(tailTip);
+			this.tail.position.set(-40, 10, 0);
+			geomTail.translate(40, 0, 0);
+			geomTailTip.translate(10, 0, 0);
+			this.tail.rotation.z = Math.PI / 1.5;
+			this.mesh.add(this.tail);
+	
+			// Create the Legs
+			var geomLeg = new THREE.BoxGeometry(20, 60, 20, 1, 1, 1);
+			this.legFR = new THREE.Mesh(geomLeg, redFurMat);
+			this.legFR.castShadow = true;
+			this.legFR.receiveShadow = true;
+	
+			// Create the feet
+			var geomFeet = new THREE.BoxGeometry(20, 20, 20, 1, 1, 1);
+			var matFeet = new THREE.MeshPhongMaterial({
+				color : Colors.white,
+				shading : THREE.FlatShading
+			});
+			var feet = new THREE.Mesh(geomFeet, matFeet);
+			feet.position.set(0, 0, 0);
+			feet.castShadow = true;
+			feet.receiveShadow = true;
+			this.legFR.add(feet);
+			this.legFR.position.set(70, -12, 25);
+			geomLeg.translate(0, 40, 0);
+			geomFeet.translate(0, 80, 0);
+			this.legFR.rotation.z = 16;
+			this.mesh.add(this.legFR);
+	
+			this.legFL = this.legFR.clone();
+			this.legFL.position.z = -this.legFR.position.z;
+			this.legFL.rotation.z = -this.legFR.rotation.z;
+			this.mesh.add(this.legFL);
+	
+			this.legBR = this.legFR.clone();
+			this.legBR.position.x = -(this.legFR.position.x) + 50;
+			this.legBR.rotation.z = -this.legFR.rotation.z;
+			this.mesh.add(this.legBR);
+	
+			this.legBL = this.legFL.clone();
+			this.legBL.position.x = -(this.legFL.position.x) + 50;
+			this.legBL.rotation.z = -this.legFL.rotation.z;
+			this.mesh.add(this.legBL);
+	
+		};
+	
+		var sky;
+		var forest;
+		var land;
+		var orbit;
+		var airplane;
+		var sun;
+		var fox;
+	
+		var mousePos = {
+			x : 0,
+			y : 0
+		};
+		var offSet = -600;
+	
+		function createSky() {
+			sky = new Sky();
+			sky.mesh.position.y = offSet;
+			scene.add(sky.mesh);
+		}
+	
+		function createLand() {
+			land = new Land();
+			land.mesh.position.y = offSet;
+			scene.add(land.mesh);
+		}
+	
+		function createOrbit() {
+			orbit = new Orbit();
+			orbit.mesh.position.y = offSet;
+			orbit.mesh.rotation.z = -Math.PI / 6;
+			scene.add(orbit.mesh);
+		}
+	
+		function createForest() {
+			forest = new Forest();
+			forest.mesh.position.y = offSet;
+			scene.add(forest.mesh);
+		}
+	
+		function createSun() {
+			sun = new Sun();
+			sun.mesh.scale.set(1, 1, .3);
+			sun.mesh.position.set(0, -30, -850);
+			scene.add(sun.mesh);
+		}
+	
+		function createPlane() {
+			airplane = new AirPlane();
+			airplane.mesh.scale.set(.35, .35, .35);
+			airplane.mesh.position.set(-40, 110, -250);
+			// airplane.mesh.rotation.z = Math.PI/15;
+			scene.add(airplane.mesh);
+		}
+	
+		function createFox() {
+			fox = new Fox();
+			fox.mesh.scale.set(.35, .35, .35);
+			fox.mesh.position.set(-40, 110, -250);
+			scene.add(fox.mesh);
+		}
+	
+		function updatePlane() {
+			var targetY = normalize(mousePos.y, -.75, .75, 50, 190);
+			var targetX = normalize(mousePos.x, -.75, .75, -100, -20);
+	
+			// Move the plane at each frame by adding a fraction of the remaining distance
+			airplane.mesh.position.y += (targetY - airplane.mesh.position.y) * 0.1;
+	
+			airplane.mesh.position.x += (targetX - airplane.mesh.position.x) * 0.1;
+	
+			// Rotate the plane proportionally to the remaining distance
+			airplane.mesh.rotation.z = (targetY - airplane.mesh.position.y) * 0.0128;
+			airplane.mesh.rotation.x = (airplane.mesh.position.y - targetY) * 0.0064;
+			airplane.mesh.rotation.y = (airplane.mesh.position.x - targetX) * 0.0064;
+	
+			airplane.propeller.rotation.x += 0.3;
+		}
+	
+		function normalize(v, vmin, vmax, tmin, tmax) {
+			var nv = Math.max(Math.min(v, vmax), vmin);
+			var dv = vmax - vmin;
+			var pc = (nv - vmin) / dv;
+			var dt = tmax - tmin;
+			var tv = tmin + (pc * dt);
+			return tv;
+	
+		}
+	
+		function loop() {
+			land.mesh.rotation.z += .005;
+			orbit.mesh.rotation.z += .001;
+			sky.mesh.rotation.z += .003;
+			forest.mesh.rotation.z += .005;
+			updatePlane();
+	
+			renderer.render(scene, camera);
+			requestAnimationFrame(loop);
+		}
+	
+		function handleMouseMove(event) {
+			var tx = -1 + (event.clientX / WIDTH) * 2;
+			var ty = 1 - (event.clientY / HEIGHT) * 2;
+			mousePos = {
+				x : tx,
+				y : ty
+			};
+		}
+	
+		function init(event) {
+			createScene();
+			createLights();
+			createPlane();
+			createOrbit();
+			createSun();
+			createLand();
+			createForest();
+			createSky();
+			//createFox();
+	
+			document.addEventListener('mousemove', handleMouseMove, false);
+	
+			loop();
+		}
+	
+		window.addEventListener('load', init, false);
+		
+<!-- <ul class="dropdown-menu" style="width: 15em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 8 pending task</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Database update</span><span
+												class="percentage">40%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar yellow" style="width: 40%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Dashboard done</span><span
+												class="percentage">90%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar green" style="width: 90%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Mobile App</span><span
+												class="percentage">33%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar red" style="width: 33%;"></div>
+										</div>
+								</a></li>
+								<li><a href="#">
+										<div class="task-info">
+											<span class="task-desc">Issues fixed</span><span
+												class="percentage">80%</span>
+											<div class="clearfix"></div>
+										</div>
+										<div class="progress progress-striped active">
+											<div class="bar  blue" style="width: 80%;"></div>
+										</div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all pending tasks</a>
+									</div>
+								</li>
+							</ul> -->
+
+class="dropdown-toggle" data-toggle="dropdown"
+							aria-expanded="false"
+
+<!-- <ul class="dropdown-menu" style="width: 10em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 3 new notification</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/1.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>AAAAAA</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li class="odd"><a href="#">
+										<div class="user_img">
+											<img src="img/2.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>BBBBBB</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/3.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>CCCCCC</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all messages</a>
+									</div>
+								</li>
+							</ul> -->
+
+
+<!-- <ul class="dropdown-menu" style="width: 10em;">
+								<li>
+									<div class="notification_header">
+										<h3>You have 3 news</h3>
+									</div>
+								</li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/1.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>AAAAAA</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li class="odd"><a href="#">
+										<div class="user_img">
+											<img src="img/2.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>BBBBBB</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li><a href="#">
+										<div class="user_img">
+											<img src="img/3.png" alt="">
+										</div>
+										<div class="notification_desc">
+											<p>CCCCCC</p>
+											<p>
+												<span>1 hour ago</span>
+											</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+								<li>
+									<div class="notification_bottom">
+										<a href="#">See all messages</a>
+									</div>
+								</li>
+							</ul> -->
+
+
+
+
+
+
+package com.sust.other;
+
+import java.security.MessageDigest;
+
+public class MD5Util {
+
+	// MD5加码32位
+	public static String MD5(String inStr) {
+
+		MessageDigest md5 = null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			e.printStackTrace();
+			return "";
+		}
+		char[] charArray = inStr.toCharArray();
+		byte[] byteArray = new byte[charArray.length];
+		for (int i = 0; i < charArray.length; i++) {
+			byteArray[i] = (byte) charArray[i];
+		}
+		byte[] md5Bytes = md5.digest(byteArray);
+		StringBuffer hexValue = new StringBuffer();
+		for (int i = 0; i < md5Bytes.length; i++) {
+			int val = ((int) md5Bytes[i]) & 0xff;
+			if (val < 16)
+				hexValue.append("0");
+			hexValue.append(Integer.toHexString(val));
+		}
+		return hexValue.toString();
+	}
+
+	// 可逆的加密算法
+	public static String KL(String inStr) {
+
+		// String s = new String(inStr);
+		char[] a = inStr.toCharArray();
+		for (int i = 0; i < a.length; i++) {
+			a[i] = (char) (a[i] ^ 't');
+		}
+		String s = new String(a);
+		return s;
+	}
+
+	// 加密后解密
+	public static String JM(String inStr) {
+		char[] a = inStr.toCharArray();
+		for (int i = 0; i < a.length; i++) {
+			a[i] = (char) (a[i] ^ 't');
+		}
+		String k = new String(a);
+		return k;
+	}
+
+	// 测试主函数
+	public static void main(String args[]) {
+
+		String s = new String("a");
+		System.out.println("原始：" + s);
+		System.out.println("MD5后：" + MD5(s));
+		System.out.println("MD5后再加密：" + KL(MD5(s)));
+		System.out.println("解密为MD5后的：" + JM(KL(MD5(s))));
+	}
+
+}
+
+/* 论文 */
+		charts.setThCateNum(getThCateNum());
+		//专利
+		charts.setPaCateNum(getPaCateNum());
+		//获奖
+		charts.setPrCateNum(getPrCateNum());
+		//项目
+		charts.setProCateNum(getProCateNum());
+		charts.setPrMoneyNum(getPrMoneyNum());
+		//教材
+		charts.setBoCateNum(getboCateNum());
+		charts.setBoFontNum(getFontNum());
+		//竞赛
+		charts.setRaCateNum(getRaCateNum());
+		//用户
+		charts.setSexNum(getSexNum());
+		charts.setAgeNum(getAgeNum());
+
+
+
+optionc = {
+		    title: {
+		        text: '学院科研成果数据',
+		        subtext: '',
+		        sublink: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis',
+		        backgroundColor: 'rgba(255,255,255,0.7)',
+		        axisPointer: {
+		            type: 'shadow'
+		        },
+		        formatter: function(params) {
+		           
+		             var res = '<div style="color: #EE7942;">';
+		            res += '<strong>'+ params[0].name +'</strong>'
+		            for (var i = 0, l = params.length; i < l; i++) {
+		                res += '<br/>' + params[i].seriesName + ' : ' + params[i].value 
+		            }
+		            res += '</div>';
+		            return res;
+		        }
+		    },
+		    legend: {
+		        x: 'right',
+		        data: ${typeName}
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        y: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    calculable: true,
+		    grid: {
+		        y: 60,
+		        y2: 30,
+		        x: 50,
+		        x2: 50
+		    },
+		    xAxis: [
+		        {
+		            type: 'category',
+		            data: ['食品', '衣着', '居住', '家庭设备及用品', '医疗保健', '交通和通信', '文教娱乐服务', '其他', '111', '222', '333', '444']
+		        }
+		    ],
+		    yAxis: [
+		        {
+		            type: 'value'
+		        }
+		    ],
+		    series: [
+		        {
+		            name: '论文',
+		            type: 'bar',
+		            /* itemStyle: itemStyle, */
+		            data: [484.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,293,495,1239,1459]
+		        },
+		        {
+		            name: '专利',
+		            type: 'bar',
+		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,956,798,1459,1329]
+		        },
+		        {
+		            name: '获奖',
+		            type: 'bar',
+		            data: [600.9,1823.4,1484.3,1116.1,1063.7,2455.5,2033.5,657.1,933,755,988,1890]
+		        },
+		        {
+		            name: '项目',
+		            type: 'bar',
+		            data: [631.9,1902,1745.1,1215.1,1118.3,2736.9,2294,699.4,560,900,456,567]
+		        },
+		        {
+		            name: '教材',
+		            type: 'bar',
+		            data: [404.7,1444.3,1332.1,908,871.8,1983.7,1627.6,499.2,932,565,1233,956]
+		        },
+		        {
+		            name: '竞赛',
+		            type: 'bar',
+		            data: [506.3,1674.7,1405,1023.2,969,2149.7,1851.7,581.3,450,670,900,1433]
+		        }
+		    ]
+		};
+
+
+
+
+//var chart = echarts.init(document.getElementById('main'), 'macarons');
+var option = {
+			title : {
+				text : 'ECharts 数据统计'
+			},
+			tooltip : {},
+			legend : {
+				data : [ '用户来源' ]
+			},
+			xAxis : {
+				data : [ "Android", "IOS", "PC", "Ohter" ]
+			},
+			yAxis : {
+	
+			},
+			series : [ {
+				name : '访问量',
+				type : 'line',
+				data : [ 500, 200, 360, 100 ]
+			} ]
+		};
+		var option1 = {
+			title : {
+				text : 'ECharts 数据统计'
+			},
+			series : [ {
+				name : '访问量',
+				type : 'pie',
+				radius : '60%',
+				data : [
+					{
+						value : 500,
+						name : 'Android'
+					},
+					{
+						value : 200,
+						name : 'IOS'
+					},
+					{
+						value : 360,
+						name : 'PC'
+					},
+					{
+						value : 100,
+						name : 'Ohter'
+					}
+				]
+			} ]
+		};
+		var myChart = echarts.init(document.getElementById('chartmain'));
+		myChart.setOption(option);
+		var myChart1 = echarts.init(document.getElementById('chartmain1'));
+		myChart1.setOption(option1);
+
+
+
+
+
+
+ this.data = data;
+        this.pageSize = pageSize;
+        
+        this.totalCount = data.size();
+        this.totalPage = (totalCount + pageSize - 1) / pageSize;
+        
+        this.firstPage = 1;
+        this.prePage = nowPage-1<1?1:nowPage-1;
+        this.nowPage = nowPage;
+        this.nextPage = nowPage>=totalPage? totalPage: nowPage + 1;
+        this.lastPage = totalPage;   
+        
+        this.startRow = nowPage * pageSize - (pageSize-1);
+        this.endRow = nowPage == lastPage? totalCount:nowPage * pageSize;
+        
+        
+        
+/* 	thesis = {
+					flg : flog,
+					xuyuan : $("#xuyuan").val(),
+					sex : $("#sex").val(),
+					duty : $("#duty").val(),
+					bigAge : $("#bigAge").val(),
+					smlAge : $("#smlAge").val(),
+					major : $("#major").val(),
+					bigThda : $("#date").val(),
+					smlThda : $("#Cdate").val(),
+					thCate : $("#thCate").val(),
+					thle : $("#thle").val(),
+					thIsCl : $("#thIsCl").val(),
+					bigThUp : $("#date1").val(),
+					smlThUp : $("#Cdate1").val()
+				} */
+	/* $.ajax({
+		type : "POST",
+		url : "${pageContext.request.contextPath}/CountData/" + url,
+		data : too,
+		dataType : 'json',
+		cache : false,
+		async : false,
+		success : function(data) {
+			alert(data.string1+data.string2);
+			location.reload();
+		},
+		error : function(data) {
+			alert("获取归纳信息出错!");
+		}
+	});  */
+
+
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" style="margin: 15% 0 0 0;">
+		<div class="modal-dialog" role="document" style="width: 18em;">
+			<div class="modal-content">
+				<form name="delect_user">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h5 id="exampleModalLabel">确认框</h5>
+					</div>
+					<div class="modal-body" style="margin: 1.5em 0em 1.5em 0em;">
+
+						<div style="text-align: center; color: #e94e02;">
+							<label for="message-text" class="control-label">确定要提交操作？</label>
+						</div>
+					</div>
+					<div class="modal-footer" style="padding-bottom: 0;">
+						<button type="submit" class="btn btn-primary">确认</button>
+						<button type="reset" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+var select;
+
+function selectAll(check) {
+
+if(check) {
+
+select = true;
+
+} else {
+
+select = false;
+
+}
+
+}
+
+function checkAll(checkboxName) {
+
+var elements = document.getElementsByName(checkboxName);
+
+var temp = document.getElementById("all");
+
+var sss= new Array();
+
+for(var i=0;i<elements.length;i++){
+
+if(elements[i].checked == true){
+
+sss[i] = 1;
+
+}else
+
+sss[i] = 0;
+
+}
+
+if(select) {
+
+temp.checked = true;
+
+for(var i=0; i<elements.length; i++) {
+
+elements[i].checked = true;
+
+}
+
+} else {
+
+temp.checked = false;
+
+for(var i=0; i<elements.length; i++) {
+
+if(sss[i] == 1)
+
+elements[i].checked = false;
+
+else
+
+elements[i].checked = true;
+
+}
+
+}
+
+}
+
+
+
 <error-page>
 		<!-- 将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径. -->
 		<error-code>404</error-code>
@@ -386,7 +1773,36 @@ XMLHttpRequest.readyState: 状态码的意思
 									class="btn btn-success" onclick="return checkFile();">上&nbsp;传</button>
 							</div>
 						</div>
-					</form> --%>       
+					</form> --%> 
+
+package com.sust.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AA {
+
+	public static void main(String[] args) {
+		
+		List<Integer> aa = new ArrayList<Integer>();
+		for (int i = 0; i < 7; i++) {
+			aa.add(raNum());
+		}
+		System.out.println(aa.toString());
+	}
+
+	private static Integer raNum() {
+		
+		int num=(int)(Math.random()*34); 
+		//暗香操作
+		if(num < 28){
+			return Integer.valueOf(num);
+		}else{
+			return raNum();
+		}
+	}
+}
+      
         
         
         

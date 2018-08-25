@@ -35,6 +35,10 @@ public class Thesis {
 	public Thesis() {
 
 	}
+	public Thesis(String thName) {
+		super();
+		this.thName = thName;
+	}
 
 	public Thesis(Integer thId, Integer usId, String thName, String thCategory, String thAuthor, Date thDate,
 			String thLevel, String thFactor, String thIncluded, String thNumber, String thJournal, String thPage,
@@ -188,7 +192,7 @@ public class Thesis {
 	}
 
 	public String getThUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(thUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(thUptime);
 	}
 
 	public void setThUptime(Date thUptime) {

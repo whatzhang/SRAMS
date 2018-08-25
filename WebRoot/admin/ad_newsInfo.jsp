@@ -54,71 +54,67 @@ li {
 
 	<div class="main-page">
 		<div class="panel-info" style="margin:  2em 3em 1em 1em; ">
-			<button type="button" class="btn btn-info" onclick="refresh();"
-				style="width: 100%; height:3em; margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;">接收/刷新信息</button>
+			<button type="button" class="btn btn-info"
+				style="width: 100%; height:3em; margin: 0em 2em 0em 1em; background-color: #d9edf7;color: #31708f; border-color:#d9edf7;"
+				onclick="refresh();">接收/刷新信息</button>
 		</div>
-
-		<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">
-			<div class="col-md-4 compose-left ">
-				<div class="panel panel-info">
-					<div class="panel-heading">
-
-						<input type="text" class="form-control1 input-lg"
-							style="overflow:auto;" id="chooseUser" placeholder="查找要给发送信息用户">
-					</div>
-					<div class="panel-body" data-spy="scroll"
+	</div>
+	<div class="main-page compose" style="margin: 2em 2em 2em 2em; ">
+		<div class="col-md-4 compose-left ">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<input type="text" class="form-control1 input-lg"
+						style="overflow:auto;" id="chooseUser" placeholder="查找要给发送信息用户">
+				</div>
+				<div class="panel-body" data-spy="scroll"
 						data-target="#navbar-example" data-offset="0"
 						style="height:15em; overflow:auto;">
-						<ul>
-							<div id="NEWS">
-								<c:forEach items="${requestScope.nowNews}" var="now">
-									<li><a href="javascript: showNewsInfo(${now.meId});"
-										title="消息阅读情况">
-											<div class="chat-left">
-												<img class="img-circle" src="img/i3.png" alt="">
-											</div>
-											<div class="chat-right">
-												<p style="color: red;">${now.meTitle}</p>
-												<p style="font-size: 1px; color: lightblue;">${now.meDate}</p>
-											</div>
-											<div class="clearfix"></div>
-									</a></li>
-								</c:forEach>
-							</div>
-						</ul>
-
-					</div>
+					<ul>
+						<div id="NEWS">
+							<c:forEach items="${requestScope.nowNews}" var="now">
+								<li><a href="javascript: showInfo(${now.meId});"
+									title="消息阅读情况">
+										<div class="chat-left">
+											<img class="img-circle" src="img/i3.png" alt="">
+										</div>
+										<div class="chat-right">
+											<p style="color: red;">${now.meTitle}</p>
+											<p style="font-size: 1px; color: lightblue;">${now.meDate}</p>
+											<p style="font-size: 1px; color: lightblue;width:22em; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${now.meAbout}</p>
+										</div>
+										<div class="clearfix"></div>
+								</a></li>
+							</c:forEach>
+						</div>
+					</ul>
 				</div>
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">文件</h3>
-					</div>
-					<div class="panel-body">
-						<ul>
-							<li><a href="javascript:void(0);"><i
-									class="fa fa-flag-o"></i>未读消息用户数<span> <label
-										id="NoRead"></label>
-								</span></a></li>
-							<li><a href="javascript:void(0);"><i
-									class="fa fa-file-text-o"></i>已读消息用户数<span><label
-										id="Readed"></label></span></a></li>
-							<li><a href="javascript:void(0);"><i
-									class=" fa fa fa-envelope-o"></i>删除消息用户数<span><label
-										id="delNews"></label></span></a></li>
-						</ul>
-					</div>
-
-				</div>
-
 			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">文件</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li><a href="javascript:void(0);"><i class="fa fa-flag-o"></i>未读消息用户数<span><label
+									id="NoRead">0</label> </span></a></li>
+						<li><a href="javascript:void(0);"><i
+								class="fa fa-file-text-o"></i>已读消息用户数<span><label
+									id="Readed">0</label></span></a></li>
+						<li><a href="javascript:void(0);"><i
+								class=" fa fa fa-envelope-o"></i>删除消息用户数<span><label
+									id="delNews">0</label></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-
-			<div class="panel panel-info col-md-8 compose-right">
-				<div class="panel-heading" style="padding: 1em 0em 1em 2em; ">发布新消息</div>
+		<div class="col-md-6 compose-right">
+			<div class="panel panel-info">
+				<div class="panel-heading" style="padding: 1em 0em 0.6em 2em; ">发布新消息</div>
 				<div class="panel-body">
 					<form class="com-mail" id="addNew" name="addNew">
 						<div style="margin: 0em 0em 1em 0em;">
-							<div class="btn-group" >
+							<div class="btn-group">
 								<button type="button" class="btn btn-danger" id="Change"
 									onclick="AllUsers();">AllUsers</button>
 								<button type="button" class="btn btn-default" id="Add"
@@ -132,16 +128,16 @@ li {
 						<textarea rows="6" class="form-control1 control2" id="mmAbout"
 							placeholder="消息内容:" required="required"></textarea>
 
-						<input type="submit" class="btn btn-success" onclick="addMessage();"
-							style=" float: right;margin-right: 1em;"
+						<input type="submit" class="btn btn-success"
+							onclick="addMessage();" style=" float: right;margin-right: 1em;"
 							value="发布提交">
 					</form>
 				</div>
 			</div>
-
-			<div class="clearfix"></div>
 		</div>
+	</div>
 
+	<div class="main-page">
 		<div class="panel-info" style="padding: 1em 2em 2em 2em;">
 			<div class="panel-heading">消息列表</div>
 			<table class="table table-bordered"
@@ -175,8 +171,9 @@ li {
 								data-toggle="tooltip" data-placement="top" title="${Me.meSend}">${Me.meSend}号用户</td>
 							<td
 								style="text-align: center; vertical-align: middle;width: 12%;"
-								data-toggle="tooltip" data-placement="top"
-								title="${Me.meReceive}">${Me.meReceive}号用户</td>
+								data-toggle="tooltip" data-placement="top"><c:if
+									test="${Me.meReceive==0}">AllUsers</c:if> <c:if
+									test="${Me.meReceive!=0}">${Me.meReceive}号用户</c:if></td>
 							<td
 								style="text-align: center; vertical-align: middle;width: 31%;"
 								data-toggle="tooltip" data-placement="top" title="${Me.meAbout}">${Me.meAbout}</td>
@@ -189,11 +186,12 @@ li {
 											class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
 									</a>
 									</li>
-									<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-										<a href="javascript: showNewsInfo(${Me.meId});"
-										title="消息阅读情况"> <i class="fa fa-download mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
+									<li style="float: left; width: 0.7em; margin-left: 0.9em;">
+										<a href="javascript: showNewsInfo(${Me.meId});" title="消息阅读情况">
+											<i class="fa fa-download mail-icon"
+											style="width: 1em; padding-left: 0.2em;"></i>
+									</a>
+									</li>
 									<li style="float: left; width: 0.7em; margin-left: 1em;"><a
 										href="javascript: deleteMessage(${Me.meId});" title="删除信息">
 											<i class="fa fa-trash-o mail-icon"
@@ -297,14 +295,42 @@ li {
 			</div>
 		</div>
 	</div>
-
-
 </body>
 <script type="text/javascript">
 	var isCh = "ch";
 	var meID = 0;
 	function refresh() {
 		window.location.href = "${pageContext.request.contextPath}/news/getAdminNews";
+	}
+	function showInfo(daa) {
+		showNewsInfo(daa);
+		showInfoLeft(daa);
+	}
+	function showInfoLeft(daId) {
+		$.ajax({
+			type : "POST",
+			url : "${pageContext.request.contextPath}/news/getNewsById",
+			data : {
+				meId : daId
+			},
+			dataType : 'json',
+			cache : false,
+			async : true,
+			success : showLeft,
+			error : function(data) {
+				alert("获取信息错误!");
+			}
+		});
+	}
+	function showLeft(data) {
+		$("#toSe").show();
+		if (data.meReceive == "0") {
+			document.getElementById('toSe').value = "AllUsers";
+		} else {
+			document.getElementById('toSe').value = data.meReceive + "号用户";
+		}
+		document.getElementById('mmTitle').value = data.meTitle;
+		document.getElementById('mmAbout').value = data.meAbout;
 	}
 	function setReadNum(ww) {
 		document.getElementById('NoRead').innerText = ww.string1;
@@ -376,9 +402,9 @@ li {
 		isCh = "ch";
 		getNewsById(meId);
 	}
-	function updataMessage(){
-		if(confirm("确定要更新信息？")){
-		    updataMe();
+	function updataMessage() {
+		if (confirm("确定要更新信息？")) {
+			updataMe();
 		}
 	}
 	function updataMe() {
@@ -436,22 +462,22 @@ li {
 			deleteMe(me);
 		}
 	}
-	function AllUsers(){
-	    $("#Add").removeClass("btn btn-danger");
+	function AllUsers() {
+		$("#Add").removeClass("btn btn-danger");
 		$("#Add").addClass("btn btn-default");
 		$("#Change").addClass("btn btn-danger");
 		$("#toSe").hide();
 		document.getElementById('toSe').value = 0;
 	}
-	function SomeOne(){
+	function SomeOne() {
 		$("#Change").removeClass("btn btn-danger");
 		$("#Change").addClass("btn btn-default");
 		$("#Add").addClass("btn btn-danger");
 		$("#toSe").show();
 	}
-	function addMessage(){
+	function addMessage() {
 		if (confirm("确定发布此条消息？")) {
-			 addNews();
+			addNews();
 		}
 	}
 	function addNews() {
@@ -477,7 +503,7 @@ li {
 			error : function(data) {
 				alert("发布信息错误!");
 			}
-		}); 
+		});
 	}
 </script>
 </html>

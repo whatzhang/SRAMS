@@ -2,8 +2,11 @@ package com.sust.other;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 
@@ -198,7 +201,7 @@ public final class MyUtils {
 		String reString = "";
 		File file = new File(dir);
 		String[] fileList = file.list();
-		logger.info(dir + "++" + name);
+		// logger.info(dir + "++" + name);
 		if (fileList != null && fileList.length > 0) {
 			for (int i = 0; i < fileList.length; i++) {
 
@@ -216,4 +219,180 @@ public final class MyUtils {
 		}
 		return reString;
 	}
+
+	/**
+	 * 获取不同类别文件名称
+	 * 
+	 * @param fileNameList
+	 * @param dir
+	 * @param type
+	 * @return
+	 */
+	public static ArrayList<File> getFileNameList(List<Date> fileNameList, String dir, String type) {
+
+		ArrayList<File> fileList = new ArrayList<File>();
+		for (String str : DateToString(fileNameList)) {
+			String name = findName(dir + File.separatorChar + type + File.separatorChar, str);
+			logger.info(name);
+			if (!"NO_SUCH_FILE".equals(name)) {
+				fileList.add(new File(dir + name));
+			}
+		}
+		for (File file : fileList) {
+			logger.info(file.getAbsolutePath().toString());
+		}
+		return fileList;
+	}
+
+	/**
+	 * Date转String
+	 * 
+	 * @param fileNameList
+	 * @return
+	 */
+	public static List<String> DateToString(List<Date> fileNameList) {
+
+		List<String> aaList = new ArrayList<String>();
+		for (Date date : fileNameList) {
+			aaList.add(new SimpleDateFormat("yyyyMMddhhmmssSSS").format(date));
+		}
+		return aaList;
+	}
+
+	/**
+	 * StringList获取文件名称
+	 * 
+	 * @param fileNameList
+	 * @param dir
+	 * @return
+	 */
+	public static ArrayList<File> getFileNameByList(List<String> fileNameList, String dir) {
+
+		ArrayList<File> fileList = new ArrayList<File>();
+		for (String str : fileNameList) {
+			String name = findName(dir, str);
+			logger.info(name);
+			if (!"NO_SUCH_FILE".equals(name)) {
+				fileList.add(new File(dir + name));
+			}
+		}
+		for (File file : fileList) {
+			logger.info(file.getAbsolutePath().toString());
+		}
+		return fileList;
+
+	}
+
+	/**
+	 * 获取全部文件名称
+	 * 
+	 * @param allMap
+	 * @param realPath
+	 * @param type
+	 * @return
+	 */
+	public static ArrayList<File> getTypeFileNameList(Map<String, List<Date>> allMap, String dir) {
+
+		ArrayList<File> fileList = new ArrayList<File>();
+		fileList.addAll(getTypeList(allMap, dir, "thesis"));
+		fileList.addAll(getTypeList(allMap, dir, "patent"));
+		fileList.addAll(getTypeList(allMap, dir, "praise"));
+		fileList.addAll(getTypeList(allMap, dir, "project"));
+		fileList.addAll(getTypeList(allMap, dir, "book"));
+		fileList.addAll(getTypeList(allMap, dir, "race"));
+		return fileList;
+	}
+
+	public static ArrayList<File> getTypeList(Map<String, List<Date>> allMap, String dir, String type) {
+
+		ArrayList<File> list = new ArrayList<File>();
+		for (String str : DateToString(allMap.get(type))) {
+			String name = findName(dir + File.separatorChar + type + File.separatorChar, str);
+			if (!"NO_SUCH_FILE".equals(name)) {
+				list.add(new File(dir + name));
+			}
+		}
+		return list;
+	}
+
+	/*
+	 * 删除指定文件夹下所有文件
+	 * 
+	 * @param path 文件夹完整绝对路径
+	 * 
+	 * @return
+	 */
+	public static boolean delAllFile(String path) {
+		boolean flag = false;
+		File file = new File(path);
+		if (!file.exists()) {
+			return flag;
+		}
+		if (!file.isDirectory()) {
+			return flag;
+		}
+		String[] tempList = file.list();
+		File temp = null;
+		for (int i = 0; i < tempList.length; i++) {
+			if (path.endsWith(File.separator)) {
+				temp = new File(path + tempList[i]);
+			} else {
+				temp = new File(path + File.separator + tempList[i]);
+			}
+			if (temp.isFile()) {
+				temp.delete();
+			}
+			if (temp.isDirectory()) {
+				delAllFile(path + File.separatorChar + tempList[i]);// 先删除文件夹里面的文件
+				delFolder(path + File.separatorChar + tempList[i]);// 再删除空文件夹
+				flag = true;
+			}
+		}
+		return flag;
+	}
+
+	/***
+	 * 删除文件夹
+	 * 
+	 * @param folderPath文件夹完整绝对路径
+	 */
+	public static void delFolder(String folderPath) {
+		try {
+			delAllFile(folderPath); // 删除完里面所有内容
+			String filePath = folderPath;
+			filePath = filePath.toString();
+			java.io.File myFilePath = new java.io.File(filePath);
+			myFilePath.delete(); // 删除空文件夹
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//用户管理模块、成果申报、成果审批、归纳管理和统计分析
+
+	public static String getData(List<String> listName) {
+
+		List<String> result = new ArrayList<String>();
+		for (String str : listName) {
+			result.add("'" + str + "'");
+		}
+		//logger.info(result.toString());
+		return result.toString();
+	}
+	
+	public static String getAllNum(List<String> typeName, List<String> allNumber,int k) {
+		logger.info(typeName.toString()+"++"+typeName.size()+"++"+allNumber.toString()+"++"+allNumber.size());
+		String re = "[";
+		for (int i = 0; i < typeName.size(); i++) {
+			String ass ="{value:" + allNumber.get(i) +",name:'"+typeName.get(i) +"'}";
+			re += ass;
+			if(i != k-1){
+				re += ",";
+			}else{
+				re += "]";
+			}
+		}
+		//logger.info(re);
+		return re;
+	}
+
 }

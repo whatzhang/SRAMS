@@ -97,182 +97,28 @@
 						<h1>SUST</h1> <span>科研管理归档</span>
 					</a>
 				</div>
-				<div class="search-box">
-					<form class="input">
-						<input class="sb-search-input input__field--madoka"
-							placeholder="Search..." type="search" id="input-31" /> <label
-							class="input__label" for="input-31"> <svg class="graphic"
-								width="100%" height="100%" viewBox="0 0 404 77"
-								preserveAspectRatio="none"> <path
-								d="m0,0l404,0l0,77l-404,0l0,-77z" /> </svg>
-						</label>
-					</form>
-				</div>
+				<div style="padding-top: 1em;padding-left: 23em;">
+						<input class="form-control1 input-lg" style="width: 16em; height:3em; border: 1.2px solid #6164C1;"
+							placeholder="Search..." type="text" id="Search" name="Search" onchange="Search()"/> 
+			   	 </div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="header-right">
 				<div class="profile_details_left">
 					<ul class="nofitications-dropdown">
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-envelope"></i><span
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getUserNews"
+						target="iFrame"class="dropdown-toggle" ><i class="fa fa-envelope"></i><span
 								class="badge">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 news</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>AAAAAA</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-bell"></i><span
-								class="badge blue">3</span></a>
-							<ul class="dropdown-menu" style="width: 10em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 3 new notification</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/1.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>AAAAAA</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li class="odd"><a href="#">
-										<div class="user_img">
-											<img src="img/2.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>BBBBBB</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li><a href="#">
-										<div class="user_img">
-											<img src="img/3.png" alt="">
-										</div>
-										<div class="notification_desc">
-											<p>CCCCCC</p>
-											<p>
-												<span>1 hour ago</span>
-											</p>
-										</div>
-										<div class="clearfix"></div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all messages</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown head-dpdn"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"><i class="fa fa-tasks"></i><span
-								class="badge blue1">15</span></a>
-							<ul class="dropdown-menu" style="width: 15em;">
-								<li>
-									<div class="notification_header">
-										<h3>You have 8 pending task</h3>
-									</div>
-								</li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Database update</span><span
-												class="percentage">40%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar yellow" style="width: 40%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Dashboard done</span><span
-												class="percentage">90%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar green" style="width: 90%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Mobile App</span><span
-												class="percentage">33%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar red" style="width: 33%;"></div>
-										</div>
-								</a></li>
-								<li><a href="#">
-										<div class="task-info">
-											<span class="task-desc">Issues fixed</span><span
-												class="percentage">80%</span>
-											<div class="clearfix"></div>
-										</div>
-										<div class="progress progress-striped active">
-											<div class="bar  blue" style="width: 80%;"></div>
-										</div>
-								</a></li>
-								<li>
-									<div class="notification_bottom">
-										<a href="#">See all pending tasks</a>
-									</div>
-								</li>
-							</ul></li>
+							</li>
+						<li class="dropdown head-dpdn"><a href="${pageContext.request.contextPath}/news/getUserNews"
+						target="iFrame"
+							class="dropdown-toggle" ><i class="fa fa-bell"></i><span
+								class="badge blue">5</span></a>
+						</li>
+						<li class="dropdown head-dpdn"><a href="javascript:void(0);"
+							class="dropdown-toggle" ><i class="fa fa-tasks"></i><span
+								class="badge blue1">10</span></a>
+						</li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>
@@ -301,7 +147,7 @@
 									href="${pageContext.request.contextPath}/users/UserInfo?type=pass"
 									target="iFrame"><i class="fa fa-cog"></i>修改密码</a></li>
 								<%
-									if ("admin".equals(login.getLoType())) {
+									if (!"user".equals(login.getLoType())) {
 								%>
 								<li><a
 									href="${pageContext.request.contextPath}/login/toAdmin"><i
@@ -324,13 +170,12 @@
 			<iframe id="iFrame" name="iFrame" width="100%"
 				onload="this.height=iFrame.document.body.scrollHeight"
 				frameborder="0" scrolling="no"
-				src="${pageContext.request.contextPath}/thesis/getUserThInfo"></iframe>
+				src="${pageContext.request.contextPath}/CountData/getMenuInit"></iframe>
 		</div>
 
 		<div class="footer">
 			<p>
-				&copy; 2016 Novus Admin Panel. All Rights Reserved | Design by <a
-					href="#" target="_blank">whatzhangy</a>
+				<a href="#" target="_blank"> 科研成果归档系统 </a> &nbsp;&copy;学生：张勇 &nbsp;&copy;指导老师：王长浩
 			</p>
 		</div>
 	</div>
@@ -354,10 +199,31 @@
 				classie.toggle(showLeftPush, 'disabled');
 			}
 		}
+		function Search(){ 
+	    	$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/login/search",
+				data : {
+					str : $("#Search").val()
+				},
+				dataType : 'json',
+				cache : false,
+				async : true,
+				success : function(data){
+					//alert(data.string1);
+					if(data.string2 == "YES"){
+					 	$("#iFrame").attr("src","${pageContext.request.contextPath}" + data.string1);
+					}else{
+					   alert("没有找到选项，请重新输入！");
+					}
+			    },
+				error : function(data) {
+					alert("查找错误！");
+				}
+			});
+	     }
 	</script>
-	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.js">
-		
 	</script>
 </body>
 </html>

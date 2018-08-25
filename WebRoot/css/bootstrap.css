@@ -12,6 +12,7 @@ html {
 }
 body {
   margin: 0;
+  height: auto;
 }
 article,
 aside,
@@ -5751,12 +5752,12 @@ button.close {
   overflow-y: auto;
 }
 .modal-dialog {
-  position: absolute;
+  position: relative;
 	width: auto;
 	margin: 10px auto;
 	left: 0;
 	right: 0;
-	top: 50%;
+	top: 10%;
 }
 .modal-content {
   position: relative;

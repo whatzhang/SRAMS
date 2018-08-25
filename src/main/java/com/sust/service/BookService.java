@@ -1,6 +1,7 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,5 +22,15 @@ public interface BookService {
 	int upBoInfo(Book book);
 
 	List<Book> getAllBoList();
+
+	Map<String, Object> GuiNaBook(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
+			String major, String boCate, String bigBoda, String smlBoda, String bigFont, String smlFont, String bigBoUp,
+			String smlBoUp);
+
+	List<Book> findBoInfo(String bigThda, String smlThda, String boCate, String bigFont, String smlFont, String bigThUp,
+			String smlThUp);
+
+	List<Book> findUserBookInfo(Integer usId, String bigThda, String smlThda, String boCate, String bigFont,
+			String smlFont, String bigThUp, String smlThUp);
 
 }

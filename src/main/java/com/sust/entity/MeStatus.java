@@ -8,17 +8,18 @@ public class MeStatus {
 	private Integer usId;
 
 	private Byte stIsread;
-	
-	public MeStatus(){
-		
+
+	public MeStatus() {
+
 	}
-	
+
 	public MeStatus(Integer meId, Integer usId, Byte stIsread) {
 		super();
 		this.meId = meId;
 		this.usId = usId;
 		this.stIsread = stIsread;
 	}
+
 	public MeStatus(Integer stId, Integer meId, Integer usId, Byte stIsread) {
 		super();
 		this.stId = stId;

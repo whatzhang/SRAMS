@@ -1,6 +1,7 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,4 +22,14 @@ public interface ThesisService {
 	public int upThesisInfo(Thesis thesis);
 
 	public List<Thesis> getAllThInfo();
+
+	public Map<String,Object>  GuiNaThesis(String flg,String xuyuan, String sex, String duty, String bigAge, String smlAge, String major,
+			String bigThda, String smlThda, String thCate, String thle, String thIsCl, String bigThUp, String smlThUp);
+
+	public List<Thesis> findThInfo(String bigThda, String smlThda, String thCate, String thle, String thIsCl,
+			String bigThUp, String smlThUp);
+	
+	List<Thesis> findUserThesisInfo(Integer usId, String bigThda, String smlThda, String thCate, String thle, String thIsCl,
+			String bigThUp, String smlThUp);
+
 }

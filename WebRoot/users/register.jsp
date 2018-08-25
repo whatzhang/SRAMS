@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class="panel panel-danger" style="margin: 5em 10em 5em 10em;">
+	<div class="panel panel-danger" style="margin: 5em 25em 5em 25em;">
 		<div class="panel-heading" style="height: 3em;">
 			<h1 class="panel-title" style="text-align: left;">注册用户</h1>
 		</div>
@@ -163,10 +163,17 @@
 							<div class="col-sm-4">
 								<select class="form-control1" required="required"
 									name="us_academy">
-									<option value="学院1">学院1</option>
-									<option value="学院2">学院2</option>
-									<option value="学院3">学院3</option>
-									<option value="学院1">其他</option>
+										<option value="电气与信息工程学院">电气与信息工程学院</option>
+										<option value="化工科学与工程学院">化工科学与工程学院</option>
+										<option value="材料科学与工程学院">材料科学与工程学院</option>
+										<option value="环境科学与工程学院">环境科学与工程学院</option>
+										<option value="食品与生物工程学院">食品与生物工程学院</option>
+										<option value="机电工程学院">机电工程学院</option>
+										<option value="经济与管理学院">经济与管理学院</option>
+										<option value="化学与化工学院">化学与化工学院</option>
+										<option value="设计与艺术学院">设计与艺术学院</option>
+										<option value="文理学院">文理学院</option>
+										<option value="职业技术学院">职业技术学院</option>
 								</select>
 							</div>
 						</div>
@@ -207,12 +214,12 @@
 							</div>
 						</div>
 						<div class="form-group mb-n">
-
-							<div class="col-sm-3" style="text-align: center;">
-								<button type="submit" class="btn btn-danger">注册提交</button>
-							</div>
+							
 							<div class="col-sm-3" style="text-align: center;">
 								<button type="reset" class="btn btn-info">重置信息</button>
+							</div>
+							<div class="col-sm-3" style="text-align: center;">
+								<button type="submit" class="btn btn-danger">注册提交</button>
 							</div>
 							<div class="col-sm-3" style="text-align: center;">
 								<button type="button" class="btn btn-success"

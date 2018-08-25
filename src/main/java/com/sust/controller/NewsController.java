@@ -97,13 +97,14 @@ public class NewsController {
 		logger.info("deleteReadNews++" + usId);
 		return new AllInfo(this.newsservice.deleteReadNews(usId));
 	}
+
 	/**
-	 * admin消息处理 
+	 * admin消息处理
 	 */
 	@RequestMapping("/getAdminNews")
 	private String getAdminNews(@RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
 			@RequestParam(value = "page", defaultValue = "1") Integer pa, Model model) {
-		
+
 		PageHelper.startPage(pa, pageSize);
 		List<Message> list = this.newsservice.getAllMessages();
 		PageInfo<Message> page = new PageInfo<Message>(list);
@@ -113,45 +114,44 @@ public class NewsController {
 		model.addAttribute("nowNews", this.newsservice.getNowMessages());
 		return "admin/ad_newsInfo";
 	}
-	
+
 	@RequestMapping(value = "/getReadNum", method = RequestMethod.POST)
 	@ResponseBody
 	private AllInfo getReadNum(@RequestParam("meId") int meId) {
 
 		logger.info("getReadNum++" + meId);
-		return new AllInfo(this.newsservice.getNoReadNum(meId),this.newsservice.getReadedNum(meId),this.newsservice.getDelNum(meId));
+		return new AllInfo(this.newsservice.getNoReadNum(meId), this.newsservice.getReadedNum(meId),
+				this.newsservice.getDelNum(meId));
 	}
-	
+
 	@RequestMapping(value = "/updataMessage", method = RequestMethod.POST)
 	@ResponseBody
-	private AllInfo getReadNum(@RequestParam("meId") Integer meId,
-								@RequestParam("meTitle") String meTitle,
-								@RequestParam("meSend") String meSend,
-								@RequestParam("meReceive") String meReceive,
-								@RequestParam("meDate") String meDate,
-								@RequestParam("meAbout") String meAbout) {
-		logger.info("updataMessage++" + meId+"++"+meTitle+"++"+meSend+"++"+meReceive+"++"+meDate+"++"+meAbout);
-		return new AllInfo(this.newsservice.updataMessage(meId,meTitle,meSend,meReceive,meDate,meAbout));
+	private AllInfo getReadNum(@RequestParam("meId") Integer meId, @RequestParam("meTitle") String meTitle,
+			@RequestParam("meSend") String meSend, @RequestParam("meReceive") String meReceive,
+			@RequestParam("meDate") String meDate, @RequestParam("meAbout") String meAbout) {
+		logger.info("updataMessage++" + meId + "++" + meTitle + "++" + meSend + "++" + meReceive + "++" + meDate + "++"
+				+ meAbout);
+		return new AllInfo(this.newsservice.updataMessage(meId, meTitle, meSend, meReceive, meDate, meAbout));
 	}
-	
+
 	@RequestMapping(value = "/deleteMessage", method = RequestMethod.POST)
 	@ResponseBody
 	private AllInfo getReadNum(@RequestParam("meId") Integer meId) {
 		logger.info("deleteMessage++" + meId);
 		return new AllInfo(this.newsservice.deleteMessage(meId));
 	}
-	
+
 	@RequestMapping(value = "/addMessage", method = RequestMethod.POST)
 	@ResponseBody
-	private AllInfo addMessage(@RequestParam("meTitle") String meTitle,
-							   @RequestParam("meReceive") String meReceive,
-							   @RequestParam("meAbout") String meAbout,HttpSession session) {
-		
-		logger.info("addMessage++" + meTitle+"++"+meReceive+"++"+meAbout);
+	private AllInfo addMessage(@RequestParam("meTitle") String meTitle, @RequestParam("meReceive") String meReceive,
+			@RequestParam("meAbout") String meAbout, HttpSession session) {
+
+		logger.info("addMessage++" + meTitle + "++" + meReceive + "++" + meAbout);
 		Integer usId = ((Login) session.getAttribute("login")).getUsId();
-		if(meReceive == "" || meReceive == null){
+		if (meReceive == "" || meReceive == null) {
 			meReceive = String.valueOf(0);
 		}
-		return new AllInfo(this.newsservice.addMessage(new Message(meTitle,usId,meReceive,new Date(System.currentTimeMillis()),meAbout)));
+		return new AllInfo(this.newsservice
+				.addMessage(new Message(meTitle, usId, meReceive, new Date(), meAbout)));
 	}
 }

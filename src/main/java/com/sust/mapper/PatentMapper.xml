@@ -19,11 +19,118 @@
 		pa_number, pa_about,
 		pa_uptime
 	</sql>
-
+	
+	<select id="selectCateNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_patent where pa_category = #{paCate,jdbcType=VARCHAR}
+	</select>
+	<select id="selectTimeNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from sr_patent where YEAR(pa_date) = #{Year,jdbcType=INTEGER}
+	</select>
+	<select id="selectXueYuanNum" parameterType="String" resultType="java.lang.Integer">
+		select count(*) from sr_patent where us_id in(select us_id from sr_users where us_academy = #{usAcademy,jdbcType=VARCHAR});
+	</select>
+	<select id="selectSexNumber" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_patent where us_id in(select us_id from sr_users where us_sex = #{usSex,jdbcType=TINYINT});
+	</select>
+ 	<select id="selectAllPatentFileName" resultType="java.util.Date">
+		select pa_uptime
+		from sr_patent
+		order by pa_uptime desc
+	</select>
+	<select id="selectPetentFind" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_patent
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPada != null">
+			 <![CDATA[
+                and pa_date >= #{smlPada,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPada != null">
+			 <![CDATA[
+				and pa_date <= #{bigPada,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="paCate != null and paCate != ''">
+				and pa_category = #{paCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPaUp != null">
+			 <![CDATA[
+				and pa_uptime >= #{smlPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPaUp != null">
+			 <![CDATA[
+				and pa_uptime <= #{bigPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		and us_id = #{usId,jdbcType=INTEGER}
+	</select>
+	<select id="selectGuiNaPetent" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_patent
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlPada != null">
+			 <![CDATA[
+                and pa_date >= #{smlPada,jdbcType=DATE}
+                ]]>
+			</if>
+			<if test="bigPada != null">
+			 <![CDATA[
+				and pa_date <= #{bigPada,jdbcType=DATE}
+				 ]]>
+			</if>
+			<if test="paCate != null and paCate != ''">
+				and pa_category = #{paCate,jdbcType=VARCHAR}
+			</if>
+			<if test="smlPaUp != null">
+			 <![CDATA[
+				and pa_uptime >= #{smlPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+			<if test="bigPaUp != null">
+			 <![CDATA[
+				and pa_uptime <= #{bigPaUp,jdbcType=TIMESTAMP}
+				]]>
+			</if>
+		</trim>
+		<if test="flg == 1">
+			and us_id in(select us_id from sr_users
+			<trim prefix="where" prefixOverrides="and">
+				<if test="xuyuan != null and xuyuan != ''">
+					and us_academy = #{xuyuan,jdbcType=VARCHAR}
+				</if>
+				<if test="sex != null and sex != ''">
+					and us_sex = #{sex,jdbcType=TINYINT}
+				</if>
+				<if test="duty != null and duty != ''">
+					and us_duty = #{duty,jdbcType=VARCHAR}
+				</if>
+				<if test="major != null and major != ''">
+					and us_major = #{major,jdbcType=VARCHAR}
+				</if>
+				<if test="smlAge != null">
+			 <![CDATA[
+				and us_age >= #{smlAge,jdbcType=INTEGER}
+				]]>
+				</if>
+				<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+				</if>
+			</trim>
+			)
+		</if>
+	</select>
 	<select id="selectAllPaInfo" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from sr_patent
+		order by pa_uptime desc
 	</select>
 	<select id="selectNameById" parameterType="java.lang.Integer"
 		resultType="String">
@@ -56,6 +163,12 @@
 		from sr_patent
 		where pa_id = #{paId,jdbcType=INTEGER}
 	</select>
+
+	<delete id="deleteByUsId" parameterType="java.lang.Integer">
+		delete from
+		sr_patent
+		where us_id = #{usId,jdbcType=INTEGER}
+	</delete>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		sr_patent

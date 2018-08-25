@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	<display-name>SRAMS</display-name>
+	<display-name>MyPicture</display-name>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
@@ -76,14 +76,14 @@
 	</filter-mapping>
 
 	<!-- sessionfilter -->
-	<filter>
+	<!-- <filter>
 		<filter-name>sessionFilter</filter-name>
 		<filter-class>com.sust.other.SessionFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>sessionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 	<!--以上截止sessionfilter -->
 	<!--设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开 -->
@@ -94,6 +94,22 @@
 		<!-- 如果某个会话在一定时间未被访问，则服务器可以扔掉以节约内存 -->
 		<session-timeout>30</session-timeout>
 	</session-config>
-
+	
+	<!-- <error-page>
+		将错误代码(Error Code)或异常(Exception)的种类对应到web应用资源路径.
+		<error-code>404</error-code>
+		HTTP Error code,例如: 404、403
+		<location>/error.jsp</location>
+		用来设置发生错误或异常时要显示的页面
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<exception-type>java.text.ParseException</exception-type>
+		<exception-type>FileNotFoundException</exception-type>
+		设置可能会发生的java异常类型,例如:java.lang.Exception
+		<location>/error.jsp</location>
+		用来设置发生错误或异常时要显示的页面
+	</error-page> -->
 
 </web-app>

@@ -55,149 +55,308 @@ li {
 
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
-			<div class="panel-info">
+			<div class="panel-info" style="margin-bottom: 3em;">
 				<div class=" panel-body-inputin">
-					<form class="form-horizontal">
+					<form class="form-horizontal"
+						action="${pageContext.request.contextPath}/praise/findPraiseInfo"
+						id="findpraiseInfo" name="findpraiseInfo" method="get">
 						<div class="form-group mb-n">
 							<label for="largeinput" class=" control-label label-input-lg"
-								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
+								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label> <a
+								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=praise"><button
+									type="button" class="btn btn-success col-sm-1"
+									style="float: right;margin-right: 2em;width: 10em;">导出所有信息为Excl</button></a>
+							<button class="btn btn-danger" id="find" type="submit"
+								style="float: right;margin-right: 2em;"
+								onclick="return findInfo();">查询信息</button>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-2" style="margin-left: 1em">
-								<select class="form-control1">
-									<option>论文名称</option>
-									<option>发表时间</option>
-									<option>发表期刊</option>
-									<option>论文类别</option>
+						<div id="Praise">
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="PrCate" name="PrCate">
+									<option value="">获奖类别</option>
+									<option value="特等奖">特等奖</option>
+									<option value="一等奖">一等奖</option>
+									<option value="二等奖">二等奖</option>
+									<option value="三等奖">三等奖</option>
 								</select>
 							</div>
-							<label for="largeinput"
-								class="col-sm-2 control-label label-input-lg"
-								style="color: #e94e02;">关键信息：</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg"
-									id="largeinput" placeholder=" ">
+							<div class="col-sm-2" style="width: 19em;">
+								<div class="form-group mb-n">
+									获奖时间&le;<input type="text" name="date4" title="获奖时间"
+										class="form-control1 input-lg" id="date4" style="width: 7em;">
+									&ge;<input type="text" name="Cdate4" title="获奖时间"
+										class="form-control1 input-lg" id="Cdate4" style="width: 7em;">
+								</div>
 							</div>
-							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<a
-								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=praise"><button
-									type="button" class="btn btn-success col-sm-2"
-									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
+							<div class="col-sm-2" style="width: 20em;">
+								<div class="form-group mb-n">
+									文件上传时间&le;<input type="text" name="date5" title="文件上传时间"
+										class="form-control1 input-lg" id="date5" style="width: 7em;">
+									&ge;<input type="text" name="Cdate5" title="文件上传时间"
+										class="form-control1 input-lg" id="Cdate5" style="width: 7em;">
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-			<br>
+			<br> <br>
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
-				<table class="table table-bordered"
-					style="table-layout: fixed; width: 100%;">
-					<thead>
-						<tr class="success">
-							<th
-								style="text-align: center; vertical-align: middle; width: 5%;"><input
-								type="checkbox" name="prId"></th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖名称</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖类别</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">获奖日期</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 14%;">颁发单位</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 29%;">获奖简介</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${requestScope.Pa}" var="RaceList">
+				<c:if test="${isShow == 'yes'}">
+					<div class="panel-heading success" style="vertical-align: middle;">
+						查找信息 <a
+							href="${pageContext.request.contextPath}/praise/getAllPraiseInfo"
+							style="color: red;float: right;"> 取消查找信息 </a> <a
+							href="${pageContext.request.contextPath}/praise/downloadFind"
+							style="color: red;float: right;margin-right: 1em;"> 导出查找信息 </a>
+					</div>
+					<table class="table table-bordered"
+						style="table-layout: fixed; width: 100%;">
+						<thead>
 							<tr>
-								<td
+								<th
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
-									type="checkbox" value="${RaceList.prId}" name="prId"></td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.prName}">${RaceList.prName}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.prCategory}">${RaceList.prCategory}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.prDate}">${RaceList.prDate}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 14%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.prUnit}">${RaceList.prUnit}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 29%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.prAbout}">${RaceList.prAbout}</td>
-								<th align="center"
-									style="width: 10%; text-align: center; vertical-align: middle;">
-									<div style="width: 100%; height: 2em;">
-										<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
-											href="javascript:void(0);"
-											onclick="showUpInfo(${RaceList.prId});" title="修改信息"> <i
-												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
-										</a></li>
-										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=praise&id=${RaceList.prId}"
-											title="下载文件"> <i class="fa fa-download mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
-										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-											href="javascript:void(0);"
-											onclick="delInfo(${RaceList.prId});" title="删除信息"> <i
-												class="fa fa-trash-o mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
-										<li
-											style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
-											href="#myLookModal" onclick="setInfo(${RaceList.prId});"
-											data-toggle="modal" data-target="#myLookModal" title="查看信息">
-												<i class="fa fa-book nav_icon"
-												style="width: 0.15em; padding-left: 0.1em;"></i>
-										</a></li>
-									</div>
-								</th>
+									type="checkbox" name="prId"></th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖名称</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖者</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖类别</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖日期</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">颁发单位</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 25%;">获奖简介</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">操作</th>
 							</tr>
-						</c:forEach>
-						<script>
-							$(function() {
-								$('[data-toggle="tooltip"]').tooltip({
-									container : 'body'
-								});
-							})
-						</script>
-					</tbody>
-				</table>
-				<p>
-				<div style="float: left;">
-					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
-					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-						onchange="rePages()" size="1">
-						<option value="${page.pageSize}">${page.pageSize}</option>
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>条记录
-				</div>
-				<div style="float:right;">
-					<a
-						href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
-					<a
-						href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
-					<a
-						href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
-					<a
-						href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
-				</div>
-				</p>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.PraiseList}" var="prList">
+								<tr>
+									<td
+										style="text-align: center; vertical-align: middle; width: 5%;"><input
+										type="checkbox" value="${prList.prId}" name="prId"></td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prName}">${prList.prName}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prAuthor}">${prList.prAuthor}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prCategory}">${prList.prCategory}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prDate}">${prList.prDate}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prUnit}">${prList.prUnit}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 25%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prAbout}">${prList.prAbout}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${prList.prUptime}">${prList.prUptime}</td>
+									<th align="center"
+										style="width: 10%; text-align: center; vertical-align: middle;">
+										<div style="width: 100%; height: 2em;">
+											<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
+												href="javascript:void(0);"
+												onclick="showUpInfo(${prList.prId});" title="修改信息"> <i
+													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=praise&id=${prList.prId}&isFind=yes&role=AD"
+												title="下载文件"> <i class="fa fa-download mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="javascript:void(0);"
+												onclick="delInfo(${prList.prId});" title="删除信息"> <i
+													class="fa fa-trash-o mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i>
+											</a></li>
+											<li
+												style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
+												href="#myLookModal" onclick="setInfo(${prList.prId});"
+												data-toggle="modal" data-target="#myLookModal" title="查看信息">
+													<i class="fa fa-book nav_icon"
+													style="width: 0.15em; padding-left: 0.1em;"></i>
+											</a></li>
+										</div>
+									</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<script>
+						$(function() {
+							$('[data-toggle="tooltip"]').tooltip({
+								container : 'body'
+							});
+						})
+					</script>
+					<p>
+					<div style="float: left;">
+						显示第${page1.startRow}至${page1.endRow}项/第${page1.nowPage}页，共
+						${page1.totalCount}项/${page1.totalPage}页， 每页显示 <select
+							id="pageSize1" onchange="rePages1()" size="1">
+							<option value="${page1.pageSize}">${page1.pageSize}</option>
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>条记录
+					</div>
+					<div style="float:right;">
+						<a
+							href="${pageContext.request.contextPath}/praise/getPage?page=${page1.firstPage}&pageSize=${ps1}">第一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getPage?page=${page1.nextPage}&pageSize=${ps1}">下一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getPage?page=${page1.prePage}&pageSize=${ps1}">上一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getPage?page=${page1.lastPage}&pageSize=${ps1}">最后页</a>
+					</div>
+					</p>
+				</c:if>
+				<c:if test="${isShow != 'yes'}">
+					<div class="panel-heading success" style="vertical-align: middle;">
+						所有获奖信息</div>
+					<table class="table table-bordered"
+						style="table-layout: fixed; width: 100%;">
+						<thead>
+							<tr>
+								<th
+									style="text-align: center; vertical-align: middle; width: 5%;"><input
+									type="checkbox" name="prId"></th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖名称</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖者</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖类别</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">获奖日期</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">颁发单位</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 25%;">获奖简介</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">文件上传时间</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 10%;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.Pa}" var="RaceList">
+								<tr>
+									<td
+										style="text-align: center; vertical-align: middle; width: 5%;"><input
+										type="checkbox" value="${RaceList.prId}" name="prId"></td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prName}">${RaceList.prName}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prAuthor}">${RaceList.prAuthor}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prCategory}">${RaceList.prCategory}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prDate}">${RaceList.prDate}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prUnit}">${RaceList.prUnit}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 25%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prAbout}">${RaceList.prAbout}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 10%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.prUptime}">${RaceList.prUptime}</td>
+									<th align="center"
+										style="width: 10%; text-align: center; vertical-align: middle;">
+										<div style="width: 100%; height: 2em;">
+											<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
+												href="javascript:void(0);"
+												onclick="showUpInfo(${RaceList.prId});" title="修改信息"> <i
+													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=praise&id=${RaceList.prId}&role=AD"
+												title="下载文件"> <i class="fa fa-download mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="javascript:void(0);"
+												onclick="delInfo(${RaceList.prId});" title="删除信息"> <i
+													class="fa fa-trash-o mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i>
+											</a></li>
+											<li
+												style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
+												href="#myLookModal" onclick="setInfo(${RaceList.prId});"
+												data-toggle="modal" data-target="#myLookModal" title="查看信息">
+													<i class="fa fa-book nav_icon"
+													style="width: 0.15em; padding-left: 0.1em;"></i>
+											</a></li>
+										</div>
+									</th>
+								</tr>
+							</c:forEach>
+							<script>
+								$(function() {
+									$('[data-toggle="tooltip"]').tooltip({
+										container : 'body'
+									});
+								})
+							</script>
+						</tbody>
+					</table>
+					<p>
+					<div style="float: left;">
+						显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+						${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+							onchange="rePages()" size="1">
+							<option value="${page.pageSize}">${page.pageSize}</option>
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>条记录
+					</div>
+					<div style="float:right;">
+						<a
+							href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						<a
+							href="${pageContext.request.contextPath}/praise/getAllPraiseInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+					</div>
+					</p>
+				</c:if>
 			</div>
 		</div>
 		<div class="media">
@@ -231,6 +390,11 @@ li {
 						<div class="col-sm-4">
 							<input type="text" class="form-control1 input-lg" id="prUnit"
 								title="颁发单位" name="prUnit" placeholder="颁发单位"
+								required="required">
+						</div>
+						<div class="col-sm-4">
+							<input type="text" name="prAuthor" title="获奖人"
+								class="form-control1 input-lg" id="prAuthor" placeholder="获奖人"
 								required="required">
 						</div>
 					</div>
@@ -280,7 +444,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">获奖名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -299,6 +463,16 @@ li {
 									class=" control-label label-input-lg">获奖时间</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="pr_da" id="pr_da" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">获奖人</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="pr_au" id="pr_au" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传时间</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="pr_time" id="pr_time" readonly="true"></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -347,6 +521,7 @@ li {
 		$("#prCategory").val(data.prCategory);
 		$("#Cdate").val(data.prDate);
 		$("#prUnit").val(data.prUnit);
+		$("#prAuthor").val(data.prAuthor);
 		$("#prAbout").val(data.prAbout);
 	}
     function showInfoModel(data) {
@@ -354,6 +529,8 @@ li {
 		$("#pr_ca").val(data.prCategory);
 		$("#pr_da").val(data.prDate);
 		$("#pr_ty").val(data.prUnit);
+		$("#pr_au").val(data.prAuthor);
+		$("#pr_time").val(data.prUptime);
 		$("#pr_ab").val(data.prAbout);
 		showInfo(data);
 	}
@@ -400,7 +577,7 @@ li {
 			async : true,
 			success : function(data){
 				 alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -439,10 +616,10 @@ li {
 			},
 			dataType : 'json',
 			cache : false,
-			async : false,
+			async : true,
 			success : function(data) {
 				alert("修改成功！");
-			    window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo";
+			   location.reload();
 			}, 
 			error : function(data) {
 				alert("update error!");
@@ -463,10 +640,10 @@ li {
 			},
 			dataType : 'json',
 			cache : false,
-			async : false,
+			async : true,
 			success : function(data) {
 				alert("添加成功！");
-			    window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo";
+			    location.reload();
 			}, 
 			error : function(data) {
 				alert("add error!");
@@ -515,9 +692,21 @@ li {
          });
     }
     function rePages(){
-   var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo?pageSize="+page;
-   window.parent.scrollTo(0, 0);
-   }
+	   var page = $("#pageSize").val();
+	   window.location.href = "${pageContext.request.contextPath}/praise/getAllPraiseInfo?pageSize="+page;
+	   window.parent.scrollTo(0, 0);
+    }
+    function rePages1(){
+		    var page = $("#pageSize1").val();
+			window.location.href = "${pageContext.request.contextPath}/praise/getPage?pageSize=" + page;
+			window.parent.scrollTo(0, 0);
+	}
+	function findInfo() {
+		if (confirm("确定要查找？")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 </script>
 </html>

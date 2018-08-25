@@ -2,21 +2,46 @@ package com.sust.entity;
 
 public class AllInfo {
 
-	public String string1;
-	public String string2;
-	public String string3;
-	public String string4;
-	public String string5;
-	public String string6;
-	public String string7;
-	public String string8;
-	public String string9;
-	public String string10;
+	public String string1 = "";
+	public String string2 = "";
+	public String string3 = "";
+	public String string4 = "";
+	public String string5 = "";
+	public String string6 = "";
+	public String string7 = "";
+	public String string8 = "";
+	public String string9 = "";
+	public String string10 = "";
 
 	public AllInfo() {
 
 	}
 
+	public AllInfo(String string1) {
+		super();
+		this.string1 = string1;
+	}
+
+	public AllInfo(String string1, String string2) {
+		super();
+		this.string1 = string1;
+		this.string2 = string2;
+	}
+
+	public AllInfo(String string1, String string2, String string3) {
+		super();
+		this.string1 = string1;
+		this.string2 = string2;
+		this.string3 = string3;
+	}
+
+	public AllInfo(String string1, String string2, String string3, String string4) {
+		super();
+		this.string1 = string1;
+		this.string2 = string2;
+		this.string3 = string3;
+		this.string4 = string4;
+	}
 	public AllInfo(String string1, String string2, String string3, String string4, String string5) {
 		super();
 		this.string1 = string1;
@@ -25,38 +50,17 @@ public class AllInfo {
 		this.string4 = string4;
 		this.string5 = string5;
 	}
-
-	public AllInfo(String string1) {
-		this.string1 = string1;
-		this.string2 = "";
-		this.string3 = "";
-		this.string4 = "";
-		this.string5 = "";
-	}
-
-	public AllInfo(String string1, String string2) {
-		this.string1 = string1;
-		this.string2 = string2;
-		this.string3 = "";
-		this.string4 = "";
-		this.string5 = "";
-	}
-
-	public AllInfo(String string1, String string2, String string3) {
-		this.string1 = string1;
-		this.string2 = string2;
-		this.string3 = string3;
-		this.string4 = "";
-		this.string5 = "";
-	}
-
-	public AllInfo(String string1, String string2, String string3, String string4) {
+	
+	public AllInfo(String string1, String string2, String string3, String string4, String string5, String string6) {
+		super();
 		this.string1 = string1;
 		this.string2 = string2;
 		this.string3 = string3;
 		this.string4 = string4;
-		this.string5 = "";
+		this.string5 = string5;
+		this.string6 = string6;
 	}
+
 	public AllInfo(String string1, String string2, String string3, String string4, String string5, String string6,
 			String string7) {
 		super();
@@ -67,11 +71,20 @@ public class AllInfo {
 		this.string5 = string5;
 		this.string6 = string6;
 		this.string7 = string7;
-		this.string8 = "";
-		this.string9 = "";
-		this.string10 = "";
 	}
 
+	public AllInfo(String string1, String string2, String string3, String string4, String string5, String string6,
+			String string7, String string8) {
+		super();
+		this.string1 = string1;
+		this.string2 = string2;
+		this.string3 = string3;
+		this.string4 = string4;
+		this.string5 = string5;
+		this.string6 = string6;
+		this.string7 = string7;
+		this.string8 = string8;
+	}
 	public AllInfo(String string1, String string2, String string3, String string4, String string5, String string6,
 			String string7, String string8, String string9) {
 		super();
@@ -84,9 +97,8 @@ public class AllInfo {
 		this.string7 = string7;
 		this.string8 = string8;
 		this.string9 = string9;
-		this.string10 = "";
 	}
-	
+
 	public AllInfo(String string1, String string2, String string3, String string4, String string5, String string6,
 			String string7, String string8, String string9, String string10) {
 		super();
@@ -181,6 +193,5 @@ public class AllInfo {
 	public void setString10(String string10) {
 		this.string10 = string10;
 	}
-
 
 }

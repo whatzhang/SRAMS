@@ -1,11 +1,11 @@
 package com.sust.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import com.sust.entity.Patent;
-import com.sust.entity.Thesis;
 
 public interface PatentService {
 
@@ -21,6 +21,13 @@ public interface PatentService {
 
 	int upPaInfo(Patent patent);
 
-	List<Thesis> getAllPaInfo();
+	List<Patent> getAllPaInfo();
+
+	Map<String, Object> GuiNaPatent(String flg, String xuyuan, String sex, String duty, String bigAge, String smlAge,
+			String major, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
+
+	List<Patent>  findThInfo(String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
+	
+	List<Patent> findUserPatentInfo(Integer usId, String paCate, String bigPada, String smlPada, String bigPaUp, String smlPaUp);
 
 }

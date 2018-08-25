@@ -13,13 +13,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.sust.entity.Login;
 
 public class SessionFilter extends OncePerRequestFilter {
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
 		// 不过滤的uri
-		String[] notFilter = new String[] { "/login","/users/register.jsp","/login.jsp","/index.jsp","/error.jsp","/css","/js","/img","/fonts"};
+		String[] notFilter = new String[] { "/login", "/users/register.jsp", "/login.jsp", "/index.jsp", "/error.jsp",
+				"/css", "/js", "/img", "/fonts" };
 
 		// 请求的uri
 		String uri = request.getRequestURI();
@@ -36,17 +37,17 @@ public class SessionFilter extends OncePerRequestFilter {
 		if (doFilter) {
 			// 执行过滤
 			// 从session中获取登录者实体
-			Login obj =(Login) request.getSession().getAttribute("login");
+			Login obj = (Login) request.getSession().getAttribute("login");
 			if (null == obj) {
 				boolean isAjaxRequest = isAjaxRequest(request);
 				if (isAjaxRequest) {
 					response.setCharacterEncoding("UTF-8");
 					response.sendError(HttpStatus.UNAUTHORIZED.value(), "您已经太长时间没有操作,请重新登录");
 					System.out.println(request.getContextPath());
-					response.sendRedirect(request.getContextPath()+"/index.jsp");
+					response.sendRedirect(request.getContextPath() + "/index.jsp");
 					return;
 				}
-				response.sendRedirect(request.getContextPath()+"/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 				return;
 			} else {
 				// 如果session中存在登录者实体，则继续

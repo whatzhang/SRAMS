@@ -20,10 +20,10 @@ public class NewsServiceImpl implements NewsService {
 
 	@Resource
 	private MessageMapper messageMapper;
-	
+
 	@Resource
 	private MeStatusMapper meStatusMapper;
-	
+
 	@Resource
 	private LoginMapper loginMapper;
 
@@ -65,31 +65,31 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public List<Message> getAllMessages() {
-		
+
 		return this.messageMapper.selectAllMessages();
 	}
 
 	@Override
 	public List<Message> getNowMessages() {
-		
+
 		return this.messageMapper.selectNowMessages();
 	}
 
 	@Override
 	public String getNoReadNum(Integer meId) {
-		
+
 		return String.valueOf(this.messageMapper.selectNoReadNum(meId));
 	}
 
 	@Override
 	public String getReadedNum(Integer meId) {
-		
+
 		return String.valueOf(this.messageMapper.selectReadedNum(meId));
 	}
 
 	@Override
 	public String getDelNum(Integer meId) {
-		
+
 		return String.valueOf(this.messageMapper.selectDelNum(meId));
 	}
 
@@ -97,7 +97,8 @@ public class NewsServiceImpl implements NewsService {
 	public String updataMessage(Integer meId, String meTitle, String meSend, String meReceive, String meDate,
 			String meAbout) {
 		try {
-			this.messageMapper.updateByPrimaryKey(new Message(meId, meTitle, Integer.valueOf(meSend), meReceive, (Date)(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(meDate)), meAbout));
+			this.messageMapper.updateByPrimaryKey(new Message(meId, meTitle, Integer.valueOf(meSend), meReceive,
+					(Date) (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(meDate)), meAbout));
 		} catch (Exception e) {
 			return "更新信息失败，请重试！";
 		}
@@ -121,7 +122,7 @@ public class NewsServiceImpl implements NewsService {
 			this.messageMapper.insertSelective(message);
 			List<Integer> usIdList = this.loginMapper.selectUsIdList();
 			for (int i = 0; i < usIdList.size(); i++) {
-				this.meStatusMapper.insertSelective(new MeStatus(message.getMeId(),usIdList.get(i),(byte) 0));
+				this.meStatusMapper.insertSelective(new MeStatus(message.getMeId(), usIdList.get(i), (byte) 0));
 			}
 		} catch (Exception e) {
 			return "发布新消息失败，请重试！";

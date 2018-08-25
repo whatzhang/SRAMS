@@ -32,4 +32,27 @@ public interface ProjectMapper {
 
 	List<Project> selectAllProjectList();
 
+	int deleteByUsId(Integer usId);
+
+	List<Project> selectGuiNaThesis(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigProda") Date bigProda, @Param("smlProda") Date smlProda,
+			@Param("proCate") String proCate, @Param("bigMoney") Integer bigMoney, @Param("smlMoney") Integer smlMoney,
+			@Param("bigProUp") Date bigProUp, @Param("smlProUp") Date smlProUp);
+
+	List<Project> selectProjectFind(@Param("usId") Integer usId, @Param("bigProda") Date bigProda, @Param("smlProda") Date smlProda,
+			@Param("proCate") String proCate, @Param("bigMoney") Integer bigMoney, @Param("smlMoney") Integer smlMoney,
+			@Param("bigProUp") Date bigProUp, @Param("smlProUp") Date smlProUp);
+
+	List<Date> selectAllProjectFileName();
+
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("proCate") String proCate);
+
+	int selectCateNumByCash(@Param("smlMoney") Integer smlMoney, @Param("bigMoney") Integer bigMoney);
 }

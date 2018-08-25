@@ -13,9 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.sust.controller.LoginController;
 import com.sust.dao.LoginMapper;
+import com.sust.dao.MessageMapper;
 import com.sust.dao.UsersMapper;
 import com.sust.entity.Login;
+import com.sust.entity.Message;
 import com.sust.entity.Users;
+import com.sust.other.MD5Util;
 import com.sust.service.LoginService;
 
 @Service
@@ -27,19 +30,22 @@ public class LoginServiceImpl implements LoginService {
 	private LoginMapper loginMapper;
 	@Resource
 	private UsersMapper usersMapper;
+	@Resource
+	private MessageMapper messageMapper;
 
 	@Override
 	public Login getLogin(String type, String account, String userPassword) throws Exception {
 
-		return loginMapper.selectLoginInfo(account, userPassword, type);
+		return loginMapper.selectLoginInfo(account, MD5Util.convertMD5(userPassword), type);
 	}
 
 	@Override
 	public String getLoginInfo(String account, String password, String type) {
-
+		
+		password = MD5Util.convertMD5(password);
 		logger.info("getLoginInfo:" + loginMapper.selectLoginByAccount(account) + "+++"
 				+ loginMapper.selectLoginByPass(password) + "+++"
-				+ loginMapper.selectLoginByAll(account, password, type));
+				+ loginMapper.selectLoginByAll(account,password, type));
 		if (loginMapper.selectLoginByAccount(account) > 0) {
 			if (loginMapper.selectLoginByPass(password) > 0) {
 				if (loginMapper.selectLoginByAll(account, password, type) > 0) {
@@ -110,9 +116,9 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public Map<String, String> getInitInfo(String account, String type, Integer id, boolean flg) {
-		
-		if(flg){
-	    	id = this.loginMapper.selectByAccount(account);
+
+		if (flg) {
+			id = this.loginMapper.selectByAccount(account);
 		}
 		Map<String, String> init = new HashMap<String, String>();
 		init.put("name", account);
@@ -125,18 +131,13 @@ public class LoginServiceImpl implements LoginService {
 		init.put("boNum", Integer.toString(this.loginMapper.selectBoNum(id)));
 		init.put("raNum", Integer.toString(this.loginMapper.selectRaNum(id)));
 		init.put("meNum", Integer.toString(this.loginMapper.selectMeNum(id)));
-		/*
-		 * for (Iterator<String> i = init.keySet().iterator(); i.hasNext();) {
-		 * Object obj = i.next(); System.out.println(obj);// 循环输出key
-		 * System.out.println("key=" + obj + " value=" + init.get(obj)); }
-		 */
 		return init;
 	}
 
 	@Override
 	public int upDataPass(Integer usId, String pass) {
 
-		return this.loginMapper.updatePassword(usId, pass);
+		return this.loginMapper.updatePassword(usId, MD5Util.convertMD5(pass));
 	}
 
 	@Override
@@ -144,14 +145,14 @@ public class LoginServiceImpl implements LoginService {
 		Map<String, String> init = new HashMap<String, String>();
 		int thNum = this.loginMapper.selectAllThNum();
 		int paNum = this.loginMapper.selectAllPaNum();
-	    int prNum = this.loginMapper.selectAllPrNum();
-	    int proNum = this.loginMapper.selectAllProNum();
-	    int boNum = this.loginMapper.selectAllBoNum();
-	    int raNum = this.loginMapper.selectAllRaNum();
-	    int meNum = this.loginMapper.selectAllMeNum();
-	    int userNum = this.loginMapper.selectAllUser();
-	    int allData = thNum + paNum + prNum + proNum + boNum + raNum;
-		
+		int prNum = this.loginMapper.selectAllPrNum();
+		int proNum = this.loginMapper.selectAllProNum();
+		int boNum = this.loginMapper.selectAllBoNum();
+		int raNum = this.loginMapper.selectAllRaNum();
+		int meNum = this.loginMapper.selectAllMeNum();
+		int userNum = this.loginMapper.selectAllUser();
+		int allData = thNum + paNum + prNum + proNum + boNum + raNum;
+
 		init.put("thNum", String.valueOf(thNum));
 		init.put("paNum", String.valueOf(paNum));
 		init.put("prNum", String.valueOf(prNum));
@@ -162,6 +163,49 @@ public class LoginServiceImpl implements LoginService {
 		init.put("userNum", String.valueOf(userNum));
 		init.put("allData", String.valueOf(allData));
 		return init;
+	}
+
+	@Override
+	public List<Login> getAllLoginInfo() {
+
+		return this.loginMapper.selectAllLogin();
+	}
+
+	@Override
+	public Login getLoginInfoById(Integer usId) {
+
+		return this.loginMapper.selectByPrimaryKey(usId);
+	}
+
+	@Override
+	public String updataLoginInfo(Login login) {
+		try {
+			this.loginMapper.updateByPrimaryKeySelective(login);
+		} catch (Exception e) {
+			return "更新失败";
+		}
+		return "更新信息成功！";
+	}
+
+	@Override
+	public String addloginInfo(Login login) {
+		try {
+			this.loginMapper.insertSelective(login);
+		} catch (Exception e) {
+			return "添加失败";
+		}
+		return "添加信息成功！";
+	}
+
+	@Override
+	public List<Message> getNews(Integer usId) {
+		List<Message> aa = messageMapper.selectMeNoReadByUsId(usId);
+		logger.info(aa.size());
+		if(aa.size()>10){
+			return aa.subList(0, 10);
+		}else{
+			return aa;
+		}
 	}
 
 }

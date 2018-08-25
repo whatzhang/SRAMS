@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.sust.entity.Patent;
-import com.sust.entity.Thesis;
 
 @Repository
 public interface PatentMapper {
@@ -33,5 +32,26 @@ public interface PatentMapper {
 
 	String selectNameById(Integer paId);
 
-	List<Thesis> selectAllPaInfo();
+	List<Patent> selectAllPaInfo();
+
+	int deleteByUsId(Integer usId);
+
+	List<Patent> selectGuiNaPetent(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
+			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
+
+	List<Patent> selectPetentFind(@Param("usId") Integer usId,  @Param("bigPada") Date bigPada, @Param("smlPada") Date smlPada,
+			@Param("paCate") String paCate,@Param("bigPaUp") Date bigPaUp, @Param("smlPaUp") Date smlPaUp);
+
+	List<Date> selectAllPatentFileName();
+	
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("paCate") String paCate);
+
 }

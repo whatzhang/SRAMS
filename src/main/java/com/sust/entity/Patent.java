@@ -130,10 +130,18 @@ public class Patent {
 	}
 
 	public String getPaUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(paUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(paUptime);
 	}
 
 	public void setPaUptime(Date paUptime) {
 		this.paUptime = paUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Patent [paId=" + paId + ", usId=" + usId + ", paName=" + paName + ", paCategory=" + paCategory
+				+ ", paAuthor=" + paAuthor + ", paPlease=" + paPlease + ", paDate=" + paDate + ", paNumber=" + paNumber
+				+ ", paAbout=" + paAbout + ", paUptime=" + paUptime + "]";
+	}
+	
 }

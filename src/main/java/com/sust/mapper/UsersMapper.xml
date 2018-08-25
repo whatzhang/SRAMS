@@ -25,6 +25,38 @@
 		us_mail, us_phone, us_academy, us_question1, us_key1, us_question2, us_key2
 	</sql>
 	
+	<select id="selectAge" resultType="java.lang.Integer">
+		select count(*) from sr_users
+		<trim prefix="where" prefixOverrides="and">
+			<if test="smlAge != null">
+			 <![CDATA[
+				and us_age > #{smlAge,jdbcType=INTEGER}
+				]]>
+			</if>
+			<if test="bigAge != null">
+			 <![CDATA[
+				and us_age <= #{bigAge,jdbcType=INTEGER}
+				]]>
+			</if>
+		</trim>
+	</select> 
+	<select id="selectSexUser" parameterType="java.lang.Byte" resultType="java.lang.Integer">
+		select count(*) from sr_users where us_sex = #{usSex,jdbcType=TINYINT}
+	</select>
+	<select id="selectAllUsers" 
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_users
+	</select>
+	<select id="selectUsidByPartName" parameterType="String"
+		resultType="String">
+		select us_name 
+		from sr_users 
+		<!-- where concat('%',#{Part,jdbcType=VARCHAR},'%') -->
+		<!-- where position('#{Part,jdbcType=VARCHAR}' in us_name)   -->
+		<!--  where us_name like "%"#{Part,jdbcType=VARCHAR}"%" --> 
+	</select>
 	<select id="selectByNum" parameterType="String"
 		resultType="java.lang.Integer">
 		select us_id from sr_users where us_num = #{usNum,jdbcType=VARCHAR}

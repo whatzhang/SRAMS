@@ -33,4 +33,26 @@ public interface ThesisMapper {
 	String selectNameByid(Integer id);
 
 	List<Thesis> selectAllThesis();
+
+	int deleteByUsId(Integer usId);
+
+	List<Thesis> selectGuiNaThesis(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigThda") Date bigThda, @Param("smlThda") Date smlThda,
+			@Param("thCate") String thCate, @Param("thle") String thle, @Param("thIsCl") String thIsCl,
+			@Param("bigThUp") Date bigThUp, @Param("smlThUp") Date smlThUp);
+
+	List<Thesis> selectThesisFind(@Param("usId") Integer usId, @Param("bigThda") Date bigThda, @Param("smlThda") Date smlThda,
+			@Param("thCate") String thCate, @Param("thle") String thle, @Param("thIsCl") String thIsCl,
+			@Param("bigThUp") Date bigThUp, @Param("smlThUp") Date smlThUp);
+
+	List<Date> selectAllThesisFileName();
+
+	int selectSexNumber(@Param("usSex") Byte usSex);
+
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("thCate") String thCate);
 }

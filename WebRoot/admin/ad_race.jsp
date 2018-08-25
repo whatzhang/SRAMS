@@ -55,160 +55,347 @@ li {
 
 	<div class="main-page">
 		<div class="media" style="padding: 1em 1em 1em 1em;">
-			<div class="panel-info">
+			<div class="panel-info" style="margin: 1em 0em 5em 0em;">
 				<div class=" panel-body-inputin">
-					<form class="form-horizontal">
+					<form class="form-horizontal"
+						action="${pageContext.request.contextPath}/race/findRaceInfo"
+						id="findraceInfo" name="findraceInfo" method="get">
 						<div class="form-group mb-n">
 							<label for="largeinput" class=" control-label label-input-lg"
-								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label>
+								style="margin-left: 2em; color: #e94e02;">选择查询条件及信息：</label> <a
+								href="${pageContext.request.contextPath}/download/downloadAllTypeExcl?type=race"><button
+									type="button" class="btn btn-success col-sm-1"
+									style="float: right;margin-right: 2em;width: 10em;">导出信息为Excl</button></a>
+							<button class="btn btn-danger" id="find" type="submit"
+								style="float: right;margin-right: 2em;"
+								onclick="return findInfo();">查询信息</button>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-2" style="margin-left: 1em">
-								<select class="form-control1">
-									<option>论文名称</option>
-									<option>发表时间</option>
-									<option>发表期刊</option>
-									<option>论文类别</option>
+						<div id="Race">
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="RaCate" name="RaCate">
+									<option value="">竞赛类别</option>
+									<option value="学科竞赛">学科竞赛</option>
+									<option value="科技竞赛">科技竞赛</option>
+									<option value="其他">其他</option>
 								</select>
 							</div>
-							<label for="largeinput"
-								class="col-sm-2 control-label label-input-lg"
-								style="color: #e94e02;">关键信息：</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control1 input-lg"
-									id="largeinput" placeholder=" ">
+							<div class="col-sm-1" style="width: 12em;">
+								<select class="form-control1" id="RaTuan" name="RaTuan">
+									<option value="">团体/个人</option>
+									<option value="0">团体</option>
+									<option value="1">个人</option>
+									<option value="2">其他</option>
+								</select>
 							</div>
-							<button type="submit" class="btn btn-success col-sm-1">查找</button>
-							<a
-								href="${pageContext.request.contextPath}/download/downloadTypeExcl?type=race"><button
-									type="button" class="btn btn-success col-sm-2"
-									style="float: right;margin-right: 2em;">导出Excl信息表</button></a>
+							<div class="col-sm-2" style="width: 19em;">
+								<div class="form-group mb-n">
+									获奖时间&le;<input type="text" name="date10" title="获奖时间"
+										class="form-control1 input-lg" id="date10" style="width: 7em;">
+									&ge;<input type="text" name="Cdate10" title="获奖时间"
+										class="form-control1 input-lg" id="Cdate10"
+										style="width: 7em;">
+								</div>
+							</div>
+							<div class="col-sm-2" style="width: 20em;">
+								<div class="form-group mb-n">
+									文件上传时间&le;<input type="text" name="date11" title="文件上传时间"
+										class="form-control1 input-lg" id="date11" style="width: 7em;">
+									&ge;<input type="text" name="Cdate11" title="文件上传时间"
+										class="form-control1 input-lg" id="Cdate11"
+										style="width: 7em;">
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-			<br>
 			<div class="panel-info" style="padding: 1em 1em 1em 1em;">
-				<table class="table table-bordered"
-					style="table-layout: fixed; width: 100%;">
-					<thead>
-						<tr class="success">
-							<th
-								style="text-align: center; vertical-align: middle; width: 5%;"><input
-								type="checkbox" name="raId"></th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">竞赛名称</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 11%;">竞赛类别</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">个人/团体</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">获奖等级</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">指导老师</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 10%;">获奖日期</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 25%;">竞赛简介</th>
-							<th
-								style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${requestScope.RaceList}" var="RaceList">
+				<c:if test="${isShow == 'yes'}">
+					<c:if test="${isFind == 'yes'}">
+						<div class="panel-heading success" style="vertical-align: middle;">
+							查找信息 <a
+								href="${pageContext.request.contextPath}/race/getAllRaceInfo"
+								style="color: red;float: right;"> 取消查找信息 </a> <a
+								href="${pageContext.request.contextPath}/race/downloadFind"
+								style="color: red;float: right;margin-right: 1em;"> 导出查找信息 </a>
+						</div>
+						<table class="table table-bordered"
+							style="table-layout: fixed; width: 100%;">
+							<thead>
+								<tr>
+									<th
+										style="text-align: center; vertical-align: middle; width: 5%;"><input
+										type="checkbox" name="raId"></th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">竞赛名称</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">获奖人</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">竞赛类别</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">个人/团体</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">获奖等级</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">指导老师</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">获奖日期</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 23%;">竞赛简介</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">上传日期</th>
+									<th
+										style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${requestScope.RaLists}" var="RaList">
+									<tr>
+										<td
+											style="text-align: center; vertical-align: middle; width: 5%;"><input
+											type="checkbox" value="${RaList.raId}" name="raId"></td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raName}">${RaList.raName}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raAuthor}">${RaList.raAuthor}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raCategory}">${RaList.raCategory}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raType}">${RaList.raType}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raLevel}">${RaList.raLevel}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raTeacher}">${RaList.raTeacher}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raDate}">${RaList.raDate}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 23%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raAbout}">${RaList.raAbout}</td>
+										<td
+											style="text-align: center; vertical-align: middle; width: 8%;"
+											data-toggle="tooltip" data-placement="top"
+											title="${RaList.raUptime}">${RaList.raUptime}</td>
+										<th align="center"
+											style="width: 8%; text-align: center; vertical-align: middle;">
+											<div style="width: 100%; height: 2em;">
+												<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
+													href="javascript:void(0);"
+													onclick="showUpInfo(${RaList.raId});" title="修改信息"> <i
+														class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+												</a></li>
+												<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+													href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaList.raId}&isFind=yes&role=AD"
+													"
+											title="下载文件"> <i
+														class="fa fa-download mail-icon"
+														style="width: 1em; padding-left: 0.2em;"></i></a></li>
+												<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+													href="javascript:void(0);"
+													onclick="delInfo(${RaList.raId});" title="删除信息"> <i
+														class="fa fa-trash-o mail-icon"
+														style="width: 1em; padding-left: 0.2em;"></i>
+												</a></li>
+												<li
+													style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
+													href="#myLookModal" onclick="setInfo(${RaList.raId});"
+													data-toggle="modal" data-target="#myLookModal" title="查看信息">
+														<i class="fa fa-book nav_icon"
+														style="width: 0.15em; padding-left: 0.1em;"></i>
+												</a></li>
+											</div>
+										</th>
+									</tr>
+								</c:forEach>
+								<script>
+									$(function() {
+										$('[data-toggle="tooltip"]').tooltip({
+											container : 'body'
+										});
+									})
+								</script>
+							</tbody>
+						</table>
+						<p>
+						<div style="float: left;">
+							显示第${page1.startRow}至${page1.endRow}项/第${page1.nowPage}页，共
+							${page1.totalCount}项/${page1.totalPage}页， 每页显示 <select
+								id="pageSize1" onchange="rePages1()" size="1">
+								<option value="${page1.pageSize}">${page1.pageSize}</option>
+								<option value="10">10</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+							</select>条记录
+						</div>
+						<div style="float:right;">
+							<a
+								href="${pageContext.request.contextPath}/race/getPage?page=${page1.firstPage}&pageSize=${ps1}">第一页</a>
+							<a
+								href="${pageContext.request.contextPath}/race/getPage?page=${page1.nextPage}&pageSize=${ps1}">下一页</a>
+							<a
+								href="${pageContext.request.contextPath}/race/getPage?page=${page1.prePage}&pageSize=${ps1}">上一页</a>
+							<a
+								href="${pageContext.request.contextPath}/race/getPage?page=${page1.lastPage}&pageSize=${ps1}">最后页</a>
+						</div>
+						</p>
+					</c:if>
+					<c:if test="${isFind != 'yes'}">
+						<span
+							style="text-align: center;vertical-align: middle;color: red;">没有满足查询条件的信息！</span>
+					</c:if>
+				</c:if>
+				<c:if test="${isShow != 'yes'}">
+					<div class="panel-heading success">所有论文信息</div>
+					<table class="table table-bordered"
+						style="table-layout: fixed; width: 100%;">
+						<thead>
 							<tr>
-								<td
+								<th
 									style="text-align: center; vertical-align: middle; width: 5%;"><input
-									type="checkbox" value="${RaceList.raId}" name="raId"></td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raName}">${RaceList.raName}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 11%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raCategory}">${RaceList.raCategory}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raType}">${RaceList.raType}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raLevel}">${RaceList.raLevel}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 10%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raTeacher}">${RaceList.raTeacher}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 25%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raDate}">${RaceList.raDate}</td>
-								<td
-									style="text-align: center; vertical-align: middle; width: 25%;"
-									data-toggle="tooltip" data-placement="top"
-									title="${RaceList.raAbout}">${RaceList.raAbout}</td>
-								<th align="center"
-									style="width: 8%; text-align: center; vertical-align: middle;">
-									<div style="width: 100%; height: 2em;">
-										<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
-											href="javascript:void(0);"
-											onclick="showUpInfo(${RaceList.raId});" title="修改信息"> <i
-												class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
-										</a></li>
-										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-											href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaceList.raId}"
-											title="下载文件"> <i class="fa fa-download mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i></a></li>
-										<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
-											href="javascript:void(0);"
-											onclick="delInfo(${RaceList.raId});" title="删除信息"> <i
-												class="fa fa-trash-o mail-icon"
-												style="width: 1em; padding-left: 0.2em;"></i>
-										</a></li>
-										<li
-											style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
-											href="#myLookModal" onclick="setInfo(${RaceList.raId});"
-											data-toggle="modal" data-target="#myLookModal" title="查看信息">
-												<i class="fa fa-book nav_icon"
-												style="width: 0.15em; padding-left: 0.1em;"></i>
-										</a></li>
-									</div>
-								</th>
+									type="checkbox" name="raId"></th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">竞赛名称</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">获奖人</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">竞赛类别</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">个人/团体</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">获奖等级</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">指导老师</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">获奖日期</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 23%;">竞赛简介</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">上传日期</th>
+								<th
+									style="text-align: center; vertical-align: middle; width: 8%;">操作</th>
 							</tr>
-						</c:forEach>
-						<script>
-							$(function() {
-								$('[data-toggle="tooltip"]').tooltip({
-									container : 'body'
-								});
-							})
-						</script>
-					</tbody>
-				</table>
-				<p>
-				<div style="float: left;">
-					显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
-					${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
-						onchange="rePages()" size="1">
-						<option value="${page.pageSize}">${page.pageSize}</option>
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-					</select>条记录
-				</div>
-				<div style="float:right;">
-					<a
-						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
-					<a
-						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
-					<a
-						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
-					<a
-						href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
-				</div>
-				</p>
+						</thead>
+						<tbody>
+							<c:forEach items="${requestScope.RaceList}" var="RaceList">
+								<tr>
+									<td
+										style="text-align: center; vertical-align: middle; width: 5%;"><input
+										type="checkbox" value="${RaceList.raId}" name="raId"></td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raName}">${RaceList.raName}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raAuthor}">${RaceList.raAuthor}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raCategory}">${RaceList.raCategory}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raType}">${RaceList.raType}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raLevel}">${RaceList.raLevel}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raTeacher}">${RaceList.raTeacher}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raDate}">${RaceList.raDate}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 23%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raAbout}">${RaceList.raAbout}</td>
+									<td
+										style="text-align: center; vertical-align: middle; width: 8%;"
+										data-toggle="tooltip" data-placement="top"
+										title="${RaceList.raUptime}">${RaceList.raUptime}</td>
+									<th align="center"
+										style="width: 8%; text-align: center; vertical-align: middle;">
+										<div style="width: 100%; height: 2em;">
+											<li style="float: left; width: 0.7em; margin-left: 0.85em;"><a
+												href="javascript:void(0);"
+												onclick="showUpInfo(${RaceList.raId});" title="修改信息"> <i
+													class="fa fa-cogs nav_icon" style="width: 0.15em"></i>
+											</a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="${pageContext.request.contextPath}/download/downloadTypeFile?type=race&id=${RaceList.raId}&role=AD"
+												"
+											title="下载文件"> <i
+													class="fa fa-download mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i></a></li>
+											<li style="float: left; width: 0.7em; margin-left: 0.9em;"><a
+												href="javascript:void(0);"
+												onclick="delInfo(${RaceList.raId});" title="删除信息"> <i
+													class="fa fa-trash-o mail-icon"
+													style="width: 1em; padding-left: 0.2em;"></i>
+											</a></li>
+											<li
+												style="float: left; width: 0.7em; margin-left: 0.8em; margin-right: 0.4em;"><a
+												href="#myLookModal" onclick="setInfo(${RaceList.raId});"
+												data-toggle="modal" data-target="#myLookModal" title="查看信息">
+													<i class="fa fa-book nav_icon"
+													style="width: 0.15em; padding-left: 0.1em;"></i>
+											</a></li>
+										</div>
+									</th>
+								</tr>
+							</c:forEach>
+							<script>
+								$(function() {
+									$('[data-toggle="tooltip"]').tooltip({
+										container : 'body'
+									});
+								})
+							</script>
+						</tbody>
+					</table>
+					<p>
+					<div style="float: left;">
+						显示第${page.startRow}至${page.endRow}项/第${page.pageNum}页，共
+						${page.total}项/${page.pages}页， 每页显示<select id="pageSize"
+							onchange="rePages()" size="1">
+							<option value="${page.pageSize}">${page.pageSize}</option>
+							<option value="10">10</option>
+							<option value="25">25</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>条记录
+					</div>
+					<div style="float:right;">
+						<a
+							href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.firstPage}&pageSize=${ps}">第一页</a>
+						<a
+							href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.nextPage}&pageSize=${ps}">下一页</a>
+						<a
+							href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.prePage}&pageSize=${ps}">上一页</a>
+						<a
+							href="${pageContext.request.contextPath}/race/getAllRaceInfo?page=${page.lastPage}&pageSize=${ps}">最后页</a>
+					</div>
+					</p>
+				</c:if>
 			</div>
 		</div>
 		<div class="media">
@@ -260,6 +447,13 @@ li {
 						</div>
 					</div>
 					<div class="form-group mb-n">
+						<div class="col-sm-4">
+							<input type="text" class="form-control1 input-lg" id="raAuthor"
+								title="获奖人" name="raAuthor" placeholder="获奖人"
+								required="required">
+						</div>
+					</div>
+					<div class="form-group mb-n">
 						<div class="col-sm-12">
 							<textarea rows="2" class="form-control1 control2 " name="raAbout"
 								id="raAbout" style="font-size: 1em;"
@@ -305,7 +499,7 @@ li {
 				<div class="modal-body" style="margin: 1em 1em 0em 0.5em;">
 					<table class="table" style="text-align: left;">
 						<tbody style="font-size: 1em;">
-							<tr style="text-align: center; vertical-align: middle;">
+							<tr style="text-align: left; vertical-align: middle;">
 								<td><label for="largeinput"
 									class="control-label label-input-lg">竞赛名称</label></td>
 								<td><input type="text" class="form-control1 input-lg"
@@ -334,6 +528,16 @@ li {
 									class=" control-label label-input-lg">指导老师</label></td>
 								<td><input type="text" class="form-control1 input-lg"
 									name="ra_te" id="ra_te" readonly="true"></td>
+							</tr>
+							<tr>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">获奖人</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_au" id="ra_au" readonly="true"></td>
+								<td><label for="largeinput"
+									class=" control-label label-input-lg">文件上传日期</label></td>
+								<td><input type="text" class="form-control1 input-lg"
+									name="ra_time" id="ra_time" readonly="true"></td>
 							</tr>
 							<tr>
 								<td colspan="4" style="text-align: left;"><label
@@ -387,6 +591,7 @@ li {
 		$("#raLevel").val(data.raLevel);
 		$("#raType").get(0).options[0].text = data.raType;
 		$("#raTeacher").val(data.raTeacher);
+		$("#raAuthor").val(data.raAuthor);
 		$("#raAbout").val(data.raAbout);
 	}
     function showInfoModel(data) {
@@ -397,10 +602,12 @@ li {
 		$("#ra_ty").val(data.raType);
 		$("#ra_te").val(data.raTeacher);
 		$("#ra_ab").val(data.raAbout);
+		$("#ra_au").val(data.raAuthor);
+		$("#ra_time").val(data.raUptime);
 		showInfo(data);
 	}
     function setInfo(raId) {
-    	idd = reId;
+    	idd = raId;
     	$.ajax({
 			type : "POST",
 			url : "${pageContext.request.contextPath}/race/getRaInfo",
@@ -442,7 +649,7 @@ li {
 			async : true,
 			success : function(data){
 				alert(data.string1);
-				window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo";
+				location.reload();
 			},
 			error : function(data) {
 				alert("删除信息出错!");
@@ -561,9 +768,21 @@ li {
          });
     }
      function rePages(){
-   var page = $("#pageSize").val();
-   window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo?pageSize="+page;
-   window.parent.scrollTo(0, 0);
+	   var page = $("#pageSize").val();
+	   window.location.href = "${pageContext.request.contextPath}/race/getAllRaceInfo?pageSize="+page;
+	   window.parent.scrollTo(0, 0);
+   }
+   function rePages1(){
+   	   var page = $("#pageSize1").val();
+       window.location.href = "${pageContext.request.contextPath}/race/getPage?pageSize="+page;
+       window.parent.scrollTo(0, 0);
+   }
+   function findInfo() {
+		if (confirm("确定要查找？")) {
+			return true;
+		} else {
+			return false;
+		}
    }
 </script>
 </body>

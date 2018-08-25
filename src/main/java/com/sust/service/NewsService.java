@@ -21,7 +21,7 @@ public interface NewsService {
 	public List<Message> getAllMessages();
 
 	public List<Message> getNowMessages();
-	
+
 	public String getNoReadNum(Integer meId);
 
 	public String getReadedNum(Integer meId);

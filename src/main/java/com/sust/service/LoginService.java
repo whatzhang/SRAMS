@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sust.entity.Login;
+import com.sust.entity.Message;
 
 public interface LoginService {
 
@@ -24,5 +25,15 @@ public interface LoginService {
 	public int upDataPass(Integer usId, String pass);
 
 	public Map<String, String> getAdminInitInfo();
+
+	public List<Login> getAllLoginInfo();
+
+	public Login getLoginInfoById(Integer usId);
+
+	public String updataLoginInfo(Login login);
+
+	public String addloginInfo(Login login);
+
+	public List<Message> getNews(Integer usId);
 
 }

@@ -34,4 +34,23 @@ public interface RaceMapper {
 
 	List<Race> selectAllRaceInfo();
 
+	int deleteByUsId(Integer usId);
+
+	List<Race> selectGuiNaRace(@Param("flg") Integer flg,@Param("xuyuan") String xuyuan, @Param("sex") Byte sex,
+			@Param("duty") String duty, @Param("bigAge") Integer bigAge, @Param("smlAge") Integer smlAge,
+			@Param("major") String major, @Param("bigRada") Date bigRada, @Param("smlRada") Date smlRada,
+			@Param("raCate") String raCate, @Param("raTuan") String raTuan,@Param("bigRaUp") Date bigRaUp, @Param("smlRaUp") Date smlRaUp);
+
+	List<Race> selectRaceFind(@Param("usId") Integer usId,  @Param("bigRada") Date bigRada, @Param("smlRada") Date smlRada,
+			@Param("raCate") String raCate, @Param("raTuan") String raTuan,@Param("bigRaUp") Date bigRaUp, @Param("smlRaUp") Date smlRaUp);
+
+	List<Date> selectAllRaceFileName();
+
+	int selectSexNumber(@Param("usSex") Byte usSex);
+	
+	int selectXueYuanNum(@Param("usAcademy") String usAcademy);
+	
+	int selectTimeNum(@Param("Year") Integer Year);
+
+	int selectCateNum(@Param("raCate") String raCate);
 }

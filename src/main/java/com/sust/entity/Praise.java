@@ -118,10 +118,18 @@ public class Praise {
 	}
 
 	public String getPrUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(prUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(prUptime);
 	}
 
 	public void setPrUptime(Date prUptime) {
 		this.prUptime = prUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Praise [prId=" + prId + ", usId=" + usId + ", prName=" + prName + ", prCategory=" + prCategory
+				+ ", prDate=" + prDate + ", prUnit=" + prUnit + ", prAuthor=" + prAuthor + ", prAbout=" + prAbout
+				+ ", prUptime=" + prUptime + "]";
+	}
+	
 }

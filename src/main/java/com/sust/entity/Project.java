@@ -130,10 +130,18 @@ public class Project {
 	}
 
 	public String getProUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(proUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(proUptime);
 	}
 
 	public void setProUptime(Date proUptime) {
 		this.proUptime = proUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Project [proId=" + proId + ", usId=" + usId + ", proName=" + proName + ", proCategory=" + proCategory
+				+ ", proDate=" + proDate + ", proCash=" + proCash + ", proLeader=" + proLeader + ", proTeam=" + proTeam
+				+ ", proAbout=" + proAbout + ", proUptime=" + proUptime + "]";
+	}
+	
 }

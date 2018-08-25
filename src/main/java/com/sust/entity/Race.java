@@ -142,10 +142,18 @@ public class Race {
 	}
 
 	public String getRaUptime() {
-		return new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss-SSS").format(raUptime);
+		return new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(raUptime);
 	}
 
 	public void setRaUptime(Date raUptime) {
 		this.raUptime = raUptime;
 	}
+
+	@Override
+	public String toString() {
+		return "Race [raId=" + raId + ", usId=" + usId + ", raName=" + raName + ", raCategory=" + raCategory
+				+ ", raType=" + raType + ", raAuthor=" + raAuthor + ", raLevel=" + raLevel + ", raTeacher=" + raTeacher
+				+ ", raDate=" + raDate + ", raAbout=" + raAbout + ", raUptime=" + raUptime + "]";
+	}
+	
 }

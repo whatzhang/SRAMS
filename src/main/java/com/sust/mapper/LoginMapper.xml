@@ -10,8 +10,20 @@
 	<sql id="Base_Column_List">
 		us_id, lo_login, lo_pass, lo_type
 	</sql>
+
+	<select id="selectUsIdByName" parameterType="String" resultType="java.lang.Integer">
+		select us_id from
+		sr_login
+		where lo_login = #{loLogin,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAllLogin" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sr_login
+	</select>
 	<select id="selectUsIdList" resultType="java.lang.Integer">
-		select us_id from sr_login
+		select us_id from
+		sr_login
 	</select>
 	<select id="selectThNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
@@ -45,9 +57,10 @@
 	</select>
 	<select id="selectMeNum" parameterType="java.lang.Integer"
 		resultType="java.lang.Integer">
-		select count(*) from sr_message,sr_me_status 
-		where sr_me_status.me_id = sr_message.me_id 
-		and sr_me_status.st_isread = 0 
+		select count(*) from sr_message,sr_me_status
+		where
+		sr_me_status.me_id = sr_message.me_id
+		and sr_me_status.st_isread = 0
 		and sr_me_status.us_id = #{id,jdbcType=INTEGER}
 	</select>
 
@@ -103,7 +116,8 @@
 		select count(*) from
 		sr_login where
 		lo_login = #{loLogin,jdbcType=VARCHAR}
-		and lo_pass = #{loPass,jdbcType=VARCHAR}
+		and lo_pass =
+		#{loPass,jdbcType=VARCHAR}
 		and lo_type = #{loType,jdbcType=VARCHAR}
 	</select>
 	<select id="selectLoginInfo" resultMap="BaseResultMap">

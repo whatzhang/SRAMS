@@ -15,10 +15,11 @@ public class Message {
 	private Date meDate;
 
 	private String meAbout;
-	public Message(){
-		
+
+	public Message() {
+
 	}
-	
+
 	public Message(Integer meId, String meTitle, Integer meSend, String meReceive, Date meDate, String meAbout) {
 		super();
 		this.meId = meId;
@@ -63,7 +64,7 @@ public class Message {
 	}
 
 	public String getMeReceive() {
-		return meReceive;
+		return meReceive = meReceive == "0" ? "AllUsers" : meReceive;
 	}
 
 	public void setMeReceive(String meReceive) {
@@ -91,5 +92,5 @@ public class Message {
 		return "Message [meId=" + meId + ", meTitle=" + meTitle + ", meSend=" + meSend + ", meReceive=" + meReceive
 				+ ", meDate=" + meDate + ", meAbout=" + meAbout + "]";
 	}
-	
+
 }

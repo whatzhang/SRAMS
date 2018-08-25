@@ -51,7 +51,7 @@
 	<%
 		}
 	%>
-	<div class="panel panel-danger" style="margin: 5em 13em 5em 13em;">
+	<div class="panel panel-danger" style="margin: 5em 25em 5em 25em;">
 		<div class="panel-heading" style="height: 3em;">
 			<h2 class="panel-title" style="text-align: center;">找回密码</h2>
 		</div>
